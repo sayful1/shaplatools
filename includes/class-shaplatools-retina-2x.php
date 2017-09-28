@@ -3,16 +3,15 @@
 if ( ! class_exists( 'ShaplaTools_Retina_2x' ) ):
 
 	class ShaplaTools_Retina_2x {
+
 		/**
 		 * initialization of class
-		 *
-		 * @param string $plugin_url
 		 */
 		public function __construct() {
 
 			if ( is_admin() ) {
 				add_filter( 'wp_generate_attachment_metadata', array( $this, 'retina_attachment_metadata' ), 10, 2 );
-				add_filter( 'delete_attachment', array( $this, 'delete_retina_image' ) );
+				add_action( 'delete_attachment', array( $this, 'delete_retina_image' ) );
 			}
 		}
 

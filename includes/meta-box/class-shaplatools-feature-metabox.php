@@ -3,6 +3,7 @@
 if ( ! class_exists( 'ShaplaTools_Feature_Metabox' ) ):
 
 	class ShaplaTools_Feature_Metabox {
+
 		private $plugin_name;
 		private $plugin_url;
 

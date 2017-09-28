@@ -3,6 +3,7 @@
 if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 
 	class ShaplaTools_Meta_Box {
+
 		public function __construct() {
 			add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
 			add_action( 'wp_ajax_shaplatools_save_images', array( $this, 'save_images' ) );
@@ -77,10 +78,12 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		 * Add a custom meta box
 		 *
 		 * @param array $meta_box Meta box input data
+		 *
+		 * @return void
 		 */
 		public function add( $meta_box ) {
 			if ( ! is_array( $meta_box ) ) {
-				return false;
+				return;
 			}
 
 			add_meta_box(

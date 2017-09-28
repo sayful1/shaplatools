@@ -1,12 +1,12 @@
 <?php
 
-class ShaplaTools_Typeahead_Search {
-	public $plugin_url;
-	public $options;
+namespace ShaplaTools\Modules\Search;
 
-	public function __construct( $plugin_url, $options ) {
-		$this->plugin_url = $plugin_url;
-		$this->options    = $options;
+class Search {
+
+	private $options;
+
+	public function __construct( $options ) {
 
 		add_action( 'wp_ajax_nopriv_shapla_search', array( $this, 'shaplatools_search' ) );
 		add_action( 'wp_ajax_shapla_search', array( $this, 'shaplatools_search' ) );
@@ -43,7 +43,7 @@ class ShaplaTools_Typeahead_Search {
 			$args['post_type'] = 'product';
 		}
 
-		$search_query = new WP_Query( $args );
+		$search_query = new \WP_Query( $args );
 
 		$results = array();
 
@@ -52,7 +52,7 @@ class ShaplaTools_Typeahead_Search {
 				$img_url = wp_get_attachment_thumb_url( get_post_thumbnail_id( $the_post ) );
 
 				if ( ! $img_url ) {
-					$img_url = $this->plugin_url . '/assets/img/no-image.svg';
+					$img_url = SHAPLATOOLS_ASSETS . '/img/no-image.svg';
 				}
 
 				$results[] = array(

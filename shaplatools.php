@@ -139,6 +139,10 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		private function includes() {
 			// Slider Module
 			include SHAPLATOOLS_MODULES . '/Slider/Slider.php';
+
+			// Search Module
+			include SHAPLATOOLS_MODULES . '/Search/Search.php';
+			new \ShaplaTools\Modules\Search\Search( $this->options );
 		}
 
 		private function init() {
@@ -248,13 +252,10 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 		public function include_other_files() {
 			include_once SHAPLATOOLS_INCLUDES . '/class-shaplatools-retina-2x.php';
-			include_once SHAPLATOOLS_INCLUDES . '/class-shaplatools-typeahead-search.php';
 
 			if ( $this->shaplatools_options()['retina_image'] ) {
 				new ShaplaTools_Retina_2x();
 			}
-
-			new ShaplaTools_Typeahead_Search( $this->plugin_url(), $this->options );
 		}
 
 		/**
