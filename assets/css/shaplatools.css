@@ -1,0 +1,455 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+#scrollUp {
+    bottom: 10px;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    background: url('../img/back-top.png') no-repeat 0 0;
+    opacity: 0.4;
+    outline: none;
+}
+#scrollUp:hover{opacity: 1;}
+
+/* 
+ *  Core Testimonial CSS File
+ *  v1.0.0
+ */
+.testimonial{
+    padding-left:30px;
+    position:relative;
+    z-index:0;
+    font-size:16px
+}
+.testimonial .quote{
+    position:absolute;
+    left:0;top:-25px;
+    font-size:200px;
+    font-family:Georgia,serif;
+    color:#f2f2f2;
+    z-index:-1;
+    line-height:1
+}
+.testimonial-text{
+    font-style:italic
+}
+.testimonial-client-name{
+    text-align:right;
+    font-size:14px
+}
+.testimonial-client-name cite{
+    font-style:normal
+}
+.testimonial-slide img{
+    max-width:120px;
+    max-height:120px;
+    float:left
+}
+/* Testimonial Slider*/
+.testimonials {
+  margin-top: 15px;
+}
+
+.single-feedback {
+  position: relative;
+  margin-top: 20px;
+}
+
+.single-feedback .client-pic {
+  width: 64px;
+  height: 64px;
+  margin: auto;
+  position: relative;
+  margin-bottom: -24px;
+  z-index: 999;
+  border: 3px solid #ffffff;
+  box-shadow: 0px 0px 0px 3px #f7f8fa;
+}
+
+.single-feedback .client-pic img {
+  max-width: 100%;
+}
+
+.single-feedback .box {
+  margin-right: 15px;
+  margin-left: 15px;
+  border-radius: 3px;
+  position: relative;
+  background: #f7f8fa;
+  padding-top: 20px;
+  -webkit-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+  -moz-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+  box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+}
+
+.single-feedback .box .message {
+  padding: 25px;
+  font-style: italic;
+}
+
+.single-feedback .box:after,
+.single-feedback .box:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.single-feedback .box:after {
+  border-color: rgba(247, 248, 250, 0);
+  border-top-color: #f7f8fa;
+  border-width: 15px;
+  margin-left: -15px;
+}
+
+.single-feedback .box:before {
+  border-color: rgba(229, 229, 229, 0);
+  border-top-color: #e5e5e5;
+  border-width: 16px;
+  margin-left: -16px;
+}
+
+.single-feedback .client-info {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.single-feedback .client-info .client-name {
+  line-height: 20px;
+}
+
+.single-feedback .client-info .company {
+  font-size: 13px;
+}
+
+/* Team Slider*/
+
+.single-team {
+  position: relative;
+  margin-top: 20px;
+}
+
+.single-team .team-pic {
+  max-width: 150px;
+  height: auto;
+  margin: auto;
+  position: relative;
+  margin-bottom: -24px;
+  z-index: 10;
+  border: 3px solid #ffffff;
+  box-shadow: 0px 0px 0px 3px #f7f8fa;
+}
+
+.single-team .team-pic img {
+  max-width: 100%;
+}
+
+.single-team .box {
+  margin-right: 15px;
+  margin-left: 15px;
+  border-radius: 3px;
+  position: relative;
+  background: #f7f8fa;
+  padding-top: 20px;
+  -webkit-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+  -moz-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+  box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+}
+
+.single-team .box .message {
+  padding: 25px;
+  font-style: italic;
+}
+
+.single-team .team-info {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.single-team .team-info .team-name {
+  line-height: 20px;
+}
+
+.single-team .team-info .company {
+  font-size: 13px;
+}
+/*Portfolio*/
+/* filters */
+#filter ul {
+  display: table;
+  padding-left: 0;
+  margin: 20px auto;
+  border-radius: 4px;
+}
+#filter ul > li {
+  display: inline;
+}
+#filter ul > li > a,
+#filter ul > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #337ab7;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+#filter ul > li:first-child > a,
+#filter ul > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+#filter ul > li:last-child > a,
+#filter ul > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#filter ul > li > a:hover,
+#filter ul > li > span:hover,
+#filter ul > li > a:focus,
+#filter ul > li > span:focus {
+  color: #23527c;
+  background-color: #eee;
+  border-color: #ddd;
+}
+#filter ul > li > a.active,
+#filter ul > li > a.active:hover,
+#filter ul > li > a.active:focus {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+/* grid */
+#grid {
+    clear: both;
+    position: relative;
+}
+.row:after,
+.row:before {
+    display: table;
+    content: " ";
+}
+.row:after { clear: both }
+.portfolio_col_2 {
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+.portfolio_col_3 {
+    width: 33.33333333%;
+    display: inline-block;
+    float: left;
+}
+.portfolio_col_4 {
+    width: 25%;
+    display: inline-block;
+    float: left;
+}
+.portfolio_col_5 {
+    width: 20%;
+    display: inline-block;
+    float: left;
+}
+
+@media only screen and (max-width: 767px){
+
+.portfolio_col_2, .portfolio_col_3, .portfolio_col_4, .portfolio_col_5 {
+  width: 100%;
+}
+
+}
+ @media only screen and (min-width: 480px) and (max-width: 767px){
+
+.portfolio_col_2, .portfolio_col_3, .portfolio_col_4, .portfolio_col_5 {
+  width: 50%;
+}
+
+}
+
+.portfolio-f-image { position: relative }
+.portfolio-f-image img {
+    height: auto;
+    max-width: 100%;
+    width: 100%;
+}
+.portfolio-hover {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.portfolio-hover:after {
+    background: none repeat scroll 0 0 #000;
+    content: "";
+    height: 100%;
+    left: -100%;
+    opacity: .6;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: .4s;
+}
+.portfolio-hover a {
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    left: 10%;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    text-align: center;
+    border: 1px solid #337AB7;
+    width: 80%;
+    z-index: 99;
+    transition: .4s;
+}
+.portfolio-hover a:hover {
+    text-decoration: none;
+    border-color: #444;
+    color: #fff;
+}
+.portfolio-hover a.portfolio-title-link {
+    top: -25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: none;
+    font-size: 25px;
+    line-height: 30px;
+    cursor: default;
+    pointer-events: none;
+}
+.portfolio-hover a.view-details-link {
+    background: none repeat scroll 0 0 #337AB7;
+    bottom: -25%;
+}
+.single-portfolio-item {
+    padding: 10px;
+    overflow: hidden;
+}
+.single-portfolio-item:hover .portfolio-hover a.portfolio-title-link { top: 32% }
+.single-portfolio-item:hover .portfolio-hover a.view-details-link { bottom: 32% }
+.single-portfolio-item:hover .portfolio-hover:after { left: 0 }
+
+/* Shapla Slide*/
+.post-thumbnail {
+  position: relative;
+}
+
+.shapla-slides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.shapla-slides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+.shapla-slides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+.shapla-slides img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+}
+.shapla-slides_nav {
+    z-index: 3;
+    position: absolute;
+    -webkit-tap-highlight-color: transparent;
+    top: 0;
+    left: 0;
+    display: block;
+    background: #FFF;
+    opacity: 0;
+    filter: alpha(opacity=1);
+    width: 48%;
+    text-indent: -9999px;
+    overflow: hidden;
+    height: 91%;
+}
+.shapla-slides_nav.prev { cursor: w-resize }
+.shapla-slides_nav.next {
+    left: auto;
+    right: 0;
+    cursor: e-resize;
+}
+.shapla-slides_tabs {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 400px;
+    max-width: 100%;
+    z-index: 1000;
+}
+.shapla-slides_tabs li {
+    display: inline-block;
+    margin-right: 5px;
+}
+.shapla-slides_tabs a {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 30px;
+    background: 0 0;
+    border: 2px solid #fff;
+    font-size: 0;
+}
+.shapla-slides_here a { background: #fff }
+
+/* Shapla feature*/
+.shapla_features {
+  margin-top: 40px;
+  margin-bottom: 35px;
+}
+
+.shapla_features .feature {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.shapla_features .icon {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.shapla_features img {
+  width: 50px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.shapla_features h4.feature_title {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+}

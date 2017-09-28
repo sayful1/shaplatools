@@ -1,0 +1,2118 @@
+# Copyright (C) 2015 ShaplaTools
+# This file is distributed under the same license as the ShaplaTools package.
+msgid ""
+msgstr ""
+"Project-Id-Version: ShaplaTools 1.0.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/shaplatools\n"
+"POT-Creation-Date: 2015-06-03 14:54:31+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: assets/js/plugin-lang.php:5
+msgid "Insert Shapla Shortcode"
+msgstr ""
+
+#: assets/js/plugin-lang.php:6
+msgid "Alerts / Notification"
+msgstr ""
+
+#: assets/js/plugin-lang.php:7
+msgid "Buttons"
+msgstr ""
+
+#: assets/js/plugin-lang.php:8
+msgid "Columns"
+msgstr ""
+
+#: assets/js/plugin-lang.php:9
+msgid "Divider / Horizontal Ruler"
+msgstr ""
+
+#: assets/js/plugin-lang.php:10 shortcodes/config.php:230
+msgid "Intro Text"
+msgstr ""
+
+#: assets/js/plugin-lang.php:11
+msgid "Tabs"
+msgstr ""
+
+#: assets/js/plugin-lang.php:12
+msgid "Toggle"
+msgstr ""
+
+#: assets/js/plugin-lang.php:13
+msgid "Dropcap"
+msgstr ""
+
+#: assets/js/plugin-lang.php:14
+msgid "Font Icon"
+msgstr ""
+
+#: assets/js/plugin-lang.php:16
+msgid "Media Elements"
+msgstr ""
+
+#: assets/js/plugin-lang.php:17
+msgid "Widget Area"
+msgstr ""
+
+#: assets/js/plugin-lang.php:18 shortcodes/config.php:309
+msgid "Image"
+msgstr ""
+
+#: assets/js/plugin-lang.php:19
+msgid "Video"
+msgstr ""
+
+#: assets/js/plugin-lang.php:20
+msgid "Google Map"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:26
+msgid ""
+"Image Gallery (will be used as slider in single post or page instate of "
+"Featured Image)"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:57
+#: includes/classes/ShaplaTools_Gallery.php:162
+msgid "Remove image"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:75
+msgid "Add gallery images"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:82
+msgid "Select Gallery Images Size"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:137
+msgid "Add Images to Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:139
+msgid "Add to gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:90
+msgid "Insert"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:130
+msgid "Create Featured Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:137
+#: includes/classes/ShaplaTools_Metaboxs.php:145
+msgid "Edit Featured Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:181
+msgid "Save Featured Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:190
+msgid "Saving..."
+msgstr ""
+
+#: includes/classes/ShaplaTools_Metaboxs.php:253
+#: includes/classes/ShaplaTools_Metaboxs.php:255
+msgid "Edit Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Typeahead.php:47
+msgid "Sorry. No results match your search."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:41
+msgid "Event Featured Image"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:50
+msgid "Event Info"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:51
+msgid "Here you can customize your event details."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:57
+msgid "Event Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:58
+msgid "Choose event images."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:61
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:83
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:61
+msgid "Upload Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:64
+msgid "Event Start Date:"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:65
+msgid "Choose the event start date"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:71
+msgid "Event End Date:"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:72
+msgid "Choose the event end date"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:78
+msgid "Event Venue:"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:79
+msgid "Enter event address"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:93
+msgid "Start Date"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:94
+msgid "End Date"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Event_Metabox.php:95
+msgid "Venue"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:41
+msgid "Extra Settings"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:47
+msgid "Font Awesome Icon Class:"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:48
+msgid ""
+"Add <a target=\"_blank\" href=\"http://fortawesome.github.io/Font-Awesome/"
+"icons/\">Font Awesome</a> Icon Class. Example: fa fa-wordpress"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:72
+msgid "Slide Settings"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:79
+msgid "Slider Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:80
+msgid "Choose slider images."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:86
+msgid "Slider Image Size"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:87
+msgid ""
+"Select image size from available image size. Use full for original image "
+"size."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:94
+msgid "Slider Theme"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:95
+msgid "Use a pre-built theme. To use your own theme select \"None\"."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:100
+#: includes/widgets/widget-testimonials.php:55 shortcodes/config.php:334
+#: shortcodes/config.php:440
+msgid "None"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:101
+msgid "Default"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:102
+msgid "Light"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:103
+msgid "Dark"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:104
+msgid "Bar"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:105
+msgid "Smoothness"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:109
+msgid "Transition Effect"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:110
+msgid "Select transition for for this slide."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:115
+msgid "random"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:116
+msgid "sliceDown"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:117
+msgid "sliceDownLeft"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:118
+msgid "sliceUp"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:119
+msgid "sliceUpLeft"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:120
+msgid "sliceUpDown"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:121
+msgid "sliceUpDownLeft"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:122
+msgid "fold"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:123
+msgid "fade"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:124
+msgid "slideInRight"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:125
+msgid "slideInLeft"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:126
+msgid "boxRandom"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:127
+msgid "boxRain"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:128
+msgid "boxRainReverse"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:129
+msgid "boxRainGrow"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:130
+msgid "boxRainGrowReverse"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:134
+msgid "Slices"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:135
+msgid "The number of slices to use in the \"Slice\" transitions (eg 15)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:141
+msgid "boxCols"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:142
+msgid "The number of columns to use in the \"Box\" transitions (eg 8)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:148
+msgid "boxRows"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:149
+msgid "The number of rows to use in the \"Box\" transitions (eg 4)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:155
+msgid "Animation Speed"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:156
+msgid "The speed of the transition animation in milliseconds (eg 500)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:162
+msgid "Pause Time"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:163
+msgid "The amount of time to show each slide in milliseconds (eg 3000)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:169
+msgid "Start Slide"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:170
+msgid "Set which slide the slider starts from (zero based index: usually 0)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:176
+msgid "Enable Thumbnail Navigation"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:183
+msgid "Enable Direction Navigation"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:184
+msgid "Prev & Next arrows"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:190
+msgid "Enable Control Navigation"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:191
+msgid "eg 1,2,3..."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:197
+msgid "Pause the Slider on Hover"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:204
+msgid "Manual Transitions"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:205
+msgid "Slider is always paused"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:211
+msgid "Random Start Slide"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:212
+msgid "Overrides Start Slide value"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:226
+msgid "Slide ID"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:227
+msgid "Shortcode"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:228
+msgid "Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:41
+msgid "Portfolio Featured Image"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:50 shaplatools.php:486
+msgid "Portfolio Settings"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:51
+msgid "Here you can customize your project details."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:57
+msgid "Project Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:58
+msgid "Choose project images."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:64
+msgid "Subtitle"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:65
+msgid "Enter the subtitle for this portfolio item"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:71
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:57
+msgid "Client Name"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:72
+msgid "Enter the client name of the project"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:78
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:101
+msgid "Project Date"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:79
+msgid "Choose the project date."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:85
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:103
+msgid "Project URL"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:86
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:72
+msgid "Enter the project URL"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:100
+#: includes/post-type/ShaplaTools_Portfolio.php:81
+msgid "Skills"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:102
+msgid "Client"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:41
+msgid "Team Member Image"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:50
+msgid "Team Member Details"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:51
+msgid "Here you can customize your team members details."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:57
+msgid "Team Member Designation"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:58
+msgid "Enter team member designation."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:64
+msgid "Member Short Description"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:65
+msgid "Enter team member short description."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:79
+msgid "Team Member Name"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:80
+msgid "Designation"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:81
+msgid "Short Description"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:82
+msgid "Member Image"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:41
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:91
+msgid "Client's Avatar"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:50
+msgid "Testimonial Details"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:51
+msgid "Here you can customize your testimonial details."
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:58
+msgid "Enter the client name"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:64
+msgid "Business/Site Name (optional)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:65
+msgid "Enter the client business/site name"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:71
+msgid "Business/Site Link (optional)"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:86
+#: includes/widgets/widget-twitter.php:182
+msgid "Title"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:87
+msgid "Testimonial"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:88
+msgid "Client's Name"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:89
+msgid "Business/Site"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:90
+msgid "Link"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:40
+msgctxt "Post Type General Name"
+msgid "Features"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:41
+msgctxt "Post Type Singular Name"
+msgid "Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:42
+msgid "Features"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:43
+msgid "Parent Feature:"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:44
+msgid "All Features"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:45
+msgid "View Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:46
+msgid "Add New Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:47
+#: includes/post-type/ShaplaTools_Portfolio.php:44
+#: includes/post-type/ShaplaTools_Slide.php:47
+#: includes/post-type/ShaplaTools_Team.php:42
+#: includes/post-type/ShaplaTools_Testimonial.php:48
+msgid "Add New"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:48
+msgid "Edit Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:49
+msgid "Update Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:50
+msgid "Search Feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:51
+#: includes/post-type/ShaplaTools_Slide.php:53
+#: includes/post-type/ShaplaTools_Testimonial.php:52
+msgid "Not found"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:52
+#: includes/post-type/ShaplaTools_Slide.php:54
+#: includes/post-type/ShaplaTools_Testimonial.php:53
+msgid "Not found in Trash"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:55
+#: includes/settings/settings.php:470
+msgid "feature"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Feature.php:56
+msgid "Add features"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:42
+#: includes/post-type/ShaplaTools_Portfolio.php:43
+msgid "Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:45
+msgid "Add New Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:46
+msgid "Edit Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:47
+msgid "New Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:48
+msgid "View Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:49
+msgid "Search Portfolio"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:50
+msgid "No Portfolios found"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:51
+msgid "No Portfolios found in trash"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Portfolio.php:82
+msgid "Skill"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:40
+msgctxt "Post Type General Name"
+msgid "Slides"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:41
+msgctxt "Post Type Singular Name"
+msgid "Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:42
+#: includes/post-type/ShaplaTools_Slide.php:43
+msgid "Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:44
+msgid "Parent Slide:"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:45
+msgid "All Slides"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:46
+msgid "Add New Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:48
+msgid "New Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:49
+msgid "Edit Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:50
+msgid "Update Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:51
+msgid "View Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:52
+msgid "Search Slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:57
+#: includes/settings/settings.php:442
+msgid "slide"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Slide.php:58
+msgid "Create slide for your site"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:40
+#: includes/post-type/ShaplaTools_Team.php:41
+msgid "Team"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:43
+msgid "Add New Team Member"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:44
+msgid "Edit Team Member"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:45
+msgid "New Team Member"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:46
+msgid "View Team Member"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:47
+msgid "Search Team Member"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:48
+msgid "No Team Member found"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Team.php:49
+msgid "No Team Member in trash"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:41
+msgctxt "Post Type General Name"
+msgid "Testimonials"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:42
+msgctxt "Post Type Singular Name"
+msgid "Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:43
+msgid "Testimonials"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:44
+msgid "Parent Testimonial:"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:45
+msgid "All Testimonials"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:46
+msgid "View Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:47
+msgid "Add New Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:49
+msgid "Edit Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:50
+msgid "Update Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:51
+msgid "Search Testimonial"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:56
+msgid "testimonials"
+msgstr ""
+
+#: includes/post-type/ShaplaTools_Testimonial.php:57
+msgid "Post Type Description"
+msgstr ""
+
+#: includes/settings/settings.php:97
+msgid "General"
+msgstr ""
+
+#: includes/settings/settings.php:98
+msgid "Social"
+msgstr ""
+
+#: includes/settings/settings.php:99
+msgid "Custom Post Types"
+msgstr ""
+
+#: includes/settings/settings.php:155
+msgid "Settings Updated"
+msgstr ""
+
+#: includes/settings/settings.php:216
+msgid "General Settings"
+msgstr ""
+
+#: includes/settings/settings.php:217 includes/settings/settings.php:437
+#: includes/settings/settings.php:478
+msgid "Configure the general settings"
+msgstr ""
+
+#: includes/settings/settings.php:222 shaplatools.php:479
+msgid "Google Analytics ID"
+msgstr ""
+
+#: includes/settings/settings.php:223
+msgid "Enter Google Analytics ID like (UA-XXXXX-X)"
+msgstr ""
+
+#: includes/settings/settings.php:228
+msgid "Autocomplete search form"
+msgstr ""
+
+#: includes/settings/settings.php:229
+msgid "Enable autocomplete search with twitter typeahead"
+msgstr ""
+
+#: includes/settings/settings.php:240
+msgid "Retina graphics for your website"
+msgstr ""
+
+#: includes/settings/settings.php:241
+msgid ""
+"To serve high-resolution images to devices with retina displays. This plugin "
+"will use open source script retina.js and for using retina.js script, a "
+"higher quality version of image will be created and stored with @2x added to "
+"the filename when an image is uploaded."
+msgstr ""
+
+#: includes/settings/settings.php:436
+msgid "Custom Post Types Settings"
+msgstr ""
+
+#: includes/settings/settings.php:443
+msgid "Check to enable custom post type <strong>slide</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:449
+msgid "portfolio"
+msgstr ""
+
+#: includes/settings/settings.php:450
+msgid "Check to enable custom post type <strong>portfolio</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:456
+msgid "team"
+msgstr ""
+
+#: includes/settings/settings.php:457
+msgid "Check to enable custom post type <strong>team</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:463
+msgid "testimonial"
+msgstr ""
+
+#: includes/settings/settings.php:464
+msgid "Check to enable custom post type <strong>testimonial</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:471
+msgid "Check to enable custom post type <strong>feature</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:477
+msgid "Default Meta Box Settings"
+msgstr ""
+
+#: includes/settings/settings.php:483
+msgid "slide default meta"
+msgstr ""
+
+#: includes/settings/settings.php:484
+msgid ""
+"Check to enable default meta for custom post type <strong>slide</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:490
+msgid "portfolio default meta"
+msgstr ""
+
+#: includes/settings/settings.php:491
+msgid ""
+"Check to enable default meta for custom post type <strong>portfolio</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:497
+msgid "team default meta"
+msgstr ""
+
+#: includes/settings/settings.php:498
+msgid ""
+"Check to enable default meta for custom post type <strong>team</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:504
+msgid "testimonial default meta"
+msgstr ""
+
+#: includes/settings/settings.php:505
+msgid ""
+"Check to enable default meta for custom post type <strong>testimonial</"
+"strong>."
+msgstr ""
+
+#: includes/settings/settings.php:511
+msgid "feature default meta"
+msgstr ""
+
+#: includes/settings/settings.php:512
+msgid ""
+"Check to enable default meta for custom post type <strong>feature</strong>."
+msgstr ""
+
+#: includes/settings/settings.php:525
+msgid ""
+"The callback function used for the <strong>%s</strong> setting is missing."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:10
+msgid "Shapla Contact Form"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:11
+msgid "A simple AJAX contact form."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:36
+msgid "NAME"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:37
+msgid "EMAIL"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:38
+msgid "MESSAGE"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:42
+msgid "SEND MESSAGE"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:95
+msgid "Your cannot resend message within "
+msgstr ""
+
+#: includes/widgets/widget-contact.php:95
+msgid " minute(s)."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:101
+msgid "Your name should be at least 3 characters."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:107
+msgid "You entered an invalid email address."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:113
+msgid "Your message should be at least 15 characters."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:122
+msgid "Someone sent you a message from "
+msgstr ""
+
+#: includes/widgets/widget-contact.php:126
+msgid "This mail is sent via contact form "
+msgstr ""
+
+#: includes/widgets/widget-contact.php:138
+msgid "Thanks, your email was sent successfully."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:142
+msgid "Please check the error bellow."
+msgstr ""
+
+#: includes/widgets/widget-contact.php:166
+msgid "Send a Direct Message"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:170
+#: includes/widgets/widget-dribbble.php:88
+#: includes/widgets/widget-fb_like_box.php:121
+#: includes/widgets/widget-flickr.php:80
+#: includes/widgets/widget-instagram.php:75
+#: includes/widgets/widget-testimonials.php:46
+msgid "Title:"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:174
+msgid "Contact Form Email Address:"
+msgstr ""
+
+#: includes/widgets/widget-contact.php:176
+msgid ""
+"Enter the email address where you would like to receive emails from the "
+"contact form."
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:8
+msgid "Display your latest Dribbble shots"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:10
+msgid "Shapla Dribbble Shots"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:55
+msgid "Please check your dribbble username"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:77
+msgid "Dribbble Shots"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:93
+#: includes/widgets/widget-instagram.php:80
+msgid "Username:"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:98
+msgid "Number of shots to show:"
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:104
+msgid "Open links in new window?"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:11
+msgid "Shapla Facebook Like Box"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:12
+msgid "Facebook Like Box only for Facebook Pages."
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:108
+msgid "Find us on Facebook"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:125
+msgid "App Id"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:128
+msgid ""
+"Dont't know your App ID? Head on over to <a target=\"_blank\" href=\"https://"
+"developers.facebook.com/\">FB Developer</a> and create App ID. Still need "
+"help? visit <a target=\"_blank\" href=\"http://sayful1.wordpress."
+"com/2014/06/12/how-to-get-facebook-api-key/\">here</a>."
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:131
+msgid "Facebook Page URL"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:133
+msgid ""
+"The absolute URL of the Facebook Page that will be liked. e.g. https://www."
+"facebook.com/FacebookDevelopers"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:136 shortcodes/config.php:419
+msgid "Width"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:138
+msgid "The width of the plugin in pixels. Minimum is 292. Default is 300."
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:141 shortcodes/config.php:425
+msgid "Height"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:143
+msgid ""
+"The height of the plugin in pixels. The default height varies based on "
+"number of faces to display, and whether the stream is displayed."
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:146
+msgid "Color Scheme"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:154
+msgid "Show Friends' Faces"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:158
+msgid "Show Posts"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:162
+msgid "Show Header"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:166
+msgid "Show Border"
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:8
+msgid "Display your latest Flickr photos"
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:10
+msgid "Shapla Flickr Photos"
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:70
+msgid "Flickr Photos"
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:85
+msgid "Your Flickr User ID:"
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:87
+msgid "Head over to %s to find your Flickr user ID."
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:91
+msgid "Number of photos to show:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:8
+msgid "A widget that displays your Instagram feed, posts, or likes."
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:10
+msgid "Shapla Instagram Photos"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:63
+msgid "Instagram Photos"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:85
+msgid "Number of Photos:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:90
+msgid "Photo Size:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:92
+msgid "Thumbnail"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:93 shortcodes/config.php:39
+msgid "Large"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:98
+msgid "Cache every:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:117
+msgid "Unable to communicate with Instagram."
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:121
+msgid "Instagram did not return a 200."
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:129
+msgid "Instagram has returned invalid data."
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:9
+msgid "Shapla Testimonials"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:10
+msgid "Display client testimonials."
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:49
+msgid "Number of Testimonials:"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:53
+msgid "Order By"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:56
+msgid "ID"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:57
+msgid "Date"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:58
+msgid "Modified"
+msgstr ""
+
+#: includes/widgets/widget-testimonials.php:59
+msgid "Random"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:13
+msgid "Shapla Latest Tweets"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:14
+msgid "Displays your latest tweets from Twitter."
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:71
+msgid "right now"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:76
+msgid "seconds ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:81
+msgid "about 1 minute ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:86
+msgid "minutes ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:91
+msgid "about 1 hour ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:96
+msgid "hours ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:101
+msgid "yesterday"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:106
+msgid "days ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:110
+msgid "over a year ago"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:158
+msgid "Error fetching feeds. Please verify the Twitter settings in the widget."
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:172
+msgid "Latest Tweets"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:188
+msgid "Twitter Username (without @)"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:194
+msgid "Number of Tweets to Display"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:200
+msgid "Consumer Key"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:203
+msgid ""
+"Don't know your Consumer Key, Consumer Secret, Access Token and Access Token "
+"Secret? <a target=\"_blank\" href=\"http://sayful1.wordpress.com/2014/06/14/"
+"how-to-generate-twitter-api-key-api-secret-access-token-access-token-secret/"
+"\">Click here to get help.</a>"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:207
+msgid "Consumer Secret"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:213
+msgid "Access Token"
+msgstr ""
+
+#: includes/widgets/widget-twitter.php:219
+msgid "Access Token Secret"
+msgstr ""
+
+#: shaplatools.php:82
+msgid "Settings"
+msgstr ""
+
+#: shaplatools.php:110
+msgid "ShaplaTools Options"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (ShaplaTools 1.0.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: shaplatools.php:110
+msgid "ShaplaTools"
+msgstr ""
+
+#: shaplatools.php:466
+msgid "For more information:"
+msgstr ""
+
+#: shaplatools.php:467
+msgid ""
+"Visit the <a href=\"%s\" target=\"_blank\">documentation</a> on the "
+"WordPress Directory."
+msgstr ""
+
+#: shaplatools.php:469
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Post an issue</a> on <a href=\"%s\" target="
+"\"_blank\">Support Forum</a>."
+msgstr ""
+
+#: shaplatools.php:477
+msgid "ShaplaTools General Settings"
+msgstr ""
+
+#: shaplatools.php:478
+msgid "Here you can find how to configure general options of this plugin."
+msgstr ""
+
+#: shaplatools.php:480
+msgid ""
+"In order to use Google Analytics service, go to <a href=\"%s\" target="
+"\"_blank\">Google Analytics</a> and click Access Google Analytics and "
+"register for a service for your site. You will get a Google Analytics ID "
+"like this formate (UA-XXXXX-X), paste this ID in Google Analytics ID field "
+"and click save."
+msgstr ""
+
+#: shaplatools.php:487
+msgid ""
+"You can use the following settigns to control the slug/taxonomies for custom "
+"post type portfolio and skills."
+msgstr ""
+
+#: shaplatools.php:488
+msgid ""
+"<strong>Portfolio Slug</strong> - This settings is used to set the slug of "
+"custom post type &lsquo;portfolio&rsquo;."
+msgstr ""
+
+#: shaplatools.php:489
+msgid ""
+"<strong>Skills Slug</strong> - This settings is used to set the slug of "
+"custom post taxonomy &lsquo;skill&rsquo;."
+msgstr ""
+
+#: shaplatools.php:495
+msgid "Using Social Icons"
+msgstr ""
+
+#: shaplatools.php:496
+msgid "Using Social Icons Shortcode"
+msgstr ""
+
+#: shaplatools.php:497
+msgid "To use the social icon use the following shortcode:"
+msgstr ""
+
+#: shaplatools.php:498
+msgid "It would display all social icons with non-empty profile URLs."
+msgstr ""
+
+#: shaplatools.php:499
+msgid "or you can pass specific ids."
+msgstr ""
+
+#: shaplatools.php:500
+msgid "Using Different Styled Icons"
+msgstr ""
+
+#: shaplatools.php:501
+msgid ""
+"You can use the social icons in two different styles: normal and square. "
+"Just pass the <code>style</code> argument in sidebar.<br>E.g.: <code>"
+"[shapla_social id=\"twitter,facebook\" style=\"square\"]</code>."
+msgstr ""
+
+#: shortcodes/config.php:11
+msgid "Button URL"
+msgstr ""
+
+#: shortcodes/config.php:12
+msgid "Add the button&lsquo;s url e.g. http://example.com"
+msgstr ""
+
+#: shortcodes/config.php:16
+msgid "Button Style"
+msgstr ""
+
+#: shortcodes/config.php:17
+msgid "Select the button&lsquo;s style, ie the button&lsquo;s colour"
+msgstr ""
+
+#: shortcodes/config.php:20 shortcodes/config.php:99
+msgid "Grey"
+msgstr ""
+
+#: shortcodes/config.php:21
+msgid "Black"
+msgstr ""
+
+#: shortcodes/config.php:22 shortcodes/config.php:102
+msgid "Green"
+msgstr ""
+
+#: shortcodes/config.php:23
+msgid "Light Blue"
+msgstr ""
+
+#: shortcodes/config.php:24 shortcodes/config.php:103
+msgid "Blue"
+msgstr ""
+
+#: shortcodes/config.php:25 shortcodes/config.php:100
+msgid "Red"
+msgstr ""
+
+#: shortcodes/config.php:26
+msgid "Orange"
+msgstr ""
+
+#: shortcodes/config.php:27
+msgid "Purple"
+msgstr ""
+
+#: shortcodes/config.php:28 shortcodes/config.php:98
+msgid "White"
+msgstr ""
+
+#: shortcodes/config.php:33
+msgid "Button Size"
+msgstr ""
+
+#: shortcodes/config.php:34
+msgid "Select the button&lsquo;s size"
+msgstr ""
+
+#: shortcodes/config.php:37
+msgid "Small"
+msgstr ""
+
+#: shortcodes/config.php:38
+msgid "Medium"
+msgstr ""
+
+#: shortcodes/config.php:44
+msgid "Button Type"
+msgstr ""
+
+#: shortcodes/config.php:45
+msgid "Select the button&lsquo;s type"
+msgstr ""
+
+#: shortcodes/config.php:47 shortcodes/config.php:125
+#: shortcodes/config.php:246 shortcodes/config.php:282
+msgid "Normal"
+msgstr ""
+
+#: shortcodes/config.php:48 shortcodes/config.php:126
+#: shortcodes/config.php:247
+msgid "Stroke"
+msgstr ""
+
+#: shortcodes/config.php:54
+msgid "Button Icon"
+msgstr ""
+
+#: shortcodes/config.php:55 shortcodes/config.php:373
+msgid "Choose an icon"
+msgstr ""
+
+#: shortcodes/config.php:59
+msgid "Font Order"
+msgstr ""
+
+#: shortcodes/config.php:60
+msgid "Select if the icon should display before text or after text."
+msgstr ""
+
+#: shortcodes/config.php:63
+msgid "Before Text"
+msgstr ""
+
+#: shortcodes/config.php:64
+msgid "After Text"
+msgstr ""
+
+#: shortcodes/config.php:69
+msgid "Button Target"
+msgstr ""
+
+#: shortcodes/config.php:70
+msgid "_self = open in same window. _blank = open in new window"
+msgstr ""
+
+#: shortcodes/config.php:73
+msgid "_self"
+msgstr ""
+
+#: shortcodes/config.php:74
+msgid "_blank"
+msgstr ""
+
+#: shortcodes/config.php:80
+msgid "Button&lsquo;s Text"
+msgstr ""
+
+#: shortcodes/config.php:81
+msgid "Add the button&lsquo;s text"
+msgstr ""
+
+#: shortcodes/config.php:85
+msgid "Insert Button Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:94
+msgid "Alert Style"
+msgstr ""
+
+#: shortcodes/config.php:95
+msgid "Select the alert&lsquo;s style, i.e. the alert colour"
+msgstr ""
+
+#: shortcodes/config.php:101
+msgid "Yellow"
+msgstr ""
+
+#: shortcodes/config.php:109
+msgid "Alert Text"
+msgstr ""
+
+#: shortcodes/config.php:110
+msgid "Add the alert&lsquo;s text"
+msgstr ""
+
+#: shortcodes/config.php:114
+msgid "Insert Alert Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:122
+msgid "Toggle Style"
+msgstr ""
+
+#: shortcodes/config.php:123
+msgid "Select the toggle&lsquo;s style"
+msgstr ""
+
+#: shortcodes/config.php:131
+msgid "Toggle Content Title"
+msgstr ""
+
+#: shortcodes/config.php:132
+msgid "Add the title that will go above the toggle content"
+msgstr ""
+
+#: shortcodes/config.php:138
+msgid "Toggle Content"
+msgstr ""
+
+#: shortcodes/config.php:139
+msgid "Add the toggle content. Will accept HTML"
+msgstr ""
+
+#: shortcodes/config.php:143
+msgid "Toggle State"
+msgstr ""
+
+#: shortcodes/config.php:144
+msgid "Select the state of the toggle on page load"
+msgstr ""
+
+#: shortcodes/config.php:146
+msgid "Open"
+msgstr ""
+
+#: shortcodes/config.php:147
+msgid "Closed"
+msgstr ""
+
+#: shortcodes/config.php:152
+msgid "Insert Toggle Content Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:158
+msgid "Insert Columns Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:166
+msgid "Column Type"
+msgstr ""
+
+#: shortcodes/config.php:167
+msgid "Select the type, ie width of the column."
+msgstr ""
+
+#: shortcodes/config.php:169
+msgid "One Third"
+msgstr ""
+
+#: shortcodes/config.php:170
+msgid "One Third Last"
+msgstr ""
+
+#: shortcodes/config.php:171
+msgid "Two Thirds"
+msgstr ""
+
+#: shortcodes/config.php:172
+msgid "Two Thirds Last"
+msgstr ""
+
+#: shortcodes/config.php:173
+msgid "One Half"
+msgstr ""
+
+#: shortcodes/config.php:174
+msgid "One Half Last"
+msgstr ""
+
+#: shortcodes/config.php:175
+msgid "One Fourth"
+msgstr ""
+
+#: shortcodes/config.php:176
+msgid "One Fourth Last"
+msgstr ""
+
+#: shortcodes/config.php:177
+msgid "Three Fourth"
+msgstr ""
+
+#: shortcodes/config.php:178
+msgid "Three Fourth Last"
+msgstr ""
+
+#: shortcodes/config.php:179
+msgid "One Fifth"
+msgstr ""
+
+#: shortcodes/config.php:180
+msgid "One Fifth Last"
+msgstr ""
+
+#: shortcodes/config.php:181
+msgid "Two Fifth"
+msgstr ""
+
+#: shortcodes/config.php:182
+msgid "Two Fifth Last"
+msgstr ""
+
+#: shortcodes/config.php:183
+msgid "Three Fifth"
+msgstr ""
+
+#: shortcodes/config.php:184
+msgid "Three Fifth Last"
+msgstr ""
+
+#: shortcodes/config.php:185
+msgid "Four Fifth"
+msgstr ""
+
+#: shortcodes/config.php:186
+msgid "Four Fifth Last"
+msgstr ""
+
+#: shortcodes/config.php:187
+msgid "One Sixth"
+msgstr ""
+
+#: shortcodes/config.php:188
+msgid "One Sixth Last"
+msgstr ""
+
+#: shortcodes/config.php:189
+msgid "Five Sixth"
+msgstr ""
+
+#: shortcodes/config.php:190
+msgid "Five Sixth Last"
+msgstr ""
+
+#: shortcodes/config.php:196
+msgid "Column Content"
+msgstr ""
+
+#: shortcodes/config.php:197
+msgid "Add the column content."
+msgstr ""
+
+#: shortcodes/config.php:201
+msgid "Add Column"
+msgstr ""
+
+#: shortcodes/config.php:210
+msgid "Divider"
+msgstr ""
+
+#: shortcodes/config.php:211
+msgid "Select the style of the Divider"
+msgstr ""
+
+#: shortcodes/config.php:213
+msgid "Plain"
+msgstr ""
+
+#: shortcodes/config.php:214
+msgid "Strong"
+msgstr ""
+
+#: shortcodes/config.php:215
+msgid "Double"
+msgstr ""
+
+#: shortcodes/config.php:216
+msgid "Dashed"
+msgstr ""
+
+#: shortcodes/config.php:217
+msgid "Dotted"
+msgstr ""
+
+#: shortcodes/config.php:222
+msgid "Insert Divider"
+msgstr ""
+
+#: shortcodes/config.php:231
+msgid "Enter the intro text."
+msgstr ""
+
+#: shortcodes/config.php:236
+msgid "Insert Author Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:243
+msgid "Tabs Style"
+msgstr ""
+
+#: shortcodes/config.php:244
+msgid "Select the tabs&lsquo;s style"
+msgstr ""
+
+#: shortcodes/config.php:253
+msgid "Insert Tab Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:259
+msgid "Tab Title"
+msgstr ""
+
+#: shortcodes/config.php:260
+msgid "Title of the tab"
+msgstr ""
+
+#: shortcodes/config.php:265
+msgid "Tab Content"
+msgstr ""
+
+#: shortcodes/config.php:266
+msgid "Add the tabs content"
+msgstr ""
+
+#: shortcodes/config.php:270
+msgid "Add Tab"
+msgstr ""
+
+#: shortcodes/config.php:279
+msgid "Dropcap Style"
+msgstr ""
+
+#: shortcodes/config.php:280
+msgid "Select the dropcap&lsquo;s style"
+msgstr ""
+
+#: shortcodes/config.php:283
+msgid "Squared"
+msgstr ""
+
+#: shortcodes/config.php:289
+msgid "Dropcap Text"
+msgstr ""
+
+#: shortcodes/config.php:290
+msgid "Enter the dropcap&lsquo;s text"
+msgstr ""
+
+#: shortcodes/config.php:295 shortcodes/config.php:393
+msgid "Font Size"
+msgstr ""
+
+#: shortcodes/config.php:296
+msgid "Enter the font&lsquo;s size in px, em or %"
+msgstr ""
+
+#: shortcodes/config.php:300
+msgid "Insert Dropcap Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:310
+msgid "Choose your image"
+msgstr ""
+
+#: shortcodes/config.php:314
+msgid "Image Filter"
+msgstr ""
+
+#: shortcodes/config.php:315
+msgid "Select the CSS3 image filter style"
+msgstr ""
+
+#: shortcodes/config.php:318
+msgid "No Filter"
+msgstr ""
+
+#: shortcodes/config.php:319
+msgid "Grayscale"
+msgstr ""
+
+#: shortcodes/config.php:320
+msgid "Sepia"
+msgstr ""
+
+#: shortcodes/config.php:321
+msgid "Blur"
+msgstr ""
+
+#: shortcodes/config.php:322
+msgid "Hue Rotate"
+msgstr ""
+
+#: shortcodes/config.php:323
+msgid "Contrast"
+msgstr ""
+
+#: shortcodes/config.php:324
+msgid "Brightness"
+msgstr ""
+
+#: shortcodes/config.php:325
+msgid "Invert"
+msgstr ""
+
+#: shortcodes/config.php:330
+msgid "Alignment"
+msgstr ""
+
+#: shortcodes/config.php:331
+msgid "Choose Image Alignment"
+msgstr ""
+
+#: shortcodes/config.php:335
+msgid "Left"
+msgstr ""
+
+#: shortcodes/config.php:336
+msgid "Center"
+msgstr ""
+
+#: shortcodes/config.php:337
+msgid "Right"
+msgstr ""
+
+#: shortcodes/config.php:343 shortcodes/config.php:378
+msgid "URL"
+msgstr ""
+
+#: shortcodes/config.php:344
+msgid "Enter the URL where image should be linked (optional)"
+msgstr ""
+
+#: shortcodes/config.php:348
+msgid "Insert Image Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:358 shortcodes/shortcode-class.php:127
+msgid "Choose Video"
+msgstr ""
+
+#: shortcodes/config.php:359
+msgid ""
+"Either upload a new video, choose an existing video from your media library "
+"or link to a video by URL. <br><br>"
+msgstr ""
+
+#: shortcodes/config.php:359
+msgid "A list of all shortcode video services can be found on %s.<br>"
+msgstr ""
+
+#: shortcodes/config.php:363
+msgid "Insert Video Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:372
+msgid "Icon"
+msgstr ""
+
+#: shortcodes/config.php:379
+msgid "Enter the URL where icon should be linked (optional)"
+msgstr ""
+
+#: shortcodes/config.php:383
+msgid "Open in new window"
+msgstr ""
+
+#: shortcodes/config.php:384
+msgid "Do you want to open the link in a new window?"
+msgstr ""
+
+#: shortcodes/config.php:386
+msgid "No"
+msgstr ""
+
+#: shortcodes/config.php:387
+msgid "Yes"
+msgstr ""
+
+#: shortcodes/config.php:394
+msgid "Enter the icon&lsquo;s font size in px, em or %"
+msgstr ""
+
+#: shortcodes/config.php:398
+msgid "Insert Icon Shortcode"
+msgstr ""
+
+#: shortcodes/config.php:407
+msgid "Latitude"
+msgstr ""
+
+#: shortcodes/config.php:408
+msgid "Enter the place latitude coordinate. E.g.: 37.42200"
+msgstr ""
+
+#: shortcodes/config.php:413
+msgid "Longitude"
+msgstr ""
+
+#: shortcodes/config.php:414
+msgid ""
+"Enter the place longitude coordinate. E.g.: -122.08395. You may find "
+"longitude and latitude <a href=\"%1$s\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: shortcodes/config.php:420
+msgid "Enter the map width."
+msgstr ""
+
+#: shortcodes/config.php:426
+msgid "Enter the map height."
+msgstr ""
+
+#: shortcodes/config.php:431
+msgid "Zoom Level"
+msgstr ""
+
+#: shortcodes/config.php:432
+msgid ""
+"Enter the map zoom level between 0-21. Highest value zooms in and lowest "
+"zooms out."
+msgstr ""
+
+#: shortcodes/config.php:437
+msgid "Map Style"
+msgstr ""
+
+#: shortcodes/config.php:438
+msgid "Select from a list of predefined map styles."
+msgstr ""
+
+#: shortcodes/config.php:441
+msgid "Pale Dawn"
+msgstr ""
+
+#: shortcodes/config.php:442
+msgid "Subtle Grayscale"
+msgstr ""
+
+#: shortcodes/config.php:443
+msgid "Bright & Bubbly"
+msgstr ""
+
+#: shortcodes/config.php:444
+msgid "Greyscale"
+msgstr ""
+
+#: shortcodes/config.php:445
+msgid "Mixed"
+msgstr ""
+
+#: shortcodes/config.php:450
+msgid "Insert Google Map Shortcode"
+msgstr ""
+
+#: shortcodes/shapla-shortcodes.php:26
+msgid "Upload or Choose Your Custom Video File"
+msgstr ""
+
+#: shortcodes/shapla-shortcodes.php:27
+msgid "Upload or Choose Your Custom Image File"
+msgstr ""
+
+#: shortcodes/shapla-shortcodes.php:99
+msgid "Insert Shortcode"
+msgstr ""
+
+#: shortcodes/shortcode-class.php:24
+msgid "Config file does not exist"
+msgstr ""
+
+#: shortcodes/shortcode-class.php:119
+msgid "Choose Image"
+msgstr ""
+
+#: shortcodes/shortcodes.php:286
+msgid "Tab"
+msgstr ""
+
+#: shortcodes/shortcodes.php:298
+msgid "Title Goes Here"
+msgstr ""
+
+#: shortcodes/shortcodes.php:666
+msgid "All"
+msgstr ""
+
+#: shortcodes/shortcodes.php:725
+msgid "It looks like nothing was found at this location."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/shaplatools/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"ShaplaTools is a powerful plugin to extend functionality to your WordPress "
+"themes."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Sayful Islam"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://sayful.net"
+msgstr ""
