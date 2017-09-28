@@ -1,5 +1,5 @@
 === ShaplaTools ===
-Contributors: sayfulit, sayful
+Contributors: sayful
 Tags: custom post type, widget, shortcode, twitter, images, image
 Requires at least: 4.0
 Tested up to: 4.8

@@ -24,7 +24,7 @@ class ShaplaTools_TinyMCE {
 	public function __construct( $plugin_name, $plugin_url ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->plugin_url = $plugin_url;
+		$this->plugin_url  = $plugin_url;
 
 		// Add the buttons
 		add_action( 'admin_init', array( $this, 'add_buttons' ), 11 );
@@ -62,7 +62,8 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array    $plugins    The current array of plugins.
+	 * @param  array $plugins The current array of plugins.
+	 *
 	 * @return array                The modified plugins array.
 	 */
 	public function add_tinymce_plugin( $plugins ) {
@@ -76,7 +77,8 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array     $buttons      The current array of plugins.
+	 * @param  array $buttons The current array of plugins.
+	 *
 	 * @return array                   The modified plugins array.
 	 */
 	public function register_mce_button( $buttons ) {
@@ -90,7 +92,8 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array    $settings    TinyMCE settings array.
+	 * @param  array $settings TinyMCE settings array.
+	 *
 	 * @return array                 Modified array.
 	 */
 	public function style_formats( $settings ) {
@@ -163,7 +166,8 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array    $buttons    Array of activated buttons.
+	 * @param  array $buttons Array of activated buttons.
+	 *
 	 * @return array                The modified array.
 	 */
 	public function register_mce_formats( $buttons ) {
@@ -178,8 +182,9 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array     $mceInit      The configuration for the current editor.
-	 * @param  string    $editor_id    The ID for the current editor.
+	 * @param  array $mceInit The configuration for the current editor.
+	 * @param  string $editor_id The ID for the current editor.
+	 *
 	 * @return array                   The modified configuration array.
 	 */
 	public function tiny_mce_before_init( $mceInit, $editor_id ) {
@@ -203,8 +208,9 @@ class ShaplaTools_TinyMCE {
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @param  array     $mce_translation    Key/value pairs of strings.
-	 * @param  string    $mce_locale         Locale.
+	 * @param  array $mce_translation Key/value pairs of strings.
+	 * @param  string $mce_locale Locale.
+	 *
 	 * @return array                         The updated translation array.
 	 */
 	public function wp_mce_translation( $mce_translation, $mce_locale ) {

@@ -1,28 +1,29 @@
 <?php
 $shapla_shortcodes['columns'] = array(
-	'params'      => array(),
-	'shortcode'   => '[shapla_row_padding]{{child_shortcode}}[/shapla_row_padding]', // as there is no wrapper shortcode
-	'popup_title' => __( 'Insert Columns Shortcode', 'shaplatools' ),
-	'no_preview'  => true,
+	'params'          => array(),
+	'shortcode'       => '[shapla_row_padding]{{child_shortcode}}[/shapla_row_padding]',
+	// as there is no wrapper shortcode
+	'popup_title'     => __( 'Insert Columns Shortcode', 'shaplatools' ),
+	'no_preview'      => true,
 
 	// child shortcode is clonable & sortable
 	'child_shortcode' => array(
-		'params' => array(
-			'column' => array(
+		'params'       => array(
+			'column'  => array(
 				'type'    => 'select',
 				'label'   => __( 'Column Grid', 'shaplatools' ),
 				'desc'    => __( 'Select the grid, ie width of the column.', 'shaplatools' ),
 				'options' => array(
-					'shapla_col_one' 	=> __( 'One columns', 'shaplatools' ),
-					'shapla_col_two' 	=> __( 'Two columns', 'shaplatools' ),
-					'shapla_col_three' 	=> __( 'Three columns', 'shaplatools' ),
-					'shapla_col_four' 	=> __( 'Four columns', 'shaplatools' ),
-					'shapla_col_five' 	=> __( 'Five columns', 'shaplatools' ),
-					'shapla_col_six' 	=> __( 'Six columns', 'shaplatools' ),
-					'shapla_col_seven' 	=> __( 'Seven columns', 'shaplatools' ),
-					'shapla_col_eight' 	=> __( 'Eight columns', 'shaplatools' ),
-					'shapla_col_nine' 	=> __( 'Nine columns', 'shaplatools' ),
-					'shapla_col_ten' 	=> __( 'Ten columns', 'shaplatools' ),
+					'shapla_col_one'    => __( 'One columns', 'shaplatools' ),
+					'shapla_col_two'    => __( 'Two columns', 'shaplatools' ),
+					'shapla_col_three'  => __( 'Three columns', 'shaplatools' ),
+					'shapla_col_four'   => __( 'Four columns', 'shaplatools' ),
+					'shapla_col_five'   => __( 'Five columns', 'shaplatools' ),
+					'shapla_col_six'    => __( 'Six columns', 'shaplatools' ),
+					'shapla_col_seven'  => __( 'Seven columns', 'shaplatools' ),
+					'shapla_col_eight'  => __( 'Eight columns', 'shaplatools' ),
+					'shapla_col_nine'   => __( 'Nine columns', 'shaplatools' ),
+					'shapla_col_ten'    => __( 'Ten columns', 'shaplatools' ),
 					'shapla_col_eleven' => __( 'Eleven columns', 'shaplatools' ),
 					'shapla_col_twelve' => __( 'Twelve columns', 'shaplatools' ),
 				)
@@ -40,15 +41,15 @@ $shapla_shortcodes['columns'] = array(
 );
 
 $shapla_shortcodes['button'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'url' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'url'        => array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Button URL', 'shaplatools' ),
 			'desc'  => __( 'Add the button&lsquo;s url e.g. http://example.com', 'shaplatools' )
 		),
-		'style' => array(
+		'style'      => array(
 			'type'    => 'select',
 			'label'   => __( 'Button Style', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s style, ie the button&lsquo;s colour', 'shaplatools' ),
@@ -65,7 +66,7 @@ $shapla_shortcodes['button'] = array(
 				'white'      => __( 'White', 'shaplatools' )
 			)
 		),
-		'size' => array(
+		'size'       => array(
 			'type'    => 'select',
 			'label'   => __( 'Button Size', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s size', 'shaplatools' ),
@@ -76,7 +77,7 @@ $shapla_shortcodes['button'] = array(
 				'large'  => __( 'Large', 'shaplatools' )
 			)
 		),
-		'type' => array(
+		'type'       => array(
 			'type'    => 'select',
 			'label'   => __( 'Button Type', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s type', 'shaplatools' ),
@@ -85,7 +86,7 @@ $shapla_shortcodes['button'] = array(
 				'stroke' => __( 'Stroke', 'shaplatools' )
 			)
 		),
-		'icon' => array(
+		'icon'       => array(
 			'std'   => '',
 			'type'  => 'icons',
 			'label' => __( 'Button Icon', 'shaplatools' ),
@@ -101,7 +102,7 @@ $shapla_shortcodes['button'] = array(
 				'after'  => __( 'After Text', 'shaplatools' )
 			)
 		),
-		'target' => array(
+		'target'     => array(
 			'type'    => 'select',
 			'label'   => __( 'Button Target', 'shaplatools' ),
 			'desc'    => __( '_self = open in same window. _blank = open in new window', 'shaplatools' ),
@@ -111,7 +112,7 @@ $shapla_shortcodes['button'] = array(
 				'_blank' => __( '_blank', 'shaplatools' )
 			)
 		),
-		'content' => array(
+		'content'    => array(
 			'std'   => 'Button Text',
 			'type'  => 'text',
 			'label' => __( 'Button&lsquo;s Text', 'shaplatools' ),
@@ -123,9 +124,9 @@ $shapla_shortcodes['button'] = array(
 );
 
 $shapla_shortcodes['toggle'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'style' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'style'   => array(
 			'type'    => 'select',
 			'label'   => __( 'Toggle Style', 'shaplatools' ),
 			'desc'    => __( 'Select the toggle&lsquo;s style', 'shaplatools' ),
@@ -134,7 +135,7 @@ $shapla_shortcodes['toggle'] = array(
 				'stroke' => __( 'Stroke', 'shaplatools' ),
 			)
 		),
-		'title' => array(
+		'title'   => array(
 			'type'  => 'text',
 			'label' => __( 'Toggle Content Title', 'shaplatools' ),
 			'desc'  => __( 'Add the title that will go above the toggle content', 'shaplatools' ),
@@ -146,7 +147,7 @@ $shapla_shortcodes['toggle'] = array(
 			'label' => __( 'Toggle Content', 'shaplatools' ),
 			'desc'  => __( 'Add the toggle content. Will accept HTML', 'shaplatools' ),
 		),
-		'state' => array(
+		'state'   => array(
 			'type'    => 'select',
 			'label'   => __( 'Toggle State', 'shaplatools' ),
 			'desc'    => __( 'Select the state of the toggle on page load', 'shaplatools' ),
@@ -161,7 +162,7 @@ $shapla_shortcodes['toggle'] = array(
 );
 
 $shapla_shortcodes['tabs'] = array(
-	'params' => array(
+	'params'          => array(
 		'style' => array(
 			'type'    => 'select',
 			'label'   => __( 'Tabs Style', 'shaplatools' ),
@@ -172,22 +173,22 @@ $shapla_shortcodes['tabs'] = array(
 			)
 		)
 	),
-	'no_preview'  => true,
-	'shortcode'   => '[shapla_tabs style="{{style}}"]{{child_shortcode}} [/shapla_tabs]',
-	'popup_title' => __( 'Insert Tab Shortcode', 'shaplatools' ),
+	'no_preview'      => true,
+	'shortcode'       => '[shapla_tabs style="{{style}}"]{{child_shortcode}} [/shapla_tabs]',
+	'popup_title'     => __( 'Insert Tab Shortcode', 'shaplatools' ),
 	'child_shortcode' => array(
-		'params' => array(
-			'title' => array(
+		'params'       => array(
+			'title'   => array(
 				'std'   => 'Title',
 				'type'  => 'text',
 				'label' => __( 'Tab Title', 'shaplatools' ),
 				'desc'  => __( 'Title of the tab', 'shaplatools' ),
 			),
 			'content' => array(
-				'std'     => 'Tab Content',
-				'type'    => 'textarea',
-				'label'   => __( 'Tab Content', 'shaplatools' ),
-				'desc'    => __( 'Add the tabs content', 'shaplatools' )
+				'std'   => 'Tab Content',
+				'type'  => 'textarea',
+				'label' => __( 'Tab Content', 'shaplatools' ),
+				'desc'  => __( 'Add the tabs content', 'shaplatools' )
 			)
 		),
 		'shortcode'    => '[shapla_tab title="{{title}}"]{{content}}[/shapla_tab]',
@@ -196,14 +197,14 @@ $shapla_shortcodes['tabs'] = array(
 );
 
 $shapla_shortcodes['dropcap'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'style' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'style'   => array(
 			'type'    => 'select',
 			'label'   => __( 'Dropcap Style', 'shaplatools' ),
 			'desc'    => __( 'Select the dropcap&lsquo;s style', 'shaplatools' ),
 			'options' => array(
-				'normal' => __( 'Normal', 'shaplatools' ),
+				'normal'  => __( 'Normal', 'shaplatools' ),
 				'squared' => __( 'Squared', 'shaplatools' ),
 			)
 		),
@@ -213,7 +214,7 @@ $shapla_shortcodes['dropcap'] = array(
 			'label' => __( 'Dropcap Text', 'shaplatools' ),
 			'desc'  => __( 'Enter the dropcap&lsquo;s text', 'shaplatools' )
 		),
-		'size' => array(
+		'size'    => array(
 			'std'   => '50px',
 			'type'  => 'text',
 			'label' => __( 'Font Size', 'shaplatools' ),
@@ -225,15 +226,15 @@ $shapla_shortcodes['dropcap'] = array(
 );
 
 $shapla_shortcodes['image'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'src' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'src'       => array(
 			'std'   => '',
 			'type'  => 'image',
 			'label' => __( 'Image', 'shaplatools' ),
 			'desc'  => __( 'Choose your image', 'shaplatools' )
 		),
-		'style' => array(
+		'style'     => array(
 			'type'    => 'select',
 			'label'   => __( 'Image Filter', 'shaplatools' ),
 			'desc'    => __( 'Select the CSS3 image filter style', 'shaplatools' ),
@@ -261,11 +262,11 @@ $shapla_shortcodes['image'] = array(
 				'right'  => __( 'Right', 'shaplatools' )
 			)
 		),
-		'url' => array(
-			'std' => '',
-			'type' => 'text',
+		'url'       => array(
+			'std'   => '',
+			'type'  => 'text',
 			'label' => __( 'URL', 'shaplatools' ),
-			'desc' => __( 'Enter the URL where image should be linked (optional)', 'shaplatools' )
+			'desc'  => __( 'Enter the URL where image should be linked (optional)', 'shaplatools' )
 		)
 	),
 	'shortcode'   => '[shapla_image style="{{style}}" src="{{src}}" alignment="{{alignment}}" url="{{url}}"]',
@@ -274,29 +275,32 @@ $shapla_shortcodes['image'] = array(
 
 
 $shapla_shortcodes['video'] = array(
-	'no_preview' => true,
-	'params' => array(
+	'no_preview'  => true,
+	'params'      => array(
 		'src' => array(
 			'std'   => '',
 			'type'  => 'video',
 			'label' => __( 'Choose Video', 'shaplatools' ),
-			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL. <br><br>', 'shaplatools' ) . sprintf( __( 'A list of all shortcode video services can be found on %s.<br>', 'shaplatools' ), '<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
+			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL. <br><br>',
+					'shaplatools' ) . sprintf( __( 'A list of all shortcode video services can be found on %s.<br>',
+					'shaplatools' ),
+					'<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
 		)
 	),
-	'shortcode' => '[shapla_video src="{{src}}"]',
+	'shortcode'   => '[shapla_video src="{{src}}"]',
 	'popup_title' => __( 'Insert Video Shortcode', 'shaplatools' )
 );
 
 $shapla_shortcodes['icon'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'icon' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'icon'       => array(
 			'std'   => '',
 			'type'  => 'icons',
 			'label' => __( 'Icon', 'shaplatools' ),
 			'desc'  => __( 'Choose an icon', 'shaplatools' )
 		),
-		'url' => array(
+		'url'        => array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'URL', 'shaplatools' ),
@@ -311,39 +315,40 @@ $shapla_shortcodes['icon'] = array(
 				'yes' => __( 'Yes', 'shaplatools' ),
 			)
 		),
-		'size' => array(
-			'std' => '50px',
-			'type' => 'text',
+		'size'       => array(
+			'std'   => '50px',
+			'type'  => 'text',
 			'label' => __( 'Font Size', 'shaplatools' ),
-			'desc' => __( 'Enter the icon&lsquo;s font size in px, em or %', 'shaplatools' ),
+			'desc'  => __( 'Enter the icon&lsquo;s font size in px, em or %', 'shaplatools' ),
 		)
 	),
-	'shortcode' => '[shapla_icon icon="{{icon}}" url="{{url}}" size="{{size}}" new_window="{{new_window}}"]',
+	'shortcode'   => '[shapla_icon icon="{{icon}}" url="{{url}}" size="{{size}}" new_window="{{new_window}}"]',
 	'popup_title' => __( 'Insert Icon Shortcode', 'shaplatools' )
 );
 
 $shapla_shortcodes['map'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'lat' => array(
+	'no_preview'  => true,
+	'params'      => array(
+		'lat'      => array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Latitude', 'shaplatools' ),
 			'desc'  => __( 'Enter the place latitude coordinate. E.g.: 37.42200', 'shaplatools' )
 		),
-		'long' => array(
+		'long'     => array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Longitude', 'shaplatools' ),
-			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude <a href="%1$s" target="_blank">here</a>.', 'shaplatools' ), esc_url( 'http://labs.mondeca.com/geo/anyplace.html' ) )
+			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude <a href="%1$s" target="_blank">here</a>.',
+				'shaplatools' ), esc_url( 'http://labs.mondeca.com/geo/anyplace.html' ) )
 		),
-		'width' => array(
+		'width'    => array(
 			'std'   => '100%',
 			'type'  => 'text',
 			'label' => __( 'Width', 'shaplatools' ),
 			'desc'  => __( 'Enter the map width.', 'shaplatools' )
 		),
-		'height' => array(
+		'height'   => array(
 			'std'   => '350px',
 			'type'  => 'text',
 			'label' => __( 'Height', 'shaplatools' ),
@@ -361,13 +366,14 @@ $shapla_shortcodes['map'] = array(
 				'terrain'   => __( 'Terrain', 'shaplatools' ),
 			)
 		),
-		'zoom' => array(
+		'zoom'     => array(
 			'std'   => '15',
 			'type'  => 'text',
 			'label' => __( 'Zoom Level', 'shaplatools' ),
-			'desc'  => __( 'Enter the map zoom level between 0-21. Highest value zooms in and lowest zooms out.', 'shaplatools' )
+			'desc'  => __( 'Enter the map zoom level between 0-21. Highest value zooms in and lowest zooms out.',
+				'shaplatools' )
 		),
-		'style' => array(
+		'style'    => array(
 			'std'     => 'none',
 			'type'    => 'select',
 			'label'   => __( 'Map Style', 'shaplatools' ),

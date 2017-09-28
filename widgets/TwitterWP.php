@@ -11,17 +11,17 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 	class TwitterWP {
 
-		protected $error_message     = 'Could not access Twitter feed.';
-		protected $url               = 'https://api.twitter.com/1.1/';
-		protected $base_url          = '';
-		public static $user          = false;
-		public static $result_type   = 'mixed';
+		protected $error_message = 'Could not access Twitter feed.';
+		protected $url = 'https://api.twitter.com/1.1/';
+		protected $base_url = '';
+		public static $user = false;
+		public static $result_type = 'mixed';
 
 		private static $bearer_token = false;
 		// A single instance of this class.
-		private static $instance     = null;
+		private static $instance = null;
 		// Get Twitter app credentials at https://dev.twitter.com
-		private static $app          = array();
+		private static $app = array();
 
 		/**
 		 * Creates or returns an instance of this class.
@@ -109,7 +109,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			self::$user = $user ? $user : self::$user;
 
-			$args = apply_filters( 'twitterwp_get_tweets', $this->header_args( '', array( 'count' => $count ) ) );
+			$args     = apply_filters( 'twitterwp_get_tweets', $this->header_args( '', array( 'count' => $count ) ) );
 			$response = wp_remote_get( $this->tweets_url( $count ), $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -134,7 +134,8 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 				return $error;
 			}
 
-			$args = apply_filters( 'twitterwp_get_search_results', $this->header_args( '', array( 'count' => $count ) ) );
+			$args     = apply_filters( 'twitterwp_get_search_results',
+				$this->header_args( '', array( 'count' => $count ) ) );
 			$response = wp_remote_get( $this->search_url( $search, $count ), $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -162,7 +163,8 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			self::$user = $user ? $user : self::$user;
 
-			$args = apply_filters( 'twitterwp_get_list_tweets', $this->header_args( '', array( 'count' => $count ) ) );
+			$args     = apply_filters( 'twitterwp_get_list_tweets',
+				$this->header_args( '', array( 'count' => $count ) ) );
 			$response = wp_remote_get( $this->list_tweets_url( $list, $count ), $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -189,7 +191,8 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			self::$user = $user ? $user : self::$user;
 
-			$args = apply_filters( 'twitterwp_get_favorite_tweets', $this->header_args( '', array( 'count' => $count ) ) );
+			$args     = apply_filters( 'twitterwp_get_favorite_tweets',
+				$this->header_args( '', array( 'count' => $count ) ) );
 			$response = wp_remote_get( $this->favorites_url( $count ), $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -219,7 +222,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 				return new WP_Error( 'twitterwp_error', __( 'ERROR: You need to provide a user.' ) );
 			}
 
-			$args = apply_filters( 'twitterwp_get_user', $this->header_args( 'oauth' ) );
+			$args     = apply_filters( 'twitterwp_get_user', $this->header_args( 'oauth' ) );
 			$response = wp_remote_get( $this->user_url(), $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -268,7 +271,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 				return $args;
 			}
 
-			$url = $this->api_url( $params, $trail );
+			$url      = $this->api_url( $params, $trail );
 			$response = wp_remote_get( $url, $args );
 
 			if ( is_wp_error( $response ) ) {
@@ -405,12 +408,12 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			// Set our oauth data
 			$oauth = wp_parse_args( $header_args, array(
-				'oauth_consumer_key' => self::$app[0],
-				'oauth_nonce' => time(),
+				'oauth_consumer_key'     => self::$app[0],
+				'oauth_nonce'            => time(),
 				'oauth_signature_method' => 'HMAC-SHA1',
-				'oauth_token' => self::$app[2],
-				'oauth_timestamp' => time(),
-				'oauth_version' => '1.0',
+				'oauth_token'            => self::$app[2],
+				'oauth_timestamp'        => time(),
+				'oauth_version'          => '1.0',
 			) );
 
 			// add our screen_name to the parameters
@@ -529,8 +532,8 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			$params = apply_filters( 'twitterwp_tweets_url',
 				array(
-					 'screen_name' => self::$user,
-					 'count'       => $count,
+					'screen_name' => self::$user,
+					'count'       => $count,
 				),
 				$count,
 				self::$user
@@ -554,9 +557,9 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			$params = apply_filters( 'twitterwp_list_tweets_url',
 				array(
-					 'slug'              => $list,
-					 'owner_screen_name' => self::$user,
-					 'count'             => $count,
+					'slug'              => $list,
+					'owner_screen_name' => self::$user,
+					'count'             => $count,
 				),
 				$count,
 				self::$user,
@@ -580,8 +583,8 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			$params = apply_filters( 'twitterwp_favorites_url',
 				array(
-					 'screen_name' => self::$user,
-					 'count'       => $count,
+					'screen_name' => self::$user,
+					'count'       => $count,
 				),
 				$count,
 				self::$user
@@ -602,7 +605,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 		 */
 		protected function search_url( $search, $count = 100 ) {
 			$this->base_url = $this->api_url();
-			$tags_array = array();
+			$tags_array     = array();
 			if ( is_array( $search ) ) {
 				foreach ( $search as $term ) {
 					$tags_array[] = trim( $term );
@@ -616,9 +619,9 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			$params = apply_filters( 'twitterwp_search_url',
 				array(
-					 'q'           => $query,
-					 'result_type' => self::$result_type,
-					 'count'       => absint( $count ),
+					'q'           => $query,
+					'result_type' => self::$result_type,
+					'count'       => absint( $count ),
 				),
 				$count,
 				$query
@@ -639,7 +642,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 			$params = apply_filters( 'twitterwp_user_url',
 				array(
-					 'screen_name' => self::$user,
+					'screen_name' => self::$user,
 				),
 				self::$user
 			);
@@ -668,13 +671,14 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 
 				$addictional_info = '';
 				if ( isset( $response['response']['message'] ) ) {
-					$code = isset( $response['response']['code'] ) ? $response['response']['code'] . ': ' : '';
+					$code             = isset( $response['response']['code'] ) ? $response['response']['code'] . ': ' : '';
 					$addictional_info = ' (' . $code . $response['response']['message'] . ')';
 				}
 				/** @noinspection PhpUnusedLocalVariableInspection */
 				foreach ( $json->errors as $key => $error ) {
 
-					$errors->add( 'twitterwp_error', '<strong>ERROR ' . $error->code . ':</strong> ' . $error->message . $addictional_info );
+					$errors->add( 'twitterwp_error',
+						'<strong>ERROR ' . $error->code . ':</strong> ' . $error->message . $addictional_info );
 				}
 
 				return $errors;
