@@ -143,6 +143,9 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			// Search Module
 			include SHAPLATOOLS_MODULES . '/Search/Search.php';
 			new \ShaplaTools\Modules\Search\Search( $this->options );
+
+			// Portfolio Module
+			include SHAPLATOOLS_MODULES . '/Portfolio/Portfolio.php';
 		}
 
 		private function init() {
@@ -168,14 +171,9 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		private function includes_post_types() {
 			$options = $this->shaplatools_options();
 
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-portfolio.php';
 			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-feature.php';
 			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-testimonial.php';
 			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-team.php';
-
-			if ( $options['portfolio_post_type'] ) {
-				new ShaplaTools_Portfolio( $this->plugin_name );
-			}
 
 			if ( $options['feature_post_type'] ) {
 				new ShaplaTools_Feature( $this->plugin_name );
@@ -193,15 +191,10 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		public function include_meta_boxes() {
 			$options = $this->shaplatools_options();
 
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-portfolio-metabox.php';
 			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-feature-metabox.php';
 			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-team-metabox.php';
 			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-testimonial-metabox.php';
 			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-post-metabox.php';
-
-			if ( $options['portfolio_meta_box'] ) {
-				new ShaplaTools_Portfolio_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
 
 			if ( $options['feature_meta_box'] ) {
 				new ShaplaTools_Feature_Metabox( $this->plugin_name, $this->plugin_url() );

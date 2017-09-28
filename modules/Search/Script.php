@@ -1,6 +1,6 @@
 <?php
 
-namespace ShaplaTools\Modules\Slider;
+namespace ShaplaTools\Modules\Search;
 
 
 class Script {
@@ -34,10 +34,10 @@ class Script {
 		}
 
 		wp_enqueue_script(
-			'nivo-slider',
-			SHAPLATOOLS_SLIDER_ASSETS . '/js/nivo-slider.min.js',
+			'typeahead',
+			SHAPLATOOLS_ASSETS . '/library/typeahead.min.js',
 			array( 'jquery' ),
-			'3.2.0',
+			'0.10.5',
 			true
 		);
 	}
@@ -48,11 +48,9 @@ class Script {
 	 * @return boolean
 	 */
 	private function should_load_scripts() {
-		global $post;
-		$load_scripts = is_active_widget( false, false, 'widget_shapla_slider', true ) ||
-		                ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'shapla_slider' ) );
+		$load_scripts = true;
 
-		return apply_filters( 'shaplatools_slider_load_scripts', $load_scripts );
+		return apply_filters( 'shaplatools_search_load_scripts', $load_scripts );
 	}
 }
 

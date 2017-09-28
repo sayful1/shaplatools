@@ -22,7 +22,7 @@ class Slider {
 		$this->define_constants();
 
 		// Include required files
-		$this->includes();
+		add_action( 'init', array( $this, 'includes' ), 0 );
 	}
 
 	/**
@@ -42,7 +42,14 @@ class Slider {
 	 *
 	 * @return void
 	 */
-	private function includes() {
+	public function includes() {
+
+		$theme_supports = get_theme_support( 'shapla-slider' );
+
+		if ( ! $theme_supports ) {
+			return;
+		}
+
 		include SHAPLATOOLS_SLIDER_PATH . '/PostType.php';
 		include SHAPLATOOLS_SLIDER_PATH . '/MetaBox.php';
 		include SHAPLATOOLS_SLIDER_PATH . '/ShortCode.php';

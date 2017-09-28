@@ -8,6 +8,8 @@ class Search {
 
 	public function __construct( $options ) {
 
+		$this->options = $options;
+
 		add_action( 'wp_ajax_nopriv_shapla_search', array( $this, 'shaplatools_search' ) );
 		add_action( 'wp_ajax_shapla_search', array( $this, 'shaplatools_search' ) );
 	}
