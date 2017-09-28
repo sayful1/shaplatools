@@ -100,7 +100,7 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		 * @param  WP_Post $post
 		 * @param  array $meta_box
 		 *
-		 * @return output metabox content
+		 * @return string metabox content
 		 */
 		public function meta_box_callback( $post, $meta_box ) {
 			if ( ! is_array( $meta_box['args'] ) ) {
