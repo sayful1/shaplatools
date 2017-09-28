@@ -1,9 +1,9 @@
 === ShaplaTools ===
 Contributors: sayfulit, sayful
 Tags: custom post type, widget, shortcode, twitter, images, image
-Requires at least: 3.9
-Tested up to: 4.4
-Stable tag: 1.2.2
+Requires at least: 4.0
+Tested up to: 4.8
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,8 +13,7 @@ ShaplaTools is a powerful plugin to extend functionality to your WordPress theme
 
 ShaplaTools is a powerful plugin to extend functionality to your WordPress themes offering shortcodes, FontAwesome icons, Autocomplete search suggestion, Retina graphics for your website and useful widgets.
 
-For documentation, please visit <a href="http://sayfulit.github.io/shaplatools/">GitHub Page</a>
-For demo, please visit <a href="http://demo.sayfulit.com/shaplatools/">here</a>
+For documentation and demo, please visit <a href="http://sayfulit.com/shapla/">here</a>
 
 = Custom Post Types =
 
@@ -86,6 +85,22 @@ Installing the plugins is just like installing other WordPress plugins. If you d
 You can enable custom post types in your theme by option page. Go to <b>Settings -> ShaplaTools</b> and then click on "Custom Post Types" tab and check which custom post types you want to enable for your theme.
 
 == Changelog ==
+
+= version 1.3.1 =
+* Fixed  	- Adding multiple slides at same page
+* Fixed  	- issue for backward compatibility for alert and button at new version.
+
+= version 1.3.0 =
+* New 		- Google map shortcode now supports map type to choose between Roadmap, Satellite, Hybrid, and Terrain. A new settings for Google Maps API key under Settings > ShaplaTools
+* Updated 	- FontAwesome library v4.7.0
+* Updated 	- Retina.js v2.0.0
+* Updated 	- Alerts Shortcode has been modified by adding many new colors.
+* Updated 	- Columns Shortcode has been changed to bootstrap like 12 columns system. also backed up previous 5 columns system.
+* Updated 	- Buttons Shortcode has been modified by adding many new colors, hover colors, button shape, new button size.
+* Fixed 	- Error of file width and height for retina image
+* Fixed 	- Typeahead autocomplete search javaScript error
+* Fixed 	- Instagram widget to work with new API
+* Fixed 	- Dribbble widget feed URL causing widget to fail
 
 = version 1.2.2 =
 * Change - replacing TwitterAPIExchange.php with TwitterWP.php for Twitter Widget for better working with WordPress..

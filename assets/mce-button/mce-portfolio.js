@@ -3,7 +3,7 @@
 		editor.addButton( 'shaplatools_portfolio_mce_button', {
 
             title : 'Add Shapla Portfolio',
-			image : url + '/icon-portfolio.png',
+			image : url + '/../img/icon-portfolio.svg',
 			onclick: function() {
 				editor.windowManager.open( {
 					title: 'Insert Portfolio Shortcode',
@@ -14,10 +14,9 @@
 							name: 'thumbnail',
 							label: 'Thumbnail per row',
 								'values': [
-									{text: 'Show 2 thumbnail per row', value: '2'},
-									{text: 'Show 3 thumbnail per row', value: '3'},
-									{text: 'Show 4 thumbnail per row', value: '4'},
-									{text: 'Show 5 thumbnail per row', value: '5'}
+									{text: 'Show 2 thumbnail per row', value: 'm6'},
+									{text: 'Show 3 thumbnail per row', value: 'm4'},
+									{text: 'Show 4 thumbnail per row', value: 'm3'}
 								]
 						},
 						{

@@ -1,19 +1,29 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ){ exit; }
 
-$strings = 'tinyMCE.addI18n({' . _WP_Editors::$mce_locale . ':{
-    shapla:{
-        insert: "' . esc_js( __( 'Insert Shapla Shortcode', 'shapla' ) ) . '",
-        button: "' . esc_js( __( 'Buttons', 'shapla' ) ) . '",
-        columns: "' . esc_js( __( 'Columns', 'shapla' ) ) . '",
-        tabs: "' . esc_js( __( 'Tabs', 'shapla' ) ) . '",
-        toggle: "' . esc_js( __( 'Toggle', 'shapla' ) ) . '",
-        dropcap: "' . esc_js( __( 'Dropcap', 'shapla' ) ) . '",
-        icon: "' . esc_js( __( 'Font Icon', 'shapla' ) ) . '",
+if ( ! class_exists( '_WP_Editors' ) ){
+    require( ABSPATH . WPINC . '/class-wp-editor.php' );
+}
 
-        media_elements: "' . esc_js( __( 'Media Elements', 'shapla' ) ) . '",
-        widget_area: "' . esc_js( __( 'Widget Area', 'shapla' ) ) . '",
-        image: "' . esc_js( __( 'Image', 'shapla' ) ) . '",
-        video: "' . esc_js( __( 'Video', 'shapla' ) ) . '",
-        map: "' . esc_js( __( 'Google Map', 'shapla' ) ) . '",
-    }
-}})';
+function shaplatools_tinymce_plugin_translation() {
+    $strings = array(
+        'insert'            => __('Insert Shapla Shortcode', 'shaplatools'),
+        'button'            => __('Buttons', 'shaplatools'),
+        'columns'           => __('Columns', 'shaplatools'),
+        'tabs'              => __('Tabs', 'shaplatools'),
+        'toggle'            => __('Toggle', 'shaplatools'),
+        'dropcap'           => __('Dropcap', 'shaplatools'),
+        'icon'              => __('Font Icon', 'shaplatools'),
+        'media_elements'    => __('Media Elements', 'shaplatools'),
+        'widget_area'       => __('Widget Area', 'shaplatools'),
+        'image'             => __('Image', 'shaplatools'),
+        'video'             => __('Video', 'shaplatools'),
+        'map'               => __('Google Map', 'shaplatools'),
+    );
+    $locale = _WP_Editors::$mce_locale;
+    $translated = 'tinyMCE.addI18n("' . $locale . '.shapla", ' . json_encode( $strings ) . ");\n";
+
+     return $translated;
+}
+
+$strings = shaplatools_tinymce_plugin_translation();

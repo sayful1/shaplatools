@@ -3,7 +3,7 @@
 		editor.addButton( 'shaplatools_team_mce_button', {
 
             title : 'Add Shapla Team',
-			image : url + '/icon-team.png',
+			image : url + '/../img/icon-team.svg',
 			onclick: function() {
 				editor.windowManager.open( {
 					title: 'Insert Team Shortcode',
@@ -35,7 +35,7 @@
 						}
 					],
 					onsubmit: function( e ) {
-						editor.insertContent( '[shapla_teams items_desktop="' + e.data.items_desktop + '" items_tablet="' + e.data.items_tablet + '" items_tablet_small="' + e.data.items_tablet_small + '" items_mobile="' + e.data.items_mobile + '"]');
+						editor.insertContent( '[shapla_team items_desktop="' + e.data.items_desktop + '" items_tablet="' + e.data.items_tablet + '" items_tablet_small="' + e.data.items_tablet_small + '" items_mobile="' + e.data.items_mobile + '"]');
 						}
 					}
 				);

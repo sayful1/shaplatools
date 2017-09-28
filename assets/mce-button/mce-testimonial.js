@@ -3,7 +3,7 @@
 		editor.addButton( 'shaplatools_testimonial_mce_button', {
 
             title : 'Add Shapla Testimonial',
-			image : url + '/icon-testimonials.png',
+			image : url + '/../img/icon-testimonials.svg',
 			onclick: function() {
 				editor.windowManager.open( {
 					title: 'Insert Testimonial Shortcode',
@@ -41,7 +41,7 @@
 						}
 					],
 					onsubmit: function( e ) {
-						editor.insertContent( '[shapla_testimonials posts_per_page="' + e.data.posts_per_page + '" items_desktop="' + e.data.items_desktop + '" items_tablet="' + e.data.items_tablet + '" items_tablet_small="' + e.data.items_tablet_small + '" items_mobile="' + e.data.items_mobile + '"]');
+						editor.insertContent( '[shapla_testimonial posts_per_page="' + e.data.posts_per_page + '" items_desktop="' + e.data.items_desktop + '" items_tablet="' + e.data.items_tablet + '" items_tablet_small="' + e.data.items_tablet_small + '" items_mobile="' + e.data.items_mobile + '"]');
 						}
 					}
 				);

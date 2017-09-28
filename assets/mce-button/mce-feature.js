@@ -3,7 +3,7 @@
 		editor.addButton( 'shaplatools_feature_mce_button', {
 
             title : 'Add Shapla Feature',
-			image : url + '/icon-features.png',
+			image : url + '/../img/icon-features.svg',
 			onclick: function() {
 				editor.windowManager.open( {
 					title: 'Insert Feature Shortcode',
@@ -14,10 +14,10 @@
 							name: 'thumbnail',
 							label: 'Feature per row',
 								'values': [
-									{text: 'Show 2 features per row', value: '2'},
-									{text: 'Show 3 features per row', value: '3'},
-									{text: 'Show 4 features per row', value: '4'},
-									{text: 'Show 5 features per row', value: '5'}
+									{text: 'Show 2 features per row', value: 's6'},
+									{text: 'Show 3 features per row', value: 's4'},
+									{text: 'Show 4 features per row', value: 's3'},
+									{text: 'Show 6 features per row', value: 's2'}
 								]
 						}
 					],
