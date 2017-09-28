@@ -210,7 +210,7 @@ class MetaBox {
 	public function columns_head( $defaults ) {
 		unset( $defaults['date'] );
 
-		$defaults['id']        = __( 'Slide ID', 'shaplatools' );
+		$defaults['id']        = __( 'Slider ID', 'shaplatools' );
 		$defaults['shortcode'] = __( 'Shortcode', 'shaplatools' );
 		$defaults['images']    = __( 'Images', 'shaplatools' );
 

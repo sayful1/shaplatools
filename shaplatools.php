@@ -345,8 +345,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 				true );
 			wp_register_script( 'owl-carousel', $this->plugin_url . '/assets/library/owl.carousel.min.js',
 				array( 'jquery' ), '2.0.0', true );
-			wp_register_script( 'nivo-slider', $this->plugin_url . '/assets/library/nivo-slider.min.js',
-				array( 'jquery' ), '3.2.0', true );
 			wp_register_script( 'typeahead', $this->plugin_url . '/assets/library/typeahead.min.js', array( 'jquery' ),
 				$this->version, true );
 			wp_register_script( 'shuffle', $this->plugin_url . '/assets/library/shuffle.min.js', array( 'jquery' ),
@@ -362,10 +360,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			if ( $this->has_shortcode( 'shapla_testimonial' ) || $this->has_shortcode( 'shapla_team' ) ) {
 				wp_enqueue_script( 'owl-carousel' );
-			}
-
-			if ( $this->has_shortcode( 'shapla_slide' ) ) {
-				wp_enqueue_script( 'nivo-slider' );
 			}
 
 			if ( $this->has_shortcode( 'shapla_portfolio' ) ) {

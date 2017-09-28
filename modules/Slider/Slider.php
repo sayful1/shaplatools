@@ -45,6 +45,9 @@ class Slider {
 	private function includes() {
 		include SHAPLATOOLS_SLIDER_PATH . '/PostType.php';
 		include SHAPLATOOLS_SLIDER_PATH . '/MetaBox.php';
+		include SHAPLATOOLS_SLIDER_PATH . '/ShortCode.php';
+		include SHAPLATOOLS_SLIDER_PATH . '/Widget.php';
+		include SHAPLATOOLS_SLIDER_PATH . '/Script.php';
 	}
 }
 

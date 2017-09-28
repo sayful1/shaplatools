@@ -32,7 +32,7 @@ class PostType {
 		$labels = array(
 			'name'               => _x( 'Sliders', 'Post Type General Name', 'shaplatools' ),
 			'singular_name'      => _x( 'Slider', 'Post Type Singular Name', 'shaplatools' ),
-			'menu_name'          => __( 'Slider', 'shaplatools' ),
+			'menu_name'          => __( 'Shapla Slider', 'shaplatools' ),
 			'name_admin_bar'     => __( 'Slider', 'shaplatools' ),
 			'parent_item_colon'  => __( 'Parent Slider:', 'shaplatools' ),
 			'all_items'          => __( 'All Sliders', 'shaplatools' ),
@@ -49,14 +49,14 @@ class PostType {
 		$args   = array(
 			'label'               => __( 'Slider', 'shaplatools' ),
 			'description'         => __( 'Create slider for your site', 'shaplatools' ),
-			'labels'              => $labels,
+			'labels'              => apply_filters( 'shaplatools_slider_labels', $labels ),
 			'supports'            => array( 'title' ),
 			'hierarchical'        => false,
 			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'menu_position'       => 35,
-			'menu_icon'           => 'dashicons-images-alt2',
+			'menu_icon'           => 'dashicons-slides',
 			'show_in_admin_bar'   => false,
 			'show_in_nav_menus'   => false,
 			'can_export'          => true,
@@ -67,7 +67,7 @@ class PostType {
 			'capability_type'     => 'page',
 		);
 
-		register_post_type( $this->slide_type, $args );
+		register_post_type( $this->slide_type, apply_filters( 'shaplatools_slider_args', $args ) );
 	}
 }
 

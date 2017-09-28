@@ -9,7 +9,6 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ):
 			$this->plugin_name = $plugin_name;
 			$this->plugin_path = $plugin_path;
 
-			add_shortcode( 'shapla_slide', array( $this, 'shapla_slide' ) );
 			add_shortcode( 'shapla_portfolio', array( $this, 'shapla_portfolio' ) );
 			add_shortcode( 'shapla_feature', array( $this, 'shapla_feature' ) );
 			add_shortcode( 'shapla_team', array( $this, 'shapla_team' ) );
@@ -17,31 +16,6 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ):
 
 			add_shortcode( 'shapla_testimonials', array( $this, 'shapla_testimonial' ) );
 			add_shortcode( 'shapla_teams', array( $this, 'shapla_team' ) );
-		}
-
-		/**
-		 * A shortcode for rendering the shapla slide.
-		 *
-		 * @param  array $attributes Shortcode attributes.
-		 * @param  string $content The text content for shortcode. Not used.
-		 *
-		 * @return string  The shortcode output
-		 */
-		public function shapla_slide( $attributes, $content = null ) {
-			$default_attributes = array(
-				'id' => ''
-			);
-
-			$attributes = shortcode_atts( $default_attributes, $attributes );
-
-			ob_start();
-			do_action( 'shaplatools_before_slide_shortcode' );
-			require $this->plugin_path . '/templates/shapla_slide.php';
-			do_action( 'shaplatools_after_slide_shortcode' );
-			$html = ob_get_contents();
-			ob_end_clean();
-
-			return $html;
 		}
 
 		/**
