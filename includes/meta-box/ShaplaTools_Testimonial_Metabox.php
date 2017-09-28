@@ -15,13 +15,27 @@ class ShaplaTools_Testimonial_Metabox {
 	 * Hook into the appropriate actions when the class is constructed.
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		add_action( 'add_meta_boxes', array( $this, 'client_avatar' ) );
-		
-		add_action( 'admin_head', array ($this, 'add_mce_button') );
+		if (is_admin()){
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'client_avatar' ) );
+			
+			add_action( 'admin_head', array ($this, 'add_mce_button') );
 
-		add_filter( 'manage_edit-testimonial_columns', array ($this, 'columns_head') );
-		add_action( 'manage_testimonial_posts_custom_column', array ($this, 'columns_content') );
+			add_filter( 'manage_edit-testimonial_columns', array ($this, 'columns_head') );
+			add_action( 'manage_testimonial_posts_custom_column', array ($this, 'columns_content'));
+		} else {
+			add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_scripts' ) );
+		}
+	}
+
+	public function frontend_scripts(){
+		global $post;
+
+		if(is_a( $post, 'WP_Post' ) && has_shortcode($post->post_content, 'shapla_testimonials')) {
+			wp_enqueue_style( 'owl-carousel' );
+			wp_enqueue_style( 'owl-carousel-theme' );
+			wp_enqueue_script( 'owl-carousel' );
+	    }
 	}
 
 	/**
@@ -50,7 +64,8 @@ class ShaplaTools_Testimonial_Metabox {
 	    }
 	}
 	public function add_tinymce_plugin( $plugin_array ) {
-	    $plugin_array['shaplatools_testimonial_mce_button'] = plugin_dir_url( dirname(dirname(__FILE__)) ) .'/assets/mce-button/mce-testimonial.js';
+		global $shaplatools;
+	    $plugin_array['shaplatools_testimonial_mce_button'] = $shaplatools->plugin_url() .'/assets/mce-button/mce-testimonial.js';
 	    return $plugin_array;
 	}
 
@@ -147,8 +162,7 @@ class ShaplaTools_Testimonial_Metabox {
 }
 
 function run_shaplatools_testimonial_meta(){
-	if (is_admin())
-		ShaplaTools_Testimonial_Metabox::get_instance();
+	ShaplaTools_Testimonial_Metabox::get_instance();
 }
 //run_shaplatools_testimonial_meta();
 endif;

@@ -299,6 +299,10 @@ class ShaplaTools_Metaboxs {
 					echo '<td class="shapla-box-'.$field['type'].'"><input data-default-color="'.@$field['std'].'" type="text" id="'. $field['id'] .'" name="shapla_meta[' . $field['id'] .']" value="'. ($meta ? $meta : $field['std']) .'" class="colorpicker"></td>';
 				break;
 
+				case 'date':
+					echo '<td class="shapla-box-'.$field['type'].'"><input type="text" id="'. $field['id'] .'" name="shapla_meta[' . $field['id'] .']" value="'. ($meta ? $meta : $field['std']) .'" class="datepicker"></td>';
+				break;
+
 				case 'checkbox':
 				    echo '<td>';
 				    $val = '';

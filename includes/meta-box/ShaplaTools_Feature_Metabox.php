@@ -46,7 +46,8 @@ class ShaplaTools_Feature_Metabox {
 	}
 
 	public function add_tinymce_plugin( $plugin_array ) {
-	    $plugin_array['shaplatools_feature_mce_button'] = plugin_dir_url( dirname(dirname(__FILE__)) ) .'/assets/mce-button/mce-feature.js';
+		global $shaplatools;
+	    $plugin_array['shaplatools_feature_mce_button'] = $shaplatools->plugin_url() .'/assets/mce-button/mce-feature.js';
 	    return $plugin_array;
 	}
 

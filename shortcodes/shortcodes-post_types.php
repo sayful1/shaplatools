@@ -82,9 +82,9 @@ function shapla_filterable_portfolio( $atts, $content = null ){
 	ob_start();
 	?>
 	<!--#container -->
-	<div id="portfolio-container">
+	<div id="shaplatools-portfolio">
 
-		<div id="filter">
+		<div id="filter" class="filter">
 			<?php
 	            $terms = get_terms("skill");    //To get custom taxonomy catagory name
 	            $count = count($terms);
@@ -101,7 +101,7 @@ function shapla_filterable_portfolio( $atts, $content = null ){
 	        ?>
 		</div>
 
-		<div id="grid" class="row">
+		<div id="grid" class="row grid">
 		    <?php
 
 		    	$args = array(
@@ -268,7 +268,7 @@ function shapla_testimonials($posts_per_page = -1, $orderby = 'none'){
 
 		?>
 			<!-- SINGLE FEEDBACK -->
-			<div class="single-feedback">
+			<div class="shapla-testimonial">
 				<div class="client-pic">
                     <?php
                         if ( has_post_thumbnail() ) {
@@ -383,7 +383,7 @@ function shapla_teams(){
 
 		?>
 			<!-- SINGLE TEAM -->
-			<div class="single-team">
+			<div class="shapla-team">
 				<div class="box">
 					<div class="team-pic">
 	                    <?php
@@ -481,7 +481,7 @@ function shapla_feature( $atts, $content = null ){
 	$query = new WP_Query( $args  );
 
 	if ( $query->have_posts() ):
-		?><div class="shapla_features"><?php
+		?><div class="shapla-features"><?php
 		while ( $query->have_posts() ) : $query->the_post();
 
 

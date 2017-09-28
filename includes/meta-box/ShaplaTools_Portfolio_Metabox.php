@@ -15,14 +15,17 @@ class ShaplaTools_Portfolio_Metabox {
 	 * Hook into the appropriate actions when the class is constructed.
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		add_action( 'add_meta_boxes', array( $this, 'portfolio_image' ) );
-		
-		add_action( 'admin_head', array ($this, 'add_mce_button') );
-		add_action( 'admin_enqueue_scripts', array ($this, 'admin_style') );
+		if (is_admin()){
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'portfolio_image' ) );
+			
+			add_action( 'admin_head', array ($this, 'add_mce_button') );
 
-		add_filter( 'manage_edit-portfolio_columns', array ($this, 'columns_head') );
-		add_action( 'manage_portfolio_posts_custom_column', array ($this, 'columns_content') );
+			add_filter( 'manage_edit-portfolio_columns', array ($this, 'columns_head') );
+			add_action( 'manage_portfolio_posts_custom_column', array ($this, 'columns_content') );
+		} else {
+			add_action( 'wp_enqueue_scripts', array ($this, 'enqueue_scripts') );
+		}
 	}
 
 	/**
@@ -39,9 +42,18 @@ class ShaplaTools_Portfolio_Metabox {
 		return self::$instance;
 	}
 
-	public function admin_style() {
+	public function enqueue_scripts() {
+		global $post, $shaplatools;
 
-        wp_localize_script( 'jquery', 'shapla_portfolio', $this->available_img_size() );
+		wp_register_script( 'modernizr', $shaplatools->plugin_url(). '/assets/library/shuffle/jquery.shuffle.modernizr'. SCRIPT_SUFFIX .'.js', array(), '3.2', true );
+		wp_register_script( 'shuffle', $shaplatools->plugin_url(). '/assets/library/shuffle/jquery.shuffle'. SCRIPT_SUFFIX .'.js', array( 'jquery', 'modernizr' ), '3.2', true );
+		wp_register_script( 'shuffle-custom', $shaplatools->plugin_url(). '/assets/library/shuffle/shuffle-custom.js', array( 'jquery', 'shuffle' ), '3.2', true );
+     
+	    if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'shapla_portfolio') ) {
+			wp_enqueue_script( 'shuffle' );
+			wp_enqueue_script( 'modernizr' );
+			wp_enqueue_script( 'shuffle-custom' );
+	    }
 	}
 
 	public function available_img_size(){
@@ -69,7 +81,8 @@ class ShaplaTools_Portfolio_Metabox {
 	    }
 	}
 	public function add_tinymce_plugin( $plugin_array ) {
-	    $plugin_array['shaplatools_portfolio_mce_button'] = plugin_dir_url( dirname(dirname(__FILE__)) ) .'/assets/mce-button/mce-portfolio.js';
+		global $shaplatools;
+	    $plugin_array['shaplatools_portfolio_mce_button'] = $shaplatools->plugin_url().'/assets/mce-button/mce-portfolio.js';
 	    return $plugin_array;
 	}
 
@@ -120,7 +133,7 @@ class ShaplaTools_Portfolio_Metabox {
 		            'name' => __('Project Date', 'shapla'),
 		            'desc' => __('Choose the project date.', 'shapla'),
 		            'id' => '_shapla_portfolio_date',
-		            'type' => 'text',
+		            'type' => 'date',
 		            'std' => '',
 		        ),
 		        array(
@@ -185,8 +198,7 @@ class ShaplaTools_Portfolio_Metabox {
 }
 
 function run_shaplatools_portfolio_meta(){
-	if (is_admin())
-		ShaplaTools_Portfolio_Metabox::get_instance();
+	ShaplaTools_Portfolio_Metabox::get_instance();
 }
 //run_shaplatools_portfolio_meta();
 endif;

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the ShaplaTools package.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShaplaTools 1.0.0\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/shaplatools\n"
-"POT-Creation-Date: 2015-06-03 14:54:31+00:00\n"
+"Project-Id-Version: ShaplaTools 1.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shaplatools\n"
+"POT-Creation-Date: 2015-09-11 15:20:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,578 +17,556 @@ msgid "Insert Shapla Shortcode"
 msgstr ""
 
 #: assets/js/plugin-lang.php:6
-msgid "Alerts / Notification"
-msgstr ""
-
-#: assets/js/plugin-lang.php:7
 msgid "Buttons"
 msgstr ""
 
-#: assets/js/plugin-lang.php:8
+#: assets/js/plugin-lang.php:7
 msgid "Columns"
 msgstr ""
 
-#: assets/js/plugin-lang.php:9
-msgid "Divider / Horizontal Ruler"
-msgstr ""
-
-#: assets/js/plugin-lang.php:10 shortcodes/config.php:230
-msgid "Intro Text"
-msgstr ""
-
-#: assets/js/plugin-lang.php:11
+#: assets/js/plugin-lang.php:8
 msgid "Tabs"
 msgstr ""
 
-#: assets/js/plugin-lang.php:12
+#: assets/js/plugin-lang.php:9
 msgid "Toggle"
 msgstr ""
 
-#: assets/js/plugin-lang.php:13
+#: assets/js/plugin-lang.php:10
 msgid "Dropcap"
 msgstr ""
 
-#: assets/js/plugin-lang.php:14
+#: assets/js/plugin-lang.php:11
 msgid "Font Icon"
 msgstr ""
 
-#: assets/js/plugin-lang.php:16
+#: assets/js/plugin-lang.php:13
 msgid "Media Elements"
 msgstr ""
 
-#: assets/js/plugin-lang.php:17
+#: assets/js/plugin-lang.php:14
 msgid "Widget Area"
 msgstr ""
 
-#: assets/js/plugin-lang.php:18 shortcodes/config.php:309
+#: assets/js/plugin-lang.php:15 shortcodes/config.php:246
 msgid "Image"
 msgstr ""
 
-#: assets/js/plugin-lang.php:19
+#: assets/js/plugin-lang.php:16
 msgid "Video"
 msgstr ""
 
-#: assets/js/plugin-lang.php:20
+#: assets/js/plugin-lang.php:17
 msgid "Google Map"
 msgstr ""
 
 #: includes/classes/ShaplaTools_Gallery.php:26
-msgid ""
-"Image Gallery (will be used as slider in single post or page instate of "
-"Featured Image)"
+msgid "Image Gallery"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Gallery.php:57
-#: includes/classes/ShaplaTools_Gallery.php:162
-msgid "Remove image"
+#: includes/classes/ShaplaTools_Gallery.php:51
+#: includes/classes/ShaplaTools_Metaboxs.php:130
+msgid "Create Featured Gallery"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Gallery.php:75
-msgid "Add gallery images"
+#: includes/classes/ShaplaTools_Gallery.php:58
+#: includes/classes/ShaplaTools_Gallery.php:66
+#: includes/classes/ShaplaTools_Metaboxs.php:137
+#: includes/classes/ShaplaTools_Metaboxs.php:145
+msgid "Edit Featured Gallery"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Gallery.php:82
-msgid "Select Gallery Images Size"
+#: includes/classes/ShaplaTools_Gallery.php:102
+#: includes/classes/ShaplaTools_Metaboxs.php:181
+msgid "Save Featured Gallery"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Gallery.php:137
-msgid "Add Images to Gallery"
+#: includes/classes/ShaplaTools_Gallery.php:111
+#: includes/classes/ShaplaTools_Metaboxs.php:190
+msgid "Saving..."
 msgstr ""
 
-#: includes/classes/ShaplaTools_Gallery.php:139
-msgid "Add to gallery"
+#: includes/classes/ShaplaTools_Gallery.php:173
+msgid "Add Gallery"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Gallery.php:175
+#: includes/classes/ShaplaTools_Metaboxs.php:253
+#: includes/classes/ShaplaTools_Metaboxs.php:255
+msgid "Edit Gallery"
 msgstr ""
 
 #: includes/classes/ShaplaTools_Metaboxs.php:90
 msgid "Insert"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Metaboxs.php:130
-msgid "Create Featured Gallery"
+#: includes/classes/ShaplaTools_TinyMCE.php:117
+msgid "Run In"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Metaboxs.php:137
-#: includes/classes/ShaplaTools_Metaboxs.php:145
-msgid "Edit Featured Gallery"
+#: includes/classes/ShaplaTools_TinyMCE.php:122
+msgid "Alert"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Metaboxs.php:181
-msgid "Save Featured Gallery"
+#: includes/classes/ShaplaTools_TinyMCE.php:125 shortcodes/config.php:22
+msgid "Green"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Metaboxs.php:190
-msgid "Saving..."
+#: includes/classes/ShaplaTools_TinyMCE.php:132 shortcodes/config.php:25
+msgid "Red"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Metaboxs.php:253
-#: includes/classes/ShaplaTools_Metaboxs.php:255
-msgid "Edit Gallery"
+#: includes/classes/ShaplaTools_TinyMCE.php:139
+msgid "Yellow"
 msgstr ""
 
-#: includes/classes/ShaplaTools_Typeahead.php:47
+#: includes/classes/ShaplaTools_TinyMCE.php:146 shortcodes/config.php:24
+msgid "Blue"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:153 shortcodes/config.php:20
+msgid "Grey"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:229
+msgid "Insert Horizontal Line"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:230
+msgid "Horizontal line"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:231
+msgid "Style"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:232
+msgid "Plain"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:233
+msgid "Strong"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:234
+msgid "Double"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:235
+msgid "Dashed"
+msgstr ""
+
+#: includes/classes/ShaplaTools_TinyMCE.php:236
+msgid "Dotted"
+msgstr ""
+
+#: includes/classes/ShaplaTools_Typeahead.php:74
 msgid "Sorry. No results match your search."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:41
-msgid "Event Featured Image"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:50
-msgid "Event Info"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:51
-msgid "Here you can customize your event details."
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:57
-msgid "Event Images"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:58
-msgid "Choose event images."
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:61
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:83
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:61
-msgid "Upload Images"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:64
-msgid "Event Start Date:"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:65
-msgid "Choose the event start date"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:71
-msgid "Event End Date:"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:72
-msgid "Choose the event end date"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:78
-msgid "Event Venue:"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:79
-msgid "Enter event address"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:93
-msgid "Start Date"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:94
-msgid "End Date"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Event_Metabox.php:95
-msgid "Venue"
-msgstr ""
-
-#: includes/meta-box/ShaplaTools_Feature_Metabox.php:41
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:65
 msgid "Extra Settings"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Feature_Metabox.php:47
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:71
 msgid "Font Awesome Icon Class:"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Feature_Metabox.php:48
+#: includes/meta-box/ShaplaTools_Feature_Metabox.php:72
 msgid ""
 "Add <a target=\"_blank\" href=\"http://fortawesome.github.io/Font-Awesome/"
 "icons/\">Font Awesome</a> Icon Class. Example: fa fa-wordpress"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:72
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:89
 msgid "Slide Settings"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:79
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:96
 msgid "Slider Images"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:80
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:97
 msgid "Choose slider images."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:86
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:100
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:116
+msgid "Upload Images"
+msgstr ""
+
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:103
 msgid "Slider Image Size"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:87
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:104
 msgid ""
 "Select image size from available image size. Use full for original image "
 "size."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:94
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:111
 msgid "Slider Theme"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:95
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:112
 msgid "Use a pre-built theme. To use your own theme select \"None\"."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:100
-#: includes/widgets/widget-testimonials.php:55 shortcodes/config.php:334
-#: shortcodes/config.php:440
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:117
+#: includes/widgets/widget-testimonials.php:55 shortcodes/config.php:271
+#: shortcodes/config.php:377
 msgid "None"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:101
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:118
 msgid "Default"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:102
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:119
 msgid "Light"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:103
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:120
 msgid "Dark"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:104
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:121
 msgid "Bar"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:105
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:122
 msgid "Smoothness"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:109
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:126
 msgid "Transition Effect"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:110
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:127
 msgid "Select transition for for this slide."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:115
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:132
 msgid "random"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:116
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:133
 msgid "sliceDown"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:117
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:134
 msgid "sliceDownLeft"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:118
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:135
 msgid "sliceUp"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:119
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:136
 msgid "sliceUpLeft"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:120
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:137
 msgid "sliceUpDown"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:121
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:138
 msgid "sliceUpDownLeft"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:122
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:139
 msgid "fold"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:123
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:140
 msgid "fade"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:124
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:141
 msgid "slideInRight"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:125
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:142
 msgid "slideInLeft"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:126
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:143
 msgid "boxRandom"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:127
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:144
 msgid "boxRain"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:128
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:145
 msgid "boxRainReverse"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:129
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:146
 msgid "boxRainGrow"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:130
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:147
 msgid "boxRainGrowReverse"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:134
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:151
 msgid "Slices"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:135
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:152
 msgid "The number of slices to use in the \"Slice\" transitions (eg 15)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:141
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:158
 msgid "boxCols"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:142
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:159
 msgid "The number of columns to use in the \"Box\" transitions (eg 8)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:148
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:165
 msgid "boxRows"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:149
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:166
 msgid "The number of rows to use in the \"Box\" transitions (eg 4)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:155
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:172
 msgid "Animation Speed"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:156
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:173
 msgid "The speed of the transition animation in milliseconds (eg 500)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:162
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:179
 msgid "Pause Time"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:163
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:180
 msgid "The amount of time to show each slide in milliseconds (eg 3000)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:169
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:186
 msgid "Start Slide"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:170
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:187
 msgid "Set which slide the slider starts from (zero based index: usually 0)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:176
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:193
 msgid "Enable Thumbnail Navigation"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:183
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:200
 msgid "Enable Direction Navigation"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:184
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:201
 msgid "Prev & Next arrows"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:190
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:207
 msgid "Enable Control Navigation"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:191
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:208
 msgid "eg 1,2,3..."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:197
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:214
 msgid "Pause the Slider on Hover"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:204
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:221
 msgid "Manual Transitions"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:205
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:222
 msgid "Slider is always paused"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:211
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:228
 msgid "Random Start Slide"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:212
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:229
 msgid "Overrides Start Slide value"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:226
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:243
 msgid "Slide ID"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:227
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:244
 msgid "Shortcode"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:228
+#: includes/meta-box/ShaplaTools_NivoSlide_Metabox.php:245
 msgid "Images"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:41
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:96
 msgid "Portfolio Featured Image"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:50 shaplatools.php:486
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:105
 msgid "Portfolio Settings"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:51
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:106
 msgid "Here you can customize your project details."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:57
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:112
 msgid "Project Images"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:58
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:113
 msgid "Choose project images."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:64
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:119
 msgid "Subtitle"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:65
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:120
 msgid "Enter the subtitle for this portfolio item"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:71
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:57
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:126
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:95
 msgid "Client Name"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:72
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:127
 msgid "Enter the client name of the project"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:78
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:101
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:133
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:156
 msgid "Project Date"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:79
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:134
 msgid "Choose the project date."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:85
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:103
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:140
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:158
 msgid "Project URL"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:86
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:72
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:141
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:110
 msgid "Enter the project URL"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:100
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:155
 #: includes/post-type/ShaplaTools_Portfolio.php:81
 msgid "Skills"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:102
+#: includes/meta-box/ShaplaTools_Portfolio_Metabox.php:157
 msgid "Client"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:41
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:79
 msgid "Team Member Image"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:50
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:88
 msgid "Team Member Details"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:51
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:89
 msgid "Here you can customize your team members details."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:57
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:95
 msgid "Team Member Designation"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:58
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:96
 msgid "Enter team member designation."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:64
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:102
 msgid "Member Short Description"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:65
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:103
 msgid "Enter team member short description."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:79
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:117
 msgid "Team Member Name"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:80
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:118
 msgid "Designation"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:81
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:119
 msgid "Short Description"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Team_Metabox.php:82
+#: includes/meta-box/ShaplaTools_Team_Metabox.php:120
 msgid "Member Image"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:41
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:91
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:79
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:129
 msgid "Client's Avatar"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:50
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:88
 msgid "Testimonial Details"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:51
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:89
 msgid "Here you can customize your testimonial details."
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:58
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:96
 msgid "Enter the client name"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:64
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:102
 msgid "Business/Site Name (optional)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:65
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:103
 msgid "Enter the client business/site name"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:71
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:109
 msgid "Business/Site Link (optional)"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:86
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:124
 #: includes/widgets/widget-twitter.php:182
 msgid "Title"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:87
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:125
 msgid "Testimonial"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:88
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:126
 msgid "Client's Name"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:89
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:127
 msgid "Business/Site"
 msgstr ""
 
-#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:90
+#: includes/meta-box/ShaplaTools_Testimonial_Metabox.php:128
 msgid "Link"
 msgstr ""
 
@@ -847,7 +825,7 @@ msgstr ""
 msgid "Social"
 msgstr ""
 
-#: includes/settings/settings.php:99
+#: includes/settings/settings.php:99 shaplatools.php:396
 msgid "Custom Post Types"
 msgstr ""
 
@@ -864,7 +842,7 @@ msgstr ""
 msgid "Configure the general settings"
 msgstr ""
 
-#: includes/settings/settings.php:222 shaplatools.php:479
+#: includes/settings/settings.php:222 shaplatools.php:375
 msgid "Google Analytics ID"
 msgstr ""
 
@@ -872,7 +850,7 @@ msgstr ""
 msgid "Enter Google Analytics ID like (UA-XXXXX-X)"
 msgstr ""
 
-#: includes/settings/settings.php:228
+#: includes/settings/settings.php:228 shaplatools.php:377
 msgid "Autocomplete search form"
 msgstr ""
 
@@ -880,16 +858,12 @@ msgstr ""
 msgid "Enable autocomplete search with twitter typeahead"
 msgstr ""
 
-#: includes/settings/settings.php:240
+#: includes/settings/settings.php:240 shaplatools.php:379
 msgid "Retina graphics for your website"
 msgstr ""
 
 #: includes/settings/settings.php:241
-msgid ""
-"To serve high-resolution images to devices with retina displays. This plugin "
-"will use open source script retina.js and for using retina.js script, a "
-"higher quality version of image will be created and stored with @2x added to "
-"the filename when an image is uploaded."
+msgid "Check to enable retina graphics for your website."
 msgstr ""
 
 #: includes/settings/settings.php:436
@@ -1048,10 +1022,10 @@ msgid "Send a Direct Message"
 msgstr ""
 
 #: includes/widgets/widget-contact.php:170
-#: includes/widgets/widget-dribbble.php:88
-#: includes/widgets/widget-fb_like_box.php:121
-#: includes/widgets/widget-flickr.php:80
-#: includes/widgets/widget-instagram.php:75
+#: includes/widgets/widget-dribbble.php:93
+#: includes/widgets/widget-fb_like_box.php:120
+#: includes/widgets/widget-flickr.php:85
+#: includes/widgets/widget-instagram.php:98
 #: includes/widgets/widget-testimonials.php:46
 msgid "Title:"
 msgstr ""
@@ -1066,32 +1040,31 @@ msgid ""
 "contact form."
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:8
-msgid "Display your latest Dribbble shots"
-msgstr ""
-
-#: includes/widgets/widget-dribbble.php:10
+#: includes/widgets/widget-dribbble.php:13
 msgid "Shapla Dribbble Shots"
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:55
+#: includes/widgets/widget-dribbble.php:14
+msgid "Display your latest Dribbble shots."
+msgstr ""
+
+#: includes/widgets/widget-dribbble.php:60
 msgid "Please check your dribbble username"
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:77
+#: includes/widgets/widget-dribbble.php:82
 msgid "Dribbble Shots"
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:93
-#: includes/widgets/widget-instagram.php:80
+#: includes/widgets/widget-dribbble.php:98
 msgid "Username:"
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:98
+#: includes/widgets/widget-dribbble.php:103
 msgid "Number of shots to show:"
 msgstr ""
 
-#: includes/widgets/widget-dribbble.php:104
+#: includes/widgets/widget-dribbble.php:109
 msgid "Open links in new window?"
 msgstr ""
 
@@ -1107,11 +1080,11 @@ msgstr ""
 msgid "Find us on Facebook"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:125
+#: includes/widgets/widget-fb_like_box.php:124
 msgid "App Id"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:128
+#: includes/widgets/widget-fb_like_box.php:127
 msgid ""
 "Dont't know your App ID? Head on over to <a target=\"_blank\" href=\"https://"
 "developers.facebook.com/\">FB Developer</a> and create App ID. Still need "
@@ -1119,120 +1092,136 @@ msgid ""
 "com/2014/06/12/how-to-get-facebook-api-key/\">here</a>."
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:131
+#: includes/widgets/widget-fb_like_box.php:130
 msgid "Facebook Page URL"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:133
+#: includes/widgets/widget-fb_like_box.php:132
 msgid ""
 "The absolute URL of the Facebook Page that will be liked. e.g. https://www."
 "facebook.com/FacebookDevelopers"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:136 shortcodes/config.php:419
+#: includes/widgets/widget-fb_like_box.php:135 shortcodes/config.php:356
 msgid "Width"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:138
-msgid "The width of the plugin in pixels. Minimum is 292. Default is 300."
+#: includes/widgets/widget-fb_like_box.php:137
+msgid "The width of the plugin in pixels. Minimum is 180. Maximum is 500."
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:141 shortcodes/config.php:425
+#: includes/widgets/widget-fb_like_box.php:140 shortcodes/config.php:362
 msgid "Height"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:143
+#: includes/widgets/widget-fb_like_box.php:142
 msgid ""
 "The height of the plugin in pixels. The default height varies based on "
 "number of faces to display, and whether the stream is displayed."
 msgstr ""
 
 #: includes/widgets/widget-fb_like_box.php:146
-msgid "Color Scheme"
-msgstr ""
-
-#: includes/widgets/widget-fb_like_box.php:154
 msgid "Show Friends' Faces"
 msgstr ""
 
+#: includes/widgets/widget-fb_like_box.php:150
+msgid "Show Page Posts"
+msgstr ""
+
+#: includes/widgets/widget-fb_like_box.php:154
+msgid "Use Small Header"
+msgstr ""
+
 #: includes/widgets/widget-fb_like_box.php:158
-msgid "Show Posts"
+msgid "Hide Cover Photo"
 msgstr ""
 
-#: includes/widgets/widget-fb_like_box.php:162
-msgid "Show Header"
-msgstr ""
-
-#: includes/widgets/widget-fb_like_box.php:166
-msgid "Show Border"
-msgstr ""
-
-#: includes/widgets/widget-flickr.php:8
-msgid "Display your latest Flickr photos"
-msgstr ""
-
-#: includes/widgets/widget-flickr.php:10
+#: includes/widgets/widget-flickr.php:13
 msgid "Shapla Flickr Photos"
 msgstr ""
 
-#: includes/widgets/widget-flickr.php:70
+#: includes/widgets/widget-flickr.php:14
+msgid "Display your latest Flickr photos."
+msgstr ""
+
+#: includes/widgets/widget-flickr.php:75
 msgid "Flickr Photos"
 msgstr ""
 
-#: includes/widgets/widget-flickr.php:85
+#: includes/widgets/widget-flickr.php:90
 msgid "Your Flickr User ID:"
 msgstr ""
 
-#: includes/widgets/widget-flickr.php:87
+#: includes/widgets/widget-flickr.php:92
 msgid "Head over to %s to find your Flickr user ID."
 msgstr ""
 
-#: includes/widgets/widget-flickr.php:91
+#: includes/widgets/widget-flickr.php:96
 msgid "Number of photos to show:"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:8
-msgid "A widget that displays your Instagram feed, posts, or likes."
-msgstr ""
-
-#: includes/widgets/widget-instagram.php:10
+#: includes/widgets/widget-instagram.php:13
 msgid "Shapla Instagram Photos"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:63
+#: includes/widgets/widget-instagram.php:14
+msgid "A widget that displays your Instagram feed, posts, or likes."
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:59
+msgid "Follow %1$s on Instagram"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:62
+msgid "Error: We were unable to fetch your instagram feed."
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:84
 msgid "Instagram Photos"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:85
-msgid "Number of Photos:"
+#: includes/widgets/widget-instagram.php:103
+msgid "Instagram Username:"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:90
+#: includes/widgets/widget-instagram.php:108
+msgid "User ID:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:110
+msgid "Lookup your User ID <a href=\"%s\" target=\"_blank\">here</a>"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:114
+msgid "Client ID:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:116
+msgid "Register a new client <a href=\"%s\" target=\"_blank\">here</a>"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:120
+msgid "Photo Count:"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:125
 msgid "Photo Size:"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:92
+#: includes/widgets/widget-instagram.php:127
 msgid "Thumbnail"
 msgstr ""
 
-#: includes/widgets/widget-instagram.php:93 shortcodes/config.php:39
-msgid "Large"
-msgstr ""
-
-#: includes/widgets/widget-instagram.php:98
-msgid "Cache every:"
-msgstr ""
-
-#: includes/widgets/widget-instagram.php:117
-msgid "Unable to communicate with Instagram."
-msgstr ""
-
-#: includes/widgets/widget-instagram.php:121
-msgid "Instagram did not return a 200."
+#: includes/widgets/widget-instagram.php:128
+msgid "Low Resolution"
 msgstr ""
 
 #: includes/widgets/widget-instagram.php:129
-msgid "Instagram has returned invalid data."
+msgid "High Resolution"
+msgstr ""
+
+#: includes/widgets/widget-instagram.php:134
+msgid "Cache time (in hours):"
 msgstr ""
 
 #: includes/widgets/widget-testimonials.php:9
@@ -1351,45 +1340,45 @@ msgstr ""
 msgid "Access Token Secret"
 msgstr ""
 
-#: shaplatools.php:82
+#: shaplatools.php:117
 msgid "Settings"
 msgstr ""
 
-#: shaplatools.php:110
+#: shaplatools.php:145
 msgid "ShaplaTools Options"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (ShaplaTools 1.0.0)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (ShaplaTools 1.2.0)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: shaplatools.php:110
+#: shaplatools.php:145
 msgid "ShaplaTools"
 msgstr ""
 
-#: shaplatools.php:466
+#: shaplatools.php:362
 msgid "For more information:"
 msgstr ""
 
-#: shaplatools.php:467
+#: shaplatools.php:363
 msgid ""
 "Visit the <a href=\"%s\" target=\"_blank\">documentation</a> on the "
 "WordPress Directory."
 msgstr ""
 
-#: shaplatools.php:469
+#: shaplatools.php:365
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Post an issue</a> on <a href=\"%s\" target="
 "\"_blank\">Support Forum</a>."
 msgstr ""
 
-#: shaplatools.php:477
+#: shaplatools.php:373
 msgid "ShaplaTools General Settings"
 msgstr ""
 
-#: shaplatools.php:478
+#: shaplatools.php:374
 msgid "Here you can find how to configure general options of this plugin."
 msgstr ""
 
-#: shaplatools.php:480
+#: shaplatools.php:376
 msgid ""
 "In order to use Google Analytics service, go to <a href=\"%s\" target="
 "\"_blank\">Google Analytics</a> and click Access Google Analytics and "
@@ -1398,53 +1387,67 @@ msgid ""
 "and click save."
 msgstr ""
 
-#: shaplatools.php:487
+#: shaplatools.php:378
 msgid ""
-"You can use the following settigns to control the slug/taxonomies for custom "
-"post type portfolio and skills."
+"Autocomplete search form use <a href=\"%s\" target=\"_blank\">twitter "
+"typeahead.js JavaScript library</a> for AJAX search. In order to use this "
+"feature select \"Enable for WordPress Default Search\" to enable AJAX search "
+"for WordPress default search or select \"Enable for WooCommerce Product "
+"Search\" to enable WooCommerce products search."
 msgstr ""
 
-#: shaplatools.php:488
+#: shaplatools.php:380
 msgid ""
-"<strong>Portfolio Slug</strong> - This settings is used to set the slug of "
-"custom post type &lsquo;portfolio&rsquo;."
+"To serve high-resolution images to devices with retina displays. This plugin "
+"will use open source script <a href=\"%s\" target=\"_blank\">retina.js "
+"JavaScript library</a> and for using retina.js script, a higher quality "
+"version of image will be created and stored with @2x added to the filename "
+"when an image is uploaded."
 msgstr ""
 
-#: shaplatools.php:489
-msgid ""
-"<strong>Skills Slug</strong> - This settings is used to set the slug of "
-"custom post taxonomy &lsquo;skill&rsquo;."
-msgstr ""
-
-#: shaplatools.php:495
+#: shaplatools.php:385
 msgid "Using Social Icons"
 msgstr ""
 
-#: shaplatools.php:496
+#: shaplatools.php:386
 msgid "Using Social Icons Shortcode"
 msgstr ""
 
-#: shaplatools.php:497
+#: shaplatools.php:387
 msgid "To use the social icon use the following shortcode:"
 msgstr ""
 
-#: shaplatools.php:498
+#: shaplatools.php:388
 msgid "It would display all social icons with non-empty profile URLs."
 msgstr ""
 
-#: shaplatools.php:499
+#: shaplatools.php:389
 msgid "or you can pass specific ids."
 msgstr ""
 
-#: shaplatools.php:500
+#: shaplatools.php:390
 msgid "Using Different Styled Icons"
 msgstr ""
 
-#: shaplatools.php:501
+#: shaplatools.php:391
 msgid ""
 "You can use the social icons in two different styles: normal and square. "
 "Just pass the <code>style</code> argument in sidebar.<br>E.g.: <code>"
 "[shapla_social id=\"twitter,facebook\" style=\"square\"]</code>."
+msgstr ""
+
+#: shaplatools.php:397
+msgid "Using Custom Post Types"
+msgstr ""
+
+#: shaplatools.php:398
+msgid ""
+"This plugin includes five most used custom post type. You can enable them by "
+"checking custom post name. Also check default meta for full functionality. "
+"If you want to add your own meta box in your theme function.php file, you "
+"can do that. For using custom post types and default meta in your theme, You "
+"can read documentation of plugin <a href=\"%s\" target=\"_blank\">FAQ page</"
+"a>."
 msgstr ""
 
 #: shortcodes/config.php:11
@@ -1463,28 +1466,12 @@ msgstr ""
 msgid "Select the button&lsquo;s style, ie the button&lsquo;s colour"
 msgstr ""
 
-#: shortcodes/config.php:20 shortcodes/config.php:99
-msgid "Grey"
-msgstr ""
-
 #: shortcodes/config.php:21
 msgid "Black"
 msgstr ""
 
-#: shortcodes/config.php:22 shortcodes/config.php:102
-msgid "Green"
-msgstr ""
-
 #: shortcodes/config.php:23
 msgid "Light Blue"
-msgstr ""
-
-#: shortcodes/config.php:24 shortcodes/config.php:103
-msgid "Blue"
-msgstr ""
-
-#: shortcodes/config.php:25 shortcodes/config.php:100
-msgid "Red"
 msgstr ""
 
 #: shortcodes/config.php:26
@@ -1495,7 +1482,7 @@ msgstr ""
 msgid "Purple"
 msgstr ""
 
-#: shortcodes/config.php:28 shortcodes/config.php:98
+#: shortcodes/config.php:28
 msgid "White"
 msgstr ""
 
@@ -1515,6 +1502,10 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
+#: shortcodes/config.php:39
+msgid "Large"
+msgstr ""
+
 #: shortcodes/config.php:44
 msgid "Button Type"
 msgstr ""
@@ -1523,13 +1514,12 @@ msgstr ""
 msgid "Select the button&lsquo;s type"
 msgstr ""
 
-#: shortcodes/config.php:47 shortcodes/config.php:125
-#: shortcodes/config.php:246 shortcodes/config.php:282
+#: shortcodes/config.php:47 shortcodes/config.php:96 shortcodes/config.php:183
+#: shortcodes/config.php:219
 msgid "Normal"
 msgstr ""
 
-#: shortcodes/config.php:48 shortcodes/config.php:126
-#: shortcodes/config.php:247
+#: shortcodes/config.php:48 shortcodes/config.php:97 shortcodes/config.php:184
 msgid "Stroke"
 msgstr ""
 
@@ -1537,7 +1527,7 @@ msgstr ""
 msgid "Button Icon"
 msgstr ""
 
-#: shortcodes/config.php:55 shortcodes/config.php:373
+#: shortcodes/config.php:55 shortcodes/config.php:310
 msgid "Choose an icon"
 msgstr ""
 
@@ -1585,493 +1575,429 @@ msgstr ""
 msgid "Insert Button Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:94
-msgid "Alert Style"
-msgstr ""
-
-#: shortcodes/config.php:95
-msgid "Select the alert&lsquo;s style, i.e. the alert colour"
-msgstr ""
-
-#: shortcodes/config.php:101
-msgid "Yellow"
-msgstr ""
-
-#: shortcodes/config.php:109
-msgid "Alert Text"
-msgstr ""
-
-#: shortcodes/config.php:110
-msgid "Add the alert&lsquo;s text"
-msgstr ""
-
-#: shortcodes/config.php:114
-msgid "Insert Alert Shortcode"
-msgstr ""
-
-#: shortcodes/config.php:122
+#: shortcodes/config.php:93
 msgid "Toggle Style"
 msgstr ""
 
-#: shortcodes/config.php:123
+#: shortcodes/config.php:94
 msgid "Select the toggle&lsquo;s style"
 msgstr ""
 
-#: shortcodes/config.php:131
+#: shortcodes/config.php:102
 msgid "Toggle Content Title"
 msgstr ""
 
-#: shortcodes/config.php:132
+#: shortcodes/config.php:103
 msgid "Add the title that will go above the toggle content"
 msgstr ""
 
-#: shortcodes/config.php:138
+#: shortcodes/config.php:109
 msgid "Toggle Content"
 msgstr ""
 
-#: shortcodes/config.php:139
+#: shortcodes/config.php:110
 msgid "Add the toggle content. Will accept HTML"
 msgstr ""
 
-#: shortcodes/config.php:143
+#: shortcodes/config.php:114
 msgid "Toggle State"
 msgstr ""
 
-#: shortcodes/config.php:144
+#: shortcodes/config.php:115
 msgid "Select the state of the toggle on page load"
 msgstr ""
 
-#: shortcodes/config.php:146
+#: shortcodes/config.php:117
 msgid "Open"
 msgstr ""
 
-#: shortcodes/config.php:147
+#: shortcodes/config.php:118
 msgid "Closed"
 msgstr ""
 
-#: shortcodes/config.php:152
+#: shortcodes/config.php:123
 msgid "Insert Toggle Content Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:158
+#: shortcodes/config.php:129
 msgid "Insert Columns Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:166
+#: shortcodes/config.php:137
 msgid "Column Type"
 msgstr ""
 
-#: shortcodes/config.php:167
+#: shortcodes/config.php:138
 msgid "Select the type, ie width of the column."
 msgstr ""
 
-#: shortcodes/config.php:169
+#: shortcodes/config.php:140
 msgid "One Third"
 msgstr ""
 
-#: shortcodes/config.php:170
+#: shortcodes/config.php:141
 msgid "One Third Last"
 msgstr ""
 
-#: shortcodes/config.php:171
+#: shortcodes/config.php:142
 msgid "Two Thirds"
 msgstr ""
 
-#: shortcodes/config.php:172
+#: shortcodes/config.php:143
 msgid "Two Thirds Last"
 msgstr ""
 
-#: shortcodes/config.php:173
+#: shortcodes/config.php:144
 msgid "One Half"
 msgstr ""
 
-#: shortcodes/config.php:174
+#: shortcodes/config.php:145
 msgid "One Half Last"
 msgstr ""
 
-#: shortcodes/config.php:175
+#: shortcodes/config.php:146
 msgid "One Fourth"
 msgstr ""
 
-#: shortcodes/config.php:176
+#: shortcodes/config.php:147
 msgid "One Fourth Last"
 msgstr ""
 
-#: shortcodes/config.php:177
+#: shortcodes/config.php:148
 msgid "Three Fourth"
 msgstr ""
 
-#: shortcodes/config.php:178
+#: shortcodes/config.php:149
 msgid "Three Fourth Last"
 msgstr ""
 
-#: shortcodes/config.php:179
+#: shortcodes/config.php:150
 msgid "One Fifth"
 msgstr ""
 
-#: shortcodes/config.php:180
+#: shortcodes/config.php:151
 msgid "One Fifth Last"
 msgstr ""
 
-#: shortcodes/config.php:181
+#: shortcodes/config.php:152
 msgid "Two Fifth"
 msgstr ""
 
-#: shortcodes/config.php:182
+#: shortcodes/config.php:153
 msgid "Two Fifth Last"
 msgstr ""
 
-#: shortcodes/config.php:183
+#: shortcodes/config.php:154
 msgid "Three Fifth"
 msgstr ""
 
-#: shortcodes/config.php:184
+#: shortcodes/config.php:155
 msgid "Three Fifth Last"
 msgstr ""
 
-#: shortcodes/config.php:185
+#: shortcodes/config.php:156
 msgid "Four Fifth"
 msgstr ""
 
-#: shortcodes/config.php:186
+#: shortcodes/config.php:157
 msgid "Four Fifth Last"
 msgstr ""
 
-#: shortcodes/config.php:187
+#: shortcodes/config.php:158
 msgid "One Sixth"
 msgstr ""
 
-#: shortcodes/config.php:188
+#: shortcodes/config.php:159
 msgid "One Sixth Last"
 msgstr ""
 
-#: shortcodes/config.php:189
+#: shortcodes/config.php:160
 msgid "Five Sixth"
 msgstr ""
 
-#: shortcodes/config.php:190
+#: shortcodes/config.php:161
 msgid "Five Sixth Last"
 msgstr ""
 
-#: shortcodes/config.php:196
+#: shortcodes/config.php:167
 msgid "Column Content"
 msgstr ""
 
-#: shortcodes/config.php:197
+#: shortcodes/config.php:168
 msgid "Add the column content."
 msgstr ""
 
-#: shortcodes/config.php:201
+#: shortcodes/config.php:172
 msgid "Add Column"
 msgstr ""
 
-#: shortcodes/config.php:210
-msgid "Divider"
-msgstr ""
-
-#: shortcodes/config.php:211
-msgid "Select the style of the Divider"
-msgstr ""
-
-#: shortcodes/config.php:213
-msgid "Plain"
-msgstr ""
-
-#: shortcodes/config.php:214
-msgid "Strong"
-msgstr ""
-
-#: shortcodes/config.php:215
-msgid "Double"
-msgstr ""
-
-#: shortcodes/config.php:216
-msgid "Dashed"
-msgstr ""
-
-#: shortcodes/config.php:217
-msgid "Dotted"
-msgstr ""
-
-#: shortcodes/config.php:222
-msgid "Insert Divider"
-msgstr ""
-
-#: shortcodes/config.php:231
-msgid "Enter the intro text."
-msgstr ""
-
-#: shortcodes/config.php:236
-msgid "Insert Author Shortcode"
-msgstr ""
-
-#: shortcodes/config.php:243
+#: shortcodes/config.php:180
 msgid "Tabs Style"
 msgstr ""
 
-#: shortcodes/config.php:244
+#: shortcodes/config.php:181
 msgid "Select the tabs&lsquo;s style"
 msgstr ""
 
-#: shortcodes/config.php:253
+#: shortcodes/config.php:190
 msgid "Insert Tab Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:259
+#: shortcodes/config.php:196
 msgid "Tab Title"
 msgstr ""
 
-#: shortcodes/config.php:260
+#: shortcodes/config.php:197
 msgid "Title of the tab"
 msgstr ""
 
-#: shortcodes/config.php:265
+#: shortcodes/config.php:202
 msgid "Tab Content"
 msgstr ""
 
-#: shortcodes/config.php:266
+#: shortcodes/config.php:203
 msgid "Add the tabs content"
 msgstr ""
 
-#: shortcodes/config.php:270
+#: shortcodes/config.php:207
 msgid "Add Tab"
 msgstr ""
 
-#: shortcodes/config.php:279
+#: shortcodes/config.php:216
 msgid "Dropcap Style"
 msgstr ""
 
-#: shortcodes/config.php:280
+#: shortcodes/config.php:217
 msgid "Select the dropcap&lsquo;s style"
 msgstr ""
 
-#: shortcodes/config.php:283
+#: shortcodes/config.php:220
 msgid "Squared"
 msgstr ""
 
-#: shortcodes/config.php:289
+#: shortcodes/config.php:226
 msgid "Dropcap Text"
 msgstr ""
 
-#: shortcodes/config.php:290
+#: shortcodes/config.php:227
 msgid "Enter the dropcap&lsquo;s text"
 msgstr ""
 
-#: shortcodes/config.php:295 shortcodes/config.php:393
+#: shortcodes/config.php:232 shortcodes/config.php:330
 msgid "Font Size"
 msgstr ""
 
-#: shortcodes/config.php:296
+#: shortcodes/config.php:233
 msgid "Enter the font&lsquo;s size in px, em or %"
 msgstr ""
 
-#: shortcodes/config.php:300
+#: shortcodes/config.php:237
 msgid "Insert Dropcap Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:310
+#: shortcodes/config.php:247
 msgid "Choose your image"
 msgstr ""
 
-#: shortcodes/config.php:314
+#: shortcodes/config.php:251
 msgid "Image Filter"
 msgstr ""
 
-#: shortcodes/config.php:315
+#: shortcodes/config.php:252
 msgid "Select the CSS3 image filter style"
 msgstr ""
 
-#: shortcodes/config.php:318
+#: shortcodes/config.php:255
 msgid "No Filter"
 msgstr ""
 
-#: shortcodes/config.php:319
+#: shortcodes/config.php:256
 msgid "Grayscale"
 msgstr ""
 
-#: shortcodes/config.php:320
+#: shortcodes/config.php:257
 msgid "Sepia"
 msgstr ""
 
-#: shortcodes/config.php:321
+#: shortcodes/config.php:258
 msgid "Blur"
 msgstr ""
 
-#: shortcodes/config.php:322
+#: shortcodes/config.php:259
 msgid "Hue Rotate"
 msgstr ""
 
-#: shortcodes/config.php:323
+#: shortcodes/config.php:260
 msgid "Contrast"
 msgstr ""
 
-#: shortcodes/config.php:324
+#: shortcodes/config.php:261
 msgid "Brightness"
 msgstr ""
 
-#: shortcodes/config.php:325
+#: shortcodes/config.php:262
 msgid "Invert"
 msgstr ""
 
-#: shortcodes/config.php:330
+#: shortcodes/config.php:267
 msgid "Alignment"
 msgstr ""
 
-#: shortcodes/config.php:331
+#: shortcodes/config.php:268
 msgid "Choose Image Alignment"
 msgstr ""
 
-#: shortcodes/config.php:335
+#: shortcodes/config.php:272
 msgid "Left"
 msgstr ""
 
-#: shortcodes/config.php:336
+#: shortcodes/config.php:273
 msgid "Center"
 msgstr ""
 
-#: shortcodes/config.php:337
+#: shortcodes/config.php:274
 msgid "Right"
 msgstr ""
 
-#: shortcodes/config.php:343 shortcodes/config.php:378
+#: shortcodes/config.php:280 shortcodes/config.php:315
 msgid "URL"
 msgstr ""
 
-#: shortcodes/config.php:344
+#: shortcodes/config.php:281
 msgid "Enter the URL where image should be linked (optional)"
 msgstr ""
 
-#: shortcodes/config.php:348
+#: shortcodes/config.php:285
 msgid "Insert Image Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:358 shortcodes/shortcode-class.php:127
+#: shortcodes/config.php:295 shortcodes/shortcode-class.php:127
 msgid "Choose Video"
 msgstr ""
 
-#: shortcodes/config.php:359
+#: shortcodes/config.php:296
 msgid ""
 "Either upload a new video, choose an existing video from your media library "
 "or link to a video by URL. <br><br>"
 msgstr ""
 
-#: shortcodes/config.php:359
+#: shortcodes/config.php:296
 msgid "A list of all shortcode video services can be found on %s.<br>"
 msgstr ""
 
-#: shortcodes/config.php:363
+#: shortcodes/config.php:300
 msgid "Insert Video Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:372
+#: shortcodes/config.php:309
 msgid "Icon"
 msgstr ""
 
-#: shortcodes/config.php:379
+#: shortcodes/config.php:316
 msgid "Enter the URL where icon should be linked (optional)"
 msgstr ""
 
-#: shortcodes/config.php:383
+#: shortcodes/config.php:320
 msgid "Open in new window"
 msgstr ""
 
-#: shortcodes/config.php:384
+#: shortcodes/config.php:321
 msgid "Do you want to open the link in a new window?"
 msgstr ""
 
-#: shortcodes/config.php:386
+#: shortcodes/config.php:323
 msgid "No"
 msgstr ""
 
-#: shortcodes/config.php:387
+#: shortcodes/config.php:324
 msgid "Yes"
 msgstr ""
 
-#: shortcodes/config.php:394
+#: shortcodes/config.php:331
 msgid "Enter the icon&lsquo;s font size in px, em or %"
 msgstr ""
 
-#: shortcodes/config.php:398
+#: shortcodes/config.php:335
 msgid "Insert Icon Shortcode"
 msgstr ""
 
-#: shortcodes/config.php:407
+#: shortcodes/config.php:344
 msgid "Latitude"
 msgstr ""
 
-#: shortcodes/config.php:408
+#: shortcodes/config.php:345
 msgid "Enter the place latitude coordinate. E.g.: 37.42200"
 msgstr ""
 
-#: shortcodes/config.php:413
+#: shortcodes/config.php:350
 msgid "Longitude"
 msgstr ""
 
-#: shortcodes/config.php:414
+#: shortcodes/config.php:351
 msgid ""
 "Enter the place longitude coordinate. E.g.: -122.08395. You may find "
 "longitude and latitude <a href=\"%1$s\" target=\"_blank\">here</a>."
 msgstr ""
 
-#: shortcodes/config.php:420
+#: shortcodes/config.php:357
 msgid "Enter the map width."
 msgstr ""
 
-#: shortcodes/config.php:426
+#: shortcodes/config.php:363
 msgid "Enter the map height."
 msgstr ""
 
-#: shortcodes/config.php:431
+#: shortcodes/config.php:368
 msgid "Zoom Level"
 msgstr ""
 
-#: shortcodes/config.php:432
+#: shortcodes/config.php:369
 msgid ""
 "Enter the map zoom level between 0-21. Highest value zooms in and lowest "
 "zooms out."
 msgstr ""
 
-#: shortcodes/config.php:437
+#: shortcodes/config.php:374
 msgid "Map Style"
 msgstr ""
 
-#: shortcodes/config.php:438
+#: shortcodes/config.php:375
 msgid "Select from a list of predefined map styles."
 msgstr ""
 
-#: shortcodes/config.php:441
+#: shortcodes/config.php:378
 msgid "Pale Dawn"
 msgstr ""
 
-#: shortcodes/config.php:442
+#: shortcodes/config.php:379
 msgid "Subtle Grayscale"
 msgstr ""
 
-#: shortcodes/config.php:443
+#: shortcodes/config.php:380
 msgid "Bright & Bubbly"
 msgstr ""
 
-#: shortcodes/config.php:444
+#: shortcodes/config.php:381
 msgid "Greyscale"
 msgstr ""
 
-#: shortcodes/config.php:445
+#: shortcodes/config.php:382
 msgid "Mixed"
 msgstr ""
 
-#: shortcodes/config.php:450
+#: shortcodes/config.php:387
 msgid "Insert Google Map Shortcode"
 msgstr ""
 
-#: shortcodes/shapla-shortcodes.php:26
+#: shortcodes/shapla-shortcodes.php:31
 msgid "Upload or Choose Your Custom Video File"
 msgstr ""
 
-#: shortcodes/shapla-shortcodes.php:27
+#: shortcodes/shapla-shortcodes.php:32
 msgid "Upload or Choose Your Custom Image File"
 msgstr ""
 
-#: shortcodes/shapla-shortcodes.php:99
+#: shortcodes/shapla-shortcodes.php:104
 msgid "Insert Shortcode"
 msgstr ""
 
@@ -2083,20 +2009,20 @@ msgstr ""
 msgid "Choose Image"
 msgstr ""
 
-#: shortcodes/shortcodes.php:286
-msgid "Tab"
-msgstr ""
-
-#: shortcodes/shortcodes.php:298
-msgid "Title Goes Here"
-msgstr ""
-
-#: shortcodes/shortcodes.php:666
+#: shortcodes/shortcodes-post_types.php:93
 msgid "All"
 msgstr ""
 
-#: shortcodes/shortcodes.php:725
+#: shortcodes/shortcodes-post_types.php:152
 msgid "It looks like nothing was found at this location."
+msgstr ""
+
+#: shortcodes/shortcodes.php:304
+msgid "Tab"
+msgstr ""
+
+#: shortcodes/shortcodes.php:317
+msgid "Title Goes Here"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -2114,5 +2040,5 @@ msgid "Sayful Islam"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://sayful.net"
+msgid "https://sayfulit.com"
 msgstr ""

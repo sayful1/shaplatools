@@ -3,7 +3,7 @@
  * Admin Options Page.
  *
  * @package ShaplaTools
- * @since 1.2
+ * @since 1.0.0
  * @access private
  * @return void
  */
@@ -324,10 +324,10 @@ function shaplatools_get_registered_settings() {
 					'desc' => 'e.g. https://plus.google.com/userID',
 					'type' => 'url'
 				),
-				'inshaplaram' => array(
-					'id'   => 'inshaplaram',
-					'name' => 'Inshaplaram',
-					'desc' => 'e.g. http://inshaplaram.com/username',
+				'instagram' => array(
+					'id'   => 'instagram',
+					'name' => 'Instagram',
+					'desc' => 'e.g. http://instagram.com/username',
 					'type' => 'url'
 				),
 				'linkedin' => array(

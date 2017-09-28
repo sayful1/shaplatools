@@ -33,12 +33,9 @@
 
 					b.addSeparator();
 
-					a.addWithPopup( b, ed.getLang('shapla.alert'), "alert" );
 					a.addWithPopup( b, ed.getLang('shapla.button'), "button" );
 					a.addWithPopup( b, ed.getLang('shapla.columns'), "columns" );
-					a.addWithPopup( b, ed.getLang('shapla.divider'), "divider" );
 					a.addWithPopup( b, ed.getLang('shapla.dropcap'), "dropcap" );
-					a.addWithPopup( b, ed.getLang('shapla.intro'), "intro" );
 					a.addWithPopup( b, ed.getLang('shapla.tabs'), "tabs" );
 					a.addWithPopup( b, ed.getLang('shapla.toggle'), "toggle" );
 					a.addWithPopup( b, ed.getLang('shapla.icon'), "icon" );

@@ -48,14 +48,14 @@ class ShaplaTools_Gallery {
 						$('#shaplatools_images_upload').on('click', function(e) {
 						    e.preventDefault();
 						    var options = {
-						        title: '<?php _e("Create Featured Gallery", "sp-image-carousel"); ?>',
+						        title: '<?php _e("Create Featured Gallery", "shapla"); ?>',
 						        state: 'gallery-edit',
 						        frame: 'post',
 						        selection: selection
 						    };
 
 						    if( frame || selection ) {
-						        options['title'] = '<?php _e("Edit Featured Gallery", "sp-image-carousel"); ?>';
+						        options['title'] = '<?php _e("Edit Featured Gallery", "shapla"); ?>';
 						    }
 
 						    frame = wp.media(options).open();
@@ -63,7 +63,7 @@ class ShaplaTools_Gallery {
 						    // Tweak Views
 						    frame.menu.get('view').unset('cancel');
 						    frame.menu.get('view').unset('separateCancel');
-						    frame.menu.get('view').get('gallery-edit').el.innerHTML = '<?php _e("Edit Featured Gallery", "sp-image-carousel"); ?>';
+						    frame.menu.get('view').get('gallery-edit').el.innerHTML = '<?php _e("Edit Featured Gallery", "shapla"); ?>';
 						    frame.content.get('view').sidebar.unset('gallery'); // Hide Gallery Settings in sidebar
 
 						    // when editing a gallery
@@ -99,7 +99,7 @@ class ShaplaTools_Gallery {
 				                frame.toolbar.get('view').set({
 				                    insert: {
 				                        style: 'primary',
-				                        text: '<?php _e("Save Featured Gallery", "sp-image-carousel"); ?>',
+				                        text: '<?php _e("Save Featured Gallery", "shapla"); ?>',
 				                        click: function(){
 				                            var models = frame.state().get('library'),
 				                                ids = '';
@@ -108,7 +108,7 @@ class ShaplaTools_Gallery {
 				                                ids += attachment.id + ','
 				                            });
 
-				                            this.el.innerHTML = '<?php _e("Saving...", "sp-image-carousel"); ?>';
+				                            this.el.innerHTML = '<?php _e("Saving...", "shapla"); ?>';
 
 				                            $.ajax({
 				                                type: 'POST',
@@ -170,9 +170,9 @@ class ShaplaTools_Gallery {
 
 				    $meta = get_post_meta( get_the_ID(), '_shaplatools_image_gallery', true );
 				    $thumbs_output = '';
-				    $button_text = __('Add Gallery', 'sp-image-carousel');
+				    $button_text = __('Add Gallery', 'shapla');
 				    if( $meta ) {
-				    	$button_text = __('Edit Gallery', 'sp-image-carousel');
+				    	$button_text = __('Edit Gallery', 'shapla');
 				        $thumbs = explode(',', $meta);
 				        $thumbs_output = '';
 				        foreach( $thumbs as $thumb ) {

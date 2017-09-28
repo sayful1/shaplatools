@@ -1,0 +1,412 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+.row{
+  &:after,
+  &:before {
+    display: table;
+    content: " ";
+  }
+  &:after { clear: both }
+}
+
+#scrollUp {
+  bottom: 10px;
+  right: 10px;
+  height: 50px;
+  width: 50px;
+  background: url('../img/back-top.png') no-repeat 0 0;
+  opacity: 0.4;
+  outline: none;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+/* Shapla Slide*/
+.post-thumbnail {
+  position: relative;
+}
+
+.shapla-slides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+    &:first-child {
+      position: relative;
+      display: block;
+      float: left;
+    }
+  }
+  img {
+    display: block;
+    height: auto;
+    float: left;
+    width: 100%;
+    border: 0;
+  }
+}
+.shapla-slides_nav {
+  z-index: 3;
+  position: absolute;
+  -webkit-tap-highlight-color: transparent;
+  top: 0;
+  left: 0;
+  display: block;
+  background: #FFF;
+  opacity: 0;
+  filter: alpha(opacity=1);
+  width: 48%;
+  text-indent: -9999px;
+  overflow: hidden;
+  height: 91%;
+  &.prev { cursor: w-resize }
+  &.next {
+    left: auto;
+    right: 0;
+    cursor: e-resize;
+  }
+}
+.shapla-slides_tabs {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 400px;
+  max-width: 100%;
+  z-index: 1000;
+  li {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  a {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 30px;
+    background: 0 0;
+    border: 2px solid #fff;
+    font-size: 0;
+  }
+  .shapla-slides_here a {
+    background: #fff
+  }
+}
+
+
+/* Shapla feature*/
+.shapla-features {
+  margin-top: 40px;
+  margin-bottom: 35px;
+  .feature {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .icon {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  img {
+    width: 50px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  h4.feature_title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+/* Testimonial Slider*/
+.shapla-testimonial {
+  position: relative;
+  margin-top: 20px;
+  .client-pic {
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    position: relative;
+    margin-bottom: -24px;
+    z-index: 999;
+    border: 3px solid #ffffff;
+    box-shadow: 0px 0px 0px 3px #f7f8fa;
+  }
+  .client-pic img {
+    max-width: 100%;
+  }
+  .box {
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 3px;
+    position: relative;
+    background: #f7f8fa;
+    padding-top: 20px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    .message {
+      padding: 25px;
+      font-style: italic;
+    }
+    &:after,
+    &:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    &:after {
+      border-color: rgba(247, 248, 250, 0);
+      border-top-color: #f7f8fa;
+      border-width: 15px;
+      margin-left: -15px;
+    }
+    &:before {
+      border-color: rgba(229, 229, 229, 0);
+      border-top-color: #e5e5e5;
+      border-width: 16px;
+      margin-left: -16px;
+    }
+  }
+  .client-info {
+    margin-top: 30px;
+    text-align: center;
+    .client-name {
+      line-height: 20px;
+    }
+    .company {
+      font-size: 13px;
+    }
+  }
+}
+
+/* Team Slider*/
+
+.shapla-team {
+  position: relative;
+  margin-top: 20px;
+  .team-pic {
+    max-width: 150px;
+    height: auto;
+    margin: auto;
+    position: relative;
+    margin-bottom: -24px;
+    z-index: 10;
+    border: 3px solid #ffffff;
+    box-shadow: 0px 0px 0px 3px #f7f8fa;
+    img {
+      max-width: 100%;
+    }
+  }
+  .box {
+    margin-right: 15px;
+    margin-left: 15px;
+    border-radius: 3px;
+    position: relative;
+    background: #f7f8fa;
+    padding-top: 20px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    box-shadow: 0px 1px 0px 0px rgba(229, 229, 229, 0.75);
+    .message {
+      padding: 25px;
+      font-style: italic;
+    }
+  }
+  .team-info {
+    margin-top: 30px;
+    text-align: center;
+    .team-name {
+      line-height: 20px;
+    }
+    .company {
+      font-size: 13px;
+    }
+  }
+}
+/*Portfolio*/
+@mixin portfolio_col_inline( $width ){
+  width: $width;
+  display: inline-block;
+  float: left;
+}
+.portfolio_col_2 { @include portfolio_col_inline(50%) }
+.portfolio_col_3 { @include portfolio_col_inline(33.33333333%) }
+.portfolio_col_4 { @include portfolio_col_inline(25%) }
+.portfolio_col_5 { @include portfolio_col_inline(20%) }
+.portfolio_col_6 { @include portfolio_col_inline(16.66666667%) }
+
+@media only screen and (max-width: 767px){
+  .portfolio_col_2,
+  .portfolio_col_3,
+  .portfolio_col_4,
+  .portfolio_col_5,
+  .portfolio_col_6 {
+    width: 100%;
+  }
+}
+ @media only screen and (min-width: 480px) and (max-width: 767px){
+  .portfolio_col_2,
+  .portfolio_col_3,
+  .portfolio_col_4,
+  .portfolio_col_5,
+  .portfolio_col_6 {
+    width: 50%;
+  }
+}
+#shaplatools-portfolio{
+  .filter ul {
+    display: table;
+    padding-left: 0;
+    margin: 20px auto;
+    border-radius: 4px;
+    li {
+      display: inline;
+      a,
+      span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #337ab7;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        &:hover,
+        &:focus {
+          color: #23527c;
+          background-color: #eee;
+          border-color: #ddd;
+        }
+      }
+      a {
+        &.active,
+        &.active:hover,
+        &.active:focus {
+          z-index: 2;
+          color: #fff;
+          cursor: default;
+          background-color: #337ab7;
+          border-color: #337ab7;
+        }
+      }
+      &:first-child a,
+      &:first-child span{
+        margin-left: 0;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+      }
+      &:last-child a,
+      &:last-child span{
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
+  .grid {
+    clear: both;
+    position: relative;
+    .item {
+      padding-left: 0;
+      padding-right: 0;
+      margin-bottom: 0;
+    }
+  }
+  .portfolio-f-image {
+    position: relative;
+    img {
+      height: auto;
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+  .portfolio-hover {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    &:after {
+      background: none repeat scroll 0 0 #000;
+      content: "";
+      height: 100%;
+      left: -100%;
+      opacity: .6;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      transition: .4s;
+    }
+    a {
+      border-radius: 5px;
+      color: #fff;
+      display: block;
+      font-size: 16px;
+      left: 10%;
+      margin: 0;
+      padding: 10px 0;
+      position: absolute;
+      text-align: center;
+      border: 1px solid #337AB7;
+      width: 80%;
+      z-index: 99;
+      transition: .4s;
+      &:hover {
+        text-decoration: none;
+        border-color: #444;
+        color: #fff;
+      }
+      &.portfolio-title-link {
+        top: -25%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border: none;
+        font-size: 25px;
+        line-height: 30px;
+        cursor: default;
+        pointer-events: none;
+      }
+      &.view-details-link {
+        background: none repeat scroll 0 0 #337AB7;
+        bottom: -25%;
+      }
+    }
+  }
+  .single-portfolio-item {
+    padding: 10px;
+    overflow: hidden;
+    &:hover{
+      .portfolio-hover{
+        &:after{left: 0;}
+        a {
+          &.portfolio-title-link { top: 32% }
+          &.view-details-link { bottom: 32% }
+        }
+      }
+    }
+  }
+}

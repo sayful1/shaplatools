@@ -2,8 +2,8 @@
 Contributors: sayfulit, sayful
 Tags: custom post type, widget, shortcode, twitter, images, image
 Requires at least: 3.9
-Tested up to: 4.3
-Stable tag: 1.1.2
+Tested up to: 4.4
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,6 +14,7 @@ ShaplaTools is a powerful plugin to extend functionality to your WordPress theme
 ShaplaTools is a powerful plugin to extend functionality to your WordPress themes offering shortcodes, FontAwesome icons, Autocomplete search suggestion, Retina graphics for your website and useful widgets.
 
 For documentation, please visit <a href="http://sayfulit.github.io/shaplatools/">GitHub Page</a>
+For demo, please visit <a href="http://demo.sayfulit.com/shaplatools/">here</a>
 
 = Custom Post Types =
 
@@ -29,7 +30,7 @@ For documentation, please visit <a href="http://sayfulit.github.io/shaplatools/"
 
 <ul>
 	<li>Facebook Like Box</li>
-	<li>Latest Tweets (PHP 5.3 or higher, cURL required)</li>
+	<li>Latest Tweets</li>
 	<li>Dribbble Shots</li>
 	<li>Flickr Photos</li>
 	<li>Instagram Photos</li>
@@ -85,6 +86,17 @@ Installing the plugins is just like installing other WordPress plugins. If you d
 You can enable custom post types in your theme by option page. Go to <b>Settings -> ShaplaTools</b> and then click on "Custom Post Types" tab and check which custom post types you want to enable for your theme.
 
 == Changelog ==
+
+= version 1.2.2 =
+* Change - replacing TwitterAPIExchange.php with TwitterWP.php for Twitter Widget for better working with WordPress..
+
+= version 1.2.1 =
+* Removed - plugin redirection after activation.
+
+= version 1.2.0 =
+* Updated - FontAwesome library v4.4.0
+* Tweak - Divider shortcode is now merged with default "Horizontal Line" editor button
+* Tweak - Intro and Alert shortcodes are now editor styles, as "Formats" in editor
 
 = version 1.1.2 =
 * Change - Upgrade Facebook Like Box Widget to Facebook Page Plugin 2.4 API

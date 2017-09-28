@@ -6,9 +6,20 @@ class Shapla_Retina_2x
 {
 	
 	public function __construct() {
-        add_filter( 'wp_generate_attachment_metadata', array( $this, 'retina_support_attachment_meta' ), 10, 2 );
-		add_filter( 'delete_attachment', array( $this, 'delete_retina_support_images' ) );
+        if (is_admin()) {
+            add_filter( 'delete_attachment', array( $this, 'delete_retina_support_images' ) );
+            add_filter( 'wp_generate_attachment_metadata', array( $this, 'retina_support_attachment_meta' ), 10, 2 );
+        } else {
+            add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_style' ), 0 );
+        }
+
 	}
+
+    public function frontend_style(){
+        global $shaplatools;
+
+        wp_enqueue_script( 'retina-js', $shaplatools->plugin_url(). '/assets/library/retinajs/retina'. SCRIPT_SUFFIX .'.js', array( 'jquery' ), '1.3.0', true );
+    }
 
 	public function retina_support_attachment_meta( $metadata, $attachment_id ) {
         foreach ( $metadata as $key => $value ) {
@@ -67,7 +78,7 @@ function run_shapla_retina_2x() {
 
     $options = get_option('shaplatools_options');
 
-    if( is_admin() && isset($options['retina_graphics']) && $options['retina_graphics'] == 'on' ){
+    if( isset($options['retina_graphics']) && $options['retina_graphics'] == 'on' ){
         
         $shapla_retina_2x = new Shapla_Retina_2x();
 

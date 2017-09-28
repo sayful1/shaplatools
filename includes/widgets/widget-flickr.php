@@ -38,7 +38,7 @@ class Shapla_Flickr_Widget extends WP_Widget{
 	
 	<div class='shapla-flickr-widget'>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<ul class="flickr-photos">
+		<ul class="shapla-flickr">
 			<?php
 
 			foreach( $items as $item ) {

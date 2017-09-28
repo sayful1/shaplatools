@@ -19,30 +19,26 @@ class Shapla_Tweet_Widget extends WP_Widget{
      * Making request to Twitter API
      */
 	public function twitter_timeline( $username, $limit, $oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret ) {
-	    require_once 'TwitterAPIExchange.php';
-	 
-	    /** Set access tokens here - see: https://dev.twitter.com/apps/ */
-	    $settings = array(
-	        'oauth_access_token'        => $oauth_access_token,
-	        'oauth_access_token_secret' => $oauth_access_token_secret,
-	        'consumer_key'              => $consumer_key,
-	        'consumer_secret'           => $consumer_secret
-	    );
-	 
-	    $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-	    $getfield = '?screen_name=' . $username . '&count=' . $limit;
-	    $request_method = 'GET';
+	    require_once 'TwitterWP.php';
+
+	    $app = array(
+		    'consumer_key'        => $consumer_key,
+		    'consumer_secret'     => $consumer_secret,
+		    'access_token'        => $oauth_access_token,
+		    'access_token_secret' => $oauth_access_token_secret,
+		);
+		$TwitterWP = TwitterWP::start( $app );
+
+		// bail here if the user doesn't exist
+		if ( ! $TwitterWP->user_exists( $username ) ) {
+			return;
+		}
 	     
-	    $twitter_instance = new TwitterAPIExchange( $settings );
+	    $query = $TwitterWP->get_tweets( $username, $limit );
 	     
-	    $query = $twitter_instance
-	        ->setGetfield( $getfield )
-	        ->buildOauth( $url, $request_method )
-	        ->performRequest();
-	     
-	    $timeline = json_decode($query);
+	    // $timeline = json_decode($query);
 	 
-	    return $timeline;
+	    return $query;
 	}
 
     /**
@@ -122,7 +118,7 @@ class Shapla_Tweet_Widget extends WP_Widget{
 	public function widget( $args, $instance ) {
 	    $title                     = apply_filters( 'widget_title', $instance['title'] );
 	    $username                  = $instance['twitter_username'];
-	    $limit                     = $instance['update_count'];
+	    $limit                     = (!empty($instance['update_count'])) ? $instance['update_count'] : 5;
 	    $oauth_access_token        = $instance['oauth_access_token'];
 	    $oauth_access_token_secret = $instance['oauth_access_token_secret'];
 	    $consumer_key              = $instance['consumer_key'];
@@ -133,29 +129,31 @@ class Shapla_Tweet_Widget extends WP_Widget{
 	    if ( ! empty( $title ) ) {
 	        echo $args['before_title'] . $title . $args['after_title'];
 	    }
-	 
-	    // Get the tweets.
-	    $timelines = $this->twitter_timeline( $username, $limit, $oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret );
-	 
-	    if ( $timelines ) {
-	 
-	        // Add links to URL and username mention in tweets.
-	        $patterns = array( '@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '/@([A-Za-z0-9_]{1,15})/' );
-	        $replace = array( '<a href="$1">$1</a>', '<a href="http://twitter.com/$1">@$1</a>' );
-	 			        
-	 		echo '<ul>';
-	        foreach ( $timelines as $timeline ) {
-	            $result = preg_replace( $patterns, $replace, $timeline->text );
-	 
-	            echo '<li>';
-	                echo $result;
-	                echo '<span>'.$this->tweet_time( $timeline->created_at ).'</span>';
-	            echo '</li>';
-	        }
-	        echo '</ul>';
-	 
-	    } else {
-	        _e( 'Error fetching feeds. Please verify the Twitter settings in the widget.', 'shapla' );
+
+	    if ( !empty($username) && !empty($oauth_access_token) && !empty($oauth_access_token_secret) && !empty($consumer_key) && !empty($consumer_secret) ) {
+		    // Get the tweets.
+		    $timelines = $this->twitter_timeline( $username, $limit, $oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret );
+		 
+		    if ( $timelines ) {
+		 
+		        // Add links to URL and username mention in tweets.
+		        $patterns = array( '@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '/@([A-Za-z0-9_]{1,15})/' );
+		        $replace = array( '<a href="$1">$1</a>', '<a href="http://twitter.com/$1">@$1</a>' );
+		 			        
+		 		echo '<ul class="shapla-twitter">';
+		        foreach ( $timelines as $timeline ) {
+		            $result = preg_replace( $patterns, $replace, $timeline->text );
+		 
+		            echo '<li>';
+		                echo $result;
+		                echo '<span>'.$this->tweet_time( $timeline->created_at ).'</span>';
+		            echo '</li>';
+		        }
+		        echo '</ul>';
+		 
+		    } else {
+		        _e( 'Error fetching feeds. Please verify the Twitter settings in the widget.', 'shapla' );
+		    }
 	    }
 	 
 	    echo $args['after_widget'];

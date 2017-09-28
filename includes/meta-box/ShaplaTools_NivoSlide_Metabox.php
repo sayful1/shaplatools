@@ -15,11 +15,28 @@ class ShaplaTools_NivoSlide_Metabox {
 	 * Hook into the appropriate actions when the class is constructed.
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		add_action( 'admin_head', array( $this, 'admin_style') );
 
-		add_filter( 'manage_edit-slide_columns', array ($this, 'columns_head') );
-		add_action( 'manage_slide_posts_custom_column', array ($this, 'columns_content') );
+		if (is_admin()){
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+			add_action( 'admin_head', array( $this, 'admin_style') );
+
+			add_filter( 'manage_edit-slide_columns', array ($this, 'columns_head') );
+			add_action( 'manage_slide_posts_custom_column', array ($this, 'columns_content') );
+		} else {
+			add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_scripts' ) );
+		}
+	}
+
+	public function frontend_scripts(){
+		global $post, $shaplatools;
+
+		wp_register_style( 'nivo-slider', $shaplatools->plugin_url(). '/assets/library/nivo-slider/nivo-slider'. SCRIPT_SUFFIX .'.css' , array(), '3.2', 'all' );
+		wp_register_script( 'nivo-slider', $shaplatools->plugin_url(). '/assets/library/nivo-slider/jquery.nivo.slider.js', array( 'jquery' ), '3.2', true );
+
+		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'shapla_slide') ) {
+			wp_enqueue_script( 'nivo-slider' );
+			wp_enqueue_style( 'nivo-slider' );
+	    }
 	}
 
 	public function admin_style(){
@@ -49,7 +66,7 @@ class ShaplaTools_NivoSlide_Metabox {
 		return self::$instance;
 	}
 
-	public function available_img_size(){
+	private function available_img_size(){
 	    $shaplatools_img_size = get_intermediate_image_sizes();
 	    array_push($shaplatools_img_size, 'full');
 
@@ -261,8 +278,7 @@ class ShaplaTools_NivoSlide_Metabox {
 }
 
 function run_shaplatools_nivoslide_meta(){
-	if (is_admin())
-		ShaplaTools_NivoSlide_Metabox::get_instance();
+	ShaplaTools_NivoSlide_Metabox::get_instance();
 }
 //run_shaplatools_nivoslide_meta();
 endif;

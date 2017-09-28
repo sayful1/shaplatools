@@ -82,36 +82,7 @@ $shapla_shortcodes['button'] = array(
 		)
 	),
 	'shortcode'   => '[shapla_button url="{{url}}" style="{{style}}" size="{{size}}" type="{{type}}" target="{{target}}" icon="{{icon}}" icon_order="{{icon_order}}"]{{content}}[/shapla_button]',
-	'popup_title' => __('Insert Button Shortcode', 'shapla')
-);
-
-
-$shapla_shortcodes['alert'] = array(
-	'no_preview' => true,
-	'params' => array(
-		'style' => array(
-			'type'    => 'select',
-			'label'   => __('Alert Style', 'shapla'),
-			'desc'    => __('Select the alert&lsquo;s style, i.e. the alert colour', 'shapla'),
-			'std'     => 'red',
-			'options' => array(
-				'white'  => __( 'White', 'shapla' ),
-				'grey'   => __( 'Grey', 'shapla' ),
-				'red'    => __( 'Red', 'shapla' ),
-				'yellow' => __( 'Yellow', 'shapla' ),
-				'green'  => __( 'Green', 'shapla' ),
-				'blue'   => __( 'Blue', 'shapla' )
-			)
-		),
-		'content' => array(
-			'std'   => 'Your Alert!',
-			'type'  => 'textarea',
-			'label' => __( 'Alert Text', 'shapla' ),
-			'desc'  => __( 'Add the alert&lsquo;s text', 'shapla' )
-		)
-	),
-	'shortcode' => '[shapla_alert style="{{style}}"]{{content}}[/shapla_alert]',
-	'popup_title' => __('Insert Alert Shortcode', 'shapla')
+	'popup_title' => __( 'Insert Button Shortcode', 'shapla' )
 );
 
 $shapla_shortcodes['toggle'] = array(
@@ -119,8 +90,8 @@ $shapla_shortcodes['toggle'] = array(
 	'params' => array(
 		'style' => array(
 			'type'    => 'select',
-			'label'   => __('Toggle Style', 'shapla'),
-			'desc'    => __('Select the toggle&lsquo;s style', 'shapla'),
+			'label'   => __( 'Toggle Style', 'shapla' ),
+			'desc'    => __( 'Select the toggle&lsquo;s style', 'shapla' ),
 			'options' => array(
 				'normal' => __( 'Normal', 'shapla' ),
 				'stroke' => __( 'Stroke', 'shapla' ),
@@ -128,20 +99,20 @@ $shapla_shortcodes['toggle'] = array(
 		),
 		'title' => array(
 			'type'  => 'text',
-			'label' => __('Toggle Content Title', 'shapla'),
-			'desc'  => __('Add the title that will go above the toggle content', 'shapla'),
-			'std'   => 'Title'
+			'label' => __( 'Toggle Content Title', 'shapla' ),
+			'desc'  => __( 'Add the title that will go above the toggle content', 'shapla' ),
+			'std'   => 'Title',
 		),
 		'content' => array(
 			'std'   => 'Content',
 			'type'  => 'textarea',
-			'label' => __('Toggle Content', 'shapla'),
-			'desc'  => __('Add the toggle content. Will accept HTML', 'shapla'),
+			'label' => __( 'Toggle Content', 'shapla' ),
+			'desc'  => __( 'Add the toggle content. Will accept HTML', 'shapla' ),
 		),
 		'state' => array(
 			'type'    => 'select',
-			'label'   => __('Toggle State', 'shapla'),
-			'desc'    => __('Select the state of the toggle on page load', 'shapla'),
+			'label'   => __( 'Toggle State', 'shapla' ),
+			'desc'    => __( 'Select the state of the toggle on page load', 'shapla' ),
 			'options' => array(
 				'open'   => __( 'Open', 'shapla' ),
 				'closed' => __( 'Closed', 'shapla' )
@@ -149,13 +120,13 @@ $shapla_shortcodes['toggle'] = array(
 		),
 	),
 	'shortcode'   => '[shapla_toggle style="{{style}}" title="{{title}}" state="{{state}}"]{{content}}[/shapla_toggle]',
-	'popup_title' => __('Insert Toggle Content Shortcode', 'shapla')
+	'popup_title' => __( 'Insert Toggle Content Shortcode', 'shapla' )
 );
 
 $shapla_shortcodes['columns'] = array(
 	'params'      => array(),
 	'shortcode'   => '[shapla_columns]{{child_shortcode}}[/shapla_columns]', // as there is no wrapper shortcode
-	'popup_title' => __('Insert Columns Shortcode', 'shapla'),
+	'popup_title' => __( 'Insert Columns Shortcode', 'shapla' ),
 	'no_preview'  => true,
 
 	// child shortcode is clonable & sortable
@@ -163,8 +134,8 @@ $shapla_shortcodes['columns'] = array(
 		'params' => array(
 			'column' => array(
 				'type'    => 'select',
-				'label'   => __('Column Type', 'shapla'),
-				'desc'    => __('Select the type, ie width of the column.', 'shapla'),
+				'label'   => __( 'Column Type', 'shapla' ),
+				'desc'    => __( 'Select the type, ie width of the column.', 'shapla' ),
 				'options' => array(
 					'shapla_one_third'         => __( 'One Third', 'shapla' ),
 					'shapla_one_third_last'    => __( 'One Third Last', 'shapla' ),
@@ -193,55 +164,21 @@ $shapla_shortcodes['columns'] = array(
 			'content' => array(
 				'std'   => '',
 				'type'  => 'textarea',
-				'label' => __('Column Content', 'shapla'),
-				'desc'  => __('Add the column content.', 'shapla'),
+				'label' => __( 'Column Content', 'shapla' ),
+				'desc'  => __( 'Add the column content.', 'shapla' ),
 			)
 		),
 		'shortcode'    => '[{{column}}]{{content}}[/{{column}}] ',
-		'clone_button' => __('Add Column', 'shapla')
+		'clone_button' => __( 'Add Column', 'shapla' )
 	)
-);
-
-$shapla_shortcodes['divider'] = array(
-	'no_preview' => true,
-	'params'     => array(
-		'style' => array(
-			'type'    => 'select',
-			'label'   => __( 'Divider', 'shapla' ),
-			'desc'    => __( 'Select the style of the Divider', 'shapla' ),
-			'options' => array(
-				'plain'  => __( 'Plain', 'shapla' ),
-				'strong' => __( 'Strong', 'shapla' ),
-				'double' => __( 'Double', 'shapla' ),
-				'dashed' => __( 'Dashed', 'shapla' ),
-				'dotted' => __( 'Dotted', 'shapla' )
-			)
-		),
-	),
-	'shortcode'   => '[shapla_divider style="{{style}}"]',
-	'popup_title' => __( 'Insert Divider', 'shapla' )
-);
-
-$shapla_shortcodes['intro'] = array(
-	'no_preview' => true,
-	'params'     => array(
-		'content' => array(
-			'type'  => 'textarea',
-			'label' => __( 'Intro Text', 'shapla' ),
-			'desc'  => __( 'Enter the intro text.', 'shapla' ),
-			'std'   => 'Intro Text'
-		),
-	),
-	'shortcode'   => '[shapla_intro]{{content}}[/shapla_intro]',
-	'popup_title' => __( 'Insert Author Shortcode', 'shapla' )
 );
 
 $shapla_shortcodes['tabs'] = array(
 	'params' => array(
 		'style' => array(
 			'type'    => 'select',
-			'label'   => __('Tabs Style', 'shapla'),
-			'desc'    => __('Select the tabs&lsquo;s style', 'shapla'),
+			'label'   => __( 'Tabs Style', 'shapla' ),
+			'desc'    => __( 'Select the tabs&lsquo;s style', 'shapla' ),
 			'options' => array(
 				'normal' => __( 'Normal', 'shapla' ),
 				'stroke' => __( 'Stroke', 'shapla' ),
@@ -276,8 +213,8 @@ $shapla_shortcodes['dropcap'] = array(
 	'params' => array(
 		'style' => array(
 			'type'    => 'select',
-			'label'   => __('Dropcap Style', 'shapla'),
-			'desc'    => __('Select the dropcap&lsquo;s style', 'shapla'),
+			'label'   => __( 'Dropcap Style', 'shapla' ),
+			'desc'    => __( 'Select the dropcap&lsquo;s style', 'shapla' ),
 			'options' => array(
 				'normal' => __( 'Normal', 'shapla' ),
 				'squared' => __( 'Squared', 'shapla' ),
@@ -311,8 +248,8 @@ $shapla_shortcodes['image'] = array(
 		),
 		'style' => array(
 			'type'    => 'select',
-			'label'   => __('Image Filter', 'shapla'),
-			'desc'    => __('Select the CSS3 image filter style', 'shapla'),
+			'label'   => __( 'Image Filter', 'shapla' ),
+			'desc'    => __( 'Select the CSS3 image filter style', 'shapla' ),
 			'std'     => 'no-filter',
 			'options' => array(
 				'no-filter'  => __( 'No Filter', 'shapla' ),
@@ -327,8 +264,8 @@ $shapla_shortcodes['image'] = array(
 		),
 		'alignment' => array(
 			'type'    => 'select',
-			'label'   => __('Alignment', 'shapla'),
-			'desc'    => __('Choose Image Alignment', 'shapla'),
+			'label'   => __( 'Alignment', 'shapla' ),
+			'desc'    => __( 'Choose Image Alignment', 'shapla' ),
 			'std'     => 'none',
 			'options' => array(
 				'none'   => __( 'None', 'shapla' ),
@@ -356,7 +293,7 @@ $shapla_shortcodes['video'] = array(
 			'std'   => '',
 			'type'  => 'video',
 			'label' => __( 'Choose Video', 'shapla' ),
-			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL. <br><br>', 'shapla' ) . sprintf( __('A list of all shortcode video services can be found on %s.<br>', 'shapla' ), '<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
+			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL. <br><br>', 'shapla' ) . sprintf( __( 'A list of all shortcode video services can be found on %s.<br>', 'shapla' ), '<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
 		)
 	),
 	'shortcode' => '[shapla_video src="{{src}}"]',
@@ -411,7 +348,7 @@ $shapla_shortcodes['map'] = array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Longitude', 'shapla' ),
-			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude <a href="%1$s" target="_blank">here</a>.', 'shapla' ), esc_url('http://universimmedia.pagesperso-orange.fr/geo/loc.htm') )
+			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude <a href="%1$s" target="_blank">here</a>.', 'shapla' ), esc_url( 'http://universimmedia.pagesperso-orange.fr/geo/loc.htm' ) )
 		),
 		'width' => array(
 			'std'   => '100%',

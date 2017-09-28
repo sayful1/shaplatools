@@ -15,13 +15,28 @@ class ShaplaTools_Team_Metabox {
 	 * Hook into the appropriate actions when the class is constructed.
 	 */
 	public function __construct() {
-		add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
-		add_action( 'add_meta_boxes', array( $this, 'team_member_image' ) );
-		
-		add_action( 'admin_head', array ($this, 'add_mce_button') );
 
-		add_filter( 'manage_edit-team_columns', array ($this, 'columns_head') );
-		add_action( 'manage_team_posts_custom_column', array ($this, 'columns_content') );
+		if (is_admin()){
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'team_member_image' ) );
+			
+			add_action( 'admin_head', array ($this, 'add_mce_button') );
+
+			add_filter( 'manage_edit-team_columns', array ($this, 'columns_head') );
+			add_action( 'manage_team_posts_custom_column', array ($this, 'columns_content') );
+		} else {
+			add_action( 'wp_enqueue_scripts', array( &$this, 'frontend_scripts' ) );
+		}
+	}
+
+	public function frontend_scripts(){
+		global $post;
+
+		if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'shapla_teams') ) {
+			wp_enqueue_style( 'owl-carousel' );
+			wp_enqueue_style( 'owl-carousel-theme' );
+			wp_enqueue_script( 'owl-carousel' );
+	    }
 	}
 
 	/**
@@ -49,7 +64,8 @@ class ShaplaTools_Team_Metabox {
 	    }
 	}
 	public function add_tinymce_plugin( $plugin_array ) {
-	    $plugin_array['shaplatools_team_mce_button'] = plugin_dir_url( dirname(dirname(__FILE__)) ) .'/assets/mce-button/mce-team.js';
+		global $shaplatools;
+	    $plugin_array['shaplatools_team_mce_button'] = $shaplatools->plugin_url() .'/assets/mce-button/mce-team.js';
 	    return $plugin_array;
 	}
 
@@ -133,8 +149,7 @@ class ShaplaTools_Team_Metabox {
 }
 
 function run_shaplatools_team_meta(){
-	if (is_admin())
-		ShaplaTools_Team_Metabox::get_instance();
+	ShaplaTools_Team_Metabox::get_instance();
 }
 //run_shaplatools_team_meta();
 endif;
