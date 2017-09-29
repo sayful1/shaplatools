@@ -9,39 +9,13 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ):
 			$this->plugin_name = $plugin_name;
 			$this->plugin_path = $plugin_path;
 
-			add_shortcode( 'shapla_portfolio', array( $this, 'shapla_portfolio' ) );
+
 			add_shortcode( 'shapla_feature', array( $this, 'shapla_feature' ) );
 			add_shortcode( 'shapla_team', array( $this, 'shapla_team' ) );
 			add_shortcode( 'shapla_testimonial', array( $this, 'shapla_testimonial' ) );
 
 			add_shortcode( 'shapla_testimonials', array( $this, 'shapla_testimonial' ) );
 			add_shortcode( 'shapla_teams', array( $this, 'shapla_team' ) );
-		}
-
-		/**
-		 * A shortcode for rendering the shapla portfolio.
-		 *
-		 * @param  array $attributes Shortcode attributes.
-		 * @param  string $content The text content for shortcode. Not used.
-		 *
-		 * @return string  The shortcode output
-		 */
-		public function shapla_portfolio( $attributes, $content = null ) {
-			$default_attributes = array(
-				'thumbnail'      => 'm4',
-				'thumbnail_size' => 'medium'
-			);
-
-			$attributes = shortcode_atts( $default_attributes, $attributes );
-
-			ob_start();
-			do_action( 'shaplatools_before_portfolio_shortcode' );
-			require_once $this->plugin_path . '/templates/shapla_portfolio.php';
-			do_action( 'shaplatools_after_portfolio_shortcode' );
-			$html = ob_get_contents();
-			ob_end_clean();
-
-			return $html;
 		}
 
 		/**

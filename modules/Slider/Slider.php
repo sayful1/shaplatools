@@ -22,6 +22,7 @@ class Slider {
 		$this->define_constants();
 
 		// Include required files
+		add_action( 'shaplatools_activation', array( $this, 'includes' ), 0 );
 		add_action( 'init', array( $this, 'includes' ), 0 );
 	}
 
@@ -50,11 +51,11 @@ class Slider {
 			return;
 		}
 
-		include SHAPLATOOLS_SLIDER_PATH . '/PostType.php';
-		include SHAPLATOOLS_SLIDER_PATH . '/MetaBox.php';
-		include SHAPLATOOLS_SLIDER_PATH . '/ShortCode.php';
-		include SHAPLATOOLS_SLIDER_PATH . '/Widget.php';
-		include SHAPLATOOLS_SLIDER_PATH . '/Script.php';
+		include_once SHAPLATOOLS_SLIDER_PATH . '/PostType.php';
+		include_once SHAPLATOOLS_SLIDER_PATH . '/MetaBox.php';
+		include_once SHAPLATOOLS_SLIDER_PATH . '/ShortCode.php';
+		include_once SHAPLATOOLS_SLIDER_PATH . '/Widget.php';
+		include_once SHAPLATOOLS_SLIDER_PATH . '/Script.php';
 	}
 }
 

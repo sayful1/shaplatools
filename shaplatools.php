@@ -341,8 +341,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 				array( 'jquery' ), '2.0.0', true );
 			wp_register_script( 'typeahead', $this->plugin_url . '/assets/library/typeahead.min.js', array( 'jquery' ),
 				$this->version, true );
-			wp_register_script( 'shuffle', $this->plugin_url . '/assets/library/shuffle.min.js', array( 'jquery' ),
-				$this->version, true );
 
 			if ( $options['retina_js'] ) {
 				wp_enqueue_script( 'retinajs' );
@@ -354,10 +352,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			if ( $this->has_shortcode( 'shapla_testimonial' ) || $this->has_shortcode( 'shapla_team' ) ) {
 				wp_enqueue_script( 'owl-carousel' );
-			}
-
-			if ( $this->has_shortcode( 'shapla_portfolio' ) ) {
-				wp_enqueue_script( 'shuffle' );
 			}
 
 			wp_localize_script( 'jquery', 'shaplatools', array(
@@ -540,8 +534,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on activation
 		 */
 		public function shaplatools_activation() {
-			ShaplaTools_Portfolio::post_type();
-			ShaplaTools_Portfolio::taxonomy();
 			ShaplaTools_Team::post_type();
 			ShaplaTools_Feature::post_type();
 			ShaplaTools_Testimonial::post_type();
@@ -554,8 +546,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on deactivation
 		 */
 		public function shaplatools_deactivation() {
-			ShaplaTools_Portfolio::post_type();
-			ShaplaTools_Portfolio::taxonomy();
 			ShaplaTools_Team::post_type();
 			ShaplaTools_Feature::post_type();
 			ShaplaTools_Testimonial::post_type();

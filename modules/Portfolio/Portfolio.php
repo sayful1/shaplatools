@@ -22,6 +22,7 @@ class Portfolio {
 		$this->define_constants();
 
 		// Include required files
+		add_action( 'shaplatools_activation', array( $this, 'includes' ), 0 );
 		add_action( 'init', array( $this, 'includes' ), 0 );
 	}
 
@@ -53,6 +54,8 @@ class Portfolio {
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/PostType.php';
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/Taxonomy.php';
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/MetaBox.php';
+		include SHAPLATOOLS_PORTFOLIO_PATH . '/ShortCode.php';
+		include SHAPLATOOLS_PORTFOLIO_PATH . '/Script.php';
 	}
 
 }
