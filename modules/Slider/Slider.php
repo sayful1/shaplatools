@@ -45,9 +45,7 @@ class Slider {
 	 */
 	public function includes() {
 
-		$theme_supports = get_theme_support( 'shapla-slider' );
-
-		if ( ! $theme_supports ) {
+		if ( ! $this->is_slider_module_enabled() ) {
 			return;
 		}
 
@@ -56,6 +54,26 @@ class Slider {
 		include_once SHAPLATOOLS_SLIDER_PATH . '/ShortCode.php';
 		include_once SHAPLATOOLS_SLIDER_PATH . '/Widget.php';
 		include_once SHAPLATOOLS_SLIDER_PATH . '/Script.php';
+	}
+
+	/**
+	 * Check if current module is enabled
+	 *
+	 * @return bool
+	 */
+	private function is_slider_module_enabled() {
+		if ( get_theme_support( 'shaplatools-slider' ) ) {
+			return true;
+		}
+
+		$options      = get_option( 'shaplatools_options' );
+		$shapla_slide = isset( $options['shapla_slide'] ) ? $options['shapla_slide'] : array();
+
+		if ( in_array( 'slide_post_type', $shapla_slide ) ) {
+			return true;
+		}
+
+		return false;
 	}
 }
 

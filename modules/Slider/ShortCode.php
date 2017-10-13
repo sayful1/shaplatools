@@ -37,7 +37,7 @@ class ShortCode {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 
 		ob_start();
-		require SHAPLATOOLS_SLIDER_PATH . '/views/shapla_slide.php';
+		require SHAPLATOOLS_SLIDER_PATH . '/views/public/shapla_slide.php';
 		$html = ob_get_contents();
 		ob_end_clean();
 

@@ -45,9 +45,7 @@ class Portfolio {
 	 */
 	public function includes() {
 
-		$theme_supports = get_theme_support( 'shapla-portfolio' );
-
-		if ( ! $theme_supports ) {
+		if ( ! $this->is_module_enabled() ) {
 			return;
 		}
 
@@ -56,6 +54,26 @@ class Portfolio {
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/MetaBox.php';
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/ShortCode.php';
 		include SHAPLATOOLS_PORTFOLIO_PATH . '/Script.php';
+	}
+
+	/**
+	 * Check if current module is enabled
+	 *
+	 * @return bool
+	 */
+	private function is_module_enabled() {
+		if ( get_theme_support( 'shaplatools-portfolio' ) ) {
+			return true;
+		}
+
+		$options      = get_option( 'shaplatools_options' );
+		$shapla_slide = isset( $options['shapla_portfolio'] ) ? $options['shapla_portfolio'] : array();
+
+		if ( in_array( 'portfolio_post_type', $shapla_slide ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 }
