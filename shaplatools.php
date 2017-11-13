@@ -146,6 +146,9 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			// Portfolio Module
 			include SHAPLATOOLS_MODULES . '/Portfolio/Portfolio.php';
+
+			// Infinite Scroll
+			include SHAPLATOOLS_MODULES . '/InfiniteScroll/InfiniteScroll.php';
 		}
 
 		private function init() {
