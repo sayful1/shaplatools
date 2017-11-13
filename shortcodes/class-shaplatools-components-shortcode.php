@@ -3,15 +3,20 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 
 	class Shaplatools_Components_Shortcode {
 
-		private $plugin_path;
-		private $plugin_name;
-		private $options;
+		private static $instance = null;
 
-		public function __construct( $plugin_name, $plugin_path, $options ) {
-			$this->plugin_name = $plugin_name;
-			$this->plugin_path = $plugin_path;
-			$this->options     = $options;
+		/**
+		 * @return Shaplatools_Components_Shortcode
+		 */
+		public static function init() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
 
+			return self::$instance;
+		}
+
+		public function __construct() {
 			add_shortcode( 'shapla_button', array( $this, 'shapla_button' ) );
 			add_shortcode( 'shapla_icon', array( $this, 'shapla_icon' ) );
 			add_shortcode( 'shapla_social', array( $this, 'shapla_social' ) );
@@ -346,3 +351,5 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 	}
 
 endif;
+
+Shaplatools_Components_Shortcode::init();

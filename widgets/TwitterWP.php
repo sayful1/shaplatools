@@ -53,7 +53,6 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 		 *
 		 * @param array $app App credentials
 		 *
-		 * @return TwitterWP true if app config seems good, wp_error if not
 		 */
 		private function __construct( $app = array() ) {
 			if ( empty( self::$app ) ) {
@@ -239,7 +238,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 		 *
 		 * @param  array $params 'resources' is a list of services to check
 		 *
-		 * @return array          Array of Status objects
+		 * @return mixed          Array of Status objects
 		 */
 		public function rate_limit_status( $params = array() ) {
 			$params = wp_parse_args( $params, array(
@@ -349,7 +348,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 		 * @param  string $auth Authentication type
 		 * @param  array $header_args Optional additional arguments
 		 *
-		 * @return array               Header arguments array
+		 * @return mixed               Header arguments array
 		 */
 		protected function header_args( $auth = 'bearer', $header_args = array() ) {
 
@@ -713,7 +712,7 @@ if ( ! class_exists( 'TwitterWP' ) ) :
 		 *
 		 * @param  array|string $app App credentials
 		 *
-		 * @return array             App credentials array
+		 * @return mixed             App credentials array
 		 */
 		public static function app_creds( $app ) {
 

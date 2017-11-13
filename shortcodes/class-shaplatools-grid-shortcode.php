@@ -3,12 +3,21 @@
 if ( ! class_exists( 'ShaplaTools_Grid_Shortcode' ) ):
 
 	class ShaplaTools_Grid_Shortcode {
-		private $plugin_path;
-		private $plugin_name;
 
-		public function __construct( $plugin_name, $plugin_path ) {
-			$this->plugin_name = $plugin_name;
-			$this->plugin_path = $plugin_path;
+		private static $instance = null;
+
+		/**
+		 * @return ShaplaTools_Grid_Shortcode
+		 */
+		public static function init() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
+		public function __construct() {
 
 			add_shortcode( 'shapla_row', array( $this, 'shapla_row' ) );
 			add_shortcode( 'shapla_row_padding', array( $this, 'shapla_row_padding' ) );
@@ -181,3 +190,5 @@ if ( ! class_exists( 'ShaplaTools_Grid_Shortcode' ) ):
 	}
 
 endif;
+
+ShaplaTools_Grid_Shortcode::init();

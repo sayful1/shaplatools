@@ -5,10 +5,22 @@ namespace ShaplaTools\Modules\Search;
 class Search {
 
 	private $options;
+	private static $instance = null;
 
-	public function __construct( $options ) {
+	/**
+	 * @return Search
+	 */
+	public static function init() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
 
-		$this->options = $options;
+		return self::$instance;
+	}
+
+	public function __construct() {
+
+		$this->options = get_option( 'shaplatools_options' );
 
 		add_action( 'wp_ajax_nopriv_shapla_search', array( $this, 'shaplatools_search' ) );
 		add_action( 'wp_ajax_shapla_search', array( $this, 'shaplatools_search' ) );
@@ -69,3 +81,5 @@ class Search {
 		wp_send_json( $results );
 	}
 }
+
+Search::init();

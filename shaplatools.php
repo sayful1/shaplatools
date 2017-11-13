@@ -142,24 +142,26 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			// Search Module
 			include SHAPLATOOLS_MODULES . '/Search/Search.php';
-			new \ShaplaTools\Modules\Search\Search( $this->options );
 
 			// Portfolio Module
 			include SHAPLATOOLS_MODULES . '/Portfolio/Portfolio.php';
 
+			// Testimonial Module
+			include SHAPLATOOLS_MODULES . '/Testimonial/Testimonial.php';
+
 			// Infinite Scroll
 			include SHAPLATOOLS_MODULES . '/InfiniteScroll/InfiniteScroll.php';
+
+			// Retina 2x
+			include SHAPLATOOLS_MODULES . '/Retina2x/Retina2x.php';
 		}
 
 		private function init() {
 			$this->include_libraries();
 			$this->include_settings();
-			$this->includes_post_types();
-			$this->include_meta_boxes();
 			$this->include_widgets();
 			$this->include_shortcodes();
 			$this->include_tinymce_shortcodes();
-			$this->include_other_files();
 		}
 
 		private function include_libraries() {
@@ -171,52 +173,7 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			include_once SHAPLATOOLS_INCLUDES . '/settings/settings.php';
 		}
 
-		private function includes_post_types() {
-			$options = $this->shaplatools_options();
-
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-feature.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-testimonial.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-team.php';
-
-			if ( $options['feature_post_type'] ) {
-				new ShaplaTools_Feature( $this->plugin_name );
-			}
-
-			if ( $options['testimonial_post_type'] ) {
-				new ShaplaTools_Testimonial( $this->plugin_name );
-			}
-
-			if ( $options['team_post_type'] ) {
-				new ShaplaTools_Team( $this->plugin_name );
-			}
-		}
-
-		public function include_meta_boxes() {
-			$options = $this->shaplatools_options();
-
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-feature-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-team-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-testimonial-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-post-metabox.php';
-
-			if ( $options['feature_meta_box'] ) {
-				new ShaplaTools_Feature_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['team_meta_box'] ) {
-				new ShaplaTools_Team_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['testimonial_meta_box'] ) {
-				new ShaplaTools_Testimonial_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['post_meta_box'] ) {
-				new ShaplaTools_Post_Metabox( $this->plugin_name );
-			}
-		}
-
-		public function include_widgets() {
+		private function include_widgets() {
 			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-flickr.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
@@ -226,31 +183,18 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			include_once SHAPLATOOLS_WIDGETS . '/widget-testimonials.php';
 		}
 
-		public function include_shortcodes() {
-			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-post-types-shortcode.php';
+		private function include_shortcodes() {
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-grid-shortcode.php';
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-components-shortcode.php';
-
-			new ShaplaTools_Grid_Shortcode( $this->plugin_name, $this->plugin_path() );
-			new ShaplaTools_Post_Types_Shortcode( $this->plugin_name, $this->plugin_path() );
-			new Shaplatools_Components_Shortcode( $this->plugin_name, $this->plugin_path(), $this->options );
 		}
 
-		public function include_tinymce_shortcodes() {
+		private function include_tinymce_shortcodes() {
 			if ( is_admin() ) {
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/ShaplaTools_TinyMCE.php';
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/shapla-shortcodes.php';
 
 				new ShaplaTools_TinyMCE( $this->plugin_name, $this->plugin_url() );
 				new ShaplaShortcodes( $this->plugin_url(), $this->plugin_path() );
-			}
-		}
-
-		public function include_other_files() {
-			include_once SHAPLATOOLS_INCLUDES . '/class-shaplatools-retina-2x.php';
-
-			if ( $this->shaplatools_options()['retina_image'] ) {
-				new ShaplaTools_Retina_2x();
 			}
 		}
 
@@ -537,10 +481,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on activation
 		 */
 		public function shaplatools_activation() {
-			ShaplaTools_Team::post_type();
-			ShaplaTools_Feature::post_type();
-			ShaplaTools_Testimonial::post_type();
-
 			do_action( 'shaplatools_activation' );
 			flush_rewrite_rules();
 		}
@@ -549,10 +489,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on deactivation
 		 */
 		public function shaplatools_deactivation() {
-			ShaplaTools_Team::post_type();
-			ShaplaTools_Feature::post_type();
-			ShaplaTools_Testimonial::post_type();
-
 			do_action( 'shaplatools_deactivation' );
 			flush_rewrite_rules();
 		}

@@ -38,7 +38,7 @@ class ShortCode {
 		$attributes = shortcode_atts( $default_attributes, $attributes );
 
 		ob_start();
-		require SHAPLATOOLS_PORTFOLIO_PATH . '/views/public/shapla_portfolio.php';
+		require SHAPLATOOLS_PORTFOLIO_VIEWS . '/public/shapla_portfolio.php';
 		$html = ob_get_contents();
 		ob_end_clean();
 

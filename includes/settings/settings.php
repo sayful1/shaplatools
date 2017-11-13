@@ -1,32 +1,32 @@
 <?php
-$shaplatools_settings_page = new ShaplaTools_Settings_API;
+$settings_page = new ShaplaTools_Settings_API;
 
 // Add settings page
-$shaplatools_settings_page->add_menu( [
+$settings_page->add_menu( array(
 	'parent_slug' => 'options-general.php',
 	'page_title'  => __( 'ShaplaTools Settings', 'shaplatools' ),
 	'menu_title'  => __( 'ShaplaTools', 'shaplatools' ),
 	'capability'  => 'manage_options',
 	'menu_slug'   => 'shaplatools',
 	'option_name' => 'shaplatools_options',
-] );
+) );
 
 // Add settings page tab
-$shaplatools_settings_page->add_tab( [
+$settings_page->add_tab( array(
 	'id'    => 'general',
 	'title' => __( 'General', 'shaplatools' ),
-] );
-$shaplatools_settings_page->add_tab( [
+) );
+$settings_page->add_tab( array(
 	'id'    => 'post_type',
 	'title' => __( 'Custom Post Type', 'shaplatools' ),
-] );
-$shaplatools_settings_page->add_tab( [
+) );
+$settings_page->add_tab( array(
 	'id'    => 'social_link',
 	'title' => __( 'Social Link', 'shaplatools' ),
-] );
+) );
 
 // Add general settings page fields
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'google_analytics',
 	'type' => 'text',
 	'name' => __( 'Google Analytics ID', 'shaplatools' ),
@@ -38,8 +38,8 @@ $shaplatools_settings_page->add_field( [
 	),
 	'std'  => '',
 	'tab'  => 'general'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'   => 'google_map_api_key',
 	'type' => 'text',
 	'name' => __( 'Google Maps API key', 'shaplatools' ),
@@ -51,8 +51,8 @@ $shaplatools_settings_page->add_field( [
 	),
 	'std'  => '',
 	'tab'  => 'general'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'      => 'typeahead_search',
 	'type'    => 'radio',
 	'name'    => __( 'Autocomplete Search', 'shaplatools' ),
@@ -69,9 +69,9 @@ $shaplatools_settings_page->add_field( [
 		'product_search' => __( 'WooCommerce Product Search', 'shaplatools' )
 	),
 	'tab'     => 'general'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'      => 'shapla_retina_graphics',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Retina graphics for your website', 'shaplatools' ),
@@ -87,10 +87,10 @@ $shaplatools_settings_page->add_field( [
 		'retina_image' => __( 'Enable retina image', 'shaplatools' ),
 	),
 	'tab'     => 'general'
-] );
+) );
 
 // Add post type settings page fields
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'      => 'shapla_slide',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Slide', 'shaplatools' ),
@@ -100,8 +100,8 @@ $shaplatools_settings_page->add_field( [
 		'slide_metabox'   => __( 'Enable Slide Default Metabox', 'shaplatools' )
 	),
 	'tab'     => 'post_type'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'      => 'shapla_portfolio',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Portfolio', 'shaplatools' ),
@@ -111,8 +111,8 @@ $shaplatools_settings_page->add_field( [
 		'portfolio_metabox'   => __( 'Enable Portfolio Default Metabox', 'shaplatools' )
 	),
 	'tab'     => 'post_type'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'      => 'shapla_team',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Team', 'shaplatools' ),
@@ -122,8 +122,8 @@ $shaplatools_settings_page->add_field( [
 		'team_metabox'   => __( 'Enable Team Default Metabox', 'shaplatools' )
 	),
 	'tab'     => 'post_type'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'      => 'shapla_testimonial',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Testimonial', 'shaplatools' ),
@@ -133,8 +133,8 @@ $shaplatools_settings_page->add_field( [
 		'testimonial_metabox'   => __( 'Enable Testimonial Default Metabox', 'shaplatools' )
 	),
 	'tab'     => 'post_type'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'      => 'shapla_feature',
 	'type'    => 'multi_checkbox',
 	'name'    => __( 'Feature', 'shaplatools' ),
@@ -144,238 +144,238 @@ $shaplatools_settings_page->add_field( [
 		'feature_metabox'   => __( 'Enable Feature Default Metabox', 'shaplatools' )
 	),
 	'tab'     => 'post_type'
-] );
+) );
 
 // Add social link settings page fields
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'android',
 	'type' => 'url',
 	'name' => __( 'Android', 'shaplatools' ),
 	'tab'  => 'social_link'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'   => 'apple',
 	'type' => 'url',
 	'name' => __( 'Apple', 'shaplatools' ),
 	'tab'  => 'social_link'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'   => 'behance',
 	'type' => 'url',
 	'name' => __( 'Behance', 'shaplatools' ),
 	'desc' => 'e.g. https://www.behance.net/username',
 	'tab'  => 'social_link'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'   => 'bitbucket',
 	'type' => 'url',
 	'name' => __( 'Bitbucket', 'shaplatools' ),
 	'desc' => 'e.g. https://bitbucket.org/username',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'codepen',
 	'name' => __( 'CodePen', 'shaplatools' ),
 	'desc' => 'e.g. http://codepen.io/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'deviantart',
 	'name' => __( 'Deviant Art', 'shaplatools' ),
 	'desc' => 'e.g. http://username.deviantart.com',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'dribbble',
 	'name' => __( 'Dribbble', 'shaplatools' ),
 	'desc' => 'e.g. http://dribbble.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'dropbox',
 	'name' => __( 'Dropbox', 'shaplatools' ),
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'facebook',
 	'name' => __( 'Facebook', 'shaplatools' ),
 	'desc' => 'e.g. http://www.facebook.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'flickr',
 	'name' => __( 'Flickr', 'shaplatools' ),
 	'desc' => 'e.g. http://www.flickr.com/photos/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'foursquare',
 	'name' => __( 'Foursquare', 'shaplatools' ),
 	'desc' => 'e.g. https://foursquare.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'github',
 	'name' => __( 'GitHub', 'shaplatools' ),
 	'desc' => 'e.g. https://github.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'google-plus',
 	'name' => __( 'Google+', 'shaplatools' ),
 	'desc' => 'e.g. https://plus.google.com/userID',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'instagram',
 	'name' => __( 'Instagram', 'shaplatools' ),
 	'desc' => 'e.g. http://instagram.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'linkedin',
 	'name' => __( 'LinkedIn', 'shaplatools' ),
 	'desc' => 'e.g. http://www.linkedin.com/in/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'mail',
 	'name' => __( 'Mail', 'shaplatools' ),
 	'desc' => 'e.g. mailto:user@name.com',
 	'type' => 'email',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'pinterest',
 	'name' => __( 'Pinterest', 'shaplatools' ),
 	'desc' => 'e.g. http://pinterest.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'rss',
 	'name' => __( 'RSS', 'shaplatools' ),
 	'desc' => 'e.g. http://example.com/feed',
 	'type' => 'url',
 	'tab'  => 'social_link',
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'skype',
 	'name' => __( 'Skype', 'shaplatools' ),
 	'type' => 'text',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'stack-exchange',
 	'name' => __( 'Stack Exchange', 'shaplatools' ),
 	'desc' => 'http://stackexchange.com/users/userID',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'stack-overflow',
 	'name' => __( 'Stack Overflow', 'shaplatools' ),
 	'desc' => 'e.g. http://stackoverflow.com/users/userID',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'trello',
 	'name' => __( 'Trello', 'shaplatools' ),
 	'desc' => 'e.g. https://trello.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'tumblr',
 	'name' => __( 'Tumblr', 'shaplatools' ),
 	'desc' => 'e.g. http://username.tumblr.com',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'twitter',
 	'name' => __( 'Twitter', 'shaplatools' ),
 	'desc' => 'e.g. http://twitter.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'vimeo',
 	'name' => __( 'Vimeo', 'shaplatools' ),
 	'desc' => 'e.g. https://vimeo.com/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'vine',
 	'name' => __( 'Vine', 'shaplatools' ),
 	'desc' => 'e.g. https://vine.co/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'windows',
 	'name' => __( 'Windows', 'shaplatools' ),
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'wordpress',
 	'name' => __( 'WordPress', 'shaplatools' ),
 	'desc' => 'e.g. https://profiles.wordpress.org/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$shaplatools_settings_page->add_field( [
+$settings_page->add_field( array(
 	'id'   => 'xing',
 	'name' => __( 'Xing', 'shaplatools' ),
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
-$shaplatools_settings_page->add_field( [
+) );
+$settings_page->add_field( array(
 	'id'   => 'youtube',
 	'name' => __( 'YouTube', 'shaplatools' ),
 	'desc' => 'e.g. http://www.youtube.com/user/username',
 	'type' => 'url',
 	'tab'  => 'social_link'
-] );
+) );
 
-$this->options                 = $shaplatools_settings_page->get_options();
-$GLOBALS['shapla_social_link'] = $shaplatools_settings_page->filter_fields_by_tab( 'social_link' );
+$this->options                 = $settings_page->get_options();
+$GLOBALS['shapla_social_link'] = $settings_page->filter_fields_by_tab( 'social_link' );
