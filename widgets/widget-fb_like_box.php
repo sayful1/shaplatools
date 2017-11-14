@@ -3,7 +3,7 @@
 class Shapla_FB_Like_Box extends WP_Widget {
 
 	/**
-	 * Register widget with WordPress.
+	 * Shapla_FB_Like_Box constructor.
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -11,7 +11,7 @@ class Shapla_FB_Like_Box extends WP_Widget {
 			__( 'Shapla Facebook Like Box', 'shaplatools' ),
 			array( 'description' => __( 'Facebook Like Box only for Facebook Pages.', 'shaplatools' ), )
 		);
-	}// end constructor
+	}
 
 	/**
 	 * Front-end display of widget.
@@ -102,6 +102,8 @@ class Shapla_FB_Like_Box extends WP_Widget {
 	 * @see WP_Widget::form()
 	 *
 	 * @param array $instance Previously saved values from database.
+	 *
+	 * @return string|void
 	 */
 	function form( $instance ) {
 
@@ -193,7 +195,11 @@ class Shapla_FB_Like_Box extends WP_Widget {
 		<?php
 	}
 
-} // class Shapla_FB_Like_Box
+	public static function register() {
+		register_widget( __CLASS__ );
+	}
+
+}
 
 // Register the Widget
-add_action( 'widgets_init', create_function( '', 'register_widget("Shapla_FB_Like_Box");' ) );
+add_action( 'widgets_init', array( 'Shapla_FB_Like_Box', 'register' ) );

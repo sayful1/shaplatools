@@ -61,10 +61,6 @@ class Shapla_Dribbble_Widget extends WP_Widget {
 
 		ob_start();
 
-		extract( $args );
-
-		echo $before_widget;
-
 		$title         = apply_filters( 'widget_title', $instance['title'] );
 		$dribbble_name = esc_html( $instance['dribbble_name'] );
 		$count         = absint( $instance['dribbble_shots'] );
@@ -81,10 +77,13 @@ class Shapla_Dribbble_Widget extends WP_Widget {
 			$items = $rss->get_items( 0, $rss->get_item_quantity( $count ) );
 		}
 
+		echo $args['before_widget'];
+
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
+
 		?>
-		<?php if ( $title ) {
-			echo $before_title . $title . $after_title;
-		} ?>
         <ul class="dribbble-list">
 			<?php if ( isset( $items ) ) : ?>
 				<?php foreach ( $items as $item ) :
@@ -110,7 +109,8 @@ class Shapla_Dribbble_Widget extends WP_Widget {
 			<?php endif; ?>
         </ul>
 		<?php
-		echo $after_widget;
+
+		echo $args['after_widget'];
 
 		$content = ob_get_clean();
 

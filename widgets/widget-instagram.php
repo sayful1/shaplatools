@@ -60,7 +60,6 @@ class Shapla_Instagram_Widget extends WP_Widget {
 
 		extract( $args );
 
-		echo $before_widget;
 
 		$title     = apply_filters( 'widget_title', $instance['title'] );
 		$username  = esc_html( $instance['username'] );
@@ -75,8 +74,10 @@ class Shapla_Instagram_Widget extends WP_Widget {
 			'cachetime' => $cachetime,
 		) );
 
-		if ( $title ) {
-			echo $before_title . $title . $after_title;
+		echo $args['before_widget'];
+
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
 		// And if we have Instagrams
@@ -111,7 +112,7 @@ class Shapla_Instagram_Widget extends WP_Widget {
 						'shaplatools' ); ?></p></div>
 		<?php endif;
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		$content = ob_get_clean();
 
@@ -198,7 +199,7 @@ class Shapla_Instagram_Widget extends WP_Widget {
 	 *
 	 * @param    array $args Argument to passed to Instagram API.
 	 *
-	 * @return  array        An array returning Instagram API data.
+	 * @return  bool|array        An array returning Instagram API data.
 	 */
 	public function get_instagrams( $args = array() ) {
 		// Get args
@@ -211,7 +212,7 @@ class Shapla_Instagram_Widget extends WP_Widget {
 			return false;
 		}
 
-		$key = "stag_instagram_{$username}";
+		$key = "shaplatools_instagram_{$username}";
 
 		if ( false === ( $instagrams = get_transient( $key ) ) ) {
 			// Ping Instagram's API
