@@ -71,8 +71,6 @@ class Shapla_Dribbble_Widget extends WP_Widget {
 
 		$rss = fetch_feed( "https://dribbble.com/$dribbble_name/shots.rss" );
 
-		add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 1800;' ) );
-
 		if ( ! is_wp_error( $rss ) ) {
 			$items = $rss->get_items( 0, $rss->get_item_quantity( $count ) );
 		}

@@ -177,10 +177,10 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			include_once SHAPLATOOLS_WIDGETS . '/shaplatools-widget.php';
 
 			include_once SHAPLATOOLS_WIDGETS . '/widget-flickr.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-twitter.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-fb_like_box.php';
+			include_once SHAPLATOOLS_WIDGETS . '/widget-twitter.php';
+//			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
+//			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
 		}
 
 		private function include_shortcodes() {

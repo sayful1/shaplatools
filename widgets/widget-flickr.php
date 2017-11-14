@@ -61,38 +61,21 @@ class Shapla_Flickr_Widget extends ShaplaTools_Widget {
 		$flickr_id    = esc_attr( $instance['flickr_id'] );
 		$flickr_count = absint( $instance['flickr_count'] );
 
-		include_once( ABSPATH . WPINC . '/feed.php' );
-
-		$rss = fetch_feed( 'http://api.flickr.com/services/feeds/photos_public.gne?ids=' . $flickr_id . '&lang=en-us&format=rss_200' );
-		add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 1800;' ) );
-
-		if ( ! is_wp_error( $rss ) ) {
-			$items = $rss->get_items( 0, $rss->get_item_quantity( $flickr_count ) );
-		}
+		$items = $this->get_public_feed( $flickr_id, $flickr_count );
 
 		echo $args['before_widget'];
-
+		if ( $title ) {
+			echo $args['before_title'] . $title . $args['after_title'];
+		}
 		?>
 
         <div class='shapla-flickr-widget'>
-			<?php if ( $title ) {
-				echo $args['before_title'] . $title . $args['after_title'];
-			} ?>
             <div class="shapla-flickr-row">
 				<?php
 				if ( isset( $items ) ) {
 					foreach ( $items as $item ) {
-						$image_group = $item->get_item_tags( 'http://search.yahoo.com/mrss/', 'thumbnail' );
-						$image_attrs = $image_group[0]['attribs'];
-						foreach ( $image_attrs as $image ) {
-							$url    = $image['url'];
-							$width  = $image['width'];
-							$height = $image['height'];
-							echo '<div class="shapla-flickr-col"><a target="_blank" href="' . $item->get_permalink() . '"><img src="' . $url . '" width="' . $width . '" height="' . $height . '" alt="' . $item->get_title() . '"></a></div>';
-						}
+						echo '<div class="shapla-flickr-col"><a target="_blank" href="' . $item['permalink'] . '"><img src="' . $item['src'] . '" alt="' . $item['alt'] . '"></a></div>';
 					}
-				} else {
-					_e( 'Invalid flickr ID', 'shaplatools' );
 				}
 				?>
             </div>
@@ -105,6 +88,68 @@ class Shapla_Flickr_Widget extends ShaplaTools_Widget {
 		echo $content;
 
 		$this->cache_widget( $args, $content );
+	}
+
+	/**
+	 * Get flickr public feed by user id
+	 *
+	 * @param $user_id
+	 * @param int $per_page
+	 *
+	 * @return array|bool
+	 */
+	private function get_public_feed( $user_id, $per_page = 20 ) {
+
+		$expiration     = 15 * MINUTE_IN_SECONDS;
+		$transient_name = 'shaplatools_flickr_public_feeds';
+
+		if ( false === ( $data = get_transient( $transient_name ) ) ) {
+
+			include_once( ABSPATH . WPINC . '/feed.php' );
+
+			$base_url = 'http://api.flickr.com/services/feeds/photos_public.gne';
+			$url      = add_query_arg( array(
+				'ids'    => $user_id,
+				'lang'   => 'en-us',
+				'format' => 'rss_200',
+			), $base_url );
+
+			$rss = fetch_feed( $url );
+
+			if ( is_wp_error( $rss ) ) {
+				return false;
+			}
+
+			// Figure out how many total items there are.
+			$max_items = $rss->get_item_quantity( $per_page );
+
+			// Build an array of all the items,
+			// starting with element 0 (first element).
+			$items = $rss->get_items( 0, $max_items );
+
+			$data = array();
+
+			$i = 0;
+			foreach ( $items as $item ) {
+				$image_group = $item->get_item_tags( 'http://search.yahoo.com/mrss/', 'thumbnail' );
+				$image_attrs = $image_group[0]['attribs'];
+				foreach ( $image_attrs as $image ) {
+
+					$_img_src = $image['url'];
+					$_img_src = str_replace( 'http://', 'https://', $_img_src );
+
+					$data[ $i ]['alt']       = esc_attr( $item->get_title() );
+					$data[ $i ]['src']       = esc_url( $_img_src );
+					$data[ $i ]['permalink'] = esc_url( $item->get_permalink() );
+				}
+
+				$i ++;
+			}
+
+			set_transient( $transient_name, $data, $expiration );
+		}
+
+		return $data;
 	}
 
 	public static function register() {
