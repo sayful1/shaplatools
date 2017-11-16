@@ -74,6 +74,17 @@ class Shapla_Instagram_Widget extends WP_Widget {
 			'cachetime' => $cachetime,
 		) );
 
+		$_medias = isset( $instagram['user']['media']['nodes'] ) ? $instagram['user']['media']['nodes'] : array();
+		$_medias = array_map( function ( $media ) {
+			return array(
+				'display_src'         => $media['display_src'],
+				'thumbnail_src'       => $media['thumbnail_src'],
+				'thumbnail_resources' => $media['thumbnail_resources'],
+				'is_video'            => $media['is_video'],
+			);
+		}, $_medias );
+
+
 		echo $args['before_widget'];
 
 		if ( ! empty( $title ) ) {
@@ -88,15 +99,12 @@ class Shapla_Instagram_Widget extends WP_Widget {
             <div class="instagram-row">
 				<?php
 				$displayed = 0;
-				foreach ( $instagram['items'] as $key => $image ) {
+				foreach ( $_medias as $key => $image ) {
 					$displayed ++;
 
 					echo apply_filters( 'st_instagram_widget_image_html',
-						sprintf( '<div class="instagram-col %4$s"><a href="%1$s"><img class="instagram-image" src="%2$s" alt="%3$s" title="%3$s" /></a></div>',
-							$image['link'],
-							str_replace( 'http:', '', $image['images'][ $image_res ]['url'] ),
-							$image['caption']['text'],
-							esc_attr( $image_res )
+						sprintf( '<div class="instagram-col"><img class="instagram-image" src="%s"></div>',
+							$image['thumbnail_src']
 						), $image );
 				}
 				?>
@@ -216,7 +224,7 @@ class Shapla_Instagram_Widget extends WP_Widget {
 
 		if ( false === ( $instagrams = get_transient( $key ) ) ) {
 			// Ping Instagram's API
-			$api_url  = "https://www.instagram.com/{$username}/media/";
+			$api_url  = "https://www.instagram.com/{$username}/?__a=1";
 			$response = wp_remote_get( $api_url );
 
 			// Check if the API is up.

@@ -179,8 +179,8 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			include_once SHAPLATOOLS_WIDGETS . '/widget-flickr.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-fb_like_box.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-twitter.php';
-//			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
-//			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
+			 include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
+			// include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
 		}
 
 		private function include_shortcodes() {
@@ -193,8 +193,8 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/ShaplaTools_TinyMCE.php';
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/shapla-shortcodes.php';
 
-				new ShaplaTools_TinyMCE( $this->plugin_name, $this->plugin_url() );
-				new ShaplaShortcodes( $this->plugin_url(), $this->plugin_path() );
+				ShaplaTools_TinyMCE::init();
+				ShaplaShortcodes::init();
 			}
 		}
 

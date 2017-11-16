@@ -4,13 +4,21 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 
 	class ShaplaShortcodes {
 
-		private $plugin_url;
-		private $plugin_path;
 
-		public function __construct( $plugin_url, $plugin_path ) {
-			$this->plugin_url  = $plugin_url;
-			$this->plugin_path = $plugin_path;
+		private static $instance = null;
 
+		/**
+		 * @return ShaplaShortcodes
+		 */
+		public static function init() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
+		public function __construct() {
 			add_action( 'init', array( &$this, 'shortcodes_init' ) );
 			add_filter( 'mce_external_languages', array( &$this, 'add_tinymce_lang' ), 10, 1 );
 			add_action( 'wp_ajax_popup', array( &$this, 'shortcode_popup_callback' ) );
@@ -24,7 +32,7 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 		}
 
 		public function add_tinymce_lang( $arr ) {
-			$arr['shaplaShortcodes'] = $this->plugin_path . '/assets/js/plugin-lang.php';
+			$arr['shaplaShortcodes'] = SHAPLATOOLS_PATH . '/assets/js/plugin-lang.php';
 
 			return $arr;
 		}
@@ -33,9 +41,9 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 			global $tinymce_version;
 
 			if ( version_compare( $tinymce_version, '400', '<' ) ) {
-				$plugin_array['shaplaShortcodes'] = $this->plugin_url . '/assets/js/editor_plugin.js';
+				$plugin_array['shaplaShortcodes'] = SHAPLATOOLS_URL . '/assets/js/editor_plugin.js';
 			} else {
-				$plugin_array['shaplaShortcodes'] = $this->plugin_url . '/assets/js/plugin.js';
+				$plugin_array['shaplaShortcodes'] = SHAPLATOOLS_URL . '/assets/js/plugin.js';
 			}
 
 			return $plugin_array;

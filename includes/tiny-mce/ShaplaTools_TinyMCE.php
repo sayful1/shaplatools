@@ -11,20 +11,27 @@
  */
 class ShaplaTools_TinyMCE {
 
-	private $plugin_name;
-	private $plugin_url;
+
+	private static $instance = null;
+
+	/**
+	 * @return ShaplaTools_TinyMCE
+	 */
+	public static function init() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
 
 	/**
 	 * Setup.
 	 *
 	 * @since  2.0.0.
 	 *
-	 * @return void
 	 */
-	public function __construct( $plugin_name, $plugin_url ) {
-
-		$this->plugin_name = $plugin_name;
-		$this->plugin_url  = $plugin_url;
+	public function __construct() {
 
 		// Add the buttons
 		add_action( 'admin_init', array( $this, 'add_buttons' ), 11 );
@@ -67,7 +74,7 @@ class ShaplaTools_TinyMCE {
 	 * @return array                The modified plugins array.
 	 */
 	public function add_tinymce_plugin( $plugins ) {
-		$plugins['shaplatools_mce_hr_button'] = $this->plugin_url . '/assets/mce-button/mce-hr.js';
+		$plugins['shaplatools_mce_hr_button'] = SHAPLATOOLS_URL . '/assets/mce-button/mce-hr.js';
 
 		return $plugins;
 	}
