@@ -286,15 +286,9 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 				true );
 			wp_register_script( 'owl-carousel', $this->plugin_url . '/assets/library/owl.carousel.min.js',
 				array( 'jquery' ), '2.0.0', true );
-			wp_register_script( 'typeahead', $this->plugin_url . '/assets/library/typeahead.min.js', array( 'jquery' ),
-				$this->version, true );
 
 			if ( $options['retina_js'] ) {
 				wp_enqueue_script( 'retinajs' );
-			}
-
-			if ( $options['typeahead_search'] == 'default_search' || $options['typeahead_search'] == 'product_search' ) {
-				wp_enqueue_script( 'typeahead' );
 			}
 
 			if ( $this->has_shortcode( 'shapla_testimonial' ) || $this->has_shortcode( 'shapla_team' ) ) {

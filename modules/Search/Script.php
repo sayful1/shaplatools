@@ -33,11 +33,27 @@ class Script {
 			return;
 		}
 
+		wp_enqueue_style(
+			'shaplatools-search',
+			SHAPLATOOLS_SEARCH_ASSETS . '/css/search.css',
+			array(),
+			SHAPLATOOLS_VERSION,
+			'all'
+		);
+
 		wp_enqueue_script(
-			'typeahead',
-			SHAPLATOOLS_ASSETS . '/library/typeahead.min.js',
+			'jquery-autocomplete',
+			SHAPLATOOLS_SEARCH_ASSETS . '/js/jquery.autocomplete.min.js',
 			array( 'jquery' ),
-			'0.10.5',
+			'1.4.4',
+			true
+		);
+
+		wp_enqueue_script(
+			'shaplatools-search',
+			SHAPLATOOLS_SEARCH_ASSETS . '/js/search.js',
+			array( 'jquery', 'jquery-autocomplete' ),
+			SHAPLATOOLS_VERSION,
 			true
 		);
 	}

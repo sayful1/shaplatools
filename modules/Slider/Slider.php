@@ -45,7 +45,7 @@ class Slider {
 	 */
 	public function includes() {
 
-		if ( ! $this->is_slider_module_enabled() ) {
+		if ( ! $this->is_module_enabled() ) {
 			return;
 		}
 
@@ -61,7 +61,7 @@ class Slider {
 	 *
 	 * @return bool
 	 */
-	private function is_slider_module_enabled() {
+	private function is_module_enabled() {
 		if ( get_theme_support( 'shaplatools-slider' ) ) {
 			return true;
 		}
