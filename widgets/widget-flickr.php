@@ -1,87 +1,107 @@
 <?php
+add_action( 'widgets_init', function(){
+	register_widget( "Shapla_Flickr_Widget" );
+});
 
-class Shapla_Flickr_Widget extends ShaplaTools_Widget {
+class Shapla_Flickr_Widget extends WP_Widget {
+
+	private $widget_id;
+	private $text_domain;
 
 	/**
-	 * Shapla_Flickr_Widget constructor.
+	 * Register widget with WordPress.
 	 */
 	public function __construct() {
 
-		$this->widget_id          = 'shapla-flickr';
-		$this->widget_css_class   = 'widget_shapla_flickr';
-		$this->widget_description = __( 'Display your latest Flickr photos.', 'shaplatools' );
-		$this->widget_name        = __( 'Shapla Flickr Photos', 'shaplatools' );
-		$this->settings           = array(
-			'title'          => array(
-				'type'  => 'text',
-				'std'   => 'Flickr Photos',
-				'label' => __( 'Title:', 'shaplatools' ),
-			),
-			'flickr_id'      => array(
-				'type'  => 'text',
-				'std'   => null,
-				'label' => __( 'Your Flickr User ID:', 'shaplatools' ),
-			),
-			'flickr_id_desc' => array(
-				'type' => 'description',
-				'std'  => sprintf(
-					__( 'Head over to %s to find your Flickr user ID.', 'shaplatools' ),
-					'<a href="//idgettr.com" target="_blank" rel="nofollow">idgettr</a>'
-				),
-			),
-			'flickr_count'   => array(
-				'type'  => 'number',
-				'std'   => 9,
-				'label' => __( 'Number of photos to show:', 'shaplatools' ),
-				'step'  => 1,
-				'min'   => 1,
-				'max'   => 20,
-			),
+		$this->text_domain 	= 'shaplatools';
+		$this->widget_id 	= 'shapla-flickr';
+		$widget_name 		= __( 'Shapla Flickr Photos', 'shaplatools' );
+		$widget_options = array(
+			'classname' => 'widget_shapla_flickr',
+			'description' => __( 'Display your latest Flickr photos.', 'shaplatools' ),
 		);
-		parent::__construct();
+
+		parent::__construct( $this->widget_id, $widget_name, $widget_options );
+
+		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
+		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
+		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
 	}
 
+	function get_cached_widget( $args ) {
+		$cache = wp_cache_get( $this->widget_id, 'widget' );
 
-	/**
-	 * Echoes the widget content.
-	 *
-	 * @param array $args Display arguments including 'before_title', 'after_title',
-	 *                        'before_widget', and 'after_widget'.
-	 * @param array $instance The settings for the particular instance of the widget.
-	 */
-	public function widget( $args, $instance ) {
+		if ( ! is_array( $cache ) )
+			$cache = array();
 
-		if ( $this->get_cached_widget( $args ) ) {
+		if ( isset( $cache[ $args[ 'widget_id' ] ] ) ) {
+			echo $cache[ $args[ 'widget_id' ] ];
+			return true;
+		}
+
+		return false;
+	}
+
+	public function cache_widget( $args, $content ) {
+		$cache[ $args[ 'widget_id' ] ] = $content;
+
+		wp_cache_set( $this->widget_id, $cache, 'widget' );
+	}
+
+	public function flush_widget_cache() {
+		wp_cache_delete( $this->widget_id, 'widget' );
+	}
+
+	function widget( $args, $instance ) {
+
+		if ( $this->get_cached_widget( $args ) ){
 			return;
 		}
 
 		ob_start();
 
+		extract( $args );
+		
 		$title        = apply_filters( 'widget_title', $instance['title'] );
-		$flickr_id    = esc_attr( $instance['flickr_id'] );
-		$flickr_count = absint( $instance['flickr_count'] );
+		$flickr_id    = esc_attr($instance['flickr_id']);
+		$flickr_count = absint($instance['flickr_count']);
+		
+		include_once(ABSPATH . WPINC . '/feed.php');
 
-		$items = $this->get_public_feed( $flickr_id, $flickr_count );
+		$rss = fetch_feed('http://api.flickr.com/services/feeds/photos_public.gne?ids='.$flickr_id.'&lang=en-us&format=rss_200');
+		add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 1800;' ) );
 
-		echo $args['before_widget'];
-		if ( $title ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+		if( !is_wp_error( $rss ) ){
+			$items = $rss->get_items( 0, $rss->get_item_quantity( $flickr_count ) );
 		}
-		?>
 
-        <div class='shapla-flickr-widget'>
-            <div class="shapla-flickr-row">
+		echo $before_widget;
+
+		?>
+	
+		<div class='shapla-flickr-widget'>
+			<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+			<div class="shapla-flickr-row">
 				<?php
 				if ( isset( $items ) ) {
-					foreach ( $items as $item ) {
-						echo '<div class="shapla-flickr-col"><a target="_blank" href="' . $item['permalink'] . '"><img src="' . $item['src'] . '" alt="' . $item['alt'] . '"></a></div>';
+					foreach( $items as $item ) {
+						$image_group = $item->get_item_tags('http://search.yahoo.com/mrss/', 'thumbnail');
+						$image_attrs = $image_group[0]['attribs'];
+						foreach( $image_attrs as $image ) {
+							$url = $image['url'];
+							$width = $image['width'];
+							$height = $image['height'];
+							echo '<div class="shapla-flickr-col"><a target="_blank" href="' . $item->get_permalink() . '"><img src="'. $url .'" width="' . $width . '" height="' . $height . '" alt="'. $item->get_title() .'"></a></div>';
+						}
 					}
+				} else {
+					_e( 'Invalid flickr ID', 'shaplatools' );
 				}
 				?>
-            </div>
-        </div>
+			</div>
+		</div>
 		<?php
-		echo $args['after_widget'];
+		echo $after_widget;
 
 		$content = ob_get_clean();
 
@@ -90,71 +110,43 @@ class Shapla_Flickr_Widget extends ShaplaTools_Widget {
 		$this->cache_widget( $args, $content );
 	}
 
-	/**
-	 * Get flickr public feed by user id
-	 *
-	 * @param $user_id
-	 * @param int $per_page
-	 *
-	 * @return array|bool
-	 */
-	private function get_public_feed( $user_id, $per_page = 20 ) {
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		
+		$instance['title']        = sanitize_text_field( $new_instance['title'] );
+		$instance['flickr_id']    = sanitize_text_field( $new_instance['flickr_id'] );
+		$instance['flickr_count'] = absint( $new_instance['flickr_count'] );
 
-		$expiration     = 15 * MINUTE_IN_SECONDS;
-		$transient_name = 'shaplatools_flickr_public_feeds';
+		$this->flush_widget_cache();
 
-		if ( false === ( $data = get_transient( $transient_name ) ) ) {
-
-			include_once( ABSPATH . WPINC . '/feed.php' );
-
-			$base_url = 'http://api.flickr.com/services/feeds/photos_public.gne';
-			$url      = add_query_arg( array(
-				'ids'    => $user_id,
-				'lang'   => 'en-us',
-				'format' => 'rss_200',
-			), $base_url );
-
-			$rss = fetch_feed( $url );
-
-			if ( is_wp_error( $rss ) ) {
-				return false;
-			}
-
-			// Figure out how many total items there are.
-			$max_items = $rss->get_item_quantity( $per_page );
-
-			// Build an array of all the items,
-			// starting with element 0 (first element).
-			$items = $rss->get_items( 0, $max_items );
-
-			$data = array();
-
-			$i = 0;
-			foreach ( $items as $item ) {
-				$image_group = $item->get_item_tags( 'http://search.yahoo.com/mrss/', 'thumbnail' );
-				$image_attrs = $image_group[0]['attribs'];
-				foreach ( $image_attrs as $image ) {
-
-					$_img_src = $image['url'];
-					$_img_src = str_replace( 'http://', 'https://', $_img_src );
-
-					$data[ $i ]['alt']       = esc_attr( $item->get_title() );
-					$data[ $i ]['src']       = esc_url( $_img_src );
-					$data[ $i ]['permalink'] = esc_url( $item->get_permalink() );
-				}
-
-				$i ++;
-			}
-
-			set_transient( $transient_name, $data, $expiration );
-		}
-
-		return $data;
+		return $instance;
 	}
 
-	public static function register() {
-		register_widget( __CLASS__ );
+	function form( $instance ){
+		$defaults = array(
+			'title'        => __( 'Flickr Photos', 'shaplatools' ),
+			'flickr_id'    => '',
+			'flickr_count' => 4,
+		);
+		$instance = wp_parse_args( (array) $instance, $defaults );
+
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'shaplatools' ); ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $instance['title']; ?>">
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('flickr_id'); ?>"><?php _e( 'Your Flickr User ID:', 'shaplatools' ); ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id('flickr_id'); ?>" name="<?php echo $this->get_field_name('flickr_id'); ?>" value="<?php echo $instance['flickr_id']; ?>">
+			<span class="description"><?php echo sprintf( __( 'Head over to %s to find your Flickr user ID.', 'shaplatools' ), '<a href="//idgettr.com" target="_blank" rel="nofollow">idgettr</a>' ); ?></span>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id('flickr_count'); ?>"><?php _e( 'Number of photos to show:', 'shaplatools' ); ?></label>
+			<input type="number" class="small-text" id="<?php echo $this->get_field_id('flickr_count'); ?>" name="<?php echo $this->get_field_name('flickr_count'); ?>" value="<?php echo $instance['flickr_count']; ?>">
+		</p>
+		<?php
 	}
+
 }
-
-add_action( 'widgets_init', array( 'Shapla_Flickr_Widget', 'register' ) );

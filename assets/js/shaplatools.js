@@ -1,10 +1,10 @@
-(function ($) {
+(function($){
     "use strict";
 
-    $(document).ready(function () {
+    $(document).ready(function(){
 
         /* initialize typeahead plugin */
-        if ($().typeahead) {
+        if( $().typeahead ){
             var shaplaToolsSearch = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -15,31 +15,31 @@
             });
             shaplaToolsSearch.initialize();
 
-            $('input[name="s"]').typeahead({
+            $( 'input[name="s"]' ).typeahead({
                 hint: true,
                 highlight: true,
                 minLength: 2
-            }, {
+            },{
                 name: 's',
                 display: 'value',
-                source: shaplaToolsSearch.ttAdapter()
+                source: shaplaToolsSearch.ttAdapter(),
 
-            }).on('typeahead:selected', function (e, data) {
-                if (data.url !== null) {
+            }).on('typeahead:selected', function(e, data) {
+                if ( data.url !== null ) {
                     window.location = data.url;
                 }
             });
         }
         /* close typeahead plugin */
-
+        
         /* initialize shuffle plugin */
-        if ($().shuffle) {
+        if( $().shuffle ){
 
             var $grid = $('#grid');
 
             $grid.shuffle({
                 itemSelector: '.item', // the selector for the items in the grid
-                speed: 500
+                speed: 500,
             });
 
             /* reshuffle when user clicks a filter item */
@@ -54,7 +54,7 @@
                 var groupName = $(this).attr('data-group');
 
                 // reshuffle grid
-                $grid.shuffle('shuffle', groupName);
+                $grid.shuffle('shuffle', groupName );
             });
         }
         /* close shuffle plugin */
