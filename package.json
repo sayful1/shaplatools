@@ -1,0 +1,22 @@
+{
+  "name": "shaplatools",
+  "title": "ShaplaTools",
+  "version": "1.4.0",
+  "description": "ShaplaTools is a powerful plugin to extend functionality to your WordPress themes.",
+  "author": {
+    "name": "Sayful Islam",
+    "email": "sayful.islam001@gmail.com",
+    "url": "https://profiles.wordpress.org/sayful"
+  },
+  "license": "GPLv3",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sayful1/shaplatools"
+  }
+}

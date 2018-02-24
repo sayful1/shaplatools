@@ -1,0 +1,13 @@
+// Variables
+@import 'utilities/variables';
+@import 'utilities/functions';
+@import 'utilities/mixins';
+
+$shapla-logo-url: "../img/shapla.svg";
+$shapla-logo-2x-url: "../img/shapla-2x.svg";
+$shapla-sprite-popup-url: "../img/sprite-popup.png";
+
+@import 'admin/ui-datepicker';
+@import 'admin/media-gallery';
+@import 'admin/widget';
+@import 'admin/menu';

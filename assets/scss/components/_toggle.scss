@@ -14,10 +14,8 @@
 			top: 50%;
 			right: 15px;
 			font-size: 18px;
-			@include transform(translateY(-50%));
-			@include iconify{
-				content: '\f067';
-			};
+			transform: translateY(-50%);
+			@include fa-icon(\f067);
 		}
 
 		&.ui-state-active:after {

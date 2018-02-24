@@ -1,0 +1,56 @@
+/* BUTTONS */
+.shapla-button {
+	-webkit-appearance: none;
+	-webkit-font-smoothing: inherit;
+	display: inline-block;
+	background: #979797;
+	color: #fff;
+	font-size: 16px;
+	line-height: 1;
+	margin: 5px;
+	padding: 12px 16px;
+	border-radius: 0;
+	text-decoration: none;
+	text-align: center;
+	box-sizing: border-box;
+	transition: all 200ms ease-in-out;
+
+	&:hover {
+		color: #fff;
+		text-decoration: none;
+	}
+	&--normal {
+		opacity: 0.9;
+	}
+	&--medium {
+		font-size: 18px;
+		padding: 17px 22px;
+	}
+	&--large {
+		font-size: 20px;
+		padding: 22px 40px;
+	}
+	&--stroke {
+		border: 1px solid transparent;
+	}
+}
+
+@each $button, $color in $button-map {
+	.shapla-button--#{$button} {
+		background: #{$color} !important;
+		color: findColorInvert($color) !important;
+		&:hover {
+			color: findColorInvert($color) !important;
+		}
+	}
+
+	.shapla-button--stroke.shapla-button--#{$button} {
+		background: transparent !important;
+		color: #{$color} !important;
+		border-color: #{$color} !important;
+		&:hover {
+			background: #{$color} !important;
+			color: findColorInvert($color) !important;
+		}
+	}
+}
