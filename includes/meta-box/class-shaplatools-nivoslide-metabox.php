@@ -1,19 +1,26 @@
 <?php
 
-if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ):
+if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ) {
 
 	class ShaplaTools_NivoSlide_Metabox {
-		private $plugin_name;
-		private $plugin_url;
+
+		private static $instance = null;
+
+		/**
+		 * @return ShaplaTools_NivoSlide_Metabox
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
 
 		/**
 		 * Hook into the appropriate actions when the class is constructed.
 		 */
-		public function __construct( $plugin_name, $plugin_url ) {
-
-			$this->plugin_name = $plugin_name;
-			$this->plugin_url  = $plugin_url;
-
+		public function __construct() {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 			add_filter( 'manage_edit-slide_columns', array( $this, 'columns_head' ) );
 			add_action( 'manage_slide_posts_custom_column', array( $this, 'columns_content' ) );
@@ -236,5 +243,7 @@ if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ):
 			}
 		}
 	}
+}
 
-endif;
+
+ShaplaTools_NivoSlide_Metabox::instance();

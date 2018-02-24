@@ -1,18 +1,26 @@
 <?php
 
-if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ):
+if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ) {
 
 	class ShaplaTools_Portfolio_Metabox {
 
-		private $plugin_name;
-		private $plugin_url;
+		private static $instance = null;
+
+		/**
+		 * @return ShaplaTools_Portfolio_Metabox
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
 
 		/**
 		 * Hook into the appropriate actions when the class is constructed.
 		 */
-		public function __construct( $plugin_name, $plugin_url ) {
-			$this->plugin_name = $plugin_name;
-			$this->plugin_url  = $plugin_url;
+		public function __construct() {
 
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 			add_action( 'add_meta_boxes', array( $this, 'portfolio_image' ) );
@@ -51,7 +59,7 @@ if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ):
 		}
 
 		public function add_tinymce_plugin( $plugin_array ) {
-			$plugin_array['shaplatools_portfolio_mce_button'] = $this->plugin_url . '/assets/mce-button/mce-portfolio.js';
+			$plugin_array['shaplatools_portfolio_mce_button'] = SHAPLATOOLS_ASSETS . '/mce-button/mce-portfolio.js';
 
 			return $plugin_array;
 		}
@@ -170,4 +178,6 @@ if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ):
 			}
 		}
 	}
-endif;
+}
+
+ShaplaTools_Portfolio_Metabox::instance();

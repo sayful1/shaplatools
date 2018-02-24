@@ -49,13 +49,17 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		 * This method is accessible outside the class for creating menu
 		 *
 		 * @param array $menu_fields
+		 *
+		 * @return WP_Error|ShaplaTools_Settings_API
 		 */
 		public function add_menu( array $menu_fields ) {
 			if ( ! isset( $menu_fields['page_title'], $menu_fields['menu_title'], $menu_fields['menu_slug'] ) ) {
-				throw new Exception( 'Required key is not set properly for creating menu.' );
+				return new WP_Error( 'field_not_set', 'Required key is not set properly for creating menu.' );
 			}
 
 			$this->menu_fields = $menu_fields;
+
+			return $this;
 		}
 
 		/**
@@ -64,10 +68,12 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		 * This method is accessible outside the class for creating settings field
 		 *
 		 * @param array $field
+		 *
+		 * @return WP_Error
 		 */
 		public function add_field( array $field ) {
 			if ( ! isset( $field['id'], $field['name'] ) ) {
-				throw new Exception( 'Required key is not set properly for creating tab.' );
+				return new WP_Error( 'field_not_set', 'Required key is not set properly for creating tab.' );
 			}
 
 			$this->fields[] = $field;
@@ -79,10 +85,12 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		 * This method is accessible outside the class for creating page tab
 		 *
 		 * @param array $tab
+		 *
+		 * @return WP_Error
 		 */
 		public function add_tab( array $tab ) {
 			if ( ! isset( $tab['id'], $tab['title'] ) ) {
-				throw new Exception( 'Required key is not set properly for creating tab.' );
+				return new WP_Error( 'field_not_set', 'Required key is not set properly for creating tab.' );
 			}
 
 			$this->tabs[] = $tab;

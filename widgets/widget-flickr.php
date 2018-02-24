@@ -157,5 +157,4 @@ class Shapla_Flickr_Widget extends WP_Widget {
         </p>
 		<?php
 	}
-
 }

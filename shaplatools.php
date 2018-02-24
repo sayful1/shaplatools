@@ -18,8 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-if ( ! class_exists( 'ShaplaTools' ) ):
-
+if ( ! class_exists( 'ShaplaTools' ) ) {
+	/**
+	 * Main ShaplaTools Class
+	 *
+	 * @package ShaplaTools
+	 * @author Sayful Islam
+	 * @link https://sayfulislam.com
+	 */
 	class ShaplaTools {
 		/**
 		 * The unique identifier of this plugin.
@@ -40,33 +46,10 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		private $version = '1.4.0';
 
 		/**
-		 * The absolute url of current version of the plugin.
+		 * The single instance of the class.
 		 *
-		 * @since    1.0.0
-		 * @access   private
-		 * @var      string $plugin_url
+		 * @var ShaplaTools
 		 */
-		private $plugin_url;
-
-		/**
-		 * The absolute path of current version of the plugin.
-		 *
-		 * @since    1.0.0
-		 * @access   private
-		 * @var      string $plugin_path
-		 */
-		private $plugin_path;
-
-		/**
-		 * The options of the plugin.
-		 *
-		 * @since    1.0.0
-		 * @access   private
-		 * @var      array $options
-		 */
-		private $options = array();
-
-
 		protected static $instance = null;
 
 		/**
@@ -89,6 +72,9 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 		/**
 		 * ShaplaTools constructor.
+		 *
+		 * @access public
+		 * @return void
 		 */
 		public function __construct() {
 
@@ -96,8 +82,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			// Define plugin constants
 			$this->define_constants();
-			// Include required files
-			$this->includes();
 
 			add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
 
@@ -106,10 +90,15 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-			add_action( 'admin_init', array( $this, 'editor_styles' ) );
+			add_action( 'after_setup_theme', array( $this, 'editor_styles' ) );
 
 			register_activation_hook( __FILE__, array( $this, 'shaplatools_activation' ) );
 			register_deactivation_hook( __FILE__, array( $this, 'shaplatools_deactivation' ) );
+
+			// Include required files
+			$this->includes();
+
+			add_action( 'init', array( &$this, 'init' ), 1 );
 
 			do_action( 'shaplatools_loaded' );
 		}
@@ -160,100 +149,48 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			}
 		}
 
+		public function init() {
+			$theme_supports = get_theme_support( 'shaplatools' );
+
+			if ( false === $theme_supports ) {
+				return;
+			}
+
+			if ( in_array( 'slider', $theme_supports[0] ) ) {
+				include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-slide.php';
+				include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-nivoslide-metabox.php';
+			}
+
+			if ( in_array( 'portfolio', $theme_supports[0] ) ) {
+				include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-portfolio.php';
+				include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-portfolio-metabox.php';
+			}
+		}
+
 		private function includes() {
 			// Include Libraries
-			include_once SHAPLATOOLS_INCLUDES . '/libraries/class-shaplatools-settings-api.php';
-			include_once SHAPLATOOLS_INCLUDES . '/libraries/class-shaplatools-meta-box.php';
+			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-settings-api.php';
+			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-meta-box.php';
+			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-twitter-api.php';
+			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-widget.php';
 
 			// Include plugin settings file
 			include_once SHAPLATOOLS_INCLUDES . '/settings/settings.php';
 
-			// Include Post Type files
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-slide.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-portfolio.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-feature.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-testimonial.php';
-			include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-team.php';
-
-			// Include Metabox files
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-nivoslide-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-portfolio-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-feature-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-team-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-testimonial-metabox.php';
-			include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-post-metabox.php';
-
 			// Include widgets
-			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-flickr.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-twitter.php';
+			include_once SHAPLATOOLS_WIDGETS . '/widget-flickr.php';
+			include_once SHAPLATOOLS_WIDGETS . '/widget-dribbble.php';
+			include_once SHAPLATOOLS_WIDGETS . '/widget-instagram.php';
 			include_once SHAPLATOOLS_WIDGETS . '/widget-fb_like_box.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-contact.php';
-			include_once SHAPLATOOLS_WIDGETS . '/widget-testimonials.php';
 
 			// Include shortcode files
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-post-types-shortcode.php';
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-grid-shortcode.php';
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-components-shortcode.php';
 
-			$this->includes_post_types();
-			$this->include_meta_boxes();
 			$this->include_shortcodes();
 			$this->include_tinymce_shortcodes();
-			$this->include_other_files();
-		}
-
-		private function includes_post_types() {
-			$options = $this->shaplatools_options();
-
-			if ( $options['slide_post_type'] ) {
-				new ShaplaTools_Slide();
-			}
-
-			if ( $options['portfolio_post_type'] ) {
-				new ShaplaTools_Portfolio();
-			}
-
-			if ( $options['feature_post_type'] ) {
-				new ShaplaTools_Feature();
-			}
-
-			if ( $options['testimonial_post_type'] ) {
-				new ShaplaTools_Testimonial();
-			}
-
-			if ( $options['team_post_type'] ) {
-				new ShaplaTools_Team();
-			}
-		}
-
-		public function include_meta_boxes() {
-			$options = $this->shaplatools_options();
-
-			if ( $options['slide_meta_box'] ) {
-				new ShaplaTools_NivoSlide_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['portfolio_meta_box'] ) {
-				new ShaplaTools_Portfolio_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['feature_meta_box'] ) {
-				new ShaplaTools_Feature_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['team_meta_box'] ) {
-				new ShaplaTools_Team_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['testimonial_meta_box'] ) {
-				new ShaplaTools_Testimonial_Metabox( $this->plugin_name, $this->plugin_url() );
-			}
-
-			if ( $options['post_meta_box'] ) {
-				new ShaplaTools_Post_Metabox( $this->plugin_name );
-			}
 		}
 
 		public function include_shortcodes() {
@@ -272,81 +209,13 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			}
 		}
 
-		public function include_other_files() {
-			include_once SHAPLATOOLS_INCLUDES . '/class-shaplatools-retina-2x.php';
-			include_once SHAPLATOOLS_INCLUDES . '/class-shaplatools-typeahead-search.php';
-
-			if ( $this->shaplatools_options()['retina_image'] ) {
-				new ShaplaTools_Retina_2x();
-			}
-
-			new ShaplaTools_Typeahead_Search( $this->plugin_url(), $this->options );
-		}
-
 		/**
-		 * Plugin path.
+		 * Whether the passed content contains the specified shortcode
 		 *
-		 * @return string Plugin path
+		 * @param string $shortcode
+		 *
+		 * @return bool
 		 */
-		private function plugin_path() {
-			if ( $this->plugin_path ) {
-				return $this->plugin_path;
-			}
-
-			return $this->plugin_path = untrailingslashit( plugin_dir_path( __FILE__ ) );
-		}
-
-		/**
-		 * Plugin url.
-		 *
-		 * @return string Plugin url
-		 */
-		private function plugin_url() {
-			if ( $this->plugin_url ) {
-				return $this->plugin_url;
-			}
-
-			return $this->plugin_url = untrailingslashit( plugins_url( '/', __FILE__ ) );
-		}
-
-		private function shaplatools_options() {
-			$options = array(
-				'google_analytics_id'   => $this->get_option( 'google_analytics' ),
-				'google_map_api_key'    => $this->get_option( 'google_map_api_key' ),
-				'typeahead_search'      => $this->get_option( 'typeahead_search' ),
-				'retina_image'          => in_array( 'retina_image', $this->get_option( 'shapla_retina_graphics' ) ),
-				'retina_js'             => in_array( 'retina_js', $this->get_option( 'shapla_retina_graphics' ) ),
-				'slide_post_type'       => in_array( 'slide_post_type', $this->get_option( 'shapla_slide' ) ),
-				'slide_meta_box'        => in_array( 'slide_metabox', $this->get_option( 'shapla_slide' ) ),
-				'portfolio_post_type'   => in_array( 'portfolio_post_type', $this->get_option( 'shapla_portfolio' ) ),
-				'portfolio_meta_box'    => in_array( 'portfolio_metabox', $this->get_option( 'shapla_portfolio' ) ),
-				'team_post_type'        => in_array( 'team_post_type', $this->get_option( 'shapla_team' ) ),
-				'team_meta_box'         => in_array( 'team_metabox', $this->get_option( 'shapla_team' ) ),
-				'testimonial_post_type' => in_array( 'testimonial_post_type', $this->get_option( 'shapla_testimonial' ) ),
-				'testimonial_meta_box'  => in_array( 'testimonial_metabox', $this->get_option( 'shapla_testimonial' ) ),
-				'feature_post_type'     => in_array( 'feature_post_type', $this->get_option( 'shapla_feature' ) ),
-				'feature_meta_box'      => in_array( 'feature_metabox', $this->get_option( 'shapla_feature' ) ),
-				'post_meta_box'         => false,
-			);
-
-			return apply_filters( 'shaplatools_options', $options );
-		}
-
-		/**
-		 * Get option by option name
-		 *
-		 * @param  string $option_name
-		 *
-		 * @return mixed
-		 */
-		private function get_option( $option_name ) {
-			if ( isset( $this->options[ $option_name ] ) ) {
-				return $this->options[ $option_name ];
-			}
-
-			return '';
-		}
-
 		public function has_shortcode( $shortcode ) {
 			global $post;
 			if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode ) ) {
@@ -357,33 +226,19 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		}
 
 		public function enqueue_scripts() {
-			$options = $this->shaplatools_options();
-
-			wp_enqueue_style( 'font-awesome', $this->plugin_url . '/assets/css/font-awesome.min.css', '', '4.7.0', 'all' );
-			wp_enqueue_style( 'shaplatools', $this->plugin_url . '/assets/css/style.css', '', $this->version, 'all' );
-			wp_register_script( 'shapla-shortcode-scripts', $this->plugin_url . '/assets/js/shapla-shortcode-scripts.js', array(
+			wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/css/font-awesome.min.css', '', '4.7.0', 'all' );
+			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', '', $this->version, 'all' );
+			wp_register_script( 'shapla-shortcode-scripts', SHAPLATOOLS_ASSETS . '/js/shapla-shortcode-scripts.js', array(
 				'jquery',
 				'jquery-ui-accordion',
 				'jquery-ui-tabs'
 			), $this->version, true );
 
-			wp_register_script( 'retinajs', $this->plugin_url . '/assets/library/retina.min.js', array(), '2.1.0', true );
-			wp_register_script( 'owl-carousel', $this->plugin_url . '/assets/library/owl.carousel.min.js', array( 'jquery' ), '2.0.0', true );
-			wp_register_script( 'nivo-slider', $this->plugin_url . '/assets/library/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
-			wp_register_script( 'typeahead', $this->plugin_url . '/assets/library/typeahead.min.js', array( 'jquery' ), $this->version, true );
-			wp_register_script( 'shuffle', $this->plugin_url . '/assets/library/shuffle.min.js', array( 'jquery' ), $this->version, true );
-
-			if ( $options['retina_js'] ) {
-				wp_enqueue_script( 'retinajs' );
-			}
-
-			if ( $options['typeahead_search'] == 'default_search' || $options['typeahead_search'] == 'product_search' ) {
-				wp_enqueue_script( 'typeahead' );
-			}
-
-			if ( $this->has_shortcode( 'shapla_testimonial' ) || $this->has_shortcode( 'shapla_team' ) ) {
-				wp_enqueue_script( 'owl-carousel' );
-			}
+			wp_register_script( 'retinajs', SHAPLATOOLS_ASSETS . '/library/retina.min.js', array(), '2.1.0', true );
+			wp_register_script( 'owl-carousel', SHAPLATOOLS_ASSETS . '/library/owl.carousel.min.js', array( 'jquery' ), '2.0.0', true );
+			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/library/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
+			wp_register_script( 'typeahead', SHAPLATOOLS_ASSETS . '/library/typeahead.min.js', array( 'jquery' ), $this->version, true );
+			wp_register_script( 'shuffle', SHAPLATOOLS_ASSETS . '/library/shuffle.min.js', array( 'jquery' ), $this->version, true );
 
 			if ( $this->has_shortcode( 'shapla_slide' ) ) {
 				wp_enqueue_script( 'nivo-slider' );
@@ -406,8 +261,8 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			wp_enqueue_script( 'jquery-ui-datepicker' );
 			wp_enqueue_media();
 
-			wp_enqueue_style( 'shaplatools-admin', $this->plugin_url . '/assets/css/admin-style.css', array(), $this->version, 'all' );
-			wp_enqueue_script( 'shaplatools-media-gallery', $this->plugin_url() . '/assets/js/admin-media-gallery.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_style( 'shaplatools-admin', SHAPLATOOLS_ASSETS . '/css/admin-style.css', array(), $this->version, 'all' );
+			wp_enqueue_script( 'shaplatools-media-gallery', SHAPLATOOLS_ASSETS . '/js/admin-media-gallery.js', array( 'jquery' ), $this->version, true );
 			wp_localize_script( 'jquery', 'shaplatools', array(
 				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( 'shaplatools_nonce' ),
@@ -417,13 +272,13 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 
 			if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 
-				wp_enqueue_style( 'font-awesome', $this->plugin_url . '/assets/css/font-awesome.min.css', '', '4.7.0', 'all' );
+				wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/css/font-awesome.min.css', '', '4.7.0', 'all' );
 
-				wp_register_script( 'font-awesome-icons-list', $this->plugin_url . '/assets/js/icons.js', array(), false, true );
+				wp_register_script( 'font-awesome-icons-list', SHAPLATOOLS_ASSETS . '/js/icons.js', array(), false, true );
 				wp_enqueue_script( 'font-awesome-icons-list' );
 
 				wp_enqueue_script( 'jquery-ui-sortable' );
-				wp_enqueue_script( 'shapla-shortcode-plugins', $this->plugin_url . '/assets/js/shortcodes_plugins.js', array( 'font-awesome-icons-list' ), $this->version, true );
+				wp_enqueue_script( 'shapla-shortcode-plugins', SHAPLATOOLS_ASSETS . '/js/shortcodes_plugins.js', array( 'font-awesome-icons-list' ), $this->version, true );
 
 				wp_localize_script( 'jquery', 'ShaplaShortcodes', array(
 					'plugin_folder'           => WP_PLUGIN_URL . '/shortcodes',
@@ -433,9 +288,14 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 			}
 		}
 
+		/**
+		 * Editor styles to hook in WordPress editor.
+		 *
+		 * @return void
+		 */
 		public function editor_styles() {
-			$shortcode_styles = $this->plugin_url() . '/assets/css/editor-style.css';
-			add_editor_style( $shortcode_styles );
+			$editor_style = SHAPLATOOLS_ASSETS . '/css/editor-style.css';
+			add_editor_style( $editor_style );
 		}
 
 		/**
@@ -459,13 +319,6 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on activation
 		 */
 		public function shaplatools_activation() {
-			ShaplaTools_Slide::post_type();
-			ShaplaTools_Portfolio::post_type();
-			ShaplaTools_Portfolio::taxonomy();
-			ShaplaTools_Team::post_type();
-			ShaplaTools_Feature::post_type();
-			ShaplaTools_Testimonial::post_type();
-
 			do_action( 'shaplatools_activation' );
 			flush_rewrite_rules();
 		}
@@ -474,19 +327,11 @@ if ( ! class_exists( 'ShaplaTools' ) ):
 		 * Flush the rewrite rules on deactivation
 		 */
 		public function shaplatools_deactivation() {
-			ShaplaTools_Slide::post_type();
-			ShaplaTools_Portfolio::post_type();
-			ShaplaTools_Portfolio::taxonomy();
-			ShaplaTools_Team::post_type();
-			ShaplaTools_Feature::post_type();
-			ShaplaTools_Testimonial::post_type();
-
 			do_action( 'shaplatools_deactivation' );
 			flush_rewrite_rules();
 		}
 	}
-
-endif;
+}
 
 /**
  * Begins execution of the plugin.

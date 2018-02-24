@@ -1,8 +1,21 @@
 <?php
 
-if ( ! class_exists( 'ShaplaTools_Slide' ) ):
+if ( ! class_exists( 'ShaplaTools_Slide' ) ) {
 
 	class ShaplaTools_Slide {
+
+		private static $instance = null;
+
+		/**
+		 * @return ShaplaTools_Slide
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
 
 		/**
 		 * The unique identifier of this plugin.
@@ -13,9 +26,7 @@ if ( ! class_exists( 'ShaplaTools_Slide' ) ):
 		 */
 
 		public function __construct() {
-			if ( is_admin() ) {
-				add_action( 'init', array( $this, 'post_type' ) );
-			}
+			add_action( 'init', array( $this, 'post_type' ) );
 		}
 
 		/**
@@ -65,5 +76,6 @@ if ( ! class_exists( 'ShaplaTools_Slide' ) ):
 			register_post_type( 'slide', $args );
 		}
 	}
+}
 
-endif;
+ShaplaTools_Slide::instance();

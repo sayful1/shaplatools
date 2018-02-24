@@ -1,8 +1,22 @@
 <?php
 
-if ( ! class_exists( 'ShaplaTools_Portfolio' ) ):
+if ( ! class_exists( 'ShaplaTools_Portfolio' ) ) {
 
 	class ShaplaTools_Portfolio {
+
+		private static $instance = null;
+
+		/**
+		 * @return ShaplaTools_Portfolio
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
 		public function __construct() {
 			add_action( 'init', array( $this, 'post_type' ) );
 			add_action( 'init', array( $this, 'taxonomy' ) );
@@ -67,5 +81,6 @@ if ( ! class_exists( 'ShaplaTools_Portfolio' ) ):
 			) );
 		}
 	}
+}
 
-endif;
+ShaplaTools_Portfolio::instance();

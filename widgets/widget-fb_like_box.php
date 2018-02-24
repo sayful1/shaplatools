@@ -184,7 +184,11 @@ class Shapla_FB_Like_Box extends WP_Widget {
 		<?php
 	}
 
-} // class Shapla_FB_Like_Box
+	public static function register() {
+		register_widget( __CLASS__ );
+	}
+
+}
 
 // Register the Widget
-add_action( 'widgets_init', create_function( '', 'register_widget("Shapla_FB_Like_Box");' ) );
+add_action( 'widgets_init', array( 'Shapla_FB_Like_Box', 'register' ) );
