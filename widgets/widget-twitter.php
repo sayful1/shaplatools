@@ -1,150 +1,101 @@
 <?php
 
-add_action( 'widgets_init', function () {
-	register_widget( "Shapla_Tweet_Widget" );
-} );
-
-class Shapla_Tweet_Widget extends WP_Widget {
-
-	private $widget_id;
-	private $text_domain;
+class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 
 	/**
 	 * Register widget with WordPress.
 	 */
 	public function __construct() {
-
-		$this->text_domain = 'shaplatools';
-		$this->widget_id   = 'shapla-latest-tweets';
-		$widget_name       = __( 'Shapla Latest Tweets', 'shaplatools' );
-		$widget_options    = array(
-			'classname'   => 'widget_shapla_tweets',
-			'description' => __( 'Displays your latest tweets from Twitter.', 'shaplatools' ),
+		$this->widget_id          = 'shapla-latest-tweets';
+		$this->widget_cssclass    = 'widget_shapla_tweets';
+		$this->widget_description = __( 'Display a list of a user&rsquo;s latest tweets.', 'shaplatools' );
+		$this->widget_name        = __( 'Shapla Twitter Feed', 'shaplatools' );
+		$this->settings           = array(
+			'description'               => array(
+				'type' => 'description',
+				'std'  => sprintf(
+					__( 'Don\'t know your Consumer Key, Consumer Secret, Access Token and Access Token Secret? %sClick here%s', 'shaplatools' ),
+					'<a target="_blank" href="https://apps.twitter.com/">',
+					'</a>'
+				),
+			),
+			'title'                     => array(
+				'type'  => 'text',
+				'std'   => 'Tweets',
+				'label' => __( 'Title:', 'shaplatools' ),
+			),
+			'twitter_username'          => array(
+				'type'  => 'text',
+				'std'   => null,
+				'label' => __( 'Twitter Username:', 'shaplatools' ),
+			),
+			'update_count'              => array(
+				'type'  => 'number',
+				'std'   => 5,
+				'label' => __( 'Number of Tweets to show:', 'shaplatools' ),
+				'step'  => 1,
+				'min'   => 1,
+				'max'   => 50,
+			),
+			'twitter_duration'          => array(
+				'type'    => 'select',
+				'std'     => '60',
+				'label'   => __( 'Load new Tweets every:', 'shaplatools' ),
+				'options' => $this->twitter_duration(),
+			),
+			'follow_link_show'          => array(
+				'type'  => 'checkbox',
+				'std'   => false,
+				'label' => __( 'Include link to twitter page?', 'shaplatools' ),
+			),
+			'follow_link_text'          => array(
+				'type'  => 'text',
+				'std'   => 'Follow on twitter',
+				'label' => __( 'Link Text:', 'shaplatools' ),
+			),
+			'consumer_key'              => array(
+				'type'  => 'text',
+				'std'   => '',
+				'label' => __( 'Consumer Key:', 'shaplatools' ),
+			),
+			'consumer_secret'           => array(
+				'type'  => 'text',
+				'std'   => '',
+				'label' => __( 'Consumer Secret:', 'shaplatools' ),
+			),
+			'oauth_access_token'        => array(
+				'type'  => 'text',
+				'std'   => '',
+				'label' => __( 'Access Token:', 'shaplatools' ),
+			),
+			'oauth_access_token_secret' => array(
+				'type'  => 'text',
+				'std'   => '',
+				'label' => __( 'Access Token Secret:', 'shaplatools' ),
+			),
 		);
 
-		parent::__construct( $this->widget_id, $widget_name, $widget_options );
+		parent::__construct();
 
-		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
-	}
-
-	function get_cached_widget( $args ) {
-		$cache = wp_cache_get( $this->widget_id, 'widget' );
-
-		if ( ! is_array( $cache ) ) {
-			$cache = array();
-		}
-
-		if ( isset( $cache[ $args['widget_id'] ] ) ) {
-			echo $cache[ $args['widget_id'] ];
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public function cache_widget( $args, $content ) {
-		$cache[ $args['widget_id'] ] = $content;
-
-		wp_cache_set( $this->widget_id, $cache, 'widget' );
-	}
-
-	public function flush_widget_cache() {
-		wp_cache_delete( $this->widget_id, 'widget' );
+		add_action( 'save_post', array( $this, 'flush_widget_transient' ) );
+		add_action( 'deleted_post', array( $this, 'flush_widget_transient' ) );
+		add_action( 'switch_theme', array( $this, 'flush_widget_transient' ) );
 	}
 
 	/**
-	 * Making request to Twitter API
+	 * Delete transient
 	 */
-	public function twitter_timeline( $username, $limit, $oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret ) {
-		require_once 'TwitterWP.php';
-
-		$app       = array(
-			'consumer_key'        => $consumer_key,
-			'consumer_secret'     => $consumer_secret,
-			'access_token'        => $oauth_access_token,
-			'access_token_secret' => $oauth_access_token_secret,
-		);
-		$TwitterWP = TwitterWP::start( $app );
-
-		// bail here if the user doesn't exist
-		if ( ! $TwitterWP->user_exists( $username ) ) {
-			return;
-		}
-
-		$query = $TwitterWP->get_tweets( $username, $limit );
-
-		// $timeline = json_decode($query);
-
-		return $query;
+	public function flush_widget_transient() {
+		delete_transient( $this->widget_id );
 	}
 
-	/**
-	 * To make the tweet time more user-friendly
-	 */
-	public function tweet_time( $time ) {
-		// Get current timestamp.
-		$now = strtotime( 'now' );
+	public function update( $new_instance, $old_instance ) {
 
-		// Get timestamp when tweet created.
-		$created = strtotime( $time );
+		parent::update( $new_instance, $old_instance );
 
-		// Get difference.
-		$difference = $now - $created;
+		$this->flush_widget_transient();
 
-		// Calculate different time values.
-		$minute = 60;
-		$hour   = $minute * 60;
-		$day    = $hour * 24;
-		$week   = $day * 7;
-
-		if ( is_numeric( $difference ) && $difference > 0 ) {
-
-			// If less than 3 seconds.
-			if ( $difference < 3 ) {
-				return __( 'right now', 'shaplatools' );
-			}
-
-			// If less than minute.
-			if ( $difference < $minute ) {
-				return floor( $difference ) . ' ' . __( 'seconds ago', 'shaplatools' );;
-			}
-
-			// If less than 2 minutes.
-			if ( $difference < $minute * 2 ) {
-				return __( 'about 1 minute ago', 'shaplatools' );
-			}
-
-			// If less than hour.
-			if ( $difference < $hour ) {
-				return floor( $difference / $minute ) . ' ' . __( 'minutes ago', 'shaplatools' );
-			}
-
-			// If less than 2 hours.
-			if ( $difference < $hour * 2 ) {
-				return __( 'about 1 hour ago', 'shaplatools' );
-			}
-
-			// If less than day.
-			if ( $difference < $day ) {
-				return floor( $difference / $hour ) . ' ' . __( 'hours ago', 'shaplatools' );
-			}
-
-			// If more than day, but less than 2 days.
-			if ( $difference > $day && $difference < $day * 2 ) {
-				return __( 'yesterday', 'shaplatools' );;
-			}
-
-			// If less than year.
-			if ( $difference < $day * 365 ) {
-				return floor( $difference / $day ) . ' ' . __( 'days ago', 'shaplatools' );
-			}
-
-			// Else return more than a year.
-			return __( 'over a year ago', 'shaplatools' );
-		}
+		return $new_instance;
 	}
 
 	/**
@@ -156,53 +107,57 @@ class Shapla_Tweet_Widget extends WP_Widget {
 	 * @param array $instance Saved values from database.
 	 */
 	public function widget( $args, $instance ) {
-
 		if ( $this->get_cached_widget( $args ) ) {
 			return;
 		}
 
 		ob_start();
 
-		$title                     = apply_filters( 'widget_title', $instance['title'] );
-		$username                  = $instance['twitter_username'];
-		$limit                     = ( ! empty( $instance['update_count'] ) ) ? $instance['update_count'] : 5;
-		$oauth_access_token        = $instance['oauth_access_token'];
-		$oauth_access_token_secret = $instance['oauth_access_token_secret'];
-		$consumer_key              = $instance['consumer_key'];
-		$consumer_secret           = $instance['consumer_secret'];
-
 		echo $args['before_widget'];
 
-		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+		if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title'];
 		}
 
-		if ( ! empty( $username ) && ! empty( $oauth_access_token ) && ! empty( $oauth_access_token_secret ) && ! empty( $consumer_key ) && ! empty( $consumer_secret ) ) {
-			// Get the tweets.
-			$timelines = $this->twitter_timeline( $username, $limit, $oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret );
+		// retrieve cache contents on success
+		$settings         = array(
+			'oauth_access_token'        => isset( $instance['oauth_access_token'] ) ? $instance['oauth_access_token'] : null,
+			'oauth_access_token_secret' => isset( $instance['oauth_access_token_secret'] ) ? $instance['oauth_access_token_secret'] : null,
+			'consumer_key'              => isset( $instance['consumer_key'] ) ? $instance['consumer_key'] : null,
+			'consumer_secret'           => isset( $instance['consumer_secret'] ) ? $instance['consumer_secret'] : null,
+		);
+		$limit            = isset( $instance['update_count'] ) ? intval( $instance['update_count'] ) : 5;
+		$twitter_duration = isset( $instance['twitter_duration'] ) ? intval( $instance['twitter_duration'] ) : 15;
+		$username         = $instance['twitter_username'];
 
-			if ( $timelines ) {
+		// Get the tweets.
+		$tweets = $this->twitter_timeline( $settings, $limit, $twitter_duration );
 
-				// Add links to URL and username mention in tweets.
-				$patterns = array(
-					'@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@',
-					'/@([A-Za-z0-9_]{1,15})/'
-				);
-				$replace  = array( '<a href="$1">$1</a>', '<a href="http://twitter.com/$1">@$1</a>' );
 
-				echo '<ul class="shapla-twitter">';
-				foreach ( $timelines as $timeline ) {
-					$result = preg_replace( $patterns, $replace, $timeline->text );
+		if ( ! empty( $tweets ) ) {
+			// Add links to URL and username mention in tweets.
+			$patterns = array(
+				'@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@',
+				'/@([A-Za-z0-9_]{1,15})/'
+			);
+			$replace  = array( '<a href="$1">$1</a>', '<a href="http://twitter.com/$1">@$1</a>' );
 
-					echo '<li>';
-					echo $result;
-					echo '<span>' . $this->tweet_time( $timeline->created_at ) . '</span>';
-					echo '</li>';
-				}
-				echo '</ul>';
+			echo '<ul class="shapla-tweets">';
+			foreach ( $tweets as $tweet ) {
+				$text       = preg_replace( $patterns, $replace, $tweet['text'] );
+				$created    = strtotime( $tweet['time'] );
+				$human_time = human_time_diff( $created ) . esc_html__( ' ago', 'shaplatools' );
 
-			} else {
-				_e( 'Error fetching feeds. Please verify the Twitter settings in the widget.', 'shaplatools' );
+				echo '<li>' . $text . '<span>' . $human_time . '</span></li>';
+			}
+			echo '</ul>';
+
+			if ( $instance['follow_link_show'] && $instance['follow_link_text'] && $username ) {
+				echo '<a href="' . esc_url( 'https://twitter.com/' . $username ) . '" class="shapla-button twitter-follow-button" target="_blank">' . esc_html( $instance['follow_link_text'] ) . '</a>';
+			}
+		} else {
+			if ( current_user_can( 'manage_options' ) ) {
+				esc_html_e( 'Error fetching twitter feeds. Please verify the Twitter settings in the widget.', 'shapla' );
 			}
 		}
 
@@ -216,116 +171,60 @@ class Shapla_Tweet_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Back-end widget form.
+	 * transient duration
 	 *
-	 * @see WP_Widget::form()
-	 *
-	 * @param array $instance Previously saved values from database.
+	 * @return array
 	 */
-	public function form( $instance ) {
-		$title                     = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Latest Tweets', 'shaplatools' );
-		$twitter_username          = ! empty( $instance['twitter_username'] ) ? $instance['twitter_username'] : '';
-		$update_count              = ! empty( $instance['update_count'] ) ? $instance['update_count'] : '';
-		$oauth_access_token        = ! empty( $instance['oauth_access_token'] ) ? $instance['oauth_access_token'] : '';
-		$oauth_access_token_secret = ! empty( $instance['oauth_access_token_secret'] ) ? $instance['oauth_access_token_secret'] : '';
-		$consumer_key              = ! empty( $instance['consumer_key'] ) ? $instance['consumer_key'] : '';
-		$consumer_secret           = ! empty( $instance['consumer_secret'] ) ? $instance['consumer_secret'] : '';
-		?>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">
-				<?php _e( 'Title', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>" type="text"
-                   value="<?php if ( isset( $title ) ) {
-				       echo esc_attr( $title );
-			       } ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'twitter_username' ); ?>">
-				<?php _e( 'Twitter Username (without @)', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'twitter_username' ); ?>"
-                   name="<?php echo $this->get_field_name( 'twitter_username' ); ?>" type="text"
-                   value="<?php if ( isset( $twitter_username ) ) {
-				       echo esc_attr( $twitter_username );
-			       } ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'update_count' ); ?>">
-				<?php _e( 'Number of Tweets to Display', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'update_count' ); ?>"
-                   name="<?php echo $this->get_field_name( 'update_count' ); ?>" type="number"
-                   value="<?php if ( isset( $update_count ) ) {
-				       echo esc_attr( $update_count );
-			       } ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'consumer_key' ); ?>">
-				<?php _e( 'Consumer Key', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'consumer_key' ); ?>"
-                   name="<?php echo $this->get_field_name( 'consumer_key' ); ?>" type="text"
-                   value="<?php if ( isset( $consumer_key ) ) {
-				       echo esc_attr( $consumer_key );
-			       } ?>"/>
-            <small><?php _e( 'Don\'t know your Consumer Key, Consumer Secret, Access Token and Access Token Secret? <a target="_blank" href="http://sayful1.wordpress.com/2014/06/14/how-to-generate-twitter-api-key-api-secret-access-token-access-token-secret/">Click here to get help.</a>', 'shaplatools' ); ?></small>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'consumer_secret' ); ?>">
-				<?php _e( 'Consumer Secret', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'consumer_secret' ); ?>"
-                   name="<?php echo $this->get_field_name( 'consumer_secret' ); ?>" type="text"
-                   value="<?php if ( isset( $consumer_secret ) ) {
-				       echo esc_attr( $consumer_secret );
-			       } ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'oauth_access_token' ); ?>">
-				<?php _e( 'Access Token', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'oauth_access_token' ); ?>"
-                   name="<?php echo $this->get_field_name( 'oauth_access_token' ); ?>" type="text"
-                   value="<?php if ( isset( $oauth_access_token ) ) {
-				       echo esc_attr( $oauth_access_token );
-			       } ?>"/>
-        </p>
-        <p>
-            <label for="<?php echo $this->get_field_id( 'oauth_access_token_secret' ); ?>">
-				<?php _e( 'Access Token Secret', 'shaplatools' ); ?>
-            </label>
-            <input class="widefat" id="<?php echo $this->get_field_id( 'oauth_access_token_secret' ); ?>"
-                   name="<?php echo $this->get_field_name( 'oauth_access_token_secret' ); ?>" type="text"
-                   value="<?php if ( isset( $oauth_access_token_secret ) ) {
-				       echo esc_attr( $oauth_access_token_secret );
-			       } ?>"/>
-        </p>
-		<?php
+	private function twitter_duration() {
+		return array(
+			'5'    => __( '5 Minutes', 'shaplatools' ),
+			'15'   => __( '15 Minutes', 'shaplatools' ),
+			'30'   => __( '30 Minutes', 'shaplatools' ),
+			'60'   => __( '1 Hour', 'shaplatools' ),
+			'120'  => __( '2 Hours', 'shaplatools' ),
+			'240'  => __( '4 Hours', 'shaplatools' ),
+			'720'  => __( '12 Hours', 'shaplatools' ),
+			'1440' => __( '24 Hours', 'shaplatools' ),
+		);
 	}
 
 	/**
-	 * Sanitize widget form values as they are saved.
+	 * Making request to Twitter API
 	 *
-	 * @see WP_Widget::update()
+	 * @param array $settings
+	 * @param int $limit
+	 * @param int $twitter_duration
 	 *
-	 * @param array $new_instance Values just sent to be saved.
-	 * @param array $old_instance Previously saved values from database.
-	 *
-	 * @return array Updated safe values to be saved.
+	 * @return array|mixed
 	 */
-	public function update( $new_instance, $old_instance ) {
-		$instance = array();
+	private function twitter_timeline( $settings, $limit = 5, $twitter_duration = 15 ) {
+		// Do we have this information in our transients already?
+		$tweets = get_transient( $this->widget_id );
 
-		$instance['title']                     = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
-		$instance['twitter_username']          = ( ! empty( $new_instance['twitter_username'] ) ) ? strip_tags( $new_instance['twitter_username'] ) : '';
-		$instance['update_count']              = ( ! empty( $new_instance['update_count'] ) ) ? strip_tags( $new_instance['update_count'] ) : '';
-		$instance['oauth_access_token']        = ( ! empty( $new_instance['oauth_access_token'] ) ) ? strip_tags( $new_instance['oauth_access_token'] ) : '';
-		$instance['oauth_access_token_secret'] = ( ! empty( $new_instance['oauth_access_token_secret'] ) ) ? strip_tags( $new_instance['oauth_access_token_secret'] ) : '';
-		$instance['consumer_key']              = ( ! empty( $new_instance['consumer_key'] ) ) ? strip_tags( $new_instance['consumer_key'] ) : '';
-		$instance['consumer_secret']           = ( ! empty( $new_instance['consumer_secret'] ) ) ? strip_tags( $new_instance['consumer_secret'] ) : '';
+		if ( false === $tweets ) {
+			$twitter_instance = new ShaplaTools_Twitter_API( $settings );
+			$timeline         = (array) $twitter_instance->user_timeline( $limit );
 
-		return $instance;
+			foreach ( $timeline as $tweet ) {
+				$tweets[] = array(
+					'text' => $tweet->text,
+					'time' => $tweet->created_at,
+				);
+			}
+
+			$transient_expiration = ( intval( $twitter_duration ) * MINUTE_IN_SECONDS );
+			set_transient( $this->widget_id, $tweets, $transient_expiration );
+		}
+
+		return $tweets;
+	}
+
+	/**
+	 * Register current class as widget
+	 */
+	public static function register() {
+		register_widget( __CLASS__ );
 	}
 }
+
+add_action( 'widgets_init', array( 'Shapla_Tweet_Widget', 'register' ) );
