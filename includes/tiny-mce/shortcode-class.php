@@ -2,21 +2,21 @@
 
 class Shapla_Shortcodes {
 
-	var	$conf;
-	var	$popup;
-	var	$params;
-	var	$shortcode;
+	var $conf;
+	var $popup;
+	var $params;
+	var $shortcode;
 	var $cparams;
 	var $cshortcode;
 	var $popup_title;
 	var $no_preview;
 	var $has_child;
-	var	$output;
-	var	$errors;
+	var $output;
+	var $errors;
 
 	function __construct( $popup ) {
 		if ( file_exists( dirname( __FILE__ ) . '/config.php' ) ) {
-			$this->conf = dirname( __FILE__ ) . '/config.php';
+			$this->conf  = dirname( __FILE__ ) . '/config.php';
 			$this->popup = $popup;
 
 			$this->format_shortcode();
@@ -41,19 +41,19 @@ class Shapla_Shortcodes {
 		global $shaplatools;
 		require_once( $this->conf );
 
-		if ( isset( $shapla_shortcodes[$this->popup]['child_shortcode'] ) ) {
+		if ( isset( $shapla_shortcodes[ $this->popup ]['child_shortcode'] ) ) {
 			$this->has_child = true;
 		}
 
 		if ( isset( $shapla_shortcodes ) && is_array( $shapla_shortcodes ) ) {
-			$this->params = $shapla_shortcodes[$this->popup]['params'];
-			$this->shortcode = $shapla_shortcodes[$this->popup]['shortcode'];
-			$this->popup_title = $shapla_shortcodes[$this->popup]['popup_title'];
+			$this->params      = $shapla_shortcodes[ $this->popup ]['params'];
+			$this->shortcode   = $shapla_shortcodes[ $this->popup ]['shortcode'];
+			$this->popup_title = $shapla_shortcodes[ $this->popup ]['popup_title'];
 
 			$this->append_output( "\n" . '<div id="_shapla_shortcode" class="hidden">' . $this->shortcode . '</div>' );
 			$this->append_output( "\n" . '<div id="_shapla_popup" class="hidden">' . $this->popup . '</div>' );
 
-			if ( isset( $shapla_shortcodes[$this->popup]['no_preview'] ) && $shapla_shortcodes[$this->popup]['no_preview'] ) {
+			if ( isset( $shapla_shortcodes[ $this->popup ]['no_preview'] ) && $shapla_shortcodes[ $this->popup ]['no_preview'] ) {
 				$this->no_preview = true;
 			}
 
@@ -62,31 +62,31 @@ class Shapla_Shortcodes {
 				// prefix the name and id with shapla_
 				$pkey = 'shapla_' . $pkey;
 
-				$row_start  = '<tbody>' . "\n";
+				$row_start = '<tbody>' . "\n";
 				$row_start .= '<tr class="form-row">' . "\n";
 				$row_start .= '<td class="label">' . $param['label'] . '</td>' . "\n";
 				$row_start .= '<td class="field">' . "\n";
 
-				$row_end	= '<span class="shapla-form-desc">' . $param['desc'] . '</span>' . "\n";
-				$row_end   .= '</td>' . "\n";
-				$row_end   .= '</tr>' . "\n";
-				$row_end   .= '</tbody>' . "\n";
+				$row_end = '<span class="shapla-form-desc">' . $param['desc'] . '</span>' . "\n";
+				$row_end .= '</td>' . "\n";
+				$row_end .= '</tr>' . "\n";
+				$row_end .= '</tbody>' . "\n";
 
 				switch ( $param['type'] ) {
 
 					case 'text' :
 						$output = $row_start;
-						$output .= '<input type="text" class="shapla-form-text shapla-input" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />'."\n";
+						$output .= '<input type="text" class="shapla-form-text shapla-input" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />' . "\n";
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'textarea' :
 						$output = $row_start;
-						$output .= '<textarea rows="8" cols="30" class="shapla-form-textarea shapla-input" name="' . $pkey . '" id="' . $pkey . '">' . $param['std'] . '</textarea>'."\n";
+						$output .= '<textarea rows="8" cols="30" class="shapla-form-textarea shapla-input" name="' . $pkey . '" id="' . $pkey . '">' . $param['std'] . '</textarea>' . "\n";
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'select' :
 						$output = $row_start;
@@ -94,16 +94,18 @@ class Shapla_Shortcodes {
 
 						ksort( $param['options'] );
 
-						if ( ! isset( $param['std'] ) ) $param['std'] = '';
+						if ( ! isset( $param['std'] ) ) {
+							$param['std'] = '';
+						}
 
 						foreach ( $param['options'] as $value => $option ) {
-							$output .= "<option value='$value' ". selected( $value, $param['std'], false ) .">$option</option>";
+							$output .= "<option value='$value' " . selected( $value, $param['std'], false ) . ">$option</option>";
 						}
 
 						$output .= '</select>' . "\n";
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'buttonset' :
 						$output = $row_start;
@@ -112,10 +114,12 @@ class Shapla_Shortcodes {
 
 						$output .= "<div class='shapla-control-buttonset'>";
 
-						if ( ! isset( $param['std'] ) ) $param['std'] = '';
+						if ( ! isset( $param['std'] ) ) {
+							$param['std'] = '';
+						}
 
 						foreach ( $param['options'] as $value => $option ) {
-							$output .= "<input data-key='$pkey' id='{$pkey}_{$value}' name='$pkey' type='radio' value='$value' ". checked( $value, $param['std'], false ) ." />";
+							$output .= "<input data-key='$pkey' id='{$pkey}_{$value}' name='$pkey' type='radio' value='$value' " . checked( $value, $param['std'], false ) . " />";
 							$output .= "<label data-key='$pkey' for='{$pkey}_{$value}'>$option</label>";
 						}
 
@@ -123,7 +127,7 @@ class Shapla_Shortcodes {
 						$output .= '<input class="shapla-input" type="hidden" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />';
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'checkbox' :
 						$output = $row_start;
@@ -132,7 +136,7 @@ class Shapla_Shortcodes {
 						$output .= ' ' . $param['checkbox_text'] . '</label>' . "\n";
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'image';
 						$output = $row_start;
@@ -140,7 +144,7 @@ class Shapla_Shortcodes {
 						$output .= '<input class="shapla-input" type="text" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />';
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'video';
 						$output = $row_start;
@@ -148,7 +152,7 @@ class Shapla_Shortcodes {
 						$output .= '<input class="shapla-input" type="text" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />';
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'icons':
 						$output = $row_start;
@@ -158,10 +162,10 @@ class Shapla_Shortcodes {
 						$output .= '<input class="shapla-input" type="hidden" name="' . $pkey . '" id="' . $pkey . '" value="' . $param['std'] . '" />';
 						$output .= $row_end;
 						$this->append_output( $output );
-					break;
+						break;
 
 					case 'widget_area':
-						if ( $shaplatools->is_scs_active() ){
+						if ( $shaplatools->is_scs_active() ) {
 							$output = $row_start;
 
 							$output .= '<p>Hello Custom Widget Area</p>';
@@ -171,18 +175,18 @@ class Shapla_Shortcodes {
 						} else {
 							return false;
 						}
-					break;
+						break;
 
 				}
 			}
 
-			if ( isset( $shapla_shortcodes[$this->popup]['child_shortcode'] ) ) {
-				$this->cparams = $shapla_shortcodes[$this->popup]['child_shortcode']['params'];
-				$this->cshortcode = $shapla_shortcodes[$this->popup]['child_shortcode']['shortcode'];
+			if ( isset( $shapla_shortcodes[ $this->popup ]['child_shortcode'] ) ) {
+				$this->cparams    = $shapla_shortcodes[ $this->popup ]['child_shortcode']['params'];
+				$this->cshortcode = $shapla_shortcodes[ $this->popup ]['child_shortcode']['shortcode'];
 
-				$prow_start  = '<tbody>' . "\n";
+				$prow_start = '<tbody>' . "\n";
 				$prow_start .= '<tr class="form-row has-child">' . "\n";
-				$prow_start .= '<td><a href="#" id="form-child-add" class="button-secondary">' . $shapla_shortcodes[$this->popup]['child_shortcode']['clone_button'] . '</a>' . "\n";
+				$prow_start .= '<td><a href="#" id="form-child-add" class="button-secondary">' . $shapla_shortcodes[ $this->popup ]['child_shortcode']['clone_button'] . '</a>' . "\n";
 				$prow_start .= '<div class="child-clone-rows">' . "\n";
 
 				// for js use
@@ -197,34 +201,34 @@ class Shapla_Shortcodes {
 				foreach ( $this->cparams as $cpkey => $cparam ) {
 					$cpkey = 'shapla_' . $cpkey;
 
-					$crow_start  = '<li class="child-clone-row-form-row">' . "\n";
+					$crow_start = '<li class="child-clone-row-form-row">' . "\n";
 					$crow_start .= '<div class="child-clone-row-label">' . "\n";
 					$crow_start .= '<label>' . $cparam['label'] . '</label>' . "\n";
 					$crow_start .= '</div>' . "\n";
 					$crow_start .= '<div class="child-clone-row-field">' . "\n";
 
-					$crow_end	  = '<span class="child-clone-row-desc">' . $cparam['desc'] . '</span>' . "\n";
-					$crow_end   .= '</div>' . "\n";
-					$crow_end   .= '</li>' . "\n";
+					$crow_end = '<span class="child-clone-row-desc">' . $cparam['desc'] . '</span>' . "\n";
+					$crow_end .= '</div>' . "\n";
+					$crow_end .= '</li>' . "\n";
 
 					switch ( $cparam['type'] ) {
 
 						case 'text':
-							$coutput  = $crow_start;
+							$coutput = $crow_start;
 							$coutput .= '<input type="text" class="shapla-form-text shapla-cinput" name="' . $cpkey . '" id="' . $cpkey . '" value="' . $cparam['std'] . '" />' . "\n";
 							$coutput .= $crow_end;
 							$this->append_output( $coutput );
-						break;
+							break;
 
 						case 'textarea':
-							$coutput  = $crow_start;
+							$coutput = $crow_start;
 							$coutput .= '<textarea rows="10" cols="30" name="' . $cpkey . '" id="' . $cpkey . '" class="shapla-form-textarea shapla-cinput">' . $cparam['std'] . '</textarea>' . "\n";
 							$coutput .= $crow_end;
 							$this->append_output( $coutput );
-						break;
+							break;
 
 						case 'select' :
-							$coutput  = $crow_start;
+							$coutput = $crow_start;
 							$coutput .= '<select name="' . $cpkey . '" id="' . $cpkey . '" class="shapla-form-select shapla-cinput">' . "\n";
 
 							foreach ( $cparam['options'] as $value => $option ) {
@@ -234,27 +238,27 @@ class Shapla_Shortcodes {
 							$coutput .= '</select>' . "\n";
 							$coutput .= $crow_end;
 							$this->append_output( $coutput );
-						break;
+							break;
 
 						case 'checkbox' :
-							$coutput  = $crow_start;
+							$coutput = $crow_start;
 							$coutput .= '<label for="' . $cpkey . '" class="shapla-form-checkbox">' . "\n";
 							$coutput .= '<input type="checkbox" class="shapla-cinput" name="' . $cpkey . '" id="' . $cpkey . '" ' . ( $cparam['std'] ? 'checked' : '' ) . ' />' . "\n";
 							$coutput .= ' ' . $cparam['checkbox_text'] . '</label>' . "\n";
 							$coutput .= $crow_end;
 							$this->append_output( $coutput );
-						break;
+							break;
 
 					}
 				}
 
-				$prow_end    = '</ul>' . "\n";
-				$prow_end   .= '<a href="#" class="child-clone-row-remove">Remove</a>' . "\n";
-				$prow_end   .= '</div>' . "\n";
-				$prow_end   .= '</div>' . "\n";
-				$prow_end   .= '</td>' . "\n";
-				$prow_end   .= '</tr>' . "\n";
-				$prow_end   .= '</tbody>' . "\n";
+				$prow_end = '</ul>' . "\n";
+				$prow_end .= '<a href="#" class="child-clone-row-remove">Remove</a>' . "\n";
+				$prow_end .= '</div>' . "\n";
+				$prow_end .= '</div>' . "\n";
+				$prow_end .= '</td>' . "\n";
+				$prow_end .= '</tr>' . "\n";
+				$prow_end .= '</tbody>' . "\n";
 
 				$this->append_output( $prow_end );
 			}
