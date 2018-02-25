@@ -9,9 +9,9 @@
  * @version    1.0.0 (Oct 28, 2016)
  *
  * @author        Sayful Islam <sayful.islam001@gmail.com>
- * @link        www.sayfulit.com Sayful IT
+ * @link        https://sayfulislam.com
  */
-if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
+if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 	class ShaplaTools_Settings_API {
 		/**
 		 * Settings options array
@@ -31,7 +31,9 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		/**
 		 * Settings tabs array
 		 */
-		private $tabs = array();
+		private $panels = array();
+
+		private $sections = array();
 
 		/**
 		 * Initialization or class
@@ -63,13 +65,143 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		}
 
 		/**
+		 * Add setting page tab
+		 *
+		 * This method is accessible outside the class for creating page tab
+		 *
+		 * @param array $panel
+		 *
+		 * @return WP_Error|$this
+		 */
+		public function add_panel( array $panel ) {
+			if ( ! isset( $panel['id'], $panel['title'] ) ) {
+				return new WP_Error( 'field_not_set', 'Required key is not set properly for creating tab.' );
+			}
+
+			$this->panels[] = $panel;
+
+			return $this;
+		}
+
+		/**
+		 * Add Setting page section
+		 *
+		 * @param array $section
+		 *
+		 * @return $this
+		 */
+		public function add_section( array $section ) {
+
+			$this->sections[] = $section;
+
+			return $this;
+		}
+
+		/**
+		 * Get sections for current panel
+		 *
+		 * @param string $panel
+		 *
+		 * @return array
+		 */
+		public function getSections( $panel = '' ) {
+			$sections = [];
+
+			foreach ( $this->sections as $section ) {
+				$sections[] = wp_parse_args( $section, [
+					'id'          => '',
+					'panel'       => '',
+					'title'       => '',
+					'description' => '',
+					'priority'    => 200,
+				] );
+			}
+
+			// Sort by priority
+			usort( $sections, function ( $a, $b ) {
+				return $a['priority'] - $b['priority'];
+			} );
+
+			if ( empty( $panel ) ) {
+				return $sections;
+			}
+
+			$current_panel = [];
+			foreach ( $sections as $section ) {
+				if ( $section['panel'] == $panel ) {
+					$current_panel[] = $section;
+				}
+			}
+
+			return $current_panel;
+		}
+
+		/**
+		 * @param string $section
+		 *
+		 * @return mixed
+		 */
+		public function getFields( $section = '' ) {
+			$fields = [];
+
+			foreach ( $this->fields as $field ) {
+				if ( ! isset( $field['priority'] ) ) {
+					$field['priority'] = 200;
+				}
+				$fields[] = $field;
+			}
+
+			// Sort by priority
+			usort( $fields, function ( $a, $b ) {
+				return $a['priority'] - $b['priority'];
+			} );
+
+			if ( empty( $section ) ) {
+				return $fields;
+			}
+
+			$current_field = [];
+			foreach ( $fields as $field ) {
+				if ( $field['section'] == $section ) {
+					$current_field[] = $field;
+				}
+			}
+
+			return $current_field;
+		}
+
+		/**
+		 * Filter settings fields by page tab
+		 *
+		 * @param  string $current_tab
+		 *
+		 * @return array
+		 */
+		public function getFieldsByPanel( $current_tab = null ) {
+
+			if ( ! $current_tab ) {
+				$current_tab = isset ( $_GET['tab'] ) ? $_GET['tab'] : $this->panels[0]['id'];
+			}
+
+			$newarray = array();
+			$sections = $this->getSections( $current_tab );
+
+			foreach ( $sections as $section ) {
+				$_section = $this->getFields( $section['id'] );
+				$newarray = array_merge( $newarray, $_section );
+			}
+
+			return $newarray;
+		}
+
+		/**
 		 * Add new settings field
 		 *
 		 * This method is accessible outside the class for creating settings field
 		 *
 		 * @param array $field
 		 *
-		 * @return WP_Error
+		 * @return WP_Error|$this
 		 */
 		public function add_field( array $field ) {
 			if ( ! isset( $field['id'], $field['name'] ) ) {
@@ -77,23 +209,8 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 			}
 
 			$this->fields[] = $field;
-		}
 
-		/**
-		 * Add setting page tab
-		 *
-		 * This method is accessible outside the class for creating page tab
-		 *
-		 * @param array $tab
-		 *
-		 * @return WP_Error
-		 */
-		public function add_tab( array $tab ) {
-			if ( ! isset( $tab['id'], $tab['title'] ) ) {
-				return new WP_Error( 'field_not_set', 'Required key is not set properly for creating tab.' );
-			}
-
-			$this->tabs[] = $tab;
+			return $this;
 		}
 
 		/**
@@ -118,23 +235,11 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 			$capability  = isset( $this->menu_fields['capability'] ) ? $this->menu_fields['capability'] : 'manage_options';
 			$parent_slug = isset( $this->menu_fields['parent_slug'] ) ? $this->menu_fields['parent_slug'] : null;
 
-			if ( $parent_slug ) {
-				add_submenu_page(
-					$parent_slug,
-					$page_title,
-					$menu_title,
-					$capability,
-					$menu_slug,
-					array( $this, 'page_content' )
-				);
+			if ( ! empty( $parent_slug ) ) {
+				add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug,
+					array( $this, 'page_content' ) );
 			} else {
-				add_menu_page(
-					$page_title,
-					$menu_title,
-					$capability,
-					$menu_slug,
-					array( $this, 'page_content' )
-				);
+				add_menu_page( $page_title, $menu_title, $capability, $menu_slug, array( $this, 'page_content' ) );
 			}
 		}
 
@@ -145,13 +250,11 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 			ob_start(); ?>
 
             <div class="wrap">
-                <h1><?php echo $this->menu_fields['page_title']; ?></h1>
 				<?php $this->option_page_tabs(); ?>
                 <form autocomplete="off" method="POST" action="options.php">
 					<?php
-					$this->get_options();
 					settings_fields( $this->menu_fields['option_name'] );
-					$this->setting_fields( $this->filter_fields_by_tab() );
+					$this->setting_fields();
 					submit_button();
 					?>
                 </form>
@@ -172,78 +275,45 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 
 		/**
 		 * Generate Option Page Tabs
-		 * @return string
+		 *
+		 * @return void
 		 */
 		private function option_page_tabs() {
-			if ( count( $this->tabs ) < 1 ) {
+			if ( count( $this->panels ) < 1 ) {
 				return;
 			}
 
-			$current_tab = isset ( $_GET['tab'] ) ? $_GET['tab'] : $this->tabs[0]['id'];
+			$current_tab = isset ( $_GET['tab'] ) ? $_GET['tab'] : $this->panels[0]['id'];
 			$page        = $this->menu_fields['menu_slug'];
 
-			echo '<h2 class="nav-tab-wrapper">';
-			foreach ( $this->tabs as $tab ) {
-				$class = ( $tab['id'] === $current_tab ) ? ' nav-tab-active' : '';
-				echo sprintf( '<a class="nav-tab%s" href="?page=%s&tab=%s">%s</a>', $class, $page, $tab['id'], $tab['title'] );
+			echo '<h2 class="nav-tab-wrapper wp-clearfix">';
+			foreach ( $this->panels as $tab ) {
+				$class = ( $tab['id'] === $current_tab ) ? 'nav-tab nav-tab-active' : 'nav-tab';
+				echo sprintf( '<a class="%s" href="?page=%s&tab=%s">%s</a>', $class, $page, $tab['id'], $tab['title'] );
 			}
 			echo '</h2>';
-		}
-
-		/**
-		 * Filter settings fields by page tab
-		 *
-		 * @param  string $current_tab
-		 *
-		 * @return array
-		 */
-		public function filter_fields_by_tab( $current_tab = null ) {
-
-			if ( count( $this->tabs ) < 1 ) {
-				return $this->fields;
-			}
-
-			if ( ! $current_tab ) {
-				$current_tab = isset ( $_GET['tab'] ) ? $_GET['tab'] : $this->tabs[0]['id'];
-			}
-
-			$newarray = array();
-			if ( is_array( $this->fields ) && count( $this->fields ) > 0 ) {
-				foreach ( array_keys( $this->fields ) as $key ) {
-					if ( isset( $this->fields[ $key ]['tab'] ) ) {
-						$temp[ $key ] = $this->fields[ $key ]['tab'];
-						if ( $temp[ $key ] == $current_tab ) {
-							$newarray[ $key ] = $this->fields[ $key ];
-						}
-					} else {
-						if ( $current_tab == $this->tabs[0]['id'] ) {
-							$newarray[ $key ] = $this->fields[ $key ];
-						}
-					}
-				}
-			}
-
-			return $newarray;
 		}
 
 		/**
 		 * Sanitize each setting field as needed
 		 *
 		 * @param array $input Contains all settings fields as array keys
+		 *
+		 * @return array
 		 */
 		public function sanitize_callback( array $input ) {
 			$output_array = array();
 			$fields       = $this->fields;
 			$options      = (array) get_option( $this->menu_fields['option_name'] );
 
-			if ( empty( array_filter( $options ) ) ) {
+			if ( empty( $options ) ) {
 				$options = (array) $this->get_options();
 			}
 
-			if ( count( $this->tabs ) > 0 ) {
+			if ( count( $this->panels ) > 0 ) {
 				parse_str( $_POST['_wp_http_referer'], $referrer );
-				$tab    = isset( $referrer['tab'] ) ? $referrer['tab'] : $this->tabs[0]['id'];
-				$fields = $this->filter_fields_by_tab( $tab );
+				$tab    = isset( $referrer['tab'] ) ? $referrer['tab'] : $this->panels[0]['id'];
+				$fields = $this->getFieldsByPanel( $tab );
 			}
 
 			// Loop through each setting being saved and
@@ -257,7 +327,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 				}
 			}
 
-			return array_merge( $options, $output_array );
+			return array_filter( array_merge( $options, $output_array ) );
 		}
 
 		/**
@@ -265,17 +335,14 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		 * @return array
 		 */
 		public function get_options() {
-			$options_array = array();
+			$defaults = array();
 
 			foreach ( $this->fields as $value ) {
-				$std_value                     = ( isset( $value['std'] ) ) ? $value['std'] : '';
-				$options_array[ $value['id'] ] = $std_value;
+				$std_value                = ( isset( $value['std'] ) ) ? $value['std'] : '';
+				$defaults[ $value['id'] ] = $std_value;
 			}
 
-			$options = wp_parse_args(
-				get_option( $this->menu_fields['option_name'] ),
-				$options_array
-			);
+			$options = wp_parse_args( get_option( $this->menu_fields['option_name'] ), $defaults );
 
 			return $this->options = $options;
 		}
@@ -283,7 +350,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		/**
 		 * Validate the option's value
 		 *
-		 * @param  array $input
+		 * @param  mixed $input
 		 * @param  string $validation_rule
 		 *
 		 * @return mixed
@@ -295,7 +362,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 					break;
 
 				case 'number':
-					return is_int( $input ) ? trim( $input ) : intval( $input );
+					return is_numeric( $input ) ? intval( $input ) : intval( $input );
 					break;
 
 				case 'url':
@@ -307,7 +374,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 					break;
 
 				case 'checkbox':
-					return ( $input == 1 ) ? 1 : 0;
+					return in_array( $input, array( 'on', 'yes', '1', 1 ) ) ? 1 : 0;
 					break;
 
 				case 'multi_checkbox':
@@ -351,39 +418,54 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 		/**
 		 * Settings fields
 		 *
-		 * @param  array $fields
 		 *
-		 * @return string
+		 * @return void
 		 */
-		private function setting_fields( $fields = null ) {
-			$fields = is_array( $fields ) ? $fields : $this->fields;
-
+		private function setting_fields() {
 			$table = "";
-			$table .= "<table class='form-table'>";
 
-			foreach ( $fields as $field ) {
-				$name  = sprintf( '%s[%s]', $this->menu_fields['option_name'], $field['id'] );
-				$type  = isset( $field['type'] ) ? $field['type'] : 'text';
-				$value = isset( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : '';
+			$current_tab = isset ( $_GET['tab'] ) ? $_GET['tab'] : $this->panels[0]['id'];
+			$panel       = $current_tab;
+			$sections    = $this->getSections( $panel );
 
-				$table .= "<tr>";
-				$table .= sprintf( '<th scope="row"><label for="%1$s">%2$s</label></th>', $field['id'], $field['name'] );
-				$table .= "<td>";
-
-				if ( method_exists( $this, $type ) ) {
-					$table .= $this->$type( $field, $name, $value );
-				} else {
-					$table .= $this->text( $field, $name, $value );
+			foreach ( $sections as $section ) {
+				if ( ! empty( $section['title'] ) ) {
+					$table .= '<h2 class="title">' . esc_html( $section['title'] ) . '</h2>';
+				}
+				if ( ! empty( $section['description'] ) ) {
+					$table .= '<p class="description">' . wp_filter_post_kses( $section['description'] ) . '</p>';
 				}
 
-				if ( ! empty( $field['desc'] ) ) {
-					$table .= sprintf( '<p class="description">%s</p>', $field['desc'] );
+				$fields = $this->getFields( $section['id'] );
+
+				$table .= "<table class='form-table'>";
+
+				foreach ( $fields as $field ) {
+					$name  = sprintf( '%s[%s]', $this->menu_fields['option_name'], $field['id'] );
+					$type  = isset( $field['type'] ) ? $field['type'] : 'text';
+					$value = isset( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : '';
+
+					$table .= "<tr>";
+					$table .= sprintf( '<th scope="row"><label for="%1$s">%2$s</label></th>', $field['id'], $field['name'] );
+
+					$table .= "<td>";
+
+					if ( method_exists( $this, $type ) ) {
+						$table .= $this->$type( $field, $name, $value );
+					} else {
+						$table .= $this->text( $field, $name, $value );
+					}
+
+					if ( ! empty( $field['desc'] ) ) {
+						$table .= sprintf( '<p class="description">%s</p>', $field['desc'] );
+					}
+					$table .= "</td>";
+					$table .= "</tr>";
 				}
-				$table .= "</td>";
-				$table .= "</tr>";
+
+				$table .= "</table>";
+
 			}
-
-			$table .= "</table>";
 			echo $table;
 		}
 
@@ -608,72 +690,5 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ):
 			return ob_get_clean();
 		}
 
-		/**
-		 * file input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function file( $field, $name, $value ) {
-			$multiple   = ( isset( $field['multiple'] ) ) ? true : false;
-			$btn_browse = ( isset( $field['btn_browse'] ) ) ? $field['btn_browse'] : 'Browse';
-			$btn_insert = ( isset( $field['btn_insert'] ) ) ? $field['btn_insert'] : 'Insert';
-			$btn_id     = $field['id'] . '_button';
-			ob_start(); ?>
-
-            <input type="text" name="<?php echo $name; ?>" id="<?php echo $field['id']; ?>"
-                   value="<?php echo $value; ?>" class="regular-text">
-            <input type="button" class="button" id="<?php echo $btn_id; ?>" value="<?php echo $btn_browse; ?>">
-            <script>
-                jQuery(function ($) {
-                    var frame,
-                        isMultiple = "<?php echo $multiple; ?>";
-
-                    $('#<?php echo $btn_id; ?>').on('click', function (e) {
-                        e.preventDefault();
-
-                        var options = {
-                            state: 'insert',
-                            frame: 'post',
-                            multiple: isMultiple
-                        };
-
-                        frame = wp.media(options).open();
-
-                        frame.menu.get('view').unset('gallery');
-                        frame.menu.get('view').unset('featured-image');
-
-                        frame.toolbar.get('view').set({
-                            insert: {
-                                style: 'primary',
-                                text: '<?php echo $btn_insert; ?>',
-
-                                click: function () {
-                                    var models = frame.state().get('selection'),
-                                        attachment_id = models.first().attributes.id,
-                                        files = [];
-
-                                    if (isMultiple) {
-                                        models.map(function (attachment) {
-                                            attachment = attachment.toJSON();
-                                            files.push(attachment.id);
-                                            attachment_id = files;
-                                        });
-                                    }
-
-                                    $('#<?php echo $field['id']; ?>').val(attachment_id);
-
-                                    frame.close();
-                                }
-                            }
-                        });
-                    });
-                });
-            </script>
-			<?php return ob_get_clean();
-		}
 	}
-endif;
+}
