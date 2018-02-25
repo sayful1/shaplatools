@@ -11,7 +11,7 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 		$this->widget_description = __( 'Display a list of a user&rsquo;s latest tweets.', 'shaplatools' );
 		$this->widget_name        = __( 'Shapla Twitter Feed', 'shaplatools' );
 		$this->settings           = array(
-			'description'               => array(
+			'description'      => array(
 				'type' => 'description',
 				'std'  => sprintf(
 					__( 'Don\'t know your Consumer Key, Consumer Secret, Access Token and Access Token Secret? %sClick here%s', 'shaplatools' ),
@@ -19,17 +19,17 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 					'</a>'
 				),
 			),
-			'title'                     => array(
+			'title'            => array(
 				'type'  => 'text',
 				'std'   => 'Tweets',
 				'label' => __( 'Title:', 'shaplatools' ),
 			),
-			'twitter_username'          => array(
+			'twitter_username' => array(
 				'type'  => 'text',
 				'std'   => null,
 				'label' => __( 'Twitter Username:', 'shaplatools' ),
 			),
-			'update_count'              => array(
+			'update_count'     => array(
 				'type'  => 'number',
 				'std'   => 5,
 				'label' => __( 'Number of Tweets to show:', 'shaplatools' ),
@@ -37,42 +37,22 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 				'min'   => 1,
 				'max'   => 50,
 			),
-			'twitter_duration'          => array(
+			'twitter_duration' => array(
 				'type'    => 'select',
 				'std'     => '60',
 				'label'   => __( 'Load new Tweets every:', 'shaplatools' ),
 				'options' => $this->twitter_duration(),
 			),
-			'follow_link_show'          => array(
+			'follow_link_show' => array(
 				'type'  => 'checkbox',
 				'std'   => false,
 				'label' => __( 'Include link to twitter page?', 'shaplatools' ),
 			),
-			'follow_link_text'          => array(
+			'follow_link_text' => array(
 				'type'  => 'text',
 				'std'   => 'Follow on twitter',
 				'label' => __( 'Link Text:', 'shaplatools' ),
-			),
-			'consumer_key'              => array(
-				'type'  => 'text',
-				'std'   => '',
-				'label' => __( 'Consumer Key:', 'shaplatools' ),
-			),
-			'consumer_secret'           => array(
-				'type'  => 'text',
-				'std'   => '',
-				'label' => __( 'Consumer Secret:', 'shaplatools' ),
-			),
-			'oauth_access_token'        => array(
-				'type'  => 'text',
-				'std'   => '',
-				'label' => __( 'Access Token:', 'shaplatools' ),
-			),
-			'oauth_access_token_secret' => array(
-				'type'  => 'text',
-				'std'   => '',
-				'label' => __( 'Access Token Secret:', 'shaplatools' ),
-			),
+			)
 		);
 
 		parent::__construct();
@@ -89,6 +69,12 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 		delete_transient( $this->widget_id );
 	}
 
+	/**
+	 * @param $new_instance
+	 * @param $old_instance
+	 *
+	 * @return array
+	 */
 	public function update( $new_instance, $old_instance ) {
 
 		parent::update( $new_instance, $old_instance );
@@ -120,18 +106,35 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 		}
 
 		// retrieve cache contents on success
-		$settings         = array(
+		$settings = array(
 			'oauth_access_token'        => isset( $instance['oauth_access_token'] ) ? $instance['oauth_access_token'] : null,
 			'oauth_access_token_secret' => isset( $instance['oauth_access_token_secret'] ) ? $instance['oauth_access_token_secret'] : null,
 			'consumer_key'              => isset( $instance['consumer_key'] ) ? $instance['consumer_key'] : null,
 			'consumer_secret'           => isset( $instance['consumer_secret'] ) ? $instance['consumer_secret'] : null,
 		);
-		$limit            = isset( $instance['update_count'] ) ? intval( $instance['update_count'] ) : 5;
-		$twitter_duration = isset( $instance['twitter_duration'] ) ? intval( $instance['twitter_duration'] ) : 15;
-		$username         = $instance['twitter_username'];
+
+		$options         = get_option( 'shaplatools_options' );
+		$consumer_key    = ! empty( $options['twitter_consumer_key'] ) ? esc_attr( $options['twitter_consumer_key'] ) : '';
+		$consumer_secret = ! empty( $options['twitter_consumer_secret'] ) ? esc_attr( $options['twitter_consumer_secret'] ) : '';
+		$access_key      = ! empty( $options['twitter_access_key'] ) ? esc_attr( $options['twitter_access_key'] ) : '';
+		$access_secret   = ! empty( $options['twitter_access_secret'] ) ? esc_attr( $options['twitter_access_secret'] ) : '';
+		if ( $consumer_key && $consumer_secret && $access_key && $access_secret ) {
+			$settings = array(
+				'oauth_access_token'        => $access_key,
+				'oauth_access_token_secret' => $access_secret,
+				'consumer_key'              => $consumer_key,
+				'consumer_secret'           => $consumer_secret,
+			);
+		}
+
+		$limit              = isset( $instance['update_count'] ) ? intval( $instance['update_count'] ) : 5;
+		$transient_duration = isset( $instance['twitter_duration'] ) ? intval( $instance['twitter_duration'] ) : 15;
+		$username           = isset( $instance['twitter_username'] ) ? esc_attr( $instance['twitter_username'] ) : null;
+		$follow_link_show   = isset( $instance['follow_link_show'] ) ? $instance['follow_link_show'] : null;
+		$follow_link_text   = isset( $instance['follow_link_text'] ) ? $instance['follow_link_text'] : null;
 
 		// Get the tweets.
-		$tweets = $this->twitter_timeline( $settings, $limit, $twitter_duration );
+		$tweets = $this->twitter_timeline( $settings, $limit, $transient_duration );
 
 
 		if ( ! empty( $tweets ) ) {
@@ -152,8 +155,8 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 			}
 			echo '</ul>';
 
-			if ( $instance['follow_link_show'] && $instance['follow_link_text'] && $username ) {
-				echo '<a href="' . esc_url( 'https://twitter.com/' . $username ) . '" class="shapla-button twitter-follow-button" target="_blank">' . esc_html( $instance['follow_link_text'] ) . '</a>';
+			if ( $follow_link_show && $follow_link_text && $username ) {
+				echo '<a href="' . esc_url( 'https://twitter.com/' . $username ) . '" class="shapla-button twitter-follow-button" target="_blank">' . esc_html( $follow_link_text ) . '</a>';
 			}
 		} else {
 			if ( current_user_can( 'manage_options' ) ) {
@@ -203,7 +206,11 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 
 		if ( false === $tweets ) {
 			$twitter_instance = new ShaplaTools_Twitter_API( $settings );
-			$timeline         = (array) $twitter_instance->user_timeline( $limit );
+			$timeline         = $twitter_instance->user_timeline( $limit );
+
+			if ( ! empty( $timeline->errors ) ) {
+				return [];
+			}
 
 			foreach ( $timeline as $tweet ) {
 				$tweets[] = array(

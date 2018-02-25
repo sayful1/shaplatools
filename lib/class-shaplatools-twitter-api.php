@@ -43,19 +43,17 @@ if ( ! class_exists( 'ShaplaTools_Twitter_API' ) ) {
 		/** @var string Request method or HTTP verb */
 		private $request_method;
 
+		private $error;
+
 		/**
-		 * Twitter_API_WordPress constructor.
+		 * ShaplaTools_Twitter_API constructor.
 		 *
 		 * @param array $settings
 		 */
 		public function __construct( $settings = array() ) {
-
-			if ( ! isset( $settings['oauth_access_token'] )
-			     || ! isset( $settings['oauth_access_token_secret'] )
-			     || ! isset( $settings['consumer_key'] )
-			     || ! isset( $settings['consumer_secret'] )
-			) {
-				return new WP_Error( 'twitter_param_incomplete', 'Make sure you are passing in the correct parameters' );
+			$error = $this->is_valid_settings( $settings );
+			if ( count( $error->get_error_codes() ) ) {
+				return $error;
 			}
 
 			$this->oauth_access_token        = $settings['oauth_access_token'];
@@ -117,7 +115,7 @@ if ( ! class_exists( 'ShaplaTools_Twitter_API' ) ) {
 		 *
 		 * @param string $request_url Twitter endpoint to send the request to
 		 *
-		 * @return Twitter_API_WordPress|WP_Error
+		 * @return $this|WP_Error
 		 */
 		public function build_oauth( $request_url ) {
 			$request_method = $this->getRequestMethod();
@@ -275,7 +273,7 @@ if ( ! class_exists( 'ShaplaTools_Twitter_API' ) ) {
 		 *
 		 * @param string $request_method
 		 *
-		 * @return Twitter_API_WordPress|WP_Error
+		 * @return $this|WP_Error
 		 */
 		public function setRequestMethod( $request_method ) {
 			if ( ! in_array( strtolower( $request_method ), array( 'post', 'get' ) ) ) {
@@ -344,6 +342,34 @@ if ( ! class_exists( 'ShaplaTools_Twitter_API' ) ) {
 		 */
 		public function getConsumerKey() {
 			return $this->consumer_key;
+		}
+
+		/**
+		 * @param $settings
+		 *
+		 * @return mixed
+		 */
+		private function is_valid_settings( $settings ) {
+			$this->error = new WP_Error();
+
+			// Check access token set properly
+			if ( empty( $settings['oauth_access_token'] ) ) {
+				$this->error->add( 'oauth_access_token', 'OAuth access token is empty.' );
+			}
+			// Check access token secret set properly
+			if ( empty( $settings['oauth_access_token_secret'] ) ) {
+				$this->error->add( 'oauth_access_token_secret', 'OAuth access token secret is empty.' );
+			}
+			// Check consumer key set properly
+			if ( empty( $settings['consumer_key'] ) ) {
+				$this->error->add( 'consumer_key', 'OAuth consumer key is empty.' );
+			}
+			// Check consumer key set properly
+			if ( empty( $settings['consumer_secret'] ) ) {
+				$this->error->add( 'consumer_secret', 'OAuth consumer secret is empty.' );
+			}
+
+			return $this->error;
 		}
 	}
 }

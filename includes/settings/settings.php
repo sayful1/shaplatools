@@ -36,7 +36,11 @@ $option_page->add_section( [
 $option_page->add_section( [
 	'id'          => 'section_twitter_settings',
 	'title'       => __( 'Twitter Settings', 'shaplatools' ),
-	'description' => '',
+	'description' => sprintf(
+		__( 'Consumer Key, Consumer Secret, Access Token and Access Token Secret is required for Twitter Feed Widget to work. Here is how you can %1$s get a key %2$s.', 'shaplatools' ),
+		'<a target="_blank" href="https://apps.twitter.com/">',
+		'</a>'
+	),
 	'panel'       => 'general',
 	'priority'    => 10,
 ] );
@@ -53,11 +57,7 @@ $option_page->add_field( [
 	'id'      => 'google_map_api_key',
 	'type'    => 'text',
 	'name'    => __( 'API key', 'shaplatools' ),
-	'desc'    => sprintf(
-		__( 'An API key is required for Google Maps shortcode to work. Here is how you can %1$s get a key %2$s.', 'shaplatools' ),
-		'<a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key">',
-		'</a>'
-	),
+	'desc'    => __( 'Enter Google Map API Key', 'shaplatools' ),
 	'std'     => '',
 	'section' => 'section_google_map'
 ] );
