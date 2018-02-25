@@ -229,11 +229,16 @@ class ShaplaTools_Widget extends WP_Widget {
                     <p>
                         <label for="<?php echo $this->get_field_id( $key ); ?>"><?php echo $setting['label']; ?></label>
                         <input id="<?php echo esc_attr( $this->get_field_id( $key ) ); ?>"
+                               class="widefat"
                                name="<?php echo $this->get_field_name( $key ); ?>" type="number"
                                step="<?php echo esc_attr( $setting['step'] ); ?>"
                                min="<?php echo esc_attr( $setting['min'] ); ?>"
                                max="<?php echo esc_attr( $setting['max'] ); ?>"
                                value="<?php echo esc_attr( $value ); ?>"/>
+	                    <?php if ( isset( $setting['description'] ) ) : ?>
+                            <br>
+                            <small><?php echo $setting['description']; ?></small>
+	                    <?php endif; ?>
                     </p>
 					<?php
 					break;

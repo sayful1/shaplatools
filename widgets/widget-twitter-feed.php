@@ -1,6 +1,6 @@
 <?php
 
-class Shapla_Tweet_Widget extends ShaplaTools_Widget {
+class Shapla_Widget_Twitter_Feed extends ShaplaTools_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -234,4 +234,4 @@ class Shapla_Tweet_Widget extends ShaplaTools_Widget {
 	}
 }
 
-add_action( 'widgets_init', array( 'Shapla_Tweet_Widget', 'register' ) );
+add_action( 'widgets_init', array( 'Shapla_Widget_Twitter_Feed', 'register' ) );
