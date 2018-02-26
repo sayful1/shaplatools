@@ -1,115 +1,136 @@
 <?php
-add_action( 'widgets_init', function () {
-	register_widget( "Shapla_Instagram_Widget" );
-} );
 
-class Shapla_Instagram_Widget extends WP_Widget {
-
-	private $widget_id;
-	private $text_domain;
+class Shapla_Widget_Instagram extends ShaplaTools_Widget {
 
 	/**
 	 * Register widget with WordPress.
 	 */
 	public function __construct() {
-
-		$this->text_domain = 'shaplatools';
-		$this->widget_id   = 'shapla-instagram';
-		$widget_name       = __( 'Shapla Instagram Photos', 'shaplatools' );
-		$widget_options    = array(
-			'classname'   => 'widget_shapla_instagram',
-			'description' => __( 'A widget that displays your Instagram feed, posts, or likes.', 'shaplatools' ),
+		$this->widget_id          = 'shapla-instagram';
+		$this->widget_cssclass    = 'widget_shapla_instagram';
+		$this->widget_description = __( 'Display your latest Instagrams photos.', 'shaplatools' );
+		$this->widget_name        = __( 'Shapla Instagram Photos', 'shaplatools' );
+		$this->settings           = array(
+			'title'            => array(
+				'type'  => 'text',
+				'std'   => __( 'Instagram Photos', 'shaplatools' ),
+				'label' => __( 'Title:', 'shaplatools' ),
+			),
+			'username'         => array(
+				'type'        => 'text',
+				'std'         => null,
+				'placeholder' => 'myusername',
+				'label'       => __( 'Instagram Username:', 'shaplatools' ),
+			),
+			'count'            => array(
+				'type'  => 'number',
+				'std'   => 9,
+				'label' => __( 'Photo Count (max 12):', 'shaplatools' ),
+				'step'  => 1,
+				'min'   => 1,
+				'max'   => 12,
+			),
+			'size'             => array(
+				'type'    => 'select',
+				'std'     => 'thumbnail',
+				'label'   => __( 'Photo Size:', 'shaplatools' ),
+				'options' => array(
+					'thumbnail' => __( 'Thumbnail', 'shaplatools' ),
+					'small'     => __( 'Small', 'shaplatools' ),
+					'large'     => __( 'Large', 'shaplatools' ),
+					'original'  => __( 'Original', 'shaplatools' ),
+				),
+			),
+			'cachetime'        => array(
+				'type'  => 'number',
+				'std'   => 2,
+				'label' => __( 'Cache time (in hours):', 'shaplatools' ),
+				'step'  => 1,
+				'min'   => 1,
+				'max'   => 500,
+			),
+			'follow_link_show' => array(
+				'type'  => 'checkbox',
+				'std'   => false,
+				'label' => __( 'Include link to Instagram page?', 'shaplatools' ),
+			),
+			'follow_link_text' => array(
+				'type'  => 'text',
+				'std'   => 'Follow on Instagram',
+				'label' => __( 'Link Text:', 'shaplatools' ),
+			),
 		);
 
-		parent::__construct( $this->widget_id, $widget_name, $widget_options );
-
-		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
+		parent::__construct();
 	}
 
-	function get_cached_widget( $args ) {
-		$cache = wp_cache_get( $this->widget_id, 'widget' );
-
-		if ( ! is_array( $cache ) ) {
-			$cache = array();
-		}
-
-		if ( isset( $cache[ $args['widget_id'] ] ) ) {
-			echo $cache[ $args['widget_id'] ];
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public function cache_widget( $args, $content ) {
-		$cache[ $args['widget_id'] ] = $content;
-
-		wp_cache_set( $this->widget_id, $cache, 'widget' );
-	}
-
-	public function flush_widget_cache() {
-		wp_cache_delete( $this->widget_id, 'widget' );
-	}
-
+	/**
+	 * Display widget content
+	 *
+	 * @param array $args
+	 * @param array $instance
+	 */
 	function widget( $args, $instance ) {
+
+		if ( $this->get_cached_widget( $args ) ) {
+			return;
+		}
+
+		$title            = isset( $instance['title'] ) ? esc_html( $instance['title'] ) : __( 'Instagram Photos', 'shaplatools' );
+		$username         = isset( $instance['username'] ) ? esc_html( $instance['username'] ) : null;
+		$count            = isset( $instance['count'] ) ? absint( $instance['count'] ) : 9;
+		$cachetime        = isset( $instance['cachetime'] ) ? absint( $instance['cachetime'] ) : 2;
+		$size             = isset( $instance['size'] ) ? esc_html( $instance['size'] ) : 'thumbnail';
+		$follow_link_show = isset( $instance['follow_link_show'] ) ? (bool) $instance['follow_link_show'] : false;
+		$follow_link_text = isset( $instance['follow_link_text'] ) ? $instance['follow_link_text'] : __( 'Follow on Instagram', 'shaplatools' );
+
+		// Get Instagrams
+		$instagram = $this->scrape_instagram( $username, $cachetime );
 
 		ob_start();
 
-		extract( $args );
+		echo $args['before_widget'];
 
-		echo $before_widget;
-
-		$title     = apply_filters( 'widget_title', $instance['title'] );
-		$username  = esc_html( $instance['username'] );
-		$count     = absint( $instance['count'] );
-		$image_res = esc_html( $instance['size'] );
-		$cachetime = absint( $instance['cachetime'] );
-
-		// Get Instagrams
-		$instagram = $this->get_instagrams( array(
-			'username'  => $username,
-			'count'     => $count,
-			'cachetime' => $cachetime,
-		) );
-
-		if ( $title ) {
-			echo $before_title . $title . $after_title;
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
 		// And if we have Instagrams
-		if ( false !== $instagram ) :
+		if ( is_array( $instagram ) ) {
+
+			// slice list down to required limit.
+			$instagram = array_slice( $instagram, 0, $count );
 
 			?>
 
             <div class="instagram-row">
 				<?php
-				$displayed = 0;
-				foreach ( $instagram['items'] as $key => $image ) {
-					$displayed ++;
+				foreach ( $instagram as $image ) {
 
-					echo apply_filters( 'st_instagram_widget_image_html', sprintf( '<div class="instagram-col %4$s"><a href="%1$s"><img class="instagram-image" src="%2$s" alt="%3$s" title="%3$s" /></a></div>',
-						$image['link'],
-						str_replace( 'http:', '', $image['images'][ $image_res ]['url'] ),
-						$image['caption']['text'],
-						esc_attr( $image_res )
-					), $image );
+					$html = '<div class="instagram-col ' . esc_attr( $size ) . '">';
+					$html .= '<a href="' . esc_url( $image['link'] ) . '">';
+					$html .= sprintf(
+						'<img class="instagram-image" src="%1$s" alt="%2$s" title="%2$s" />',
+						esc_url( $image[ $size ] ),
+						esc_html( $image['description'] )
+					);
+					$html .= '</a>';
+					$html .= '</div>';
+
+					echo apply_filters( 'shaplatools_instagram_widget_image_html', $html, $image );
 				}
 				?>
-
             </div>
 
-            <a class="instagram-follow-link"
-               href="https://instagram.com/<?php echo esc_html( $username ); ?>"><?php printf( __( 'Follow %1$s on Instagram', 'shaplatools' ), esc_html( $username ) ); ?></a>
+			<?php if ( $follow_link_show && $follow_link_text ) { ?>
+                <a class="instagram-follow-link" href="https://instagram.com/<?php echo esc_html( $username ); ?>">
+					<?php echo $follow_link_text; ?>
+                </a>
+			<?php } ?>
 
-		<?php elseif ( ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ) && ( defined( 'WP_DEBUG_DISPLAY' ) && false !== WP_DEBUG_DISPLAY ) ) : ?>
-            <div id="message" class="error">
-                <p><?php _e( 'Error: We were unable to fetch your instagram feed.', 'shaplatools' ); ?></p></div>
-		<?php endif;
+		<?php }
 
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		$content = ob_get_clean();
 
@@ -118,116 +139,137 @@ class Shapla_Instagram_Widget extends WP_Widget {
 		$this->cache_widget( $args, $content );
 	}
 
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-
-		$instance['title']     = esc_attr( $new_instance['title'] );
-		$instance['username']  = esc_attr( $new_instance['username'] );
-		$instance['size']      = esc_attr( $new_instance['size'] );
-		$instance['cachetime'] = absint( $new_instance['cachetime'] );
-		$instance['count']     = absint( $new_instance['count'] );
-
-		$this->flush_widget_cache();
-
-		return $instance;
-	}
-
-	function form( $instance ) {
-		$defaults = array(
-			'title'     => __( 'Instagram Photos', 'shaplatools' ),
-			'username'  => '',
-			'cachetime' => '2',
-			'size'      => 'thumbnail',
-			'count'     => 9,
-		);
-
-		$instance = wp_parse_args( (array) $instance, $defaults );
-
-		?>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'shaplatools' ); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>">
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'username' ); ?>"><?php _e( 'Instagram Username:', 'shaplatools' ); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'username' ); ?>"
-                   name="<?php echo $this->get_field_name( 'username' ); ?>"
-                   value="<?php echo $instance['username']; ?>">
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Photo Count:', 'shaplatools' ); ?></label>
-            <input type="number" min="1" max="20" class="widefat" id="<?php echo $this->get_field_id( 'count' ); ?>"
-                   name="<?php echo $this->get_field_name( 'count' ); ?>" value="<?php echo $instance['count']; ?>">
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'size' ); ?>"><?php _e( 'Photo Size:', 'shaplatools' ); ?></label>
-            <select id="<?php echo $this->get_field_id( 'size' ); ?>"
-                    name="<?php echo $this->get_field_name( 'size' ); ?>" class="widefat">
-                <option value="thumbnail" <?php selected( 'thumbnail', $instance['size'] ) ?>><?php _e( 'Thumbnail', 'shaplatools' ); ?></option>
-                <option value="low_resolution" <?php selected( 'low_resolution', $instance['size'] ) ?>><?php _e( 'Low Resolution', 'shaplatools' ); ?></option>
-                <option value="standard_resolution" <?php selected( 'standard_resolution', $instance['size'] ) ?>><?php _e( 'High Resolution', 'shaplatools' ); ?></option>
-            </select>
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'cachetime' ); ?>"><?php _e( 'Cache time (in hours):', 'shaplatools' ); ?></label>
-            <input type="number" min="1" max="500" step="1" id="<?php echo $this->get_field_id( 'cachetime' ); ?>"
-                   name="<?php echo $this->get_field_name( 'cachetime' ); ?>"
-                   value="<?php echo $instance['cachetime']; ?>">
-        </p>
-
-		<?php
-	}
-
 	/**
-	 * Get relevant data from Instagram API.
+	 * Scrapge Instagram data from webpage.
+	 * Based on https://gist.github.com/cosmocatalano/4544576
 	 *
-	 * @param    array $args Argument to passed to Instagram API.
+	 * @param  string $username Instagram username.
+	 * @param  string $cachetime Cache time.
 	 *
-	 * @return  array        An array returning Instagram API data.
+	 * @return mixed
 	 */
-	public function get_instagrams( $args = array() ) {
-		// Get args
-		$username  = ( ! empty( $args['username'] ) ) ? $args['username'] : '';
-		$count     = ( ! empty( $args['count'] ) ) ? $args['count'] : 9;
-		$cachetime = ( ! empty( $args['cachetime'] ) ) ? $args['cachetime'] : 2;
+	protected function scrape_instagram( $username, $cachetime ) {
+		$username       = trim( strtolower( $username ) );
+		$transient_name = 'shaplatools_instagram_' . sanitize_title_with_dashes( $username );
+		$instagram      = get_transient( $transient_name );
 
-		// If no user id, bail
-		if ( empty( $username ) ) {
-			return false;
-		}
+		if ( false === $instagram ) {
+			switch ( substr( $username, 0, 1 ) ) {
+				case '#':
+					$url = 'https://instagram.com/explore/tags/' . str_replace( '#', '', $username );
+					break;
 
-		$key = "stag_instagram_{$username}";
-
-		if ( false === ( $instagrams = get_transient( $key ) ) ) {
-			// Ping Instagram's API
-			$api_url  = "https://www.instagram.com/{$username}/media/";
-			$response = wp_remote_get( $api_url );
-
-			// Check if the API is up.
-			if ( ! 200 == wp_remote_retrieve_response_code( $response ) ) {
-				return false;
+				default:
+					$url = 'https://instagram.com/' . str_replace( '@', '', $username );
+					break;
 			}
 
-			// Parse the API data and place into an array
-			$instagrams = json_decode( wp_remote_retrieve_body( $response ), true );
+			$remote = wp_remote_get( $url );
 
-			// Are the results in an array?
-			if ( ! is_array( $instagrams ) ) {
-				return false;
+			if ( is_wp_error( $remote ) ) {
+				return new WP_Error( 'site_down', esc_html__( 'Unable to communicate with Instagram.', 'shaplatools' ) );
 			}
 
-			$instagrams = maybe_unserialize( $instagrams );
+			if ( 200 !== wp_remote_retrieve_response_code( $remote ) ) {
+				return new WP_Error( 'invalid_response', esc_html__( 'Instagram did not return a 200.', 'shaplatools' ) );
+			}
 
-			// Store Instagrams in a transient, and expire every hour
-			set_transient( $key, $instagrams, $cachetime * HOUR_IN_SECONDS );
+			$shards      = explode( 'window._sharedData = ', $remote['body'] );
+			$insta_json  = explode( ';</script>', $shards[1] );
+			$insta_array = json_decode( $insta_json[0], true );
+
+			if ( ! $insta_array ) {
+				return new WP_Error( 'bad_json', esc_html__( 'Instagram has returned invalid data.', 'shaplatools' ) );
+			}
+
+			if ( isset( $insta_array['entry_data']['ProfilePage'][0]['user']['media']['nodes'] ) ) {
+				$images = $insta_array['entry_data']['ProfilePage'][0]['user']['media']['nodes'];
+			} elseif ( isset( $insta_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'] ) ) {
+				$images = $insta_array['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']['edges'];
+			} else {
+				return new WP_Error( 'bad_json_2', esc_html__( 'Instagram has returned invalid data.', 'shaplatools' ) );
+			}
+
+			if ( ! is_array( $images ) ) {
+				return new WP_Error( 'bad_array', esc_html__( 'Instagram has returned invalid data.', 'shaplatools' ) );
+			}
+
+			$instagram = array();
+
+			foreach ( $images as $image ) {
+				switch ( substr( $username, 0, 1 ) ) {
+					case '#':
+						if ( true === $image['node']['is_video'] ) {
+							$type = 'video';
+						} else {
+							$type = 'image';
+						}
+
+						$caption = __( 'Instagram Image', 'stag' );
+						if ( ! empty( $image['node']['edge_media_to_caption']['edges'][0]['node']['text'] ) ) {
+							$caption = $image['node']['edge_media_to_caption']['edges'][0]['node']['text'];
+						}
+
+						$instagram[] = array(
+							'description' => $caption,
+							'link'        => trailingslashit( '//instagram.com/p/' . $image['node']['shortcode'] ),
+							'time'        => $image['node']['taken_at_timestamp'],
+							'comments'    => $image['node']['edge_media_to_comment']['count'],
+							'likes'       => $image['node']['edge_liked_by']['count'],
+							'thumbnail'   => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][0]['src'] ),
+							'small'       => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][2]['src'] ),
+							'large'       => preg_replace( '/^https?\:/i', '', $image['node']['thumbnail_resources'][4]['src'] ),
+							'original'    => preg_replace( '/^https?\:/i', '', $image['node']['display_url'] ),
+							'type'        => $type,
+						);
+						break;
+
+					default:
+						if ( true === $image['is_video'] ) {
+							$type = 'video';
+						} else {
+							$type = 'image';
+						}
+
+						$caption = __( 'Instagram Image', 'shaplatools' );
+						if ( ! empty( $image['caption'] ) ) {
+							$caption = $image['caption'];
+						}
+
+						$instagram[] = array(
+							'description' => $caption,
+							'link'        => trailingslashit( '//instagram.com/p/' . $image['code'] ),
+							'time'        => $image['date'],
+							'comments'    => $image['comments']['count'],
+							'likes'       => $image['likes']['count'],
+							'thumbnail'   => preg_replace( '/^https?\:/i', '', $image['thumbnail_resources'][0]['src'] ),
+							'small'       => preg_replace( '/^https?\:/i', '', $image['thumbnail_resources'][2]['src'] ),
+							'large'       => preg_replace( '/^https?\:/i', '', $image['thumbnail_resources'][4]['src'] ),
+							'original'    => preg_replace( '/^https?\:/i', '', $image['display_src'] ),
+							'type'        => $type,
+						);
+						break;
+				}
+			}  // End foreach().
+
+			// Do not set an empty transient - should help catch private or empty accounts.
+			if ( ! empty( $instagram ) ) {
+				$instagram            = base64_encode( serialize( $instagram ) );
+				$transient_expiration = HOUR_IN_SECONDS * $cachetime;
+				set_transient( $transient_name, $instagram, $transient_expiration );
+			}
 		}
 
-		return $instagrams;
+		if ( ! empty( $instagram ) ) {
+			return unserialize( base64_decode( $instagram ) );
+		} else {
+			return new WP_Error( 'no_images', esc_html__( 'Instagram did not return any images.', 'shaplatools' ) );
+		}
+	}
+
+	public static function register() {
+		register_widget( __CLASS__ );
 	}
 }
+
+add_action( 'widgets_init', array( 'Shapla_Widget_Instagram', 'register' ) );
