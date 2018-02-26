@@ -10,8 +10,6 @@
  * @since 2.0.0
  */
 class ShaplaTools_TinyMCE {
-
-
 	/**
 	 * Setup.
 	 *
@@ -20,14 +18,10 @@ class ShaplaTools_TinyMCE {
 	 * @return void
 	 */
 	public function __construct() {
-
-
 		// Add the buttons
 		add_action( 'admin_init', array( $this, 'add_buttons' ), 11 );
-
 		// Reorder the hr button
 		add_filter( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 20, 2 );
-
 		// Add translations for plugin
 		add_filter( 'wp_mce_translation', array( $this, 'wp_mce_translation' ), 10, 2 );
 	}

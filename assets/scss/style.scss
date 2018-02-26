@@ -2,20 +2,17 @@
 @import 'utilities/variables';
 @import 'utilities/functions';
 @import 'utilities/mixins';
+// Shapla Grids System
+@import 'grids/grids';
 // Components
 @import 'components/components';
-// Custom Post Type Style
-@import 'post-type/portfolio';
-@import 'post-type/feature';
-@import 'post-type/testimonial';
-@import 'post-type/team';
-@import 'post-type/slide';
 // Widgets
 @import 'widgets/flickr';
 @import 'widgets/twitter';
 @import 'widgets/dribbbles';
 @import 'widgets/instagram';
-// Shapla Grids System
-@import 'grids/grids';
+// Custom Post Type Style
+@import 'post-type/portfolio';
+@import 'post-type/slide';
 // Library
 @import 'library/library';

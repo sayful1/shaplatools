@@ -1,7 +1,6 @@
 <?php
 
 class Shapla_Shortcodes {
-
 	var $conf;
 	var $popup;
 	var $params;
@@ -14,15 +13,11 @@ class Shapla_Shortcodes {
 	var $output;
 	var $errors;
 
-	function __construct( $popup ) {
-		if ( file_exists( dirname( __FILE__ ) . '/config.php' ) ) {
-			$this->conf  = dirname( __FILE__ ) . '/config.php';
-			$this->popup = $popup;
+	function __construct( $config, $popup ) {
+		$this->conf  = $config;
+		$this->popup = $popup;
 
-			$this->format_shortcode();
-		} else {
-			$this->append_error( __( 'Config file does not exist', 'shaplatools' ) );
-		}
+		$this->format_shortcode();
 	}
 
 	function append_output( $output ) {

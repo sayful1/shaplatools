@@ -1,6 +1,6 @@
 <?php
 
-if ( ! class_exists( 'ShaplaShortcodes' ) ):
+if ( ! class_exists( 'ShaplaShortcodes' ) ) {
 
 	class ShaplaShortcodes {
 
@@ -18,7 +18,7 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 		}
 
 		public function add_tinymce_lang( $arr ) {
-			$arr['shaplaShortcodes'] = SHAPLATOOLS_PATH . '/assets/js/plugin-lang.php';
+			$arr['shaplaShortcodes'] = SHAPLATOOLS_INCLUDES . '/tiny-mce/plugin-lang.php';
 
 			return $arr;
 		}
@@ -42,13 +42,12 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 		}
 
 		public function shortcode_popup_callback() {
-			require_once( 'shortcode-class.php' );
-			$shortcode = new Shapla_Shortcodes( $_REQUEST['popup'] );
-
+			require_once SHAPLATOOLS_INCLUDES . '/lib/class-shapla-shortcodes.php';
+			$config    = dirname( __FILE__ ) . '/config.php';
+			$shortcode = new Shapla_Shortcodes( $config, $_REQUEST['popup'] );
 			?>
-            <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-            <html xmlns="http://www.w3.org/1999/xhtml">
+            <!DOCTYPE html>
+            <html>
             <head></head>
             <body>
 
@@ -71,7 +70,7 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
                             <tr class="form-row">
 								<?php if ( ! $shortcode->has_child ) : ?>
                                     <td class="label">&nbsp;</td>
-                                <?php endif; ?>
+								<?php endif; ?>
                                 <!-- <td class="field insert-field"> -->
 
                                 <!-- </td> -->
@@ -99,7 +98,5 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 
 			die();
 		}
-
 	}
-
-endif;
+}
