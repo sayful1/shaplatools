@@ -157,12 +157,12 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			}
 
 			if ( in_array( 'slider', $theme_supports[0] ) ) {
-				include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-slide.php';
+				include_once SHAPLATOOLS_INCLUDES . '/post-type/slide.php';
 				include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-nivoslide-metabox.php';
 			}
 
 			if ( in_array( 'portfolio', $theme_supports[0] ) ) {
-				include_once SHAPLATOOLS_INCLUDES . '/post-type/class-shaplatools-portfolio.php';
+				include_once SHAPLATOOLS_INCLUDES . '/post-type/portfolio.php';
 				include_once SHAPLATOOLS_INCLUDES . '/meta-box/class-shaplatools-portfolio-metabox.php';
 			}
 		}

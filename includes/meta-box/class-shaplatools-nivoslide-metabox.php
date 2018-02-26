@@ -66,7 +66,7 @@ if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ) {
 					),
 					array(
 						'name'    => __( 'Slider Image Size', 'shaplatools' ),
-						'desc'    => __( 'Select image size from available image size. Use full for original image size.', 'shaplatools' ),
+						'desc'    => __( 'Choose image size from available image size. Use full for original image size.', 'shaplatools' ),
 						'id'      => '_shapla_slide_img_size',
 						'type'    => 'select',
 						'std'     => 'full',

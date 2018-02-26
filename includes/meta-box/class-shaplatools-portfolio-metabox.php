@@ -157,6 +157,7 @@ if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ) {
 				if ( ! $terms = get_the_terms( get_the_ID(), $column_name ) ) {
 					echo '<span class="na">&mdash;</span>';
 				} else {
+					$termlist = array();
 					foreach ( $terms as $term ) {
 						$termlist[] = '<a href="' . esc_url( add_query_arg( $column_name, $term->slug, admin_url( 'edit.php?post_type=portfolio' ) ) ) . ' ">' . ucfirst( $term->name ) . '</a>';
 					}
