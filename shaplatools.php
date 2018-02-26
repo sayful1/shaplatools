@@ -113,7 +113,7 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			define( 'SHAPLATOOLS_PATH', dirname( SHAPLATOOLS_FILE ) );
 			define( 'SHAPLATOOLS_INCLUDES', SHAPLATOOLS_PATH . '/includes' );
 			define( 'SHAPLATOOLS_TEMPLATES', SHAPLATOOLS_PATH . '/templates' );
-			define( 'SHAPLATOOLS_WIDGETS', SHAPLATOOLS_PATH . '/widgets' );
+			define( 'SHAPLATOOLS_WIDGETS', SHAPLATOOLS_INCLUDES . '/widgets' );
 			define( 'SHAPLATOOLS_MODULES', SHAPLATOOLS_PATH . '/modules' );
 			define( 'SHAPLATOOLS_URL', plugins_url( '', SHAPLATOOLS_FILE ) );
 			define( 'SHAPLATOOLS_ASSETS', SHAPLATOOLS_URL . '/assets' );
@@ -169,10 +169,10 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 
 		private function includes() {
 			// Include Libraries
-			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-settings-api.php';
-			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-meta-box.php';
-			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-twitter-api.php';
-			include_once SHAPLATOOLS_PATH . '/lib/class-shaplatools-widget.php';
+			include_once SHAPLATOOLS_INCLUDES . '/lib/class-shaplatools-settings-api.php';
+			include_once SHAPLATOOLS_INCLUDES . '/lib/class-shaplatools-meta-box.php';
+			include_once SHAPLATOOLS_INCLUDES . '/lib/class-shaplatools-twitter-api.php';
+			include_once SHAPLATOOLS_INCLUDES . '/lib/class-shaplatools-widget.php';
 
 			// Include plugin settings file
 			include_once SHAPLATOOLS_INCLUDES . '/settings/settings.php';

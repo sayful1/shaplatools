@@ -5,7 +5,6 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
 	class ShaplaShortcodes {
 
 		public function __construct() {
-
 			add_action( 'init', array( &$this, 'shortcodes_init' ) );
 			add_filter( 'mce_external_languages', array( &$this, 'add_tinymce_lang' ), 10, 1 );
 			add_action( 'wp_ajax_popup', array( &$this, 'shortcode_popup_callback' ) );
@@ -71,7 +70,8 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ):
                             <tbody>
                             <tr class="form-row">
 								<?php if ( ! $shortcode->has_child ) : ?>
-                                    <td class="label">&nbsp;</td><?php endif; ?>
+                                    <td class="label">&nbsp;</td>
+                                <?php endif; ?>
                                 <!-- <td class="field insert-field"> -->
 
                                 <!-- </td> -->
