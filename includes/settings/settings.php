@@ -1,5 +1,5 @@
 <?php
-$option_page = new ShaplaTools_Settings_API;
+$option_page = new ShaplaTools_Settings_API();
 
 // Add settings page
 $option_page->add_menu( [
@@ -58,13 +58,30 @@ $option_page->add_section( [
 ] );
 
 $option_page->add_section( [
+	'id'          => 'section_dribbble_settings',
+	'title'       => __( 'Dribbble Settings', 'shaplatools' ),
+	'description' => '',
+	'panel'       => 'general',
+	'priority'    => 40,
+] );
+
+$option_page->add_section( [
 	'id'          => 'section_social_link',
 	'title'       => __( 'Social Link Settings', 'shaplatools' ),
 	'description' => '',
 	'panel'       => 'social_link',
+	'priority'    => 10,
 ] );
 
 // Add general settings page fields
+$option_page->add_field( [
+	'id'      => 'dribbble_access_token',
+	'type'    => 'text',
+	'name'    => __( 'Access Token', 'shaplatools' ),
+	'desc'    => __( 'Enter Dribbble Access Token', 'shaplatools' ),
+	'std'     => '',
+	'section' => 'section_dribbble_settings'
+] );
 $option_page->add_field( [
 	'id'      => 'google_map_api_key',
 	'type'    => 'text',

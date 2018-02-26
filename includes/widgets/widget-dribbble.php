@@ -3,114 +3,98 @@
 /**
  * Display your latest Dribbble shots.
  */
-class Shapla_Dribbble_Widget extends WP_Widget {
-	private $widget_id;
-	private $text_domain;
+class Shapla_Dribbble_Widget extends ShaplaTools_Widget {
 
 	/**
 	 * Register widget with WordPress.
 	 */
 	public function __construct() {
-
-		$this->text_domain = 'shaplatools';
-		$this->widget_id   = 'shapla-dribbble';
-		$widget_name       = __( 'Shapla Dribbble Shots', 'shaplatools' );
-		$widget_options    = array(
-			'classname'   => 'widget_shapla_dribbble',
-			'description' => __( 'Display your latest Dribbble shots.', 'shaplatools' ),
+		$this->widget_id          = 'shapla-dribbble';
+		$this->widget_cssclass    = 'widget_shapla_dribbble';
+		$this->widget_description = __( 'Display your latest Dribbble shots.', 'shaplatools' );
+		$this->widget_name        = __( 'Shapla Dribbble Shots', 'shaplatools' );
+		$this->settings           = array(
+			'title' => array(
+				'type'  => 'text',
+				'std'   => 'Latest Shots',
+				'label' => __( 'Title:', 'shaplatools' ),
+			),
+			'count' => array(
+				'type'  => 'number',
+				'std'   => 4,
+				'label' => __( 'Number of shots to show:', 'shaplatools' ),
+				'step'  => 1,
+				'min'   => 1,
+				'max'   => 10,
+			),
 		);
 
-		parent::__construct( $this->widget_id, $widget_name, $widget_options );
-
-		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
-	}
-
-	function get_cached_widget( $args ) {
-		$cache = wp_cache_get( $this->widget_id, 'widget' );
-
-		if ( ! is_array( $cache ) ) {
-			$cache = array();
-		}
-
-		if ( isset( $cache[ $args['widget_id'] ] ) ) {
-			echo $cache[ $args['widget_id'] ];
-
-			return true;
-		}
-
-		return false;
-	}
-
-	public function cache_widget( $args, $content ) {
-		$cache[ $args['widget_id'] ] = $content;
-
-		wp_cache_set( $this->widget_id, $cache, 'widget' );
-	}
-
-	public function flush_widget_cache() {
-		wp_cache_delete( $this->widget_id, 'widget' );
+		parent::__construct();
 	}
 
 	function widget( $args, $instance ) {
-
 		if ( $this->get_cached_widget( $args ) ) {
 			return;
 		}
 
 		ob_start();
 
-		extract( $args );
+		$title = apply_filters( 'widget_title', $instance['title'] );
+		$count = absint( $instance['count'] );
+		$index = 0;
 
-		echo $before_widget;
+		/* Display the widget title if one was input (before and after defined by themes). */
+		echo $args['before_widget'];
 
-		$title         = apply_filters( 'widget_title', $instance['title'] );
-		$dribbble_name = esc_html( $instance['dribbble_name'] );
-		$count         = absint( $instance['dribbble_shots'] );
-		$new_window    = $instance['new_window'];
-
-		// Includes feed function
-		include_once( ABSPATH . WPINC . '/feed.php' );
-
-		$rss = fetch_feed( "https://dribbble.com/$dribbble_name/shots.rss" );
-
-		add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 1800;' ) );
-
-		if ( ! is_wp_error( $rss ) ) {
-			$items = $rss->get_items( 0, $rss->get_item_quantity( $count ) );
+		if ( ! empty( $title ) ) {
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
-		?>
-		<?php if ( $title ) {
-			echo $before_title . $title . $after_title;
-		} ?>
-        <ul class="dribbble-list">
-			<?php if ( isset( $items ) ) : ?>
-				<?php foreach ( $items as $item ) :
-					$shot_title = $item->get_title();
-					$shot_link = $item->get_permalink();
-					$shot_date = $item->get_date( 'F d, Y' );
-					$shot_description = $item->get_description();
-
-					preg_match( "/src=\"(http.*(jpg|jpeg|gif|png))/", $shot_description, $shot_image_url );
-					$shot_image = $shot_image_url[1];
+		$options = get_option( 'shaplatools_options' );
+		if ( empty( $options['dribbble_access_token'] ) ) {
+			if ( current_user_can( 'edit_theme_options' ) ) {
+				?>
+                <p class="shapla-alert shapla-alert--red">
+					<?php
+					echo sprintf(
+						__( 'Please generate an access token from <a href="">ShaplaTools settings</a>', 'shaplatools' ),
+						admin_url( 'options-general.php?page=shaplatools' )
+					);
 					?>
-                    <li class="dribbble-list-item">
-                        <a href="<?php echo esc_url( $shot_link ); ?>" class="dribbble-link"
-                           title="<?php echo $shot_title; ?>" <?php if ( $new_window == 1 ) {
-							echo 'target="_blank"';
-						} ?>>
-                            <img src="<?php echo $shot_image; ?>" alt="<?php echo $shot_title; ?>">
+                </p>
+				<?php
+			}
+
+			return;
+		}
+
+		$shots = $this->dribbble_shots( $options['dribbble_access_token'], $count );
+		?>
+        <ul class="dribbbles">
+			<?php if ( ! empty( $shots ) ) : ?>
+				<?php foreach ( $shots as $shot ) : ?>
+                    <li class="dribbble-shot">
+                        <a href="<?php echo esc_url( $shot->html_url ); ?>" class="dribbble-link"
+                           title="<?php echo esc_attr( $shot->title ); ?>">
+                            <img src="<?php echo esc_url( $shot->images->normal ); ?>"
+                                 srcset="<?php echo esc_url( $shot->images->normal ); ?> 1x, <?php echo esc_url( $shot->images->hidpi ); ?> 2x"
+                                 alt="<?php echo esc_attr( $shot->title ); ?>"
+                                 width="<?php echo esc_attr( $shot->width ); ?>"
+                                 height="<?php echo esc_attr( $shot->height ); ?>">
                         </a>
                     </li>
+					<?php
+					$index ++;
+					if ( $index === $count ) {
+						break;
+					}
+					?>
 				<?php endforeach; ?>
-			<?php else: ?>
-				<?php _x( 'Please check your dribbble username', 'Dribbble username error message', 'shaplatools' ); ?>
 			<?php endif; ?>
         </ul>
+
 		<?php
-		echo $after_widget;
+		echo $args['after_widget'];
 
 		$content = ob_get_clean();
 
@@ -119,63 +103,53 @@ class Shapla_Dribbble_Widget extends WP_Widget {
 		$this->cache_widget( $args, $content );
 	}
 
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
+	/**
+	 * Get Dribbble shots.
+	 *
+	 * @param string $username Dribbble username.
+	 * @param string $access_token Client access token.
+	 * @param int $count Number of posts to return.
+	 *
+	 * @since 2.2.0.
+	 *
+	 * @return mixed
+	 */
+	public function dribbble_shots( $access_token, $count ) {
+		if ( '' === $access_token ) {
+			return false;
+		}
 
-		$instance['title']          = sanitize_text_field( $new_instance['title'] );
-		$instance['dribbble_name']  = sanitize_text_field( $new_instance['dribbble_name'] );
-		$instance['new_window']     = sanitize_text_field( $new_instance['new_window'] );
-		$instance['dribbble_shots'] = absint( $new_instance['dribbble_shots'] );
+		$transient_key = "shaplatools_dribble_${access_token}_${count}";
+		$shots         = get_transient( $transient_key );
 
-		$this->flush_widget_cache();
+		if ( empty( $shots ) || false === $shots ) {
+			$remote_url = add_query_arg( array(
+				'access_token' => $access_token,
+				'per_page'     => $count,
+			), 'https://api.dribbble.com/v2/user/shots' );
 
-		return $instance;
+			$request = wp_remote_get( $remote_url, array(
+				'sslverify' => false,
+			) );
+
+			if ( is_wp_error( $request ) ) {
+				return false;
+			} else {
+				$body  = wp_remote_retrieve_body( $request );
+				$shots = json_decode( $body );
+
+				if ( ! empty( $shots ) ) {
+					set_transient( $transient_key, $shots, DAY_IN_SECONDS );
+				}
+			}
+		}
+
+		return $shots;
 	}
 
-	function form( $instance ) {
-		$defaults = array(
-			'title'          => __( 'Dribbble Shots', 'shaplatools' ),
-			'dribbble_name'  => '',
-			'dribbble_shots' => 4,
-			'new_window'     => ''
-		);
-
-		$instance = wp_parse_args( (array) $instance, $defaults );
-
-		?>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'shaplatools' ); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>">
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'dribbble_name' ); ?>"><?php _e( 'Username:', 'shaplatools' ); ?></label>
-            <input type="text" class="widefat" id="<?php echo $this->get_field_id( 'dribbble_name' ); ?>"
-                   name="<?php echo $this->get_field_name( 'dribbble_name' ); ?>"
-                   value="<?php echo $instance['dribbble_name']; ?>">
-        </p>
-
-        <p>
-            <label for="<?php echo $this->get_field_id( 'dribbble_shots' ); ?>"><?php _e( 'Number of shots to show:', 'shaplatools' ); ?></label>
-            <input type="number" min="1" max="10" step="1" class="small-text"
-                   id="<?php echo $this->get_field_id( 'dribbble_shots' ); ?>"
-                   name="<?php echo $this->get_field_name( 'dribbble_shots' ); ?>"
-                   value="<?php echo $instance['dribbble_shots']; ?>">
-        </p>
-
-        <p>
-            <input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'new_window' ); ?>"
-                   name="<?php echo $this->get_field_name( 'new_window' ); ?>"
-                   value="1" <?php checked( $instance['new_window'], 1 ); ?>>
-            <label for="<?php echo $this->get_field_id( 'new_window' ); ?>"><?php _e( 'Open links in new window?', 'shaplatools' ); ?></label>
-        </p>
-
-		<?php
+	public static function register() {
+		register_widget( __CLASS__ );
 	}
 }
 
-add_action( 'widgets_init', function () {
-	register_widget( "Shapla_Dribbble_Widget" );
-} );
+add_action( 'widgets_init', array( 'Shapla_Dribbble_Widget', 'register' ) );
