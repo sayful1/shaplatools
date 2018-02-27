@@ -1,18 +1,26 @@
 /* Shapla Icon */
 .shapla-icon-link {
-	text-decoration: none;
-	transition: color 150ms;
+    text-decoration: none;
+    transition: color 150ms;
 }
 
 .fa,
 .shapla-icon {
-	text-align: center;
-	vertical-align: middle;
-	&--before & {
-		margin-right: 0.7em;
-	}
+    text-align: center;
+    vertical-align: middle;
+    &--before & {
+        margin-right: 0.7em;
+    }
 
-	&--after & {
-		margin-left: 0.7em;
-	}
+    &--after & {
+        margin-left: 0.7em;
+    }
+}
+
+.shapla-icon--before svg {
+    margin-right: 0.7em;
+}
+
+.shapla-icon--after svg {
+    margin-left: 0.7em;
 }

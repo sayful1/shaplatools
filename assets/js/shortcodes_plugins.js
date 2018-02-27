@@ -5,7 +5,6 @@
  * 2. jQuery Appendo
  * 3. base64.js
  * 4. custom
- *
  */
 
 // 1. jQuery Live Query

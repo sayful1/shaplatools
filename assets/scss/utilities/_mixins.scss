@@ -1,61 +1,62 @@
 @mixin clearfix {
-	&:before,
-	&:after {
-		content: " ";
-		display: table;
-	}
-	&:after {
-		clear: both;
-	}
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
 }
 
 @mixin fa-icon($code:null) {
-	@if $code {
-		content: "#{$code}";
-	} @else {
-		@content;
-	}
-	display: inline-block;
-	font: normal normal normal 1em/1 FontAwesome;
-	font-size: inherit;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    @if $code {
+        content: "#{$code}";
+    } @else {
+        @content;
+    }
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 @mixin bg-color($bg_color, $color: null) {
-	background-color: $bg_color;
+    background-color: $bg_color;
 
-	@if $color {
-		color: "#{$color}";
-	} @else {
-		color: findColorInvert($bg_color);
-	}
+    @if $color {
+        color: "#{$color}";
+    } @else {
+        color: findColorInvert($bg_color);
+    }
 }
 
 @mixin text-color($color) {
-	color: $color;
+    color: $color;
 }
 
 @mixin border-color($color) {
-	border-color: $color;
+    border-color: $color;
 }
 
 @mixin loader() {
-	&::before {
-		@include fa-icon();
-		content: "\f110";
-		-webkit-animation: fa-spin .75s linear infinite;
-		-moz-animation: fa-spin .75s linear infinite;
-		animation: fa-spin .75s linear infinite;
-		height: 30px;
-		width: 30px;
-		line-height: 30px;
-		font-size: 30px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		margin-left: -15px;
-		margin-top: -15px;
-	}
+    &::before {
+        @include fa-icon();
+        content: "\f110";
+        -webkit-animation: fa-spin .75s linear infinite;
+        -moz-animation: fa-spin .75s linear infinite;
+        animation: fa-spin .75s linear infinite;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -15px;
+        margin-top: -15px;
+    }
 }
