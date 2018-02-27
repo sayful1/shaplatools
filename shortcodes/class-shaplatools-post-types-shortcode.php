@@ -4,8 +4,8 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ) {
 	class ShaplaTools_Post_Types_Shortcode {
 
 		public function __construct() {
-			add_shortcode( 'shapla_slide', array( $this, 'shapla_slide' ) );
-			add_shortcode( 'shapla_portfolio', array( $this, 'shapla_portfolio' ) );
+			add_shortcode( 'shapla_slide', array( __CLASS__, 'shapla_slide' ) );
+			add_shortcode( 'shapla_portfolio', array( __CLASS__, 'shapla_portfolio' ) );
 		}
 
 		/**
@@ -16,7 +16,7 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ) {
 		 *
 		 * @return string  The shortcode output
 		 */
-		public function shapla_slide( $attributes, $content = null ) {
+		public static function shapla_slide( $attributes, $content = null ) {
 			$default_attributes = array(
 				'id' => ''
 			);
@@ -39,7 +39,7 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ) {
 		 *
 		 * @return string  The shortcode output
 		 */
-		public function shapla_portfolio( $attributes, $content = null ) {
+		public static function shapla_portfolio( $attributes, $content = null ) {
 			$default_attributes = array(
 				'thumbnail'      => 'm4',
 				'thumbnail_size' => 'medium'

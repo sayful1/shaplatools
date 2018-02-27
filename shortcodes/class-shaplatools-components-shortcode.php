@@ -1,25 +1,33 @@
 <?php
-if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
+if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 
 	class Shaplatools_Components_Shortcode {
 
+		/**
+		 * Shaplatools_Components_Shortcode constructor.
+		 */
 		public function __construct() {
-			add_shortcode( 'shapla_button', array( $this, 'shapla_button' ) );
-			add_shortcode( 'shapla_icon', array( $this, 'shapla_icon' ) );
-			add_shortcode( 'shapla_social', array( $this, 'shapla_social' ) );
-			add_shortcode( 'shapla_map', array( $this, 'shapla_map' ) );
-			add_shortcode( 'shapla_video', array( $this, 'shapla_video' ) );
-			add_shortcode( 'shapla_image', array( $this, 'shapla_image' ) );
-			add_shortcode( 'shapla_dropcap', array( $this, 'shapla_dropcap' ) );
-			add_shortcode( 'shapla_toggle', array( $this, 'shapla_toggle' ) );
-			add_shortcode( 'shapla_tabs', array( $this, 'shapla_tabs' ) );
-			add_shortcode( 'shapla_tab', array( $this, 'shapla_tab' ) );
+			add_shortcode( 'shapla_button', array( __CLASS__, 'shapla_button' ) );
+			add_shortcode( 'shapla_icon', array( __CLASS__, 'shapla_icon' ) );
+			add_shortcode( 'shapla_social', array( __CLASS__, 'shapla_social' ) );
+			add_shortcode( 'shapla_map', array( __CLASS__, 'shapla_map' ) );
+			add_shortcode( 'shapla_video', array( __CLASS__, 'shapla_video' ) );
+			add_shortcode( 'shapla_image', array( __CLASS__, 'shapla_image' ) );
+			add_shortcode( 'shapla_dropcap', array( __CLASS__, 'shapla_dropcap' ) );
+			add_shortcode( 'shapla_toggle', array( __CLASS__, 'shapla_toggle' ) );
+			add_shortcode( 'shapla_tabs', array( __CLASS__, 'shapla_tabs' ) );
+			add_shortcode( 'shapla_tab', array( __CLASS__, 'shapla_tab' ) );
 		}
 
 		/**
 		 * Shapla button
+		 *
+		 * @param $atts
+		 * @param null $content
+		 *
+		 * @return string
 		 */
-		public function shapla_button( $atts, $content = null ) {
+		public static function shapla_button( $atts, $content = null ) {
 			$args = shortcode_atts( array(
 				'url'        => '#',
 				'target'     => '_self',
@@ -30,18 +38,17 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 				'icon_order' => 'before',
 			), $atts, 'purchase_link' );
 
-			$button_icon = '';
-			$class       = " shapla-button--{$args['size']}";
-			$class       .= " shapla-button--{$args['style']}";
-			$class       .= " shapla-button--{$args['type']}";
+			$class = " shapla-button--{$args['size']}";
+			$class .= " shapla-button--{$args['style']}";
+			$class .= " shapla-button--{$args['type']}";
 
 			if ( ! empty( $args['icon'] ) ) {
 				if ( $args['icon_order'] == 'before' ) {
-					$button_content = $this->shapla_icon( array( 'icon' => $args['icon'] ) );
+					$button_content = self::shapla_icon( array( 'icon' => $args['icon'] ) );
 					$button_content .= do_shortcode( $content );
 				} else {
 					$button_content = do_shortcode( $content );
-					$button_content .= $this->shapla_icon( array( 'icon' => $args['icon'] ) );
+					$button_content .= self::shapla_icon( array( 'icon' => $args['icon'] ) );
 				}
 				$class .= " shapla-icon--{$args['icon_order']}";
 			} else {
@@ -51,10 +58,15 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return '<a target="' . esc_attr( $args['target'] ) . '" href="' . esc_url( $args['url'] ) . '" class="shapla-button' . esc_attr( $class ) . '">' . $button_content . '</a>';
 		}
 
+
 		/**
 		 * FontAwesome Icon shortcode.
+		 *
+		 * @param $atts
+		 *
+		 * @return string
 		 */
-		public function shapla_icon( $atts, $content = null ) {
+		public static function shapla_icon( $atts ) {
 			$args = shortcode_atts( array(
 				'icon'       => '',
 				'url'        => '',
@@ -69,16 +81,13 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			$output = '';
 			$attrs  = '';
 
-			if ( ! empty( $args['url'] ) ) {
-				$a_attrs = ' href="' . esc_url( $args['url'] ) . '" target="' . esc_attr( $new_window ) . '"';
-			}
-
 			if ( ! empty( $size ) ) {
 				$attrs .= ' style="font-size:' . $size . ';line-height:' . $size . '"';
 			}
 
-			if ( $args['url'] != '' ) {
-				$output .= '<a class="shapla-icon-link" ' . $a_attrs . '><i class="fa fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i></a>';
+			if ( ! empty( $args['url'] ) ) {
+				$a_attrs = ' href="' . esc_url( $args['url'] ) . '" target="' . esc_attr( $new_window ) . '"';
+				$output  .= '<a class="shapla-icon-link" ' . $a_attrs . '><i class="fa fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i></a>';
 			} else {
 				$output .= '<i class="fa fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i>';
 			}
@@ -87,12 +96,13 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 		}
 
 		/**
-		 * Social shortcode.
 		 * Display links to social profiles.
 		 *
-		 * @since 1.0.0
+		 * @param $atts
+		 *
+		 * @return string
 		 */
-		public function shapla_social( $atts ) {
+		public static function shapla_social( $atts ) {
 			$args = shortcode_atts( array(
 				'id'    => 'all',
 				'style' => 'normal',
@@ -133,15 +143,16 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			$output .= '</div>';
 
 			return $output;
-
 		}
 
 		/**
 		 * Google Map Shortcode
 		 *
-		 * @since 1.0.0
+		 * @param $atts
+		 *
+		 * @return string
 		 */
-		public function shapla_map( $atts ) {
+		public static function shapla_map( $atts ) {
 			$args = shortcode_atts( array(
 				'lat'    => '37.42200',
 				'long'   => '-122.08395',
@@ -204,7 +215,12 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return ob_get_clean();
 		}
 
-		public function shapla_video( $atts, $content = null ) {
+		/**
+		 * @param $atts
+		 *
+		 * @return string
+		 */
+		public static function shapla_video( $atts ) {
 			$args = shortcode_atts( array(
 				'src' => '',
 			), $atts, 'shapla_video' );
@@ -212,7 +228,12 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return '<div class="shapla-section shapla-video">' . $GLOBALS['wp_embed']->run_shortcode( '[embed]' . esc_url( $args['src'] ) . '[/embed]' ) . '</div>';
 		}
 
-		public function shapla_image( $atts, $content = null ) {
+		/**
+		 * @param $atts
+		 *
+		 * @return string
+		 */
+		public static function shapla_image( $atts ) {
 			$args = shortcode_atts( array(
 				'style'     => 'grayscale',
 				'alignment' => 'none',
@@ -233,7 +254,13 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return $output;
 		}
 
-		public function shapla_toggle( $atts, $content = null ) {
+		/**
+		 * @param $atts
+		 * @param null $content
+		 *
+		 * @return string
+		 */
+		public static function shapla_toggle( $atts, $content = null ) {
 			$args = shortcode_atts( array(
 				'title' => __( 'Title Goes Here', 'shaplatools' ),
 				'state' => 'open',
@@ -245,7 +272,13 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return '<div data-id="' . esc_attr( $args['state'] ) . '" class="shapla-section shapla-toggle shapla-toggle--' . esc_attr( $args['style'] ) . '"><span class="shapla-toggle-title">' . esc_html( $args['title'] ) . '</span><div class="shapla-toggle-inner"><div class="shapla-toggle-content">' . do_shortcode( $content ) . '</div></div></div>';
 		}
 
-		public function shapla_dropcap( $atts, $content = null ) {
+		/**
+		 * @param $atts
+		 * @param null $content
+		 *
+		 * @return string
+		 */
+		public static function shapla_dropcap( $atts, $content = null ) {
 			$args = shortcode_atts( array(
 				'style'     => 'normal',
 				'font_size' => '50px',
@@ -256,8 +289,13 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 
 		/**
 		 * Shortcode for tabs.
+		 *
+		 * @param $atts
+		 * @param null $content
+		 *
+		 * @return string
 		 */
-		function shapla_tabs( $atts, $content = null ) {
+		public static function shapla_tabs( $atts, $content = null ) {
 			$args = shortcode_atts( array(
 				'style' => 'normal',
 			), $atts, 'shapla_tabs' );
@@ -291,7 +329,15 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return $output;
 		}
 
-		function shapla_tab( $atts, $content = null ) {
+		/**
+		 * Shapla Tab Shortcode
+		 *
+		 * @param $atts
+		 * @param null $content
+		 *
+		 * @return string
+		 */
+		public static function shapla_tab( $atts, $content = null ) {
 			$args = shortcode_atts( array(
 				'title' => __( 'Tab', 'shaplatools' )
 			), $atts, 'shapla_tab' );
@@ -299,5 +345,5 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			return '<div id="shapla-tab-' . sanitize_title( $args['title'] ) . '" class="shapla-tab">' . do_shortcode( $content ) . '</div>';
 		}
 	}
+}
 
-endif;
