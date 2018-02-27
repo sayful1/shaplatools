@@ -36,11 +36,11 @@
 }
 
 #shapla-sc-form-wrap {
-  background: #1b93c7;
-  font-weight: bold;
-  color: white;
-  padding: 23px 10px;
-  font-size: 13px;
+	background: #1b93c7;
+	font-weight: bold;
+	color: white;
+	padding: 23px 10px;
+	font-size: 13px;
 }
 
 #shapla-sc-form-head {
@@ -48,7 +48,7 @@
 	padding: 0;
 	line-height: 1;
 	font-weight: normal;
-	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
 	display: inline-block;
 	color: white;
 }
@@ -115,7 +115,6 @@
 	}
 }
 
-
 .shapla-input {
 	width: 100%;
 }
@@ -178,7 +177,7 @@
 }
 
 /* Retina Queries */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 	.mceIcon.mce_shaplaShortcodes,
 	.mce-i-shaplatools {
 		background-image: url($shapla-logo-2x-url) !important;
@@ -225,15 +224,11 @@
 		&.active-icon {
 			color: #D54E21 !important;
 		}
-		
+
 		&:hover {
 			color: #278AB7;
 			background: #fff;
 			z-index: 10;
-			-webkit-transform: scale(1.3);
-			-moz-webkit-transform: scale(1.3);
-			-ms-webkit-transform: scale(1.3);
-			-o-webkit-transform: scale(1.3);
 			transform: scale(1.3);
 		}
 	}
@@ -247,4 +242,40 @@
 
 #TB_ajaxContent#TB_ajaxContent {
 	padding: 0 !important;
+}
+
+#TB_window {
+	overflow-x: hidden !important;
+	overflow-y: hidden !important;
+}
+
+.shapla-control-buttonset {
+	position: relative;
+	width: 100%;
+	padding: 1px;
+	overflow: auto;
+	height: auto;
+
+	input[type="radio"] {
+		display: none;
+	}
+
+	label {
+		display: inline-block;
+		float: left;
+		font-size: 13px;
+		outline: 1px solid #ccc;
+		line-height: 28px;
+		padding: 5px 10px;
+		border: none #ccc;
+
+		&.ui-state-default {
+			background: #fff;
+		}
+
+		&.ui-state-active {
+			color: #fff;
+			background: #1b93c7;
+		}
+	}
 }
