@@ -150,6 +150,8 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 		}
 
 		public function init() {
+			add_filter( 'script_loader_tag', array( &$this, 'add_defer_attribute' ), 10, 2 );
+
 			$theme_supports = get_theme_support( 'shaplatools' );
 
 			if ( false === $theme_supports ) {
@@ -226,32 +228,53 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 		}
 
 		public function enqueue_scripts() {
-			wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/css/font-awesome.min.css', '', '4.7.0', 'all' );
-			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', '', $this->version, 'all' );
-			wp_register_script( 'shapla-shortcode-scripts', SHAPLATOOLS_ASSETS . '/js/shapla-shortcode-scripts.js', array(
-				'jquery',
-				'jquery-ui-accordion',
-				'jquery-ui-tabs'
-			), $this->version, true );
+			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', '', SHAPLATOOLS_VERSION, 'all' );
+			wp_register_script( 'shapla-shortcode-scripts', SHAPLATOOLS_ASSETS . '/js/shapla-shortcode-scripts.js',
+				array(
+					'jquery',
+					'jquery-ui-accordion',
+					'jquery-ui-tabs'
+				), $this->version, true );
 
-			wp_register_script( 'retinajs', SHAPLATOOLS_ASSETS . '/library/retina.min.js', array(), '2.1.0', true );
-			wp_register_script( 'owl-carousel', SHAPLATOOLS_ASSETS . '/library/owl.carousel.min.js', array( 'jquery' ), '2.0.0', true );
+			wp_enqueue_script( 'shapla-shortcode-scripts' );
+
+			// Font Awesome Free 5.0.7
+			wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/lib/font-awesome/css/fontawesome-all.min.css', '', '5.0.6', 'all' );
+			wp_enqueue_script( 'font-awesome-v5-svg', SHAPLATOOLS_ASSETS . '/lib/font-awesome/js/fontawesome-all.min.js', array(), '5.0.6', true );
+			wp_enqueue_script( 'font-awesome-v4-shim', SHAPLATOOLS_ASSETS . '/lib/font-awesome/js/fa-v4-shims.min.js', array( 'font-awesome-v5-svg' ), '5.0.6', true );
+
+			// Nivo Slider Script
 			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/library/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
-			wp_register_script( 'typeahead', SHAPLATOOLS_ASSETS . '/library/typeahead.min.js', array( 'jquery' ), $this->version, true );
-			wp_register_script( 'shuffle', SHAPLATOOLS_ASSETS . '/library/shuffle.min.js', array( 'jquery' ), $this->version, true );
-
 			if ( $this->has_shortcode( 'shapla_slide' ) ) {
 				wp_enqueue_script( 'nivo-slider' );
 			}
 
-			if ( $this->has_shortcode( 'shapla_portfolio' ) ) {
-				wp_enqueue_script( 'shuffle' );
-			}
-
-			wp_localize_script( 'jquery', 'shaplatools', array(
+			wp_localize_script( 'jquery', 'ShaplaTools', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'shaplatools_nonce' ),
 			) );
+		}
+
+		/**
+		 * Add defer attribute to selected scripts.
+		 *
+		 * @since 2.2.3.
+		 *
+		 * @param string $tag Script tag.
+		 * @param string $handle Script handle.
+		 *
+		 * @return mixed
+		 */
+		public function add_defer_attribute( $tag, $handle ) {
+			$scripts_to_defer = array( 'shapla-shortcode-scripts', 'font-awesome-v5-svg', 'font-awesome-v4-shim' );
+
+			foreach ( $scripts_to_defer as $defer_script ) {
+				if ( $defer_script === $handle ) {
+					return str_replace( ' src', ' async defer src', $tag );
+				}
+			}
+
+			return $tag;
 		}
 
 		public function admin_scripts( $hook ) {
@@ -259,10 +282,14 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_script( 'jquery-ui-datepicker' );
+			wp_enqueue_script( 'jquery-ui-button' );
 			wp_enqueue_media();
 
-			wp_enqueue_style( 'shaplatools-admin', SHAPLATOOLS_ASSETS . '/css/admin-style.css', array(), $this->version, 'all' );
-			wp_enqueue_script( 'shaplatools-media-gallery', SHAPLATOOLS_ASSETS . '/js/admin-media-gallery.js', array( 'jquery' ), $this->version, true );
+			wp_enqueue_style( 'shaplatools-admin', SHAPLATOOLS_ASSETS . '/css/admin-style.css', array(),
+				SHAPLATOOLS_VERSION, 'all' );
+			wp_enqueue_script( 'shaplatools-media-gallery', SHAPLATOOLS_ASSETS . '/js/admin-media-gallery.js',
+				array( 'jquery' ), SHAPLATOOLS_VERSION, true );
+
 			wp_localize_script( 'jquery', 'shaplatools', array(
 				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( 'shaplatools_nonce' ),
@@ -272,13 +299,12 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 
 			if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 
-				wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/css/font-awesome.min.css', '', '4.7.0', 'all' );
-
+				// Font Awesome Free 5.0.7
+				wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/lib/font-awesome/css/fontawesome-all.min.css', '', '5.0.6', 'all' );
 				wp_register_script( 'font-awesome-icons-list', SHAPLATOOLS_ASSETS . '/js/icons.js', array(), false, true );
-				wp_enqueue_script( 'font-awesome-icons-list' );
 
-				wp_enqueue_script( 'jquery-ui-sortable' );
-				wp_enqueue_script( 'shapla-shortcode-plugins', SHAPLATOOLS_ASSETS . '/js/shortcodes_plugins.js', array( 'font-awesome-icons-list' ), $this->version, true );
+				wp_enqueue_script( 'shapla-shortcode-plugins', SHAPLATOOLS_ASSETS . '/js/shortcodes_plugins.js',
+					array( 'jquery-ui-sortable', 'font-awesome-icons-list' ), SHAPLATOOLS_VERSION, true );
 
 				wp_localize_script( 'jquery', 'ShaplaShortcodes', array(
 					'plugin_folder'           => WP_PLUGIN_URL . '/shortcodes',

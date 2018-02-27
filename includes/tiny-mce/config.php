@@ -43,14 +43,20 @@ $shapla_shortcodes['columns'] = array(
 $shapla_shortcodes['button'] = array(
 	'no_preview'  => true,
 	'params'      => array(
-		'url'        => array(
+		'button-url'        => array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Button URL', 'shaplatools' ),
-			'desc'  => __( 'Add the button&lsquo;s url e.g. http://example.com', 'shaplatools' )
+			'desc'  => __( 'Add the button&lsquo;s url e.g. https://example.com', 'shaplatools' )
 		),
-		'style'      => array(
-			'type'    => 'select',
+		'button-content'    => array(
+			'std'   => 'Button Text',
+			'type'  => 'text',
+			'label' => __( 'Button&lsquo;s Text', 'shaplatools' ),
+			'desc'  => __( 'Add the button&lsquo;s text', 'shaplatools' ),
+		),
+		'button-style'      => array(
+			'type'    => 'buttonset',
 			'label'   => __( 'Button Style', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s style, ie the button&lsquo;s colour', 'shaplatools' ),
 			'std'     => 'black',
@@ -66,8 +72,8 @@ $shapla_shortcodes['button'] = array(
 				'white'      => __( 'White', 'shaplatools' )
 			)
 		),
-		'size'       => array(
-			'type'    => 'select',
+		'button-size'       => array(
+			'type'    => 'buttonset',
 			'label'   => __( 'Button Size', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s size', 'shaplatools' ),
 			'std'     => 'small',
@@ -77,10 +83,11 @@ $shapla_shortcodes['button'] = array(
 				'large'  => __( 'Large', 'shaplatools' )
 			)
 		),
-		'type'       => array(
-			'type'    => 'select',
+		'button-type'       => array(
+			'type'    => 'buttonset',
 			'label'   => __( 'Button Type', 'shaplatools' ),
 			'desc'    => __( 'Select the button&lsquo;s type', 'shaplatools' ),
+			'std'     => 'normal',
 			'options' => array(
 				'normal' => __( 'Normal', 'shaplatools' ),
 				'stroke' => __( 'Stroke', 'shaplatools' )
@@ -92,8 +99,8 @@ $shapla_shortcodes['button'] = array(
 			'label' => __( 'Button Icon', 'shaplatools' ),
 			'desc'  => __( 'Choose an icon', 'shaplatools' )
 		),
-		'icon_order' => array(
-			'type'    => 'select',
+		'button-icon_order' => array(
+			'type'    => 'buttonset',
 			'label'   => __( 'Font Order', 'shaplatools' ),
 			'desc'    => __( 'Select if the icon should display before text or after text.', 'shaplatools' ),
 			'std'     => 'before',
@@ -102,24 +109,18 @@ $shapla_shortcodes['button'] = array(
 				'after'  => __( 'After Text', 'shaplatools' )
 			)
 		),
-		'target'     => array(
-			'type'    => 'select',
+		'button-target'     => array(
+			'type'    => 'buttonset',
 			'label'   => __( 'Button Target', 'shaplatools' ),
-			'desc'    => __( '_self = open in same window. _blank = open in new window', 'shaplatools' ),
+			'desc'    => '',
 			'std'     => '_self',
 			'options' => array(
-				'_self'  => __( '_self', 'shaplatools' ),
-				'_blank' => __( '_blank', 'shaplatools' )
+				'_self'  => __( 'Same Window', 'shaplatools' ),
+				'_blank' => __( 'New Window', 'shaplatools' )
 			)
 		),
-		'content'    => array(
-			'std'   => 'Button Text',
-			'type'  => 'text',
-			'label' => __( 'Button&lsquo;s Text', 'shaplatools' ),
-			'desc'  => __( 'Add the button&lsquo;s text', 'shaplatools' ),
-		)
 	),
-	'shortcode'   => '[shapla_button url="{{url}}" style="{{style}}" size="{{size}}" type="{{type}}" target="{{target}}" icon="{{icon}}" icon_order="{{icon_order}}"]{{content}}[/shapla_button]',
+	'shortcode'   => '[shapla_button url="{{button-url}}" style="{{button-style}}" size="{{button-size}}" type="{{button-type}}" target="{{button-target}}" icon="{{icon}}" icon_order="{{button-icon_order}}"]{{button-content}}[/shapla_button]',
 	'popup_title' => __( 'Insert Button Shortcode', 'shaplatools' )
 );
 
@@ -127,7 +128,7 @@ $shapla_shortcodes['toggle'] = array(
 	'no_preview'  => true,
 	'params'      => array(
 		'style'   => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Toggle Style', 'shaplatools' ),
 			'desc'    => __( 'Select the toggle&lsquo;s style', 'shaplatools' ),
 			'options' => array(
@@ -148,7 +149,7 @@ $shapla_shortcodes['toggle'] = array(
 			'desc'  => __( 'Add the toggle content. Will accept HTML', 'shaplatools' ),
 		),
 		'state'   => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Toggle State', 'shaplatools' ),
 			'desc'    => __( 'Select the state of the toggle on page load', 'shaplatools' ),
 			'options' => array(
@@ -164,7 +165,7 @@ $shapla_shortcodes['toggle'] = array(
 $shapla_shortcodes['tabs'] = array(
 	'params'          => array(
 		'style' => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Tabs Style', 'shaplatools' ),
 			'desc'    => __( 'Select the tabs&lsquo;s style', 'shaplatools' ),
 			'options' => array(
@@ -200,7 +201,7 @@ $shapla_shortcodes['dropcap'] = array(
 	'no_preview'  => true,
 	'params'      => array(
 		'style'   => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Dropcap Style', 'shaplatools' ),
 			'desc'    => __( 'Select the dropcap&lsquo;s style', 'shaplatools' ),
 			'options' => array(
@@ -235,7 +236,7 @@ $shapla_shortcodes['image'] = array(
 			'desc'  => __( 'Choose your image', 'shaplatools' )
 		),
 		'style'     => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Image Filter', 'shaplatools' ),
 			'desc'    => __( 'Select the CSS3 image filter style', 'shaplatools' ),
 			'std'     => 'no-filter',
@@ -251,7 +252,7 @@ $shapla_shortcodes['image'] = array(
 			)
 		),
 		'alignment' => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Alignment', 'shaplatools' ),
 			'desc'    => __( 'Choose Image Alignment', 'shaplatools' ),
 			'std'     => 'none',
@@ -304,7 +305,7 @@ $shapla_shortcodes['icon'] = array(
 			'desc'  => __( 'Enter the URL where icon should be linked (optional)', 'shaplatools' )
 		),
 		'new_window' => array(
-			'type'    => 'select',
+			'type'    => 'buttonset',
 			'label'   => __( 'Open in new window', 'shaplatools' ),
 			'desc'    => __( 'Do you want to open the link in a new window?', 'shaplatools' ),
 			'options' => array(
@@ -372,7 +373,7 @@ $shapla_shortcodes['map'] = array(
 			'std'     => 'none',
 			'type'    => 'select',
 			'label'   => __( 'Map Style', 'shaplatools' ),
-			'desc'    => __( 'Select from a list of predefined map styles.', 'shaplatools' ),
+			'desc'    => __( 'Choose from a list of predefined map styles.', 'shaplatools' ),
 			'options' => array(
 				'none'             => __( 'None', 'shaplatools' ),
 				'pale_dawn'        => __( 'Pale Dawn', 'shaplatools' ),

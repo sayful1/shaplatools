@@ -166,75 +166,42 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ):
 			$shapla_options = get_option( 'shaplatools_options' );
 			$api_key        = ( isset( $shapla_options['google_map_api_key'] ) ) ? $shapla_options['google_map_api_key'] : '';
 
-			if ( '' != $api_key ) {
-				wp_enqueue_script( 'google-maps', add_query_arg( 'key', $api_key, 'https://maps.googleapis.com/maps/api/js' ), array( 'jquery' ) );
-			} else {
-				if ( current_user_can( 'edit_posts' ) ) :
-					echo '<p class="shapla-alert shapla-red">';
 
+			if ( empty( $api_key ) ) {
+				$html = '';
+				if ( current_user_can( 'edit_posts' ) ) {
+					$html .= '<p class="shapla-alert shapla-red">';
 					/* translators: %s is a link, do not remove/modify it. */
-					echo sprintf( esc_html__( 'To be able to use Google Maps, you first need to set an %s.', 'shaplatools' ),
+					$html .= sprintf( esc_html__( 'To be able to use Google Maps, you first need to set an %s.', 'shaplatools' ),
 						sprintf( '<a href="' . admin_url( 'options-general.php?page=shaplatools' ) . '">%1$s</a>', esc_html__( 'API key', 'shaplatools' ) )
 					);
-					echo '</p>';
-				endif;
+					$html .= '</p>';
+				}
 
-				return;
+				return $html;
 			}
 
+			wp_enqueue_script( 'google-maps', add_query_arg( 'key', $api_key, 'https://maps.googleapis.com/maps/api/js' ), '', '', true );
+			wp_enqueue_script( 'shapla-shortcode-scripts' );
+			$options = array(
+				'id'        => $map_id,
+				'styles'    => json_decode( $map_styles[ $args['style'] ] ),
+				'zoom'      => $args['zoom'],
+				'mapTypeId' => 'google.maps.MapTypeId.' . strtoupper( $args['type'] ),
+				'center'    => array(
+					'lat'  => $args['lat'],
+					'long' => $args['long'],
+				),
+			);
+
+			ob_start();
 			?>
-
-            <script type="text/javascript">
-                jQuery(window).load(function () {
-                    var Shaplatools = {};
-
-                    Shaplatools.Map = (function ($) {
-                        function setupMap(options) {
-                            var mapOptions, mapElement, map, marker;
-
-                            if (typeof google === 'undefined') return;
-
-                            mapOptions = {
-                                zoom: parseFloat(options.zoom),
-                                center: new google.maps.LatLng(options.center.lat, options.center.long),
-                                scrollwheel: false,
-                                styles: options.styles
-                            };
-
-                            mapElement = document.getElementById(options.id);
-                            map = new google.maps.Map(mapElement, mapOptions);
-
-                            marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(options.center.lat, options.center.long),
-                                map: map
-                            });
-                        }
-
-                        return {
-                            init: function (options) {
-                                setupMap(options);
-                            }
-                        }
-                    })(jQuery);
-
-                    var options = {
-                        id: "<?php echo esc_js( $map_id ); ?>",
-                        styles: <?php echo $map_styles[ $args['style'] ]; ?>,
-                        zoom: <?php echo esc_js( $args['zoom'] ); ?>,
-                        mapTypeId: google.maps.MapTypeId.<?php echo esc_js( strtoupper( $args['type'] ) ); ?>,
-                        center: {
-                            lat: "<?php echo esc_js( $args['lat'] ); ?>",
-                            long: "<?php echo esc_js( $args['long'] ); ?>"
-                        }
-                    };
-
-                    Shaplatools.Map.init(options);
-                });
-            </script>
-
+            <section id='<?php echo esc_attr( $map_id ); ?>' class='shapla-section shapla-google-map google-map'
+                     data-map_options='<?php echo wp_json_encode( $options ); ?>'
+                     style="width:<?php echo esc_attr( $args['width'] ) ?>;height:<?php echo esc_attr( $args['height'] ) ?>"></section>
 			<?php
 
-			return '<section id="' . esc_attr( $map_id ) . '" class="shapla-section google-map" style="width:' . esc_attr( $args['width'] ) . ';height:' . esc_attr( $args['height'] ) . '"></section>';
+			return ob_get_clean();
 		}
 
 		public function shapla_video( $atts, $content = null ) {
