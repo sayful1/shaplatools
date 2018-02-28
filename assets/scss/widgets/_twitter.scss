@@ -8,7 +8,7 @@
             padding: 1em 0;
 
             &:before {
-                @include fa-icon('\f099');
+                @include fa-icon('\f099', 'brands');
                 margin-right: 0.5em;
             }
 

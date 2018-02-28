@@ -1,10 +1,27 @@
-(function($){
-	"use strict";
+/** @global shaplatools */
+(function ($, wp) {
+
+    //Initializing jQuery UI Datepicker
+    $('.date-picker').datepicker({
+        dateFormat: 'MM dd, yy',
+        changeMonth: true,
+        changeYear: true,
+        onClose: function (selectedDate) {
+            $('.datepicker').datepicker('option', 'minDate', selectedDate);
+        }
+    });
+
+    // Initializing WordPress ColorPicker
+    $('.color-picker').each(function () {
+        $(this).wpColorPicker();
+    });
+
+    // Media Gallery
     var frame,
         images = shaplatools.image_ids,
         selection = loadImages(images);
 
-    $('#shaplatools_gallery_btn').on('click', function(e) {
+    $('#shaplatools_gallery_btn').on('click', function (e) {
         e.preventDefault();
         var options = {
             title: 'Create Gallery',
@@ -13,7 +30,7 @@
             selection: selection
         };
 
-        if( frame || selection ) {
+        if (frame || selection) {
             options['title'] = 'Edit Gallery';
         }
 
@@ -27,30 +44,30 @@
 
         // when editing a gallery
         overrideGalleryInsert();
-        frame.on( 'toolbar:render:gallery-edit', function() {
+        frame.on('toolbar:render:gallery-edit', function () {
             overrideGalleryInsert();
         });
 
-        frame.on( 'content:render:browse', function( browser ) {
-            if ( !browser ) return;
+        frame.on('content:render:browse', function (browser) {
+            if (!browser) return;
             // Hide Gallery Settings in sidebar
-            browser.sidebar.on('ready', function(){
+            browser.sidebar.on('ready', function () {
                 browser.sidebar.unset('gallery');
             });
             // Hide filter/search as they don't work
-            browser.toolbar.on('ready', function(){
-                if(browser.toolbar.controller._state == 'gallery-library'){
+            browser.toolbar.on('ready', function () {
+                if (browser.toolbar.controller._state === 'gallery-library') {
                     browser.toolbar.$el.hide();
                 }
             });
         });
 
         // All images removed
-        frame.state().get('library').on( 'remove', function() {
+        frame.state().get('library').on('remove', function () {
             var models = frame.state().get('library');
-            if(models.length == 0){
+            if (models.length === 0) {
                 selection = false;
-                $.post(shaplatools.ajaxurl, {
+                $.post(ajaxurl, {
                     ids: '',
                     action: 'shaplatools_save_images',
                     post_id: shaplatools.post_id,
@@ -59,16 +76,16 @@
             }
         });
 
-        function overrideGalleryInsert(){
+        function overrideGalleryInsert() {
             frame.toolbar.get('view').set({
                 insert: {
                     style: 'primary',
                     text: 'Save Gallery',
-                    click: function(){
+                    click: function () {
                         var models = frame.state().get('library'),
                             ids = '';
 
-                        models.each( function( attachment ) {
+                        models.each(function (attachment) {
                             ids += attachment.id + ','
                         });
 
@@ -76,21 +93,21 @@
 
                         $.ajax({
                             type: 'POST',
-                            url: shaplatools.ajaxurl,
+                            url: ajaxurl,
                             data: {
                                 ids: ids,
                                 action: 'shaplatools_save_images',
                                 post_id: shaplatools.post_id,
                                 nonce: shaplatools.nonce
                             },
-                            success: function(){
+                            success: function () {
                                 selection = loadImages(ids);
-                                $('#shaplatools_images_ids').val( ids );
+                                $('#shaplatools_images_ids').val(ids);
                                 frame.close();
                             },
                             dataType: 'html'
-                        }).done( function( data ) {
-                            $('.shaplatools_gallery_list').html( data );
+                        }).done(function (data) {
+                            $('.shaplatools_gallery_list').html(data);
                         });
                     }
                 }
@@ -99,26 +116,26 @@
 
     });
 
-    function loadImages(images){
-        if (images){
+    function loadImages(images) {
+        if (images) {
             var shortcode = new wp.shortcode({
-                tag:      'gallery',
-                attrs:    { ids: images },
-                type:     'single'
+                tag: 'gallery',
+                attrs: {ids: images},
+                type: 'single'
             });
 
-            var attachments = wp.media.gallery.attachments( shortcode );
+            var attachments = wp.media.gallery.attachments(shortcode);
 
-            var selection = new wp.media.model.Selection( attachments.models, {
-                props:    attachments.props.toJSON(),
+            var selection = new wp.media.model.Selection(attachments.models, {
+                props: attachments.props.toJSON(),
                 multiple: true
             });
 
             selection.gallery = attachments.gallery;
 
-            selection.more().done( function() {
+            selection.more().done(function () {
                 // Break ties with the query.
-                selection.props.set({ query: false });
+                selection.props.set({query: false});
                 selection.unmirror();
                 selection.props.unset('orderby');
             });
@@ -127,4 +144,5 @@
         }
         return false;
     }
-})(jQuery);
+
+})(jQuery, wp);

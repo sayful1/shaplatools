@@ -433,7 +433,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 					$table .= '<h2 class="title">' . esc_html( $section['title'] ) . '</h2>';
 				}
 				if ( ! empty( $section['description'] ) ) {
-					$table .= '<p class="description">' . wp_filter_post_kses( $section['description'] ) . '</p>';
+					$table .= '<p class="description">' . ( $section['description'] ) . '</p>';
 				}
 
 				$fields = $this->getFields( $section['id'] );

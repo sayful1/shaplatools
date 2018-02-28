@@ -1,0 +1,7 @@
+[shapla_dropcap font_size="50px" style="squared"]D[/shapla_dropcap]ropcap text example. Ink is a liquid or paste that contains pigments or dyes and is used to color a surface to produce an image, text, or design. Ink is used for drawing or writing with a pen, brush, or quill.
+
+When a message is replied to in e-mail, Internet forums, or Usenet, the original can often be included, or “quoted”, in a variety of different posting styles. The main options are interleaved posting (also called inline replying, in which the different parts of the reply follow the relevant parts of the original post), bottom-posting (in which the reply follows the quote) or top-posting (in which the reply precedes the quoted original message).
+
+[shapla_dropcap font_size="50px" style="normal"]D[/shapla_dropcap]ropcap text example. Ink is a liquid or paste that contains pigments or dyes and is used to color a surface to produce an image, text, or design. Ink is used for drawing or writing with a pen, brush, or quill.
+
+When a message is replied to in e-mail, Internet forums, or Usenet, the original can often be included, or “quoted”, in a variety of different posting styles. The main options are interleaved posting (also called inline replying, in which the different parts of the reply follow the relevant parts of the original post), bottom-posting (in which the reply follows the quote) or top-posting (in which the reply precedes the quoted original message).

@@ -72,6 +72,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 				'url'        => '',
 				'size'       => '',
 				'new_window' => 'no',
+				'style'      => 'fa',
 			), $atts, 'shapla_icon' );
 
 			$new_window = ( $args['new_window'] == 'no' ) ? '_self' : '_blank';
@@ -87,9 +88,9 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 
 			if ( ! empty( $args['url'] ) ) {
 				$a_attrs = ' href="' . esc_url( $args['url'] ) . '" target="' . esc_attr( $new_window ) . '"';
-				$output  .= '<a class="shapla-icon-link" ' . $a_attrs . '><i class="fa fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i></a>';
+				$output  .= '<a class="shapla-icon-link" ' . $a_attrs . '><i class="' . $args['style'] . ' fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i></a>';
 			} else {
-				$output .= '<i class="fa fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i>';
+				$output .= '<i class="' . $args['style'] . ' fa-' . esc_attr( $args['icon'] ) . '" ' . $attrs . '></i>';
 			}
 
 			return $output;
@@ -193,7 +194,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 			}
 
 			wp_enqueue_script( 'google-maps', add_query_arg( 'key', $api_key, 'https://maps.googleapis.com/maps/api/js' ), '', '', true );
-			wp_enqueue_script( 'shapla-shortcode-scripts' );
+			wp_enqueue_script( 'shaplatools-shortcode-scripts' );
 			$options = array(
 				'id'        => $map_id,
 				'styles'    => json_decode( $map_styles[ $args['style'] ] ),
@@ -267,7 +268,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 				'style' => 'normal',
 			), $atts, 'shapla_toggle' );
 
-			wp_enqueue_script( 'shapla-shortcode-scripts' );
+			wp_enqueue_script( 'shaplatools-shortcode-scripts' );
 
 			return '<div data-id="' . esc_attr( $args['state'] ) . '" class="shapla-section shapla-toggle shapla-toggle--' . esc_attr( $args['style'] ) . '"><span class="shapla-toggle-title">' . esc_html( $args['title'] ) . '</span><div class="shapla-toggle-inner"><div class="shapla-toggle-content">' . do_shortcode( $content ) . '</div></div></div>';
 		}
@@ -300,7 +301,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 				'style' => 'normal',
 			), $atts, 'shapla_tabs' );
 
-			wp_enqueue_script( 'shapla-shortcode-scripts' );
+			wp_enqueue_script( 'shaplatools-shortcode-scripts' );
 
 			preg_match_all( '/tab title="([^\"]+)"/i', $content, $matches, PREG_OFFSET_CAPTURE );
 

@@ -4,7 +4,7 @@
 @import 'utilities/mixins';
 
 $shapla-logo-url: "../img/shapla.svg";
-$shapla-logo-2x-url: "../img/shapla-2x.svg";
+$shapla-logo-2x-url: $shapla-logo-url;
 $shapla-sprite-popup-url: "../img/sprite-popup.png";
 
 @import 'admin/ui-datepicker';

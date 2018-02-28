@@ -78,5 +78,3 @@ add_action( 'wp_footer', function () use ( $id ) {
     </script>
 	<?php
 }, 60 );
-
-?>

@@ -9,14 +9,19 @@
     }
 }
 
-@mixin fa-icon($code:null) {
+@mixin fa-icon($code:null, $style: 'regular') {
     @if $code {
         content: "#{$code}";
     } @else {
         @content;
     }
+
+    @if $style == 'brands' {
+        font-family: 'Font Awesome 5 Brands';
+    } @else {
+        font-family: 'Font Awesome 5 Free';
+    }
     display: inline-block;
-    font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 900;
     line-height: 1;

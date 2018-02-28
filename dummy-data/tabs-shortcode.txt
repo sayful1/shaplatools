@@ -1,0 +1,2 @@
+[shapla_tabs style="normal"][shapla_tab title="Title 1 Normal"]Tab Content 1[/shapla_tab] [shapla_tab title="Title 2 Normal"]Tab Content 2[/shapla_tab] [/shapla_tabs]
+[shapla_tabs style="stroke"][shapla_tab title="Title 1 stroke"]Tab Content stroke[/shapla_tab] [shapla_tab title="Title 2 stroke"]Tab Content stroke[/shapla_tab] [/shapla_tabs]

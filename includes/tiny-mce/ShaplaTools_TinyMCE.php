@@ -57,7 +57,7 @@ class ShaplaTools_TinyMCE {
 	 * @return array                The modified plugins array.
 	 */
 	public function add_tinymce_plugin( $plugins ) {
-		$plugins['shaplatools_mce_hr_button'] = SHAPLATOOLS_ASSETS . '/mce-button/mce-hr.js';
+		$plugins['shaplatools_mce_hr_button'] = SHAPLATOOLS_ASSETS . '/js/mce-hr.js';
 
 		return $plugins;
 	}

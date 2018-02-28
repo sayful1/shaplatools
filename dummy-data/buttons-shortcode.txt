@@ -1,0 +1,3 @@
+[shapla_button url="" style="black" size="small" type="normal" target="_blank" icon="facebook-square" icon_order="before"]Button Text[/shapla_button]
+
+[shapla_button url="" style="green" size="medium" type="stroke" target="_blank" icon="wordpress" icon_order="before"]Twitter[/shapla_button]
