@@ -7,7 +7,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
 
-$image-path: 					"../img/nivoslide/";
+$image-path: 					"./img/";
 $nivo-loading-url : 			"#{$image-path}loading.gif";
 $nivo-bullets-default-url : 	"#{$image-path}default-bullets.png";
 $nivo-arrows-default-url : 		"#{$image-path}default-arrows.png";
@@ -17,9 +17,9 @@ $nivo-bullets-dark-url : 		"#{$image-path}dark-bullets.png";
 $nivo-arrows-dark-url : 		"#{$image-path}dark-arrows.png";
 $nivo-arrows-smooth-url : 		"#{$image-path}smooth-arrows.png";
 
-@import 'core';
-@import 'default';
-@import 'bar';
-@import 'light';
-@import 'dark';
-@import 'smooth';
+@import 'scss/core';
+@import 'scss/default';
+@import 'scss/bar';
+@import 'scss/light';
+@import 'scss/dark';
+@import 'scss/smooth';

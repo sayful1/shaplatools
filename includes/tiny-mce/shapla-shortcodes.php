@@ -4,6 +4,19 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ) {
 
 	class ShaplaShortcodes {
 
+		private static $instance;
+
+		/**
+		 * @return ShaplaShortcodes
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
 		public function __construct() {
 			add_action( 'init', array( &$this, 'shortcodes_init' ) );
 			add_filter( 'mce_external_languages', array( &$this, 'add_tinymce_lang' ), 10, 1 );
@@ -100,3 +113,5 @@ if ( ! class_exists( 'ShaplaShortcodes' ) ) {
 		}
 	}
 }
+
+ShaplaShortcodes::instance();

@@ -3,6 +3,19 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 
 	class Shaplatools_Components_Shortcode {
 
+		private static $instance;
+
+		/**
+		 * @return Shaplatools_Components_Shortcode
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
 		/**
 		 * Shaplatools_Components_Shortcode constructor.
 		 */
@@ -348,3 +361,4 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 	}
 }
 
+Shaplatools_Components_Shortcode::instance();

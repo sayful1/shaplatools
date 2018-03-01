@@ -191,23 +191,9 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-grid-shortcode.php';
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-components-shortcode.php';
 
-			$this->include_shortcodes();
-			$this->include_tinymce_shortcodes();
-		}
-
-		public function include_shortcodes() {
-			new ShaplaTools_Grid_Shortcode();
-			new ShaplaTools_Post_Types_Shortcode();
-			new Shaplatools_Components_Shortcode();
-		}
-
-		public function include_tinymce_shortcodes() {
 			if ( is_admin() ) {
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/ShaplaTools_TinyMCE.php';
 				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/shapla-shortcodes.php';
-
-				new ShaplaTools_TinyMCE();
-				new ShaplaShortcodes();
 			}
 		}
 
@@ -218,7 +204,7 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function has_shortcode( $shortcode ) {
+		private function has_shortcode( $shortcode ) {
 			global $post;
 			if ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, $shortcode ) ) {
 				return true;
@@ -227,6 +213,9 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			return false;
 		}
 
+		/**
+		 * Load front facing scripts and styles
+		 */
 		public function enqueue_scripts() {
 			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', '', SHAPLATOOLS_VERSION, 'all' );
 			wp_register_script( 'shaplatools-shortcode-scripts', SHAPLATOOLS_ASSETS . '/js/shapla-shortcode-scripts.js',
@@ -242,7 +231,8 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			wp_enqueue_script( 'font-awesome-v4-shim', SHAPLATOOLS_ASSETS . '/lib/font-awesome/js/fa-v4-shims.min.js', array( 'font-awesome-v5-svg' ), '5.0.6', true );
 
 			// Nivo Slider Script
-			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
+			wp_enqueue_style( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.css', array(), '3.2.0', 'screen' );
+			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
 			if ( $this->has_shortcode( 'shapla_slide' ) ) {
 				wp_enqueue_script( 'nivo-slider' );
 			}
@@ -284,26 +274,21 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 				array( 'jquery' ), SHAPLATOOLS_VERSION, true );
 
 			wp_localize_script( 'jquery', 'shaplatools', array(
-				'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-				'nonce'     => wp_create_nonce( 'shaplatools_nonce' ),
-				'post_id'   => $post ? $post->ID : '',
-				'image_ids' => $post ? get_post_meta( $post->ID, '_shaplatools_images_ids', true ) : '',
+				'ajaxurl'                 => admin_url( 'admin-ajax.php' ),
+				'nonce'                   => wp_create_nonce( 'shaplatools_nonce' ),
+				'post_id'                 => $post ? $post->ID : '',
+				'image_ids'               => $post ? get_post_meta( $post->ID, '_shaplatools_images_ids', true ) : '',
+				'media_frame_video_title' => __( 'Upload or Choose Your Custom Video File', 'shaplatools' ),
+				'media_frame_image_title' => __( 'Upload or Choose Your Custom Image File', 'shaplatools' )
 			) );
 
 			if ( in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
-
 				// Font Awesome Free 5.0.7
 				wp_enqueue_style( 'font-awesome', SHAPLATOOLS_ASSETS . '/lib/font-awesome/css/fontawesome-all.min.css', '', '5.0.6', 'all' );
 				wp_register_script( 'font-awesome-icons-list', SHAPLATOOLS_ASSETS . '/js/icons.js', array(), false, true );
 
 				wp_enqueue_script( 'shapla-shortcode-plugins', SHAPLATOOLS_ASSETS . '/js/shortcodes_plugins.js',
 					array( 'jquery-ui-sortable', 'font-awesome-icons-list' ), SHAPLATOOLS_VERSION, true );
-
-				wp_localize_script( 'jquery', 'ShaplaShortcodes', array(
-					'plugin_folder'           => WP_PLUGIN_URL . '/shortcodes',
-					'media_frame_video_title' => __( 'Upload or Choose Your Custom Video File', 'shaplatools' ),
-					'media_frame_image_title' => __( 'Upload or Choose Your Custom Image File', 'shaplatools' )
-				) );
 			}
 		}
 

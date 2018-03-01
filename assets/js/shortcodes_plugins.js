@@ -9,7 +9,150 @@
  */
 
 // 1. jQuery Live Query
-(function(a){a.extend(a.fn,{livequery:function(e,d,c){var b=this,f;if(a.isFunction(e)){c=d,d=e,e=undefined}a.each(a.livequery.queries,function(g,h){if(b.selector==h.selector&&b.context==h.context&&e==h.type&&(!d||d.$lqguid==h.fn.$lqguid)&&(!c||c.$lqguid==h.fn2.$lqguid)){return(f=h)&&false}});f=f||new a.livequery(this.selector,this.context,e,d,c);f.stopped=false;f.run();return this},expire:function(e,d,c){var b=this;if(a.isFunction(e)){c=d,d=e,e=undefined}a.each(a.livequery.queries,function(f,g){if(b.selector==g.selector&&b.context==g.context&&(!e||e==g.type)&&(!d||d.$lqguid==g.fn.$lqguid)&&(!c||c.$lqguid==g.fn2.$lqguid)&&!this.stopped){a.livequery.stop(g.id)}});return this}});a.livequery=function(b,d,f,e,c){this.selector=b;this.context=d;this.type=f;this.fn=e;this.fn2=c;this.elements=[];this.stopped=false;this.id=a.livequery.queries.push(this)-1;e.$lqguid=e.$lqguid||a.livequery.guid++;if(c){c.$lqguid=c.$lqguid||a.livequery.guid++}return this};a.livequery.prototype={stop:function(){var b=this;if(this.type){this.elements.unbind(this.type,this.fn)}else{if(this.fn2){this.elements.each(function(c,d){b.fn2.apply(d)})}}this.elements=[];this.stopped=true},run:function(){if(this.stopped){return}var d=this;var e=this.elements,c=a(this.selector,this.context),b=c.not(e);this.elements=c;if(this.type){b.bind(this.type,this.fn);if(e.length>0){a.each(e,function(f,g){if(a.inArray(g,c)<0){a.event.remove(g,d.type,d.fn)}})}}else{b.each(function(){d.fn.apply(this)});if(this.fn2&&e.length>0){a.each(e,function(f,g){if(a.inArray(g,c)<0){d.fn2.apply(g)}})}}}};a.extend(a.livequery,{guid:0,queries:[],queue:[],running:false,timeout:null,checkQueue:function(){if(a.livequery.running&&a.livequery.queue.length){var b=a.livequery.queue.length;while(b--){a.livequery.queries[a.livequery.queue.shift()].run()}}},pause:function(){a.livequery.running=false},play:function(){a.livequery.running=true;a.livequery.run()},registerPlugin:function(){a.each(arguments,function(c,d){if(!a.fn[d]){return}var b=a.fn[d];a.fn[d]=function(){var e=b.apply(this,arguments);a.livequery.run();return e}})},run:function(b){if(b!=undefined){if(a.inArray(b,a.livequery.queue)<0){a.livequery.queue.push(b)}}else{a.each(a.livequery.queries,function(c){if(a.inArray(c,a.livequery.queue)<0){a.livequery.queue.push(c)}})}if(a.livequery.timeout){clearTimeout(a.livequery.timeout)}a.livequery.timeout=setTimeout(a.livequery.checkQueue,20)},stop:function(b){if(b!=undefined){a.livequery.queries[b].stop()}else{a.each(a.livequery.queries,function(c){a.livequery.queries[c].stop()})}}});a.livequery.registerPlugin("append","prepend","after","before","wrap","attr","removeAttr","addClass","removeClass","toggleClass","empty","remove","html");a(function(){a.livequery.play()})})(jQuery);
+(function (a) {
+    a.extend(a.fn, {
+        livequery: function (e, d, c) {
+            var b = this, f;
+            if (a.isFunction(e)) {
+                c = d, d = e, e = undefined
+            }
+            a.each(a.livequery.queries, function (g, h) {
+                if (b.selector == h.selector && b.context == h.context && e == h.type && (!d || d.$lqguid == h.fn.$lqguid) && (!c || c.$lqguid == h.fn2.$lqguid)) {
+                    return (f = h) && false
+                }
+            });
+            f = f || new a.livequery(this.selector, this.context, e, d, c);
+            f.stopped = false;
+            f.run();
+            return this
+        }, expire: function (e, d, c) {
+            var b = this;
+            if (a.isFunction(e)) {
+                c = d, d = e, e = undefined
+            }
+            a.each(a.livequery.queries, function (f, g) {
+                if (b.selector == g.selector && b.context == g.context && (!e || e == g.type) && (!d || d.$lqguid == g.fn.$lqguid) && (!c || c.$lqguid == g.fn2.$lqguid) && !this.stopped) {
+                    a.livequery.stop(g.id)
+                }
+            });
+            return this
+        }
+    });
+    a.livequery = function (b, d, f, e, c) {
+        this.selector = b;
+        this.context = d;
+        this.type = f;
+        this.fn = e;
+        this.fn2 = c;
+        this.elements = [];
+        this.stopped = false;
+        this.id = a.livequery.queries.push(this) - 1;
+        e.$lqguid = e.$lqguid || a.livequery.guid++;
+        if (c) {
+            c.$lqguid = c.$lqguid || a.livequery.guid++
+        }
+        return this
+    };
+    a.livequery.prototype = {
+        stop: function () {
+            var b = this;
+            if (this.type) {
+                this.elements.unbind(this.type, this.fn)
+            } else {
+                if (this.fn2) {
+                    this.elements.each(function (c, d) {
+                        b.fn2.apply(d)
+                    })
+                }
+            }
+            this.elements = [];
+            this.stopped = true
+        }, run: function () {
+            if (this.stopped) {
+                return
+            }
+            var d = this;
+            var e = this.elements, c = a(this.selector, this.context), b = c.not(e);
+            this.elements = c;
+            if (this.type) {
+                b.bind(this.type, this.fn);
+                if (e.length > 0) {
+                    a.each(e, function (f, g) {
+                        if (a.inArray(g, c) < 0) {
+                            a.event.remove(g, d.type, d.fn)
+                        }
+                    })
+                }
+            } else {
+                b.each(function () {
+                    d.fn.apply(this)
+                });
+                if (this.fn2 && e.length > 0) {
+                    a.each(e, function (f, g) {
+                        if (a.inArray(g, c) < 0) {
+                            d.fn2.apply(g)
+                        }
+                    })
+                }
+            }
+        }
+    };
+    a.extend(a.livequery, {
+        guid: 0, queries: [], queue: [], running: false, timeout: null, checkQueue: function () {
+            if (a.livequery.running && a.livequery.queue.length) {
+                var b = a.livequery.queue.length;
+                while (b--) {
+                    a.livequery.queries[a.livequery.queue.shift()].run()
+                }
+            }
+        }, pause: function () {
+            a.livequery.running = false
+        }, play: function () {
+            a.livequery.running = true;
+            a.livequery.run()
+        }, registerPlugin: function () {
+            a.each(arguments, function (c, d) {
+                if (!a.fn[d]) {
+                    return
+                }
+                var b = a.fn[d];
+                a.fn[d] = function () {
+                    var e = b.apply(this, arguments);
+                    a.livequery.run();
+                    return e
+                }
+            })
+        }, run: function (b) {
+            if (b != undefined) {
+                if (a.inArray(b, a.livequery.queue) < 0) {
+                    a.livequery.queue.push(b)
+                }
+            } else {
+                a.each(a.livequery.queries, function (c) {
+                    if (a.inArray(c, a.livequery.queue) < 0) {
+                        a.livequery.queue.push(c)
+                    }
+                })
+            }
+            if (a.livequery.timeout) {
+                clearTimeout(a.livequery.timeout)
+            }
+            a.livequery.timeout = setTimeout(a.livequery.checkQueue, 20)
+        }, stop: function (b) {
+            if (b != undefined) {
+                a.livequery.queries[b].stop()
+            } else {
+                a.each(a.livequery.queries, function (c) {
+                    a.livequery.queries[c].stop()
+                })
+            }
+        }
+    });
+    a.livequery.registerPlugin("append", "prepend", "after", "before", "wrap", "attr", "removeAttr", "addClass", "removeClass", "toggleClass", "empty", "remove", "html");
+    a(function () {
+        a.livequery.play()
+    })
+})(jQuery);
 
 // 2. jQuery.appendo
 /**
@@ -20,13 +163,15 @@
  */
 
 // Attach appendo as a jQuery plugin
-jQuery.fn.appendo = function(opt) {
-    this.each(function() { jQuery.appendo.init(this,opt); });
+jQuery.fn.appendo = function (opt) {
+    this.each(function () {
+        jQuery.appendo.init(this, opt);
+    });
     return this;
 };
 
 // appendo namespace
-jQuery.appendo = function() {
+jQuery.appendo = function () {
 
     // Create a closure so that we can refer to "this" correctly down the line
     var myself = this;
@@ -36,26 +181,30 @@ jQuery.appendo = function() {
     // jQuery.appendo.opt.maxRows = 5;
     // $.appendo.opt.allowDelete = false;
     // (no need, in fact you shouldn't, wrap in jQuery(document).ready() etc)
-    this.opt = { };
+    this.opt = {};
 
-    this.init = function(obj,opt) {
+    this.init = function (obj, opt) {
 
         // Extend the defaults with global options and options given, if any
         var options = jQuery.extend({
-                labelAdd:       'Add Row',
-                labelDel:       'Remove',
-                allowDelete:    true,
+                labelAdd: 'Add Row',
+                labelDel: 'Remove',
+                allowDelete: true,
                 // copyHandlers does not seem to work
                 // it's been removed from the docs for now...
-                copyHandlers:   false,
-                focusFirst:     true,
-                onAdd:          function() { return true; },
-                onDel:      function() { return true; },
-                maxRows:        0,
-                wrapClass:      'appendoButtons',
-                wrapStyle:      { padding: '.4em .2em .5em' },
-                buttonStyle:    { marginRight: '.5em' },
-                subSelect:      'tr:last'
+                copyHandlers: false,
+                focusFirst: true,
+                onAdd: function () {
+                    return true;
+                },
+                onDel: function () {
+                    return true;
+                },
+                maxRows: 0,
+                wrapClass: 'appendoButtons',
+                wrapStyle: {padding: '.4em .2em .5em'},
+                buttonStyle: {marginRight: '.5em'},
+                subSelect: 'tr:last'
             },
             myself.opt,
             opt
@@ -82,8 +231,7 @@ jQuery.appendo = function() {
         // Remove last row from table instance
         function del_row() {
             var $row = jQuery(obj).find(options.subSelect);
-            if ((typeof(options.onDel) != "function") || options.onDel($row))
-            {
+            if ((typeof(options.onDel) != "function") || options.onDel($row)) {
                 $row.remove();
                 update_buttons(-1);
             }
@@ -96,7 +244,7 @@ jQuery.appendo = function() {
             // Disable the add button if maxRows is set and we have that many rows
             // $add_btn.attr('disabled',(!options.maxRows || (rows < options.maxRows))?false:true);
             // Show remove button if we've added rows and allowDelete is set
-            (options.allowDelete && (rows > 1))? $del_btn.show(): $del_btn.hide();
+            (options.allowDelete && (rows > 1)) ? $del_btn.show() : $del_btn.hide();
         };
 
         // Returns (jQuery) button objects with label
@@ -135,37 +283,37 @@ jQuery.appendo = function() {
 // 4. custom
 var FontAwesomeIcons;
 
-( function( $ ) {
+(function ($) {
     'use strict';
 
-    FontAwesomeIcons = function() {
+    FontAwesomeIcons = function () {
         var html = '';
 
-        $.each( stIconObj['fontawesome'], function( cat, icons ) {
+        $.each(stIconObj['fontawesome'], function (cat, icons) {
             html += '<span class="icon-category">' + cat + '</span>';
 
-            icons.map(function(icon){
-                html += '<i class="'+ icon.style +' fa-' + icon.id + '" data-icon-id="' + icon.id + '" data-style="' + icon.style + '"></i>';
+            icons.map(function (icon) {
+                html += '<i class="' + icon.style + ' fa-' + icon.id + '" data-icon-id="' + icon.id + '" data-style="' + icon.style + '"></i>';
             });
         });
 
         return html;
     };
 
-})( jQuery );
+})(jQuery);
 
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
     var shaplas = {
-        loadVals: function() {
+        loadVals: function () {
             var shortcode = $('#_shapla_shortcode').text(),
                 uShortcode = shortcode;
 
             // fill in the gaps eg {{param}}
-            $('.shapla-input').each(function() {
+            $('.shapla-input').each(function () {
                 var input = $(this),
                     id = input.attr('id'),
                     id = id.replace('shapla_', ''),       // gets rid of the shapla_ prefix
-                    re = new RegExp("{{"+id+"}}","g");
+                    re = new RegExp("{{" + id + "}}", "g");
 
                 uShortcode = uShortcode.replace(re, input.val());
             });
@@ -175,21 +323,21 @@ jQuery(document).ready(function($) {
             $('#shapla-sc-form-table').prepend('<div id="_shapla_ushortcode" class="hidden">' + uShortcode + '</div>');
         },
 
-        cLoadVals: function() {
+        cLoadVals: function () {
             var shortcode = $('#_shapla_cshortcode').text(),
                 pShortcode = '';
-                shortcodes = '';
+            shortcodes = '';
 
             // fill in the gaps eg {{param}}
-            $('.child-clone-row').each(function() {
+            $('.child-clone-row').each(function () {
                 var row = $(this),
                     rShortcode = shortcode;
 
-                $('.shapla-cinput', this).each(function() {
+                $('.shapla-cinput', this).each(function () {
                     var input = $(this),
                         id = input.attr('id'),
                         id = id.replace('shapla_', '')        // gets rid of the shapla_ prefix
-                        re = new RegExp("{{"+id+"}}","g");
+                    re = new RegExp("{{" + id + "}}", "g");
 
                     rShortcode = rShortcode.replace(re, input.val());
                 });
@@ -210,7 +358,7 @@ jQuery(document).ready(function($) {
             $('#shapla-sc-form-table').prepend('<div id="_shapla_ushortcode" class="hidden">' + pShortcode + '</div>');
         },
 
-        children: function() {
+        children: function () {
             // assign the cloning plugin
             $('.child-clone-rows').appendo({
                 subSelect: '> div.child-clone-row:last-child',
@@ -219,13 +367,13 @@ jQuery(document).ready(function($) {
             });
 
             // remove button
-            $('.child-clone-row-remove').live('click', function() {
+            $('.child-clone-row-remove').live('click', function () {
                 var btn = $(this),
                     row = btn.parent();
 
-                if( $('.child-clone-row').size() > 1 ) {
+                if ($('.child-clone-row').size() > 1) {
                     row.remove();
-                }else{
+                } else {
                     alert('You need a minimum of one row');
                 }
 
@@ -233,13 +381,13 @@ jQuery(document).ready(function($) {
             });
 
             // assign jUI sortable
-            $( ".child-clone-rows" ).sortable({
+            $(".child-clone-rows").sortable({
                 placeholder: "sortable-placeholder",
                 items: '.child-clone-row'
             });
         },
 
-        resizeTB: function() {
+        resizeTB: function () {
             var ajaxCont = $('#TB_ajaxContent'),
                 tbWindow = $('#TB_window'),
                 shaplaPopup = $('#shapla-popup');
@@ -247,7 +395,7 @@ jQuery(document).ready(function($) {
             tbWindow.css({
                 height: shaplaPopup.outerHeight(),
                 width: shaplaPopup.outerWidth(),
-                marginLeft: -(shaplaPopup.outerWidth()/2),
+                marginLeft: -(shaplaPopup.outerWidth() / 2),
                 maxHeight: "85%",
                 overflowY: "scroll"
             });
@@ -265,21 +413,21 @@ jQuery(document).ready(function($) {
             $('#shapla-popup').addClass('no_preview');
         },
 
-        media: function(){
+        media: function () {
             var shapla_media_frame,
                 frame_title,
                 insertButton = $('.shapla-open-media');
 
-            if ( insertButton.data('type') === "image" ) {
-                frame_title = StagShortcodes.media_frame_image_title;
-            } else if ( insertButton.data('type') === "video" ) {
-                frame_title = StagShortcodes.media_frame_video_title;
+            if (insertButton.data('type') === "image") {
+                frame_title = shaplatools.media_frame_image_title;
+            } else if (insertButton.data('type') === "video") {
+                frame_title = shaplatools.media_frame_video_title;
             }
 
-            insertButton.on('click', function(e){
+            insertButton.on('click', function (e) {
                 e.preventDefault();
 
-                if(shapla_media_frame){
+                if (shapla_media_frame) {
                     shapla_media_frame.open();
                     return;
                 }
@@ -297,7 +445,7 @@ jQuery(document).ready(function($) {
                     }
                 });
 
-                shapla_media_frame.on('select', function(){
+                shapla_media_frame.on('select', function () {
                     var media_attachment = shapla_media_frame.state().get('selection').first().toJSON();
                     $('#shapla_src').val(media_attachment.url);
                     $('.shapla-input').trigger('change');
@@ -308,7 +456,7 @@ jQuery(document).ready(function($) {
             });
         },
 
-        load: function() {
+        load: function () {
             var shaplas = this,
                 tbWindow = $('#TB_window'),
                 popup = $('#shapla-popup'),
@@ -319,13 +467,15 @@ jQuery(document).ready(function($) {
                 iconSelector = $('.shapla-all-icons').find('i'),
                 closePopup = $('#close-popup');
 
-            closePopup.on('click', function(){
+            closePopup.on('click', function () {
                 tb_remove();
             });
 
             // resize TB
             shaplas.resizeTB();
-            $(window).resize(function() { shaplas.resizeTB() });
+            $(window).resize(function () {
+                shaplas.resizeTB()
+            });
 
             tbWindow.css({
                 border: "none",
@@ -340,43 +490,43 @@ jQuery(document).ready(function($) {
             shaplas.media();
 
             // update on children value change
-            $('.shapla-cinput', form).live('change', function() {
+            $('.shapla-cinput', form).live('change', function () {
                 shaplas.cLoadVals();
             });
 
             // update on value change
-            $('.shapla-input', form).live('change', function() {
+            $('.shapla-input', form).live('change', function () {
                 shaplas.loadVals();
             });
 
             var iconContainer = $('.shapla-all-icons');
-            iconContainer.append( FontAwesomeIcons() );
+            iconContainer.append(FontAwesomeIcons());
 
-            iconContainer.on( 'click', 'i', function(e) {
+            iconContainer.on('click', 'i', function (e) {
                 iconContainer.find('i').removeClass('active-icon');
                 $(this).addClass('active-icon');
-                $('#shapla_icon').val( $(this).data('icon-id') );
-                $('#shapla_style').val( $(this).data('style') );
+                $('#shapla_icon').val($(this).data('icon-id'));
+                $('#shapla_style').val($(this).data('style'));
                 $('.shapla-input').trigger('change');
-            } );
+            });
 
             $('.shapla-control-buttonset').buttonset();
-            $('.shapla-control-buttonset').on( 'change', 'input', function(e) {
+            $('.shapla-control-buttonset').on('change', 'input', function (e) {
                 var id = $(this).data('key');
-                $('#'+id).val( $(this).val() );
+                $('#' + id).val($(this).val());
                 $('.shapla-input').trigger('change');
             });
 
             // when insert is clicked
-            $('.shapla-insert', form).click(function() {
-                if(window.tinyMCE) {
+            $('.shapla-insert', form).click(function () {
+                if (window.tinyMCE) {
                     var version = tinyMCE.majorVersion;
 
-                    if ( version === '3' ) {
-                        window.tinyMCE.execInstanceCommand( window.tinyMCE.activeEditor.id, 'mceInsertContent', false, $('#_shapla_ushortcode', form).html());
+                    if (version === '3') {
+                        window.tinyMCE.execInstanceCommand(window.tinyMCE.activeEditor.id, 'mceInsertContent', false, $('#_shapla_ushortcode', form).html());
                         tb_remove();
-                    } else if ( version === '4' ) {
-                        window.tinyMCE.activeEditor.insertContent( $('#_shapla_ushortcode', form).html() );
+                    } else if (version === '4') {
+                        window.tinyMCE.activeEditor.insertContent($('#_shapla_ushortcode', form).html());
                         tb_remove();
                     }
 
@@ -386,7 +536,7 @@ jQuery(document).ready(function($) {
     }
 
     // run
-    $('#shapla-popup').livequery( function() {
+    $('#shapla-popup').livequery(function () {
         shaplas.load();
-    } );
+    });
 });

@@ -3,6 +3,19 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ) {
 
 	class ShaplaTools_Post_Types_Shortcode {
 
+		private static $instance;
+
+		/**
+		 * @return ShaplaTools_Post_Types_Shortcode
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
+
 		public function __construct() {
 			add_shortcode( 'shapla_slide', array( __CLASS__, 'shapla_slide' ) );
 			add_shortcode( 'shapla_portfolio', array( __CLASS__, 'shapla_portfolio' ) );
@@ -56,3 +69,5 @@ if ( ! class_exists( 'ShaplaTools_Post_Types_Shortcode' ) ) {
 		}
 	}
 }
+
+ShaplaTools_Post_Types_Shortcode::instance();

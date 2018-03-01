@@ -10,6 +10,20 @@
  * @since 2.0.0
  */
 class ShaplaTools_TinyMCE {
+
+	private static $instance;
+
+	/**
+	 * @return ShaplaTools_TinyMCE
+	 */
+	public static function instance() {
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
 	/**
 	 * Setup.
 	 *
@@ -218,3 +232,5 @@ class ShaplaTools_TinyMCE {
 		return array_merge( $mce_translation, $additional_items );
 	}
 }
+
+ShaplaTools_TinyMCE::instance();

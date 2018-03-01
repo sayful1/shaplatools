@@ -1,8 +1,21 @@
 <?php
 
-if ( ! class_exists( 'ShaplaTools_Grid_Shortcode' ) ):
+if ( ! class_exists( 'ShaplaTools_Grid_Shortcode' ) ) {
 
 	class ShaplaTools_Grid_Shortcode {
+
+		private static $instance;
+
+		/**
+		 * @return ShaplaTools_Grid_Shortcode
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
 
 		/**
 		 * ShaplaTools_Grid_Shortcode constructor.
@@ -267,5 +280,6 @@ if ( ! class_exists( 'ShaplaTools_Grid_Shortcode' ) ):
 			return '<div class="shapla-col m80 l80">' . do_shortcode( $content ) . '</div>';
 		}
 	}
+}
 
-endif;
+ShaplaTools_Grid_Shortcode::instance();
