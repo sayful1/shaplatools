@@ -1,58 +1,40 @@
 === ShaplaTools ===
-Contributors: sayfulit, sayful
+Contributors: sayful
 Tags: custom post type, widget, shortcode, twitter, images, image
 Requires at least: 4.0
-Tested up to: 4.8
-Stable tag: 1.3.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tested up to: 4.9
+Stable tag: 1.4.0
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 ShaplaTools is a powerful plugin to extend functionality to your WordPress themes.
 
 == Description ==
 
-ShaplaTools is a powerful plugin to extend functionality to your WordPress themes offering shortcodes, FontAwesome icons, Autocomplete search suggestion, Retina graphics for your website and useful widgets.
-
-For documentation and demo, please visit <a href="http://sayfulit.com/shapla/">here</a>
-
-= Custom Post Types =
-
-<ul>
-	<li>Slider (for jQuery NIVO Slider)</li>
-	<li>Testimonial</li>
-	<li>Portfolio</li>
-	<li>Team</li>
-	<li>Features</li>
-</ul>
+ShaplaTools is a powerful plugin to extend functionality to your WordPress themes offering shortcodes, FontAwesome icons and useful widgets.
 
 = Widgets =
 
-<ul>
-	<li>Facebook Like Box</li>
-	<li>Latest Tweets</li>
-	<li>Dribbble Shots</li>
-	<li>Flickr Photos</li>
-	<li>Instagram Photos</li>
-	<li>Ajax Contact Form</li>
-	<li>Testimonial (For Testimonial Custom Post Type)</li>
-</ul>
+* Dribbble Shots
+* Facebook Like Box
+* Flickr Photos
+* Instagram Photos
+* Twitter Feed
 
 = Shortcodes =
 
-<ul>
-	<li>Alerts</li>
-	<li>Buttons ( optionally, with font icons )</li>
-	<li>Columns</li>
-	<li>Divider / Horizontal Ruler</li>
-	<li>Dropcaps</li>
-	<li>Intro Text</li>
-	<li>Tabs</li>
-	<li>Toggle</li>
-	<li>Font Icons by Font Awesome</li>
-	<li>Google Maps with 5 predefined styles</li>
-	<li>Image with CSS3 filters</li>
-	<li>Videos ( supports Embeds )</li>
-</ul>
+* Alerts
+* Buttons ( optionally, with font icons )
+* Columns
+* Divider / Horizontal Ruler
+* Dropcaps
+* Intro Text
+* Tabs
+* Toggle
+* Font Icons by Font Awesome
+* Google Maps with 5 predefined styles
+* Image with CSS3 filters
+* Videos ( supports Embeds )
 
 == Installation ==
 
@@ -77,14 +59,25 @@ Installing the plugins is just like installing other WordPress plugins. If you d
 * From your WordPress dashboard, choose 'Installed Plugins' option under the 'Plugins' category
 * Locate the newly added plugin and click on the \'Activate\' link to enable its features.
 
-
-== Frequently Asked Questions ==
-
-= How to add custom post types in my theme? =
-
-You can enable custom post types in your theme by option page. Go to <b>Settings -> ShaplaTools</b> and then click on "Custom Post Types" tab and check which custom post types you want to enable for your theme.
-
 == Changelog ==
+
+= version 1.4.0 =
+* Tweak  	- Add support for Font Awesome 5 Free.
+* Tweak  	- Update twitter feed widget by adding support for transient, cached.
+* Tweak  	- Update Facebook Like Box Widget.
+* Tweak  	- Update flickr widget.
+* Tweak  	- Update instagram widget.
+* Tweak  	- Update google map shortcode.
+* Fixed  	- Fixed dribbble widget not working as it require Access Token.
+* Removed  	- Removed auto complete search suggestion feature from core.
+* Removed  	- Removed google-analytics script option.
+* Removed  	- Removed team post type.
+* Removed  	- Removed testimonial post type.
+* Removed  	- Removed retina image generation.
+* Dev  	    - Add Widget Wrapper class.
+* Dev  	    - Update setting page API to add section.
+* Dev  	    - Twitter API, Facebook API, Dribbble API, Google Map API settings now on setting page.
+* Dev  	    - Update core code.
 
 = version 1.3.1 =
 * Fixed  	- Adding multiple slides at same page
@@ -125,8 +118,3 @@ You can enable custom post types in your theme by option page. Go to <b>Settings
 
 = version 1.0.0 =
 * Initial release 
-
-
-== CONTACT ==
-
-[Sayful Islam](http://sayful1.wordpress.com/100-2/)

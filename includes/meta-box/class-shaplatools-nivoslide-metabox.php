@@ -23,7 +23,7 @@ if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ) {
 		public function __construct() {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 			add_filter( 'manage_edit-slide_columns', array( $this, 'columns_head' ) );
-			add_action( 'manage_slide_posts_custom_column', array( $this, 'columns_content' ) );
+			add_action( 'manage_slide_posts_custom_column', array( $this, 'columns_content' ), 10, 2 );
 		}
 
 		private function available_img_size() {
@@ -207,38 +207,29 @@ if ( ! class_exists( 'ShaplaTools_NivoSlide_Metabox' ) ) {
 
 			$defaults['id']        = __( 'Slide ID', 'shaplatools' );
 			$defaults['shortcode'] = __( 'Shortcode', 'shaplatools' );
-			$defaults['images']    = __( 'Images', 'shaplatools' );
 
 			return $defaults;
 		}
 
-		public function columns_content( $column_name ) {
-
-			$image_ids = explode( ',', get_post_meta( get_the_ID(), '_shapla_image_ids', true ) );
-
+		/**
+		 * @param $column_name
+		 * @param $post_id
+		 */
+		public function columns_content( $column_name, $post_id ) {
 			if ( 'id' == $column_name ) {
-				echo get_the_ID();
+				echo $post_id;
 			}
 
 			if ( 'shortcode' == $column_name ) {
-				echo '<pre><code>[shapla_slide id="' . get_the_ID() . '"]</pre></code>';
-			}
-
-			if ( 'images' == $column_name ) {
 				?>
-                <ul id="slider-thumbs" class="slider-thumbs">
-					<?php
-
-					foreach ( $image_ids as $image ) {
-						if ( ! $image ) {
-							continue;
-						}
-						$src = wp_get_attachment_image_src( $image, array( 50, 50 ) );
-						echo "<li><img src='{$src[0]}' width='{$src[1]}' height='{$src[2]}'></li>";
-					}
-
-					?>
-                </ul>
+				<input
+					type="text"
+					onmousedown="this.clicked = 1;"
+					onfocus="if (!this.clicked) this.select(); else this.clicked = 2;"
+					onclick="if (this.clicked === 2) this.select(); this.clicked = 0;"
+					value="[shapla_slide id='<?php echo $post_id; ?>']"
+					style="background-color: #f1f1f1;min-width: 250px;padding: 5px 8px;"
+				>
 				<?php
 			}
 		}

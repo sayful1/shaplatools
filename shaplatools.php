@@ -5,7 +5,7 @@
  * Description:       ShaplaTools is a powerful plugin to extend functionality to your WordPress themes.
  * Version:           1.4.0
  * Author:            Sayful Islam
- * Author URI:        https://sayfulit.com
+ * Author URI:        https://sayfulislam.com
  * License:           GPLv3
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain:       shaplatools
@@ -192,8 +192,8 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			include_once SHAPLATOOLS_PATH . '/shortcodes/class-shaplatools-components-shortcode.php';
 
 			if ( is_admin() ) {
-				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/ShaplaTools_TinyMCE.php';
-				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/shapla-shortcodes.php';
+				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/class-shaplatools-tinymce.php';
+				include_once SHAPLATOOLS_INCLUDES . '/tiny-mce/class-shapla-shortcodes.php';
 			}
 		}
 
@@ -217,7 +217,7 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 		 * Load front facing scripts and styles
 		 */
 		public function enqueue_scripts() {
-			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', '', SHAPLATOOLS_VERSION, 'all' );
+			wp_enqueue_style( 'shaplatools', SHAPLATOOLS_ASSETS . '/css/style.css', array(), SHAPLATOOLS_VERSION, 'all' );
 			wp_register_script( 'shaplatools-shortcode-scripts', SHAPLATOOLS_ASSETS . '/js/shapla-shortcode-scripts.js',
 				array(
 					'jquery',
@@ -231,10 +231,9 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			wp_enqueue_script( 'font-awesome-v4-shim', SHAPLATOOLS_ASSETS . '/lib/font-awesome/js/fa-v4-shims.min.js', array( 'font-awesome-v5-svg' ), '5.0.6', true );
 
 			// Nivo Slider Script
-			wp_enqueue_style( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.css', array(), '3.2.0', 'screen' );
-			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
 			if ( $this->has_shortcode( 'shapla_slide' ) ) {
-				wp_enqueue_script( 'nivo-slider' );
+				wp_enqueue_style( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.css', array(), '3.2.0', 'screen' );
+				wp_enqueue_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
 			}
 		}
 

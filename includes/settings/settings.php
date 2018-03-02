@@ -49,7 +49,7 @@ $option_page->add_section( [
 	'id'          => 'section_facebook',
 	'title'       => __( 'Facebook Settings', 'shaplatools' ),
 	'description' => sprintf(
-		__( 'An App ID is required for Facebook Like Box widget to work. Here is how you can %1$s get a ID %2$s.', 'shaplatools' ),
+		__( 'An App ID is required for Facebook Like Box widget to work. Here is how you can %1$s get an ID %2$s.', 'shaplatools' ),
 		'<a target="_blank" href="https://developers.facebook.com/">',
 		'</a>'
 	),

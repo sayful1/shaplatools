@@ -25,8 +25,6 @@ if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_meta_box' ) );
 			add_action( 'add_meta_boxes', array( $this, 'portfolio_image' ) );
 
-			add_action( 'admin_head', array( $this, 'add_mce_button' ) );
-
 			add_filter( 'manage_edit-portfolio_columns', array( $this, 'columns_head' ) );
 			add_action( 'manage_portfolio_posts_custom_column', array( $this, 'columns_content' ) );
 		}
@@ -43,31 +41,6 @@ if ( ! class_exists( 'ShaplaTools_Portfolio_Metabox' ) ) {
 			}
 
 			return $result;
-		}
-
-		public function add_mce_button() {
-			// check user permissions
-			if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
-				return;
-			}
-
-			// check if WYSIWYG is enabled
-			if ( 'true' == get_user_option( 'rich_editing' ) ) {
-				add_filter( 'mce_external_plugins', array( $this, 'add_tinymce_plugin' ) );
-				add_filter( 'mce_buttons', array( $this, 'register_mce_button' ) );
-			}
-		}
-
-		public function add_tinymce_plugin( $plugin_array ) {
-			$plugin_array['shaplatools_portfolio_mce_button'] = SHAPLATOOLS_ASSETS . '/mce-button/mce-portfolio.js';
-
-			return $plugin_array;
-		}
-
-		public function register_mce_button( $buttons ) {
-			array_push( $buttons, 'shaplatools_portfolio_mce_button' );
-
-			return $buttons;
 		}
 
 		public function portfolio_image() {
