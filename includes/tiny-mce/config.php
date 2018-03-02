@@ -282,7 +282,7 @@ $shapla_shortcodes['video'] = array(
 			'std'   => '',
 			'type'  => 'video',
 			'label' => __( 'Choose Video', 'shaplatools' ),
-			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL. <br><br>', 'shaplatools' ) . sprintf( __( 'A list of all shortcode video services can be found on %s.<br>', 'shaplatools' ), '<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
+			'desc'  => __( 'Either upload a new video, choose an existing video from your media library or link to a video by URL.', 'shaplatools' ) . '<br><br>' . sprintf( __( 'A list of all shortcode video services can be found on %s.', 'shaplatools' ), '<a target="_blank" href="//codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F">WordPress.org</a>.<br><br>Working examples, in case you want to use an external service:<br><strong>http://vimeo.com/18439821</strong><br/><strong>http://www.youtube.com/watch?v=G0k3kHtyoqc</strong>' )
 		)
 	),
 	'shortcode'   => '[shapla_video src="{{src}}"]',
@@ -348,7 +348,7 @@ $shapla_shortcodes['map'] = array(
 			'std'   => '',
 			'type'  => 'text',
 			'label' => __( 'Longitude', 'shaplatools' ),
-			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude <a href="%1$s" target="_blank">here</a>.', 'shaplatools' ), esc_url( 'http://labs.mondeca.com/geo/anyplace.html' ) )
+			'desc'  => sprintf( __( 'Enter the place longitude coordinate. E.g.: -122.08395. You may find longitude and latitude %s.', 'shaplatools' ), '<a href="' . esc_url( 'http://labs.mondeca.com/geo/anyplace.html' ) . '" target="_blank">here</a>' )
 		),
 		'width'    => array(
 			'std'   => '100%',
