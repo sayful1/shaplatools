@@ -5,7 +5,7 @@
  * @package ShaplaTools
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  */
-$portfolio_labels = apply_filters( 'shapla_portfolio_labels', array(
+$portfolio_labels = apply_filters( 'shaplatools_portfolio_labels', array(
 	'name'               => __( 'Portfolio', 'shaplatools' ),
 	'singular_name'      => __( 'Portfolio', 'shaplatools' ),
 	'add_new'            => __( 'Add New', 'shaplatools' ),
@@ -18,6 +18,8 @@ $portfolio_labels = apply_filters( 'shapla_portfolio_labels', array(
 	'not_found_in_trash' => __( 'No Portfolios found in trash', 'shaplatools' ),
 	'parent_item_colon'  => ''
 ) );
+
+$supports = apply_filters( 'shaplatools_portfolio_supports', array( 'title', 'editor', 'thumbnail', 'revisions' ) );
 
 $args = array(
 	'labels'              => $portfolio_labels,
@@ -32,10 +34,10 @@ $args = array(
 	'menu_position'       => 33,
 	'menu_icon'           => 'dashicons-portfolio',
 	'has_archive'         => false,
-	'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions' )
+	'supports'            => $supports
 );
 
-register_post_type( 'portfolio', $args );
+register_post_type( 'portfolio', apply_filters( 'shaplatools_portfolio_post_type_args', $args ) );
 
 /**
  * Register a skill taxonomy for portfolio post type.

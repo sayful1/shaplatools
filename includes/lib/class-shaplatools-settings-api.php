@@ -6,12 +6,13 @@
  * give you easy way to create multi tabs admin menu and
  * add setting fields with build in validation.
  *
- * @version    1.0.0 (Oct 28, 2016)
- *
- * @author        Sayful Islam <sayful.islam001@gmail.com>
- * @link        https://sayfulislam.com
+ * @author  Sayful Islam <sayful.islam001@gmail.com>
+ * @link    https://sayfulislam.com
  */
 if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
+	/**
+	 * Class ShaplaTools_Settings_API
+	 */
 	class ShaplaTools_Settings_API {
 		/**
 		 * Settings options array
@@ -33,6 +34,9 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 */
 		private $panels = array();
 
+		/**
+		 * @var array
+		 */
 		private $sections = array();
 
 		/**
@@ -253,22 +257,15 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 				<?php $this->option_page_tabs(); ?>
                 <form autocomplete="off" method="POST" action="options.php">
 					<?php
+					// Output nonce, action, and option_page fields for a settings page.
 					settings_fields( $this->menu_fields['option_name'] );
+					// Get setting fields
 					$this->setting_fields();
+					// Echoes a submit button
 					submit_button();
 					?>
                 </form>
             </div>
-            <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $(".colorpicker").wpColorPicker();
-                    $(".datepicker").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        showAnim: "slideDown"
-                    });
-                });
-            </script>
 			<?php
 			echo ob_get_clean();
 		}
@@ -374,7 +371,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 					break;
 
 				case 'checkbox':
-					return in_array( $input, array( 'on', 'yes', '1', 1 ) ) ? 1 : 0;
+					return in_array( $input, array( 'on', 'yes', '1', 1, 'true', true ) ) ? 1 : 0;
 					break;
 
 				case 'multi_checkbox':
@@ -469,10 +466,6 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 			echo $table;
 		}
 
-		public function section( $field, $name, $value ) {
-			return '';
-		}
-
 		/**
 		 * text input field
 		 *
@@ -482,60 +475,11 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function text( $field, $name, $value ) {
-			return sprintf( '<input type="text" class="regular-text" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
-		}
+		protected function text( $field, $name, $value ) {
+			$valid_types = array( 'text', 'email', 'password', 'number', 'url' );
+			$type        = isset( $field['type'] ) && in_array( $field['type'], $valid_types ) ? esc_attr( $field['type'] ) : 'text';
 
-		/**
-		 * email input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function email( $field, $name, $value ) {
-			return sprintf( '<input type="email" class="regular-text" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
-		}
-
-		/**
-		 * password input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function password( $field, $name, $value ) {
-			return sprintf( '<input type="password" class="regular-text" value="" id="%2$s" name="%3$s">', $value, $field['id'], $name );
-		}
-
-		/**
-		 * number input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function number( $field, $name, $value ) {
-			return sprintf( '<input type="number" class="regular-text" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
-		}
-
-		/**
-		 * url input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function url( $field, $name, $value ) {
-			return sprintf( '<input type="url" class="regular-text" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
+			return '<input type="' . $type . '" class="regular-text" value="' . $value . '" id="' . $field['id'] . '" name="' . $name . '">';
 		}
 
 		/**
@@ -547,10 +491,10 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function color( $field, $name, $value ) {
+		protected function color( $field, $name, $value ) {
 			$default_color = ( isset( $field['std'] ) ) ? $field['std'] : "";
 
-			return sprintf( '<input type="text" class="colorpicker" value="%1$s" id="%2$s" name="%3$s" data-default-color="%4$s">', $value, $field['id'], $name, $default_color );
+			return sprintf( '<input type="text" class="color-picker" value="%1$s" id="%2$s" name="%3$s" data-default-color="%4$s">', $value, $field['id'], $name, $default_color );
 		}
 
 		/**
@@ -562,10 +506,14 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function date( $field, $name, $value ) {
-			$value = date( "F d, Y", strtotime( $value ) );
+		protected function date( $field, $name, $value ) {
+			if ( $this->is_date( $value ) ) {
+				$value = date( "F d, Y", strtotime( $value ) );
+			} else {
+				$value = '';
+			}
 
-			return sprintf( '<input type="text" class="regular-text datepicker" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
+			return sprintf( '<input type="text" class="regular-text date-picker" value="%1$s" id="%2$s" name="%3$s">', $value, $field['id'], $name );
 		}
 
 		/**
@@ -577,7 +525,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function textarea( $field, $name, $value ) {
+		protected function textarea( $field, $name, $value ) {
 			$rows = ( isset( $field['rows'] ) ) ? $field['rows'] : 5;
 			$cols = ( isset( $field['cols'] ) ) ? $field['cols'] : 40;
 
@@ -593,8 +541,8 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function checkbox( $field, $name, $value ) {
-			$checked = ( 1 == $value ) ? 'checked="checked"' : '';
+		protected function checkbox( $field, $name, $value ) {
+			$checked = in_array( $value, array( 'on', 'yes', '1', 1, 'true', true ) ) ? 'checked="checked"' : '';
 			$table   = sprintf( '<input type="hidden" name="%1$s" value="0">', $name );
 			$table   .= sprintf( '<fieldset><legend class="screen-reader-text"><span>%1$s</span></legend><label for="%2$s"><input type="checkbox" value="1" id="%2$s" name="%4$s" %3$s>%1$s</label></fieldset>', $field['name'], $field['id'], $checked, $name );
 
@@ -610,7 +558,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function multi_checkbox( $field, $name, $value ) {
+		protected function multi_checkbox( $field, $name, $value ) {
 			$table           = "<fieldset>";
 			$multicheck_name = $name . "[]";
 
@@ -633,7 +581,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function radio( $field, $name, $value ) {
+		protected function radio( $field, $name, $value ) {
 			$table = sprintf( '<fieldset><legend class="screen-reader-text"><span>%1$s</span></legend><p>', $field['name'] );
 
 			foreach ( $field['options'] as $key => $radio_label ) {
@@ -655,7 +603,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function select( $field, $name, $value ) {
+		protected function select( $field, $name, $value ) {
 			$table = sprintf( '<select id="%1$s" name="%2$s">', $field['id'], $name );
 			foreach ( $field['options'] as $key => $select_label ) {
 				$selected = ( $value == $key ) ? 'selected="selected"' : '';
@@ -675,7 +623,7 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 		 *
 		 * @return string
 		 */
-		private function wp_editor( $field, $name, $value ) {
+		protected function wp_editor( $field, $name, $value ) {
 			ob_start();
 			echo "<div class='sp-wp-editor-container'>";
 			wp_editor( $value, $field['id'], array(
@@ -690,5 +638,25 @@ if ( ! class_exists( 'ShaplaTools_Settings_API' ) ) {
 			return ob_get_clean();
 		}
 
+		/**
+		 * Check if the given input is a valid date.
+		 *
+		 * @param  mixed $value
+		 *
+		 * @return boolean
+		 */
+		private function is_date( $value ) {
+			if ( $value instanceof \DateTime ) {
+				return true;
+			}
+
+			if ( strtotime( $value ) === false ) {
+				return false;
+			}
+
+			$date = date_parse( $value );
+
+			return checkdate( $date['month'], $date['day'], $date['year'] );
+		}
 	}
 }

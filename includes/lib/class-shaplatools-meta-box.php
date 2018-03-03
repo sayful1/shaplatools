@@ -3,6 +3,87 @@
 if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 
 	class ShaplaTools_Meta_Box {
+
+		private static $instance;
+
+		/**
+		 * @return ShaplaTools_Meta_Box
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+
+				add_action( 'admin_head', array( __CLASS__, 'meta_box_style' ) );
+			}
+
+			return self::$instance;
+		}
+
+		/**
+		 * Meta box style
+		 */
+		public static function meta_box_style() {
+			?>
+            <style type="text/css">
+                .shapla-metabox-table {
+                    border-collapse: collapse;
+                    width: 100%
+                }
+
+                .shapla-metabox-table tr {
+                    border-top: 1px solid #ececec
+                }
+
+                .shapla-metabox-table tr:first-child {
+                    border-top: none
+                }
+
+                .shapla-metabox-table th {
+                    text-align: left;
+                    width: 40%;
+                    padding: 10px 0;
+                    vertical-align: top
+                }
+
+                .shapla-metabox-table th label {
+                    text-shadow: white 0 1px 0
+                }
+
+                .shapla-metabox-table th label strong {
+                    font-weight: 500;
+                    color: #444
+                }
+
+                .shapla-metabox-table th label span {
+                    display: block;
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: #999;
+                    margin: 8px 0 0 0
+                }
+
+                .shapla-metabox-table td {
+                    padding: 8px 10px
+                }
+
+                #side-sortables .shapla-metabox-table th,
+                #side-sortables .shapla-metabox-table td {
+                    width: 100%;
+                    display: block;
+                    padding-left: 0;
+                    padding-right: 0
+                }
+
+                #side-sortables .shapla-metabox-table td {
+                    border-bottom: none
+                }
+            </style>
+			<?php
+		}
+
+		/**
+		 * ShaplaTools_Meta_Box constructor.
+		 */
 		public function __construct() {
 			add_action( 'save_post', array( $this, 'save_meta_boxes' ) );
 			add_action( 'wp_ajax_shaplatools_save_images', array( $this, 'save_images' ) );
@@ -14,30 +95,64 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		 * @param int $post_id The post ID
 		 */
 		public function save_meta_boxes( $post_id ) {
-			if (
-				! isset( $_POST['shapla_meta'] ) ||
-				! isset( $_POST['_shapla_nonce'] ) ||
-				! wp_verify_nonce( $_POST['_shapla_nonce'], 'shaplatools_save_meta_box' )
-			) {
+
+			// Verify that the nonce is valid.
+			$nonce = isset( $_POST['_shaplatools_nonce'] ) && wp_verify_nonce( $_POST['_shaplatools_nonce'], basename( __FILE__ ) );
+			if ( ! $nonce ) {
 				return;
 			}
 
-			// Check if user has permissions to save data.
-			if ( ! current_user_can( 'edit_post', $post_id ) ) {
-				return;
-			}
 			// Check if not an autosave.
 			if ( wp_is_post_autosave( $post_id ) ) {
 				return;
 			}
+
 			// Check if not a revision.
 			if ( wp_is_post_revision( $post_id ) ) {
 				return;
 			}
 
-			foreach ( $_POST['shapla_meta'] as $key => $val ) {
-				update_post_meta( $post_id, $key, stripslashes( htmlspecialchars( $val ) ) );
+			// Check if user has permissions to save data.
+			$capability = ( isset( $_POST['post_type'] ) && 'page' == $_POST['post_type'] ) ? 'edit_page' : 'edit_post';
+			if ( ! current_user_can( $capability, $post_id ) ) {
+				return;
 			}
+
+			// Check if meta box data exists
+			if ( ! isset( $_POST['shapla_meta'] ) ) {
+				return;
+			}
+
+			foreach ( $_POST['shapla_meta'] as $key => $val ) {
+				update_post_meta( $post_id, $key, $this->sanitize_value( $val ) );
+			}
+		}
+
+		/**
+		 * Sanitize meta value
+		 *
+		 * @param $input
+		 *
+		 * @return array|string
+		 */
+		private function sanitize_value( $input ) {
+			// Initialize the new array that will hold the sanitize values
+			$new_input = array();
+
+			if ( is_array( $input ) ) {
+				// Loop through the input and sanitize each of the values
+				foreach ( $input as $key => $value ) {
+					if ( is_array( $value ) ) {
+						$new_input[ $key ] = $this->sanitize_value( $value );
+					} else {
+						$new_input[ $key ] = sanitize_text_field( $value );
+					}
+				}
+			} else {
+				return sanitize_text_field( $input );
+			}
+
+			return $new_input;
 		}
 
 		public function save_images() {
@@ -80,7 +195,7 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		 */
 		public function add( $meta_box ) {
 			if ( ! is_array( $meta_box ) ) {
-				return false;
+				return;
 			}
 
 			add_meta_box(
@@ -100,20 +215,20 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		 * @param  WP_Post $post
 		 * @param  array $meta_box
 		 *
-		 * @return output metabox content
+		 * @return void
 		 */
 		public function meta_box_callback( $post, $meta_box ) {
 			if ( ! is_array( $meta_box['args'] ) ) {
-				return false;
+				return;
 			}
+
+			wp_nonce_field( basename( __FILE__ ), '_shaplatools_nonce' );
 
 			$meta_box = $meta_box['args'];
 
 			if ( isset( $meta_box['description'] ) && $meta_box['description'] != '' ) {
 				echo sprintf( '<p class="description">%s</p>', $meta_box['description'] );
 			}
-
-			wp_nonce_field( 'shaplatools_save_meta_box', '_shapla_nonce' );
 
 			$table = "";
 			$table .= "<table class='form-table shapla-metabox-table'>";
@@ -126,7 +241,17 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 				$type      = isset( $field['type'] ) ? $field['type'] : 'text';
 
 				$table .= "<tr>";
-				$table .= sprintf( '<th scope="row"><label for="%1$s">%2$s</label></th>', $field['id'], $field['name'] );
+
+				$table .= '<th>';
+
+				$table .= '<label for="' . $field['id'] . '">';
+				$table .= '<strong>' . $field['name'] . '</strong>';
+				if ( ! empty( $field['desc'] ) ) {
+					$table .= '<span>' . $field['desc'] . '</span>';
+				}
+				$table .= '</label>';
+				$table .= '</th>';
+
 				$table .= "<td>";
 
 				if ( method_exists( $this, $type ) ) {
@@ -135,31 +260,12 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 					$table .= $this->text( $field, $name, $value );
 				}
 
-				if ( ! empty( $field['desc'] ) ) {
-					$table .= sprintf( '<p class="description">%s</p>', $field['desc'] );
-				}
 				$table .= "</td>";
 				$table .= "</tr>";
 			}
 
 			$table .= "</table>";
 			echo $table;
-			$this->color_datepicker_script();
-		}
-
-		public function color_datepicker_script() {
-			?>
-            <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $(".colorpicker").wpColorPicker();
-                    $(".datepicker").datepicker({
-                        changeMonth: true,
-                        changeYear: true,
-                        showAnim: "slideDown"
-                    });
-                });
-            </script>
-			<?php
 		}
 
 		/**
@@ -380,74 +486,6 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 		}
 
 		/**
-		 * file input field
-		 *
-		 * @param  array $field
-		 * @param  string $name
-		 * @param  string $value
-		 *
-		 * @return string
-		 */
-		private function file( $field, $name, $value ) {
-			$multiple   = ( isset( $field['multiple'] ) ) ? true : false;
-			$btn_browse = ( isset( $field['btn_browse'] ) ) ? $field['btn_browse'] : 'Browse';
-			$btn_insert = ( isset( $field['btn_insert'] ) ) ? $field['btn_insert'] : 'Insert';
-			$btn_id     = $field['id'] . '_button';
-			ob_start(); ?>
-
-            <input type="text" name="<?php echo $name; ?>" id="<?php echo $field['id']; ?>"
-                   value="<?php echo $value; ?>" class="regular-text">
-            <input type="button" class="button" id="<?php echo $btn_id; ?>" value="<?php echo $btn_browse; ?>">
-            <script>
-                jQuery(function ($) {
-                    var frame,
-                        isMultiple = "<?php echo $multiple; ?>";
-
-                    $('#<?php echo $btn_id; ?>').on('click', function (e) {
-                        e.preventDefault();
-
-                        var options = {
-                            state: 'insert',
-                            frame: 'post',
-                            multiple: isMultiple
-                        };
-
-                        frame = wp.media(options).open();
-
-                        frame.menu.get('view').unset('gallery');
-                        frame.menu.get('view').unset('featured-image');
-
-                        frame.toolbar.get('view').set({
-                            insert: {
-                                style: 'primary',
-                                text: '<?php echo $btn_insert; ?>',
-
-                                click: function () {
-                                    var models = frame.state().get('selection'),
-                                        attachment_id = models.first().attributes.id,
-                                        files = [];
-
-                                    if (isMultiple) {
-                                        models.map(function (attachment) {
-                                            attachment = attachment.toJSON();
-                                            files.push(attachment.id);
-                                            attachment_id = files;
-                                        });
-                                    }
-
-                                    $('#<?php echo $field['id']; ?>').val(attachment_id);
-
-                                    frame.close();
-                                }
-                            }
-                        });
-                    });
-                });
-            </script>
-			<?php return ob_get_clean();
-		}
-
-		/**
 		 * images input field
 		 *
 		 * @param  array $field
@@ -485,5 +523,5 @@ if ( ! class_exists( 'ShaplaTools_Meta_Box' ) ):
 endif;
 
 if ( is_admin() ) {
-	$ShaplaTools_Meta_Box = new ShaplaTools_Meta_Box();
+	ShaplaTools_Meta_Box::instance();
 }

@@ -1,25 +1,25 @@
 <?php
 
 $labels = array(
-	'name'               => _x( 'Slides', 'Post Type General Name', 'shaplatools' ),
-	'singular_name'      => _x( 'Slide', 'Post Type Singular Name', 'shaplatools' ),
-	'menu_name'          => __( 'Slide', 'shaplatools' ),
-	'name_admin_bar'     => __( 'Slide', 'shaplatools' ),
-	'parent_item_colon'  => __( 'Parent Slide:', 'shaplatools' ),
-	'all_items'          => __( 'All Slides', 'shaplatools' ),
-	'add_new_item'       => __( 'Add New Slide', 'shaplatools' ),
+	'name'               => _x( 'Sliders', 'Post Type General Name', 'shaplatools' ),
+	'singular_name'      => _x( 'Slider', 'Post Type Singular Name', 'shaplatools' ),
+	'menu_name'          => __( 'Slider', 'shaplatools' ),
+	'name_admin_bar'     => __( 'Slider', 'shaplatools' ),
+	'parent_item_colon'  => __( 'Parent Slider:', 'shaplatools' ),
+	'all_items'          => __( 'All Sliders', 'shaplatools' ),
+	'add_new_item'       => __( 'Add New Slider', 'shaplatools' ),
 	'add_new'            => __( 'Add New', 'shaplatools' ),
-	'new_item'           => __( 'New Slide', 'shaplatools' ),
-	'edit_item'          => __( 'Edit Slide', 'shaplatools' ),
-	'update_item'        => __( 'Update Slide', 'shaplatools' ),
-	'view_item'          => __( 'View Slide', 'shaplatools' ),
-	'search_items'       => __( 'Search Slide', 'shaplatools' ),
+	'new_item'           => __( 'New Slider', 'shaplatools' ),
+	'edit_item'          => __( 'Edit Slider', 'shaplatools' ),
+	'update_item'        => __( 'Update Slider', 'shaplatools' ),
+	'view_item'          => __( 'View Slider', 'shaplatools' ),
+	'search_items'       => __( 'Search Slider', 'shaplatools' ),
 	'not_found'          => __( 'Not found', 'shaplatools' ),
 	'not_found_in_trash' => __( 'Not found in Trash', 'shaplatools' ),
 );
 $args   = array(
-	'label'               => __( 'slide', 'shaplatools' ),
-	'description'         => __( 'Create slide for your site', 'shaplatools' ),
+	'label'               => __( 'slider', 'shaplatools' ),
+	'description'         => __( 'Create slider for your site', 'shaplatools' ),
 	'labels'              => $labels,
 	'supports'            => array( 'title' ),
 	'hierarchical'        => false,
@@ -35,6 +35,6 @@ $args   = array(
 	'exclude_from_search' => true,
 	'publicly_queryable'  => true,
 	'rewrite'             => false,
-	'capability_type'     => 'post',
+	'capability_type'     => 'page',
 );
 register_post_type( 'slide', $args );
