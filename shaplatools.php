@@ -231,9 +231,11 @@ if ( ! class_exists( 'ShaplaTools' ) ) {
 			wp_enqueue_script( 'font-awesome-v4-shim', SHAPLATOOLS_ASSETS . '/lib/font-awesome/js/fa-v4-shims.min.js', array( 'font-awesome-v5-svg' ), '5.0.6', true );
 
 			// Nivo Slider Script
+			wp_register_style( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.css', array(), '3.2.0', 'screen' );
+			wp_register_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
 			if ( $this->has_shortcode( 'shapla_slide' ) ) {
-				wp_enqueue_style( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.css', array(), '3.2.0', 'screen' );
-				wp_enqueue_script( 'nivo-slider', SHAPLATOOLS_ASSETS . '/lib/nivo-slider/nivo-slider.min.js', array( 'jquery' ), '3.2.0', true );
+				wp_enqueue_style( 'nivo-slider' );
+				wp_enqueue_script( 'nivo-slider' );
 			}
 		}
 

@@ -48,6 +48,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 				'size'       => 'small',
 				'type'       => 'round',
 				'icon'       => '',
+				'icon_style' => 'fa',
 				'icon_order' => 'before',
 			), $atts, 'purchase_link' );
 
@@ -57,11 +58,17 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 
 			if ( ! empty( $args['icon'] ) ) {
 				if ( $args['icon_order'] == 'before' ) {
-					$button_content = self::shapla_icon( array( 'icon' => $args['icon'] ) );
+					$button_content = self::shapla_icon( array(
+						'icon'  => $args['icon'],
+						'style' => $args['icon_style'],
+					) );
 					$button_content .= do_shortcode( $content );
 				} else {
 					$button_content = do_shortcode( $content );
-					$button_content .= self::shapla_icon( array( 'icon' => $args['icon'] ) );
+					$button_content .= self::shapla_icon( array(
+						'icon'  => $args['icon'],
+						'style' => $args['icon_style'],
+					) );
 				}
 				$class .= " shapla-icon--{$args['icon_order']}";
 			} else {

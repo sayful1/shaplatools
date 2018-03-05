@@ -99,6 +99,17 @@ $shapla_shortcodes['button'] = array(
 			'label' => __( 'Button Icon', 'shaplatools' ),
 			'desc'  => __( 'Choose an icon', 'shaplatools' )
 		),
+		'style'           => array(
+			'std'     => 'fas',
+			'type'    => 'buttonset',
+			'hidden'  => true,
+			'label'   => __( 'Icon Style', 'shaplatools' ),
+			'options' => array(
+				'fas' => __( 'Solid', 'shaplatools' ),
+				'far' => __( 'Regular', 'shaplatools' ),
+				'fab' => __( 'Brands', 'shaplatools' ),
+			),
+		),
 		'button-icon_order' => array(
 			'type'    => 'buttonset',
 			'label'   => __( 'Font Order', 'shaplatools' ),
@@ -120,7 +131,7 @@ $shapla_shortcodes['button'] = array(
 			)
 		),
 	),
-	'shortcode'   => '[shapla_button url="{{button-url}}" style="{{button-style}}" size="{{button-size}}" type="{{button-type}}" target="{{button-target}}" icon="{{icon}}" icon_order="{{button-icon_order}}"]{{button-content}}[/shapla_button]',
+	'shortcode'   => '[shapla_button url="{{button-url}}" style="{{button-style}}" size="{{button-size}}" type="{{button-type}}" target="{{button-target}}" icon="{{icon}}" icon_style="{{style}}" icon_order="{{button-icon_order}}"]{{button-content}}[/shapla_button]',
 	'popup_title' => __( 'Insert Button Shortcode', 'shaplatools' )
 );
 
