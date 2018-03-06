@@ -202,7 +202,7 @@ if ( ! class_exists( 'Shaplatools_Components_Shortcode' ) ) {
 			if ( empty( $api_key ) ) {
 				$html = '';
 				if ( current_user_can( 'edit_posts' ) ) {
-					$html .= '<p class="shapla-alert shapla-red">';
+					$html .= '<p class="shapla-alert shapla-alert--red">';
 					/* translators: %s is a link, do not remove/modify it. */
 					$html .= sprintf( esc_html__( 'To be able to use Google Maps, you first need to set an %s.', 'shaplatools' ),
 						sprintf( '<a href="' . admin_url( 'options-general.php?page=shaplatools' ) . '">%1$s</a>', esc_html__( 'API key', 'shaplatools' ) )
