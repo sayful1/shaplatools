@@ -9,6 +9,3 @@
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
-
-// Delete Plugin Options
-delete_option( 'shaplatools_options' );

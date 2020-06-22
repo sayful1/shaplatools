@@ -1,2 +1,0 @@
-[shapla_toggle style="normal" title="Title for Normal with Closed" state="closed"]Content 1[/shapla_toggle]
-[shapla_toggle style="stroke" title="Title for Stroke with Open state" state="open"]Content 2[/shapla_toggle]
